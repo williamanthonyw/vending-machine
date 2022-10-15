@@ -28,6 +28,7 @@ public class App extends Application{
         mainView = new MainView(mainModel);
 
         System.out.println("hello");
+        System.out.println("github test");
 
         launch();
 
