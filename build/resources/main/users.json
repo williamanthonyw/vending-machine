@@ -1,0 +1,11 @@
+[
+
+  {"username":"Kylie",
+    "password":"password",
+    "purchases":[{"price":10.0,"quantity":8,"item":"cheese","datePurchased":{"date":{"year":2022,"month":10,"day":16},"time":{"hour":22,"minute":56,"second":13,"nano":250689000}}},{"price":12.0,"quantity":11,"item":"can","datePurchased":{"date":{"year":2022,"month":10,"day":16},"time":{"hour":22,"minute":56,"second":13,"nano":251810000}}},{"price":12.0,"quantity":11,"item":"can2","datePurchased":{"date":{"year":2022,"month":10,"day":16},"time":{"hour":22,"minute":56,"second":13,"nano":251824000}}},{"price":12.0,"quantity":11,"item":"can3","datePurchased":{"date":{"year":2022,"month":10,"day":16},"time":{"hour":22,"minute":56,"second":13,"nano":251836000}}},{"price":12.0,"quantity":11,"item":"can4","datePurchased":{"date":{"year":2022,"month":10,"day":16},"time":{"hour":22,"minute":56,"second":13,"nano":251844000}}},{"price":12.0,"quantity":11,"item":"can5","datePurchased":{"date":{"year":2022,"month":10,"day":16},"time":{"hour":22,"minute":56,"second":13,"nano":251851000}}}]
+  },
+  { "username":"anonymous",
+    "password":"password",
+    "purchases": [{"price":10.0,"quantity":8,"item":"cheese","datePurchased":{"date":{"year":2022,"month":10,"day":16},"time":{"hour":22,"minute":56,"second":13,"nano":250689000}}}]
+  }
+]

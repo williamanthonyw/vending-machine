@@ -20,10 +20,12 @@ public class MainView {
     public MainView(MainModel mainModel){
         this.mainModel = mainModel;
 
+        setUpMenu();
     }
 
     public void setUp(Stage stage){
         this.stage = stage;
+        goToLastFiveProductsView();
         stage.show();
     }
 
@@ -31,6 +33,10 @@ public class MainView {
         view.setUp();
         stage.setScene(view.getScene());
         view.setUpMenuBTN(menuBTN);
+    }
+
+    public void goToLastFiveProductsView(){
+        goToView(new LastFiveProductsView(mainModel));
     }
 
     public void setUpMenu() {
