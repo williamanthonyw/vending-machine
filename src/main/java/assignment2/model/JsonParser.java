@@ -71,7 +71,7 @@ public class JsonParser {
         }
         
         catch(Exception e){
-            
+            e.printStackTrace();
         }
     }
 

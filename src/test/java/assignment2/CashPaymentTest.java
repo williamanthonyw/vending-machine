@@ -20,6 +20,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 public class CashPaymentTest {
+    JsonParser jp = new JsonParser();
+    private List<Cash> defaultCash = jp.getCash("src/main/resources/InitialCash.json");
 
     //Test on initial amount of each notes and coins available
     @Test
@@ -109,7 +111,7 @@ public class CashPaymentTest {
 
         //reset json
         JsonParser jp = new JsonParser();
-        jp.updateCash(cashList, initialPath);
+        jp.updateCash(defaultCash, initialPath);
     }
 
     //Test on payment where changes are in coins only
@@ -128,7 +130,7 @@ public class CashPaymentTest {
 
         //reset json
         JsonParser jp = new JsonParser();
-        jp.updateCash(cashList, initialPath);
+        jp.updateCash(defaultCash, initialPath);
 
     }
 
@@ -173,7 +175,7 @@ public class CashPaymentTest {
 
         //reset json
         JsonParser jp = new JsonParser();
-        jp.updateCash(cashList, initialPath);
+        jp.updateCash(defaultCash, initialPath);
     }
 
     //Test on small change not sufficient

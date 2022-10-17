@@ -92,8 +92,12 @@ public class CashPaymentModel{
     }
 
     public static void main(String[] args){
-        CashPaymentModel c = new CashPaymentModel("src/main/resources/InitialCash.json");
-        System.out.println(c.cashList);
+        CashPaymentModel c = new CashPaymentModel("src/main/resources/cash.json");
+        final List<Cash> cl = new ArrayList<Cash>();
+        cl.addAll(c.cashList);
+        for (Cash cs: cl){
+            System.out.println(cs.getName() + cs.getAmount());
+        }
         double payment = 139.00;
         double price = 122.45; //16.55
         try{
@@ -104,7 +108,9 @@ public class CashPaymentModel{
             e.printStackTrace();
         }
         
-        System.out.println(c.getCashMap(c.cashList));
+        for (Cash cs: cl){
+            System.out.println(cs.getName() + cs.getAmount());
+        }
         
     }
 }

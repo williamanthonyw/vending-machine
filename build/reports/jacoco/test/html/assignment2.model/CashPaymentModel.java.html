@@ -92,20 +92,26 @@ public class CashPaymentModel{
     }
 
     public static void main(String[] args){
-<span class="nc" id="L95">        CashPaymentModel c = new CashPaymentModel(&quot;src/main/resources/InitialCash.json&quot;);</span>
-<span class="nc" id="L96">        System.out.println(c.cashList);</span>
-<span class="nc" id="L97">        double payment = 139.00;</span>
-<span class="nc" id="L98">        double price = 122.45; //16.55</span>
+<span class="nc" id="L95">        CashPaymentModel c = new CashPaymentModel(&quot;src/main/resources/cash.json&quot;);</span>
+<span class="nc" id="L96">        final List&lt;Cash&gt; cl = new ArrayList&lt;Cash&gt;();</span>
+<span class="nc" id="L97">        cl.addAll(c.cashList);</span>
+<span class="nc bnc" id="L98" title="All 2 branches missed.">        for (Cash cs: cl){</span>
+<span class="nc" id="L99">            System.out.println(cs.getName() + cs.getAmount());</span>
+<span class="nc" id="L100">        }</span>
+<span class="nc" id="L101">        double payment = 139.00;</span>
+<span class="nc" id="L102">        double price = 122.45; //16.55</span>
         try{
-<span class="nc" id="L100">            HashMap&lt;String, Integer&gt; change = c.calculateChange(payment, price);</span>
-<span class="nc" id="L101">            System.out.println(change);</span>
+<span class="nc" id="L104">            HashMap&lt;String, Integer&gt; change = c.calculateChange(payment, price);</span>
+<span class="nc" id="L105">            System.out.println(change);</span>
         }
-<span class="nc" id="L103">        catch (InsufficientChangeException e){</span>
-<span class="nc" id="L104">            e.printStackTrace();</span>
-<span class="nc" id="L105">        }</span>
+<span class="nc" id="L107">        catch (InsufficientChangeException e){</span>
+<span class="nc" id="L108">            e.printStackTrace();</span>
+<span class="nc" id="L109">        }</span>
         
-<span class="nc" id="L107">        System.out.println(c.getCashMap(c.cashList));</span>
+<span class="nc bnc" id="L111" title="All 2 branches missed.">        for (Cash cs: cl){</span>
+<span class="nc" id="L112">            System.out.println(cs.getName() + cs.getAmount());</span>
+<span class="nc" id="L113">        }</span>
         
-<span class="nc" id="L109">    }</span>
+<span class="nc" id="L115">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
