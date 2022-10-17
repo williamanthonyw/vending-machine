@@ -49,5 +49,31 @@ public class JsonParser {
 
     }
 
+    public List<Cash> getCash(String filename){
+        try{
+            Reader reader = new BufferedReader(new FileReader(filename));
+
+            List<Cash> cashList = gson.fromJson(reader, new TypeToken<List<Cash>>() {}.getType());
+
+            return cashList;
+        }
+
+        catch (Exception e){
+            return new ArrayList<Cash>();
+        }
+    }
+
+    public void updateCash(List<Cash> cashList, String filename){
+        
+        try(FileWriter file = new FileWriter(filename)){
+            file.write(gson.toJson(cashList));
+            file.flush();
+        }
+        
+        catch(Exception e){
+            
+        }
+    }
+
 }
 
