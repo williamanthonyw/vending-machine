@@ -32,61 +32,80 @@ public class CashPaymentModel{
 <span class="fc" id="L32">        return this.cashList;</span>
     }
 
+    public HashMap&lt;String, Integer&gt; getCashMap(List&lt;Cash&gt; cashList){
+<span class="fc" id="L36">        HashMap&lt;String, Integer&gt; cashMap = new HashMap&lt;String, Integer&gt;();</span>
+        
+<span class="fc bfc" id="L38" title="All 2 branches covered.">        for (Cash c: cashList){</span>
+<span class="fc" id="L39">            cashMap.put(c.getName(), c.getAmount());</span>
+<span class="fc" id="L40">        }</span>
+
+<span class="fc" id="L42">        return cashMap;</span>
+    }
+
     public HashMap&lt;String, Integer&gt; calculateChange(double payment, double price) throws InsufficientChangeException{
-<span class="fc" id="L36">        HashMap&lt;String, Integer&gt; totalChange = new HashMap&lt;String, Integer&gt;();</span>
-<span class="fc" id="L37">        double change = payment - price; </span>
+<span class="fc" id="L46">        HashMap&lt;String, Integer&gt; totalChange = new HashMap&lt;String, Integer&gt;();</span>
+<span class="fc" id="L47">        double change = payment - price; </span>
 
         //calculate total amount of cash available
-<span class="fc" id="L40">        double totalCash = 0;</span>
-<span class="fc bfc" id="L41" title="All 2 branches covered.">        for (Cash c: this.cashList){</span>
-<span class="fc" id="L42">            totalCash += (c.getValue() * c.getAmount());</span>
-<span class="fc" id="L43">        }</span>
+<span class="fc" id="L50">        double totalCash = 0;</span>
+<span class="fc bfc" id="L51" title="All 2 branches covered.">        for (Cash c: this.cashList){</span>
+<span class="fc" id="L52">            totalCash += (c.getValue() * c.getAmount());</span>
+<span class="fc" id="L53">        }</span>
 
-<span class="pc bpc" id="L45" title="1 of 2 branches missed.">        if (totalCash &lt; change){</span>
-<span class="nc" id="L46">            throw new InsufficientChangeException(&quot;Not enough change&quot;);</span>
+<span class="fc bfc" id="L55" title="All 2 branches covered.">        if (totalCash &lt; change){</span>
+<span class="fc" id="L56">            throw new InsufficientChangeException(&quot;Not enough change&quot;);</span>
         }
         // reverse sorted order from highest value to lowest value
-<span class="fc" id="L49">        List&lt;Cash&gt; reverseCashList = this.cashList;</span>
-<span class="fc" id="L50">        Collections.reverse(reverseCashList);</span>
+<span class="fc" id="L59">        List&lt;Cash&gt; reverseCashList = this.cashList;</span>
+<span class="fc" id="L60">        Collections.reverse(reverseCashList);</span>
 
         //calculate change given paid amount -&gt; from notes with highest value
-<span class="fc bfc" id="L53" title="All 2 branches covered.">        for (Cash c: reverseCashList){</span>
-<span class="fc" id="L54">            int counter = 0;</span>
-<span class="pc bpc" id="L55" title="1 of 6 branches missed.">            while (c.getAmount() != 0 &amp;&amp; change != 0 &amp;&amp; c.getValue() &lt;= change){</span>
-<span class="pc bpc" id="L56" title="1 of 2 branches missed.">                if (change &lt; 0.05){</span>
-<span class="nc" id="L57">                    break;</span>
+<span class="fc bfc" id="L63" title="All 2 branches covered.">        for (Cash c: reverseCashList){</span>
+<span class="fc" id="L64">            int counter = 0;</span>
+<span class="pc bpc" id="L65" title="1 of 6 branches missed.">            while (c.getAmount() != 0 &amp;&amp; change != 0 &amp;&amp; c.getValue() &lt;= change){</span>
+<span class="pc bpc" id="L66" title="1 of 2 branches missed.">                if (change &lt; 0.05){</span>
+<span class="nc" id="L67">                    break;</span>
                 }
-<span class="fc" id="L59">                change -= c.getValue();</span>
-<span class="fc" id="L60">                change = Math.round(change*100.0)/100.0;</span>
-<span class="fc" id="L61">                c.setAmount(c.getAmount() - 1);</span>
-<span class="fc" id="L62">                System.out.println(change);</span>
+<span class="fc" id="L69">                change -= c.getValue();</span>
+<span class="fc" id="L70">                change = Math.round(change*100.0)/100.0;</span>
+<span class="fc" id="L71">                c.setAmount(c.getAmount() - 1);</span>
+<span class="fc" id="L72">                System.out.println(change);</span>
 
-<span class="fc" id="L64">                counter++;</span>
+<span class="fc" id="L74">                counter++;</span>
 
             }
-<span class="fc" id="L67">            totalChange.put(c.getName(), counter);</span>
+<span class="fc" id="L77">            totalChange.put(c.getName(), counter);</span>
 
-<span class="fc" id="L69">        }</span>
+<span class="fc" id="L79">        }</span>
 
-        //update change amount
+<span class="pc bpc" id="L81" title="1 of 2 branches missed.">        if (change != 0){</span>
+<span class="nc" id="L82">            throw new InsufficientChangeException(&quot;Not enough change&quot;);</span>
+        }
 
-<span class="fc" id="L73">        return totalChange;</span>
+        //update change amount with reversing the reversed list
+<span class="fc" id="L86">        Collections.reverse(reverseCashList);</span>
+<span class="fc" id="L87">        this.cashList = reverseCashList;</span>
+<span class="fc" id="L88">        JsonParser jp = new JsonParser();</span>
+<span class="fc" id="L89">        jp.updateCash(this.cashList, this.cashPath);</span>
+
+<span class="fc" id="L91">        return totalChange;</span>
     }
 
     public static void main(String[] args){
-<span class="nc" id="L77">        CashPaymentModel c = new CashPaymentModel(&quot;src/main/resources/InitialCash.json&quot;);</span>
-<span class="nc" id="L78">        System.out.println(c.cashList);</span>
-<span class="nc" id="L79">        double payment = 0.50;</span>
-<span class="nc" id="L80">        double price = 0.15;</span>
+<span class="nc" id="L95">        CashPaymentModel c = new CashPaymentModel(&quot;src/main/resources/InitialCash.json&quot;);</span>
+<span class="nc" id="L96">        System.out.println(c.cashList);</span>
+<span class="nc" id="L97">        double payment = 139.00;</span>
+<span class="nc" id="L98">        double price = 122.45; //16.55</span>
         try{
-<span class="nc" id="L82">            HashMap&lt;String, Integer&gt; change = c.calculateChange(payment, price);</span>
-<span class="nc" id="L83">            System.out.println(change);</span>
+<span class="nc" id="L100">            HashMap&lt;String, Integer&gt; change = c.calculateChange(payment, price);</span>
+<span class="nc" id="L101">            System.out.println(change);</span>
         }
-<span class="nc" id="L85">        catch (InsufficientChangeException e){</span>
-<span class="nc" id="L86">            e.printStackTrace();</span>
-<span class="nc" id="L87">        }</span>
+<span class="nc" id="L103">        catch (InsufficientChangeException e){</span>
+<span class="nc" id="L104">            e.printStackTrace();</span>
+<span class="nc" id="L105">        }</span>
         
+<span class="nc" id="L107">        System.out.println(c.getCashMap(c.cashList));</span>
         
-<span class="nc" id="L90">    }</span>
+<span class="nc" id="L109">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

@@ -58,22 +58,22 @@ import java.util.Scanner;
 <span class="fc" id="L58">            return cashList;</span>
         }
 
-<span class="nc" id="L61">        catch (Exception e){</span>
-<span class="nc" id="L62">            return new ArrayList&lt;Cash&gt;();</span>
+<span class="fc" id="L61">        catch (Exception e){</span>
+<span class="fc" id="L62">            return new ArrayList&lt;Cash&gt;();</span>
         }
     }
 
     public void updateCash(List&lt;Cash&gt; cashList, String filename){
         
-<span class="nc" id="L68">        try(FileWriter file = new FileWriter(filename)){</span>
-<span class="nc" id="L69">            file.write(gson.toJson(cashList));</span>
-<span class="nc" id="L70">            file.flush();</span>
+<span class="fc" id="L68">        try(FileWriter file = new FileWriter(filename)){</span>
+<span class="fc" id="L69">            file.write(gson.toJson(cashList));</span>
+<span class="fc" id="L70">            file.flush();</span>
         }
         
 <span class="nc" id="L73">        catch(Exception e){</span>
             
-<span class="nc" id="L75">        }</span>
-<span class="nc" id="L76">    }</span>
+<span class="fc" id="L75">        }</span>
+<span class="fc" id="L76">    }</span>
 
 }
 

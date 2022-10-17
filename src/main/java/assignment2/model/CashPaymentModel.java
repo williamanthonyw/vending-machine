@@ -32,6 +32,16 @@ public class CashPaymentModel{
         return this.cashList;
     }
 
+    public HashMap<String, Integer> getCashMap(List<Cash> cashList){
+        HashMap<String, Integer> cashMap = new HashMap<String, Integer>();
+        
+        for (Cash c: cashList){
+            cashMap.put(c.getName(), c.getAmount());
+        }
+
+        return cashMap;
+    }
+
     public HashMap<String, Integer> calculateChange(double payment, double price) throws InsufficientChangeException{
         HashMap<String, Integer> totalChange = new HashMap<String, Integer>();
         double change = payment - price; 
@@ -68,7 +78,15 @@ public class CashPaymentModel{
 
         }
 
-        //update change amount
+        if (change != 0){
+            throw new InsufficientChangeException("Not enough change");
+        }
+
+        //update change amount with reversing the reversed list
+        Collections.reverse(reverseCashList);
+        this.cashList = reverseCashList;
+        JsonParser jp = new JsonParser();
+        jp.updateCash(this.cashList, this.cashPath);
 
         return totalChange;
     }
@@ -76,8 +94,8 @@ public class CashPaymentModel{
     public static void main(String[] args){
         CashPaymentModel c = new CashPaymentModel("src/main/resources/InitialCash.json");
         System.out.println(c.cashList);
-        double payment = 0.50;
-        double price = 0.15;
+        double payment = 139.00;
+        double price = 122.45; //16.55
         try{
             HashMap<String, Integer> change = c.calculateChange(payment, price);
             System.out.println(change);
@@ -86,6 +104,7 @@ public class CashPaymentModel{
             e.printStackTrace();
         }
         
+        System.out.println(c.getCashMap(c.cashList));
         
     }
 }
