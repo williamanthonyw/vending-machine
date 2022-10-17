@@ -1,12 +1,17 @@
 package assignment2;
 
 import assignment2.model.*;
+import assignment2.model.InsufficientChangeException;
+
+import java.util.HashMap;
 import java.util.List;
 
+import javax.naming.InsufficientResourcesException;
+
+import org.junit.experimental.theories.suppliers.TestedOn;
 import org.junit.jupiter.api.Test;
 import com.google.gson.Gson;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
 
 
@@ -82,5 +87,38 @@ public class CashPaymentTest {
 
         assertEquals(11, cashList.size());
     }
+
+    //Test on payment where changes are in notes
+    @Test
+    public void changeNotesOnly() throws InsufficientChangeException{
+        String initialPath = "src/main/resources/InitialCash.json";
+        CashPaymentModel Test4 = new CashPaymentModel(initialPath);
+        List<Cash> cashList = Test4.getCashList();
+        double payment = 288.00;
+        double price = 12.00;
+
+        HashMap<String, Integer> change = Test4.calculateChange(payment, price);
+        assertEquals(2, change.get("$100"));
+        assertEquals(1, change.get("$50"));
+        assertEquals(1, change.get("$20"));
+        assertEquals(1, change.get("$5"));
+        assertEquals(1, change.get("$1"));
+    
+    }
+
+    @Test
+    public void changeCoinsOnly() throws InsufficientChangeException{
+        String initialPath = "src/main/resources/InitialCash.json";
+        CashPaymentModel Test5 = new CashPaymentModel(initialPath);
+        List<Cash> cashList = Test5.getCashList();
+        double payment = 0.50;
+        double price = 0.15;
+
+        HashMap<String, Integer> change = Test5.calculateChange(payment, price);
+        assertEquals(1, change.get("20c"));
+        assertEquals(1, change.get("10c"));
+        assertEquals(1, change.get("5c"));
+    }
+
 
 }
