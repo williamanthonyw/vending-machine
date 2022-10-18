@@ -18,7 +18,10 @@ public class MainModel {
     public MainModel(){
         this.lastFiveProductsModel = new LastFiveProductsModel();
 
-        this.loginModel = new LoginModel(jsonParser.getUsers("src/main/resources/users.json"));
+        this.loginModel = new LoginModel(jsonParser.getUsers("src/test/resources/test_users.json"));
+//                "src/main/resources/users.json"));
+
+        System.out.println(loginModel.getUsers());
 
         this.user = loginModel.getAnonymousUser();
         this.isLoggedIn = false;
