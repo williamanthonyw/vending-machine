@@ -25,7 +25,7 @@ public class MainView {
 
     public void setUp(Stage stage){
         this.stage = stage;
-        goToLoginView();
+        goToLastFiveProductsView();
         stage.show();
     }
 
@@ -57,7 +57,7 @@ public class MainView {
 
         MenuItem loginBTN = new MenuItem("Login");
         loginBTN.setOnAction((ActionEvent e) -> {
-
+            goToLoginView();
         });
 
         menuBTN.getItems().addAll(loginBTN);

@@ -86,10 +86,6 @@ public class LoginView implements View{
 
         Button signInBTN = new Button("Sign in");
         loginBox.getChildren().add(signInBTN);
-//        JSONObject adminDetail = new JSONObject();
-//        adminDetail.put("password", "admin");
-//        adminDetail.put("userID", "admin");
-//        loginModel.addUserToJson(adminDetail);
 
         signInBTN.setOnAction((ActionEvent e)->{
             loginModel.login(passwordTF.getText(),passwordTF.getText());
