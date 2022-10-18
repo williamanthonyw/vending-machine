@@ -35,8 +35,16 @@ public class MainModel {
         return this.lastFiveProductsModel;
     }
 
+    public LoginModel getLoginModel() {
+        return loginModel;
+    }
+
     public boolean isLoggedIn(){
         return isLoggedIn;
+    }
+
+    public void setIsLoggedIn(boolean logged){
+        this.isLoggedIn = logged;
     }
 
     public User getUser(){

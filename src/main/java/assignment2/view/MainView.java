@@ -25,7 +25,7 @@ public class MainView {
 
     public void setUp(Stage stage){
         this.stage = stage;
-        goToLastFiveProductsView();
+        goToLoginView();
         stage.show();
     }
 
@@ -37,6 +37,10 @@ public class MainView {
 
     public void goToLastFiveProductsView(){
         goToView(new LastFiveProductsView(mainModel));
+    }
+
+    public void goToLoginView(){
+        goToView(new LoginView(mainModel));
     }
 
     public void setUpMenu() {

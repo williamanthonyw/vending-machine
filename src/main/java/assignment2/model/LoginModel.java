@@ -44,5 +44,14 @@ public class LoginModel {
         return null;
     }
 
+    public boolean addUser(User user){
+        for(User user1: users){
+            if(user1.getUsername() == user.getUsername()){
+                return false;
+            }
+        }
+        users.add(user);
+        return true;
+    }
 
 }
