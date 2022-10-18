@@ -39,6 +39,10 @@ public class MainView {
         goToView(new LastFiveProductsView(mainModel));
     }
 
+    public void goToLoginView(){
+        goToView(new LoginView(mainModel));
+    }
+
     public void setUpMenu() {
 
         this.menuBTN = new MenuButton();
@@ -53,7 +57,7 @@ public class MainView {
 
         MenuItem loginBTN = new MenuItem("Login");
         loginBTN.setOnAction((ActionEvent e) -> {
-
+            goToLoginView();
         });
 
         menuBTN.getItems().addAll(loginBTN);

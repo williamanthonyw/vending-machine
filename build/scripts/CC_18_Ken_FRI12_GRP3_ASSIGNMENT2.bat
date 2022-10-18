@@ -71,7 +71,7 @@ set CLASSPATH=%APP_HOME%\lib\CC_18_Ken_FRI12_GRP3_ASSIGNMENT2-1.0-SNAPSHOT.jar;%
 
 
 @rem Execute CC_18_Ken_FRI12_GRP3_ASSIGNMENT2
-"%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %CC_18_KEN_FR_I12_GR_P3_ASSIGNMEN_T2_OPTS%  -classpath "%CLASSPATH%" assignment2.App %*
+"%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %CC_18_KEN_FR_I12_GR_P3_ASSIGNMEN_T2_OPTS%  -classpath "%CLASSPATH%" assignment2.model.CashPaymentModel %*
 
 :end
 @rem End local scope for the variables with windows NT shell
