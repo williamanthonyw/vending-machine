@@ -26,6 +26,10 @@ public class JsonParser {
             // Convert json file to a list of exchange rates
             List<User> users = gson.fromJson(reader, new TypeToken<List<User>>() {}.getType());
 
+            if (users == null){
+                return new ArrayList<User>();
+            }
+
             return users;
 
         } catch (IOException e) {
