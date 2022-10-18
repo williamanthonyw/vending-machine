@@ -74,7 +74,7 @@ public class MainView {
 
     /////
     public void goToProductOptionsView(){
-        goToView(new ProductOptionsView(mainModel));
+        goToView(new ProductOptionsView(mainModel, stage));
     }
     
     public void goToLoginView(){
