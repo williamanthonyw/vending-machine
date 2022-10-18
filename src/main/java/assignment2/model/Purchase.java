@@ -12,7 +12,7 @@ public class Purchase {
         this.price = price;
         this.quantity = quantity;
         this.item = item;
-        this. datePurchased = datePurchased;
+        this.datePurchased = datePurchased;
     }
 
     public double getPrice() {
