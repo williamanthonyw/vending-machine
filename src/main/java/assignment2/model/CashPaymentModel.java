@@ -42,9 +42,34 @@ public class CashPaymentModel{
         return cashMap;
     }
 
-    public HashMap<String, Integer> calculateChange(double payment, double price) throws InsufficientChangeException{
+    public double calculatePayment(HashMap<Double, Integer> cashPayment){
+        double totalPayment = 0;
+        
+        for (HashMap.Entry<Double, Integer> map: cashPayment.entrySet()){
+            totalPayment += map.getKey() * map.getValue();
+        }
+
+        return totalPayment;
+    }
+
+    public void addPaymentToMachine(HashMap<Double, Integer> cashPayment, List<Cash> cashList){
+        for (Cash c: cashList){
+            if (cashPayment.get(c.getValue()) == null){
+                cashPayment.put(c.getValue(),0);
+            }
+            //System.out.println(cashPayment.get(c.getValue()));
+            c.setAmount(c.getAmount() + cashPayment.get(c.getValue()));
+        }
+    }
+
+    public HashMap<String, Integer> calculateChange(double payment, double price, HashMap<Double, Integer> cashPayment) throws InsufficientChangeException{
         HashMap<String, Integer> totalChange = new HashMap<String, Integer>();
         double change = payment - price; 
+
+        
+
+        //add payment cash to machine
+        addPaymentToMachine(cashPayment, this.cashList);
 
         //calculate total amount of cash available
         double totalCash = 0;
@@ -53,8 +78,9 @@ public class CashPaymentModel{
         }
 
         if (totalCash < change){
-            throw new InsufficientChangeException("Not enough change");
+            throw new InsufficientChangeException("Not enough cash in vending machine");
         }
+
         // reverse sorted order from highest value to lowest value
         List<Cash> reverseCashList = this.cashList;
         Collections.reverse(reverseCashList);
@@ -62,25 +88,48 @@ public class CashPaymentModel{
         //calculate change given paid amount -> from notes with highest value
         for (Cash c: reverseCashList){
             int counter = 0;
+            
             while (c.getAmount() != 0 && change != 0 && c.getValue() <= change){
-                if (change < 0.05){
-                    break;
-                }
                 change -= c.getValue();
                 change = Math.round(change*100.0)/100.0;
                 c.setAmount(c.getAmount() - 1);
-                System.out.println(change);
 
                 counter++;
 
             }
             totalChange.put(c.getName(), counter);
-
+            System.out.println(change);
         }
 
-        if (change != 0){
+        int fiveCentsChange = totalChange.get("5c");
+
+        //rounding change less than 5 cents
+        HashMap<String, Integer> cashMap = this.getCashMap(reverseCashList);
+        if (change < 0.05){
+            change = Math.round(change*20.0)/20.0;
+
+            if (change == 0.05){
+                if (cashMap.get("5c") >= 1){
+                    for (Cash c: reverseCashList){
+                        if (c.getName().equals("5c")){
+                            c.setAmount(c.getAmount()-1);
+                            totalChange.replace("5c", fiveCentsChange, fiveCentsChange+1);
+                            change -= 0.05;
+                            // System.out.println(change);
+                            break;
+                        }
+                    }
+                }
+                else{
+                    throw new InsufficientChangeException("Not enough change");
+                }
+            }
+        }
+        // System.out.println(change);
+        if (change > 0){
             throw new InsufficientChangeException("Not enough change");
         }
+
 
         //update change amount with reversing the reversed list
         Collections.reverse(reverseCashList);
@@ -92,25 +141,51 @@ public class CashPaymentModel{
     }
 
     public static void main(String[] args){
-        CashPaymentModel c = new CashPaymentModel("src/main/resources/cash.json");
-        final List<Cash> cl = new ArrayList<Cash>();
-        cl.addAll(c.cashList);
-        for (Cash cs: cl){
-            System.out.println(cs.getName() + cs.getAmount());
-        }
-        double payment = 139.00;
-        double price = 122.45; //16.55
+        String initialPath = "src/main/resources/test6cash.json";
+        CashPaymentModel Test12 = new CashPaymentModel(initialPath);
+        List<Cash> cashList = Test12.getCashList();
+        HashMap<String, Integer> cashMap1 = Test12.getCashMap(cashList);
+        // cashMap1.forEach((k,v) ->{
+        //     System.out.printf("key: %s, value: %d%n", k, v);
+        // }
+
+        // );
+        HashMap<Double, Integer> payment1 = new HashMap<Double, Integer>();
+        payment1.put(0.05, 10);
+        payment1.put(0.10, 8);  
+        payment1.put(0.20, 8);
+        payment1.put(0.50, 5);
+        payment1.put(1.00, 7);
+        payment1.put(2.00, 6);
+        payment1.put(5.00, 4);
+        payment1.put(10.00, 1);
+        payment1.put(20.00, 3);
+        payment1.put(50.00, 1);
+        payment1.put(100.00, 4);
+
+        double totalPayment1 = Test12.calculatePayment(payment1);
+        double price1 = 368.44;
         try{
-            HashMap<String, Integer> change = c.calculateChange(payment, price);
-            System.out.println(change);
+            
+            HashMap<String, Integer> change1 = Test12.calculateChange(totalPayment1, price1, payment1);
+            
+            System.out.println(change1);
+            for (Cash c: Test12.getCashList()){
+                
+                System.out.println(cashMap1.get(c.getName()) + payment1.get(c.getValue()) - change1.get(c.getName()) == c.getAmount());
+                // System.out.println("After: " + c.getAmount());
+            }
+
+            
         }
         catch (InsufficientChangeException e){
             e.printStackTrace();
         }
+        //reset json
+        JsonParser jp = new JsonParser();
+        jp.updateCash(jp.getCash("src/main/resources/richcash.json"), initialPath);
         
-        for (Cash cs: cl){
-            System.out.println(cs.getName() + cs.getAmount());
-        }
+        
         
     }
 }
