@@ -77,6 +77,9 @@ public class ProductOptionsView implements View{
         cancelBTN.setMaxHeight(10);
         buttonBox.getChildren().add(cancelBTN);
 
+        setUpCheckoutButton();
+        setUpCancelBTN(cancelBTN);
+
         Label selectCategoryLBL = new Label("Select category");
         // selectCategoryLBL.setID("align");
         selectCategory = new ComboBox<String>();
@@ -123,8 +126,8 @@ public class ProductOptionsView implements View{
         // productOptionsBox.getChildren().add(candiesLBL);
         // setUpCandiesTable();
         
-        setUpCheckoutButton();
-        setUpCancelButton();
+        // setUpCheckoutButton();
+        // setUpCancelButton();
     }
 
 
@@ -413,7 +416,8 @@ public class ProductOptionsView implements View{
 
     }
 
-    public void setUpCancelButton(){
+    @Override
+    public void setUpCancelBTN(Button cancelBTN){   ///////////////
 
     }
 
