@@ -2,6 +2,7 @@ package assignment2.view;
 
 import assignment2.model.MainModel;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
 import javafx.scene.layout.BorderPane;
 
@@ -23,6 +24,11 @@ public class CardPaymentView implements View{
     @Override
     public void setUpMenuBTN(MenuButton menuBTN) {
 
+    }
+
+    @Override
+    public void setUpCancelBTN(Button cancelBTN){
+//        mainBox.getChildren().add(cancelBTN);
     }
 
     @Override
