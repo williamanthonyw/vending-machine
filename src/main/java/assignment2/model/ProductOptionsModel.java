@@ -17,4 +17,16 @@ public class ProductOptionsModel {
         
         return productsToDisplay;
     }
+
+    public ArrayList<String> getCategories(){
+        ArrayList<String> categories = new ArrayList<>();
+        List<ProductToDisplay> allProducts = getProductsToDisplay();
+
+        for (ProductToDisplay product : allProducts){
+            if (! categories.contains(product.getCategory())){
+                categories.add(product.getCategory());
+            }
+        }
+        return categories;
+    }
 }

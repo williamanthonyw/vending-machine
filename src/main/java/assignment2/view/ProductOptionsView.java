@@ -34,6 +34,7 @@ public class ProductOptionsView implements View{
     private TableView<ProductToDisplay> candiesTable;
     private Button checkoutBTN;
     private Button cancelBTN;
+    private Button selectCategoryBTN;
     ComboBox<String> selectCategory;
 
     public ProductOptionsView(MainModel mainModel){
@@ -76,34 +77,51 @@ public class ProductOptionsView implements View{
         cancelBTN.setMaxHeight(10);
         buttonBox.getChildren().add(cancelBTN);
 
+        Label selectCategoryLBL = new Label("Select category");
+        // selectCategoryLBL.setID("align");
+        selectCategory = new ComboBox<String>();
+        selectCategory.getItems().addAll(productOptionsModel.getCategories());
+        selectCategory.setValue("drinks");  // drinks by default
+
+        selectCategoryBTN = new Button("View Products");
+
+        HBox categorySelectionBox = new HBox(5);
+        categorySelectionBox.getChildren().addAll(selectCategoryLBL, selectCategory, selectCategoryBTN);
+        mainBox.getChildren().add(categorySelectionBox);
 
         productOptionsBox = new VBox(10);
-        // productOptionsBox.setAlignment(Pos.CENTER_LEFT);
-        // mainBox.getChildren().add(productOptionsBox);
-        ScrollPane scrollPane = new ScrollPane();
-        scrollPane.setContent(productOptionsBox);
-        mainBox.getChildren().add(scrollPane);
-        scrollPane.setFitToWidth(true);
+        productOptionsBox.setAlignment(Pos.CENTER_LEFT);
+        mainBox.getChildren().add(productOptionsBox);
 
-        Label drinksLBL = new Label("Drinks");
-        drinksLBL.setId("title");
-        productOptionsBox.getChildren().add(drinksLBL);
-        setUpDrinksTable();
+        setUpDrinksTable();  //show drinks table as default
 
-        Label chocolatesLBL = new Label("Chocolates");
-        chocolatesLBL.setId("title");
-        productOptionsBox.getChildren().add(chocolatesLBL);
-        setUpChocolatesTable();
+        setUpSelectCategoryBTN();
+        //////////////////////////////////////////////////////////////////////////////
+        
+        // ScrollPane scrollPane = new ScrollPane();
+        // scrollPane.setContent(productOptionsBox);
+        // mainBox.getChildren().add(scrollPane);
+        // scrollPane.setFitToWidth(true);
 
-        Label chipsLBL = new Label("Chips");
-        chipsLBL.setId("title");
-        productOptionsBox.getChildren().add(chipsLBL);
-        setUpChipsTable();
+        // Label drinksLBL = new Label("Drinks");
+        // drinksLBL.setId("title");
+        // productOptionsBox.getChildren().add(drinksLBL);
+        // setUpDrinksTable();
 
-        Label candiesLBL = new Label("Candies");
-        candiesLBL.setId("title");
-        productOptionsBox.getChildren().add(candiesLBL);
-        setUpCandiesTable();
+        // Label chocolatesLBL = new Label("Chocolates");
+        // chocolatesLBL.setId("title");
+        // productOptionsBox.getChildren().add(chocolatesLBL);
+        // setUpChocolatesTable();
+
+        // Label chipsLBL = new Label("Chips");
+        // chipsLBL.setId("title");
+        // productOptionsBox.getChildren().add(chipsLBL);
+        // setUpChipsTable();
+
+        // Label candiesLBL = new Label("Candies");
+        // candiesLBL.setId("title");
+        // productOptionsBox.getChildren().add(candiesLBL);
+        // setUpCandiesTable();
         
         setUpCheckoutButton();
         setUpCancelButton();
@@ -111,6 +129,11 @@ public class ProductOptionsView implements View{
 
 
     public void setUpDrinksTable(){
+
+        Label drinksLBL = new Label("Drinks");
+        drinksLBL.setId("title");
+        productOptionsBox.getChildren().add(drinksLBL);
+
         drinksTable = new TableView<ProductToDisplay>();
         drinksTable.setPlaceholder(new Label("No drinks available"));
         drinksTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
@@ -172,6 +195,10 @@ public class ProductOptionsView implements View{
     }
 
     public void setUpChocolatesTable(){
+        Label chocolatesLBL = new Label("Chocolates");
+        chocolatesLBL.setId("title");
+        productOptionsBox.getChildren().add(chocolatesLBL);
+
         chocolatesTable = new TableView<ProductToDisplay>();
         chocolatesTable.setPlaceholder(new Label("No chocolates available"));
         chocolatesTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
@@ -227,6 +254,11 @@ public class ProductOptionsView implements View{
     }
 
     public void setUpChipsTable(){
+        Label chipsLBL = new Label("Chips");
+        chipsLBL.setId("title");
+        productOptionsBox.getChildren().add(chipsLBL);
+
+
         chipsTable = new TableView<ProductToDisplay>();
         chipsTable.setPlaceholder(new Label("No chips available"));
         chipsTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
@@ -281,6 +313,11 @@ public class ProductOptionsView implements View{
     }
 
     public void setUpCandiesTable(){
+        Label candiesLBL = new Label("Candies");
+        candiesLBL.setId("title");
+        productOptionsBox.getChildren().add(candiesLBL);
+
+
         candiesTable = new TableView<ProductToDisplay>();
         candiesTable.setPlaceholder(new Label("No candies available"));
         candiesTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
@@ -349,6 +386,27 @@ public class ProductOptionsView implements View{
 
             }
         }
+    }
+
+    public void setUpSelectCategoryBTN(){
+        selectCategoryBTN.setOnAction((e) -> {
+            String selectedCategory = selectCategory.getValue();
+
+            productOptionsBox.getChildren().clear();  //clear existing table
+            
+            if (selectedCategory.equals("drinks")){
+                setUpDrinksTable();
+            }
+            if (selectedCategory.equals("chocolates")){
+                setUpChocolatesTable();
+            }
+            if (selectedCategory.equals("chips")){
+                setUpChipsTable();
+            }
+            if (selectedCategory.equals("candies")){
+                setUpCandiesTable();
+            }
+        });
     }
 
     public void setUpCheckoutButton(){
