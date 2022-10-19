@@ -26,6 +26,8 @@ public class MainView {
     public void setUp(Stage stage){
         this.stage = stage;
         goToLastFiveProductsView();
+        // goToProductOptionsView();    ///////////
+
         stage.show();
     }
 
@@ -37,6 +39,11 @@ public class MainView {
 
     public void goToLastFiveProductsView(){
         goToView(new LastFiveProductsView(mainModel));
+    }
+
+    /////
+    public void goToProductOptionsView(){
+        goToView(new ProductOptionsView(mainModel));
     }
 
     public void setUpMenu() {
@@ -55,8 +62,12 @@ public class MainView {
         loginBTN.setOnAction((ActionEvent e) -> {
 
         });
+        MenuItem productOptionsBTN = new MenuItem("Products");
+        productOptionsBTN.setOnAction((ActionEvent e) -> {
+            goToProductOptionsView();
+        });
 
-        menuBTN.getItems().addAll(loginBTN);
+        menuBTN.getItems().addAll(loginBTN, productOptionsBTN);
 
 
     }

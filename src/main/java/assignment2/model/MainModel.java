@@ -9,6 +9,7 @@ public class MainModel {
 
     private LastFiveProductsModel lastFiveProductsModel;
     private LoginModel loginModel;
+    private ProductOptionsModel productOptionsModel;  ////
 
     private User user;
     private boolean isLoggedIn;
@@ -17,6 +18,7 @@ public class MainModel {
 
     public MainModel(){
         this.lastFiveProductsModel = new LastFiveProductsModel();
+        this.productOptionsModel = new ProductOptionsModel();   ////////
 
         this.loginModel = new LoginModel(jsonParser.getUsers("src/main/resources/users.json"));
 
@@ -53,10 +55,14 @@ public class MainModel {
         // update users file
         jsonParser.updateUsers(loginModel.getUsers(), "src/main/resources/users.json");
 
-        // need to update inventory file as well
+        // need to update inventory file as well   //////////TODO
 
 
 
+    }
+
+    public ProductOptionsModel getProductOptionsModel(){
+        return this.productOptionsModel;
     }
 
 }
