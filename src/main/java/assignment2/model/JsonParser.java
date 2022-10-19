@@ -3,6 +3,7 @@ package assignment2.model;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import org.json.simple.parser.JSONParser;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -79,5 +80,18 @@ public class JsonParser {
         }
     }
 
+    public List<CardUser> getCardDetail(String filename) {
+        try {
+
+            Reader reader = new BufferedReader(new FileReader(filename));
+
+            // Convert json file to a list of exchange rates
+            List<CardUser> cardUsers = gson.fromJson(reader, new TypeToken<List<CardUser>>() {}.getType());
+            return cardUsers;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
 

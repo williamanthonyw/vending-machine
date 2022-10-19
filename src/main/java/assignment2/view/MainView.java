@@ -25,7 +25,7 @@ public class MainView {
 
     public void setUp(Stage stage){
         this.stage = stage;
-        goToLastFiveProductsView();
+        goToCardPaymentView();
         stage.show();
     }
 
@@ -41,6 +41,10 @@ public class MainView {
 
     public void goToLoginView(){
         goToView(new LoginView(mainModel));
+    }
+
+    public void goToCardPaymentView(){
+        goToView(new CardPaymentView(mainModel));
     }
 
     public void setUpMenu() {
