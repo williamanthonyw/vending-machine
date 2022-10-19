@@ -20,7 +20,10 @@ public class MainModel {
         this.lastFiveProductsModel = new LastFiveProductsModel();
         this.productOptionsModel = new ProductOptionsModel();   ////////
 
-        this.loginModel = new LoginModel(jsonParser.getUsers("src/main/resources/users.json"));
+        this.loginModel = new LoginModel(jsonParser.getUsers("src/test/resources/test_users.json"));
+//                "src/main/resources/users.json"));
+
+        System.out.println(loginModel.getUsers());
 
         this.user = loginModel.getAnonymousUser();
         this.isLoggedIn = false;
@@ -37,8 +40,16 @@ public class MainModel {
         return this.lastFiveProductsModel;
     }
 
+    public LoginModel getLoginModel() {
+        return loginModel;
+    }
+
     public boolean isLoggedIn(){
         return isLoggedIn;
+    }
+
+    public void setIsLoggedIn(boolean logged){
+        this.isLoggedIn = logged;
     }
 
     public User getUser(){

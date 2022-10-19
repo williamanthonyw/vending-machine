@@ -45,6 +45,10 @@ public class MainView {
     public void goToProductOptionsView(){
         goToView(new ProductOptionsView(mainModel));
     }
+    
+    public void goToLoginView(){
+        goToView(new LoginView(mainModel));
+    }
 
     public void setUpMenu() {
 
@@ -60,7 +64,7 @@ public class MainView {
 
         MenuItem loginBTN = new MenuItem("Login");
         loginBTN.setOnAction((ActionEvent e) -> {
-
+            goToLoginView();
         });
         MenuItem productOptionsBTN = new MenuItem("Products");
         productOptionsBTN.setOnAction((ActionEvent e) -> {
