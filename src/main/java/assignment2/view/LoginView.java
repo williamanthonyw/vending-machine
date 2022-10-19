@@ -128,4 +128,10 @@ public class LoginView implements View{
             }
         });
     }
+
+    @Override
+    public void setUpCancelBTN(Button cancelBTN){
+//        mainBox.getChildren().add(cancelBTN);
+    }
+
 }

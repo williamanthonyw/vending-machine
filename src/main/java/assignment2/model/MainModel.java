@@ -30,8 +30,8 @@ public class MainModel {
         purchaseProduct(new Product("milk", 28), 2);
 
         // for now logging in
-//        this.user = loginModel.login("Kylie", "password");
-//        this.isLoggedIn = true;
+        this.user = loginModel.login("Kylie", "password");
+        this.isLoggedIn = true;
     }
 
     public LastFiveProductsModel getLastFiveProductsModel(){
@@ -52,6 +52,20 @@ public class MainModel {
 
     public User getUser(){
         return this.user;
+    }
+
+    public void logout(){
+        this.user = loginModel.getAnonymousUser();
+        this.isLoggedIn = false;
+    }
+
+    public void cancelTransaction(){
+
+        // clear cart (look at Katie's stuff)
+
+        // log user out
+        logout();
+
     }
 
     public void purchaseProduct(Product product, int quantity){
