@@ -46,12 +46,11 @@ public class MainModel {
         return loginModel;
     }
 
+    public CardPaymentModel getCardPaymentModel(){return cardPaymentModel;}
+
     public CashPaymentModel getCashPaymentModel(){
         return this.cashPaymentModel;
     }
-
-    public CardPaymentModel getCardPaymentModel(){return cardPaymentModel;}
-
     public boolean isLoggedIn(){
         return isLoggedIn;
     }
@@ -88,7 +87,7 @@ public class MainModel {
         // update users file
         jsonParser.updateUsers(loginModel.getUsers(), "src/main/resources/users.json");
 
-        // need to update inventory file as well   //////////TODO
+        // need to update inventory file as well
 
 
 

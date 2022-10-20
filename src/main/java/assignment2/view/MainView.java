@@ -91,7 +91,6 @@ public class MainView {
 
     public void goToCashPaymentView(){ goToView(new CashPaymentView(mainModel)); }
 
-
     public void setUpCancelOnTimeOut(){
 
         Duration delay = Duration.seconds(120);

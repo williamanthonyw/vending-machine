@@ -88,12 +88,12 @@ public class CashPaymentView implements View{
         mainBox.getChildren().add(0, menuBTN);
     }
 
+
     // @Override
     // public void setupPopupTimeoutHandler(MainView mainView){
 
     // }
 
-    
     @Override
     public void setUp(){
  
