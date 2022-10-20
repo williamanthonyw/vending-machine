@@ -9,7 +9,11 @@ public class MainModel {
 
     private LastFiveProductsModel lastFiveProductsModel;
     private LoginModel loginModel;
+<<<<<<< HEAD
+    private CashPaymentModel cashPaymentModel;
+=======
     private ProductOptionsModel productOptionsModel;  ////
+>>>>>>> 9ca2739f40322e414bb8faf5363706c77429be33
 
     private User user;
     private boolean isLoggedIn;
@@ -28,6 +32,7 @@ public class MainModel {
         this.user = loginModel.getAnonymousUser();
         this.isLoggedIn = false;
 
+        this.cashPaymentModel = new CashPaymentModel("src/test/resources/initialCash.json");
 
         purchaseProduct(new Product("milk", 28), 2);
 
@@ -42,6 +47,10 @@ public class MainModel {
 
     public LoginModel getLoginModel() {
         return loginModel;
+    }
+
+    public CashPaymentModel getCashPaymentModel(){
+        return this.cashPaymentModel;
     }
 
     public boolean isLoggedIn(){

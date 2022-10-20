@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CashPaymentModel.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">CC_18_Ken_FRI12_GRP3_ASSIGNMENT2</a> &gt; <a href="index.source.html" class="el_package">assignment2.model</a> &gt; <span class="el_source">CashPaymentModel.java</span></div><h1>CashPaymentModel.java</h1><pre class="source lang-java linenums">package assignment2.model;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.Reader;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.HashMap;
+import java.lang.Math.*;
+
+
+public class CashPaymentModel{
+    private String cashPath;
+    private List&lt;Cash&gt; cashList;
+    // src/main/resources/Cash.json;
+    
+<span class="fc" id="L21">    public CashPaymentModel(String cp){</span>
+<span class="fc" id="L22">        this.cashPath = cp;</span>
+<span class="fc" id="L23">        JsonParser jp = new JsonParser();</span>
+        
+        
+        //read from a json file into list of available notes/coins 
+<span class="fc" id="L27">        List&lt;Cash&gt; cash = jp.getCash(this.cashPath);</span>
+<span class="fc" id="L28">        this.cashList = cash;</span>
+<span class="fc" id="L29">    }</span>
+
+    public List&lt;Cash&gt; getCashList(){
+<span class="fc" id="L32">        return this.cashList;</span>
+    }
+
+    public HashMap&lt;String, Integer&gt; getCashMap(List&lt;Cash&gt; cashList){
+<span class="fc" id="L36">        HashMap&lt;String, Integer&gt; cashMap = new HashMap&lt;String, Integer&gt;();</span>
+        
+<span class="fc bfc" id="L38" title="All 2 branches covered.">        for (Cash c: cashList){</span>
+<span class="fc" id="L39">            cashMap.put(c.getName(), c.getAmount());</span>
+<span class="fc" id="L40">        }</span>
+
+<span class="fc" id="L42">        return cashMap;</span>
+    }
+
+    public double calculatePayment(HashMap&lt;Double, Integer&gt; cashPayment){
+<span class="fc" id="L46">        double totalPayment = 0;</span>
+        
+<span class="fc bfc" id="L48" title="All 2 branches covered.">        for (HashMap.Entry&lt;Double, Integer&gt; map: cashPayment.entrySet()){</span>
+<span class="fc" id="L49">            totalPayment += map.getKey() * map.getValue();</span>
+<span class="fc" id="L50">        }</span>
+
+<span class="fc" id="L52">        return totalPayment;</span>
+    }
+
+    public void addPaymentToMachine(HashMap&lt;Double, Integer&gt; cashPayment, List&lt;Cash&gt; cashList){
+<span class="fc bfc" id="L56" title="All 2 branches covered.">        for (Cash c: cashList){</span>
+<span class="fc bfc" id="L57" title="All 2 branches covered.">            if (cashPayment.get(c.getValue()) == null){</span>
+<span class="fc" id="L58">                cashPayment.put(c.getValue(),0);</span>
+            }
+            //System.out.println(cashPayment.get(c.getValue()));
+<span class="fc" id="L61">            c.setAmount(c.getAmount() + cashPayment.get(c.getValue()));</span>
+<span class="fc" id="L62">        }</span>
+<span class="fc" id="L63">    }</span>
+
+    public HashMap&lt;String, Integer&gt; calculateChange(double payment, double price, HashMap&lt;Double, Integer&gt; cashPayment) throws InsufficientChangeException, PaymentNotEnoughException{
+<span class="fc" id="L66">        HashMap&lt;String, Integer&gt; totalChange = new HashMap&lt;String, Integer&gt;();</span>
+
+<span class="fc bfc" id="L68" title="All 2 branches covered.">        if (payment &lt; price){</span>
+<span class="fc" id="L69">            throw new PaymentNotEnoughException(&quot;Please add more cash or cancel&quot;);</span>
+        }
+<span class="fc" id="L71">        double change = payment - price; </span>
+
+        
+
+        //add payment cash to machine
+<span class="fc" id="L76">        addPaymentToMachine(cashPayment, this.cashList);</span>
+
+        //calculate total amount of cash available
+<span class="fc" id="L79">        double totalCash = 0;</span>
+<span class="fc bfc" id="L80" title="All 2 branches covered.">        for (Cash c: this.cashList){</span>
+<span class="fc" id="L81">            totalCash += (c.getValue() * c.getAmount());</span>
+<span class="fc" id="L82">        }</span>
+
+<span class="fc bfc" id="L84" title="All 2 branches covered.">        if (totalCash &lt; change){</span>
+<span class="fc" id="L85">            throw new InsufficientChangeException(&quot;Not enough cash in vending machine&quot;);</span>
+        }
+
+        // reverse sorted order from highest value to lowest value
+<span class="fc" id="L89">        List&lt;Cash&gt; reverseCashList = this.cashList;</span>
+<span class="fc" id="L90">        Collections.reverse(reverseCashList);</span>
+
+        //calculate change given paid amount -&gt; from notes with highest value
+<span class="fc bfc" id="L93" title="All 2 branches covered.">        for (Cash c: reverseCashList){</span>
+<span class="fc" id="L94">            int counter = 0;</span>
+            
+<span class="fc bfc" id="L96" title="All 6 branches covered.">            while (c.getAmount() != 0 &amp;&amp; change != 0 &amp;&amp; c.getValue() &lt;= change){</span>
+<span class="fc" id="L97">                change -= c.getValue();</span>
+<span class="fc" id="L98">                change = Math.round(change*100.0)/100.0;</span>
+<span class="fc" id="L99">                c.setAmount(c.getAmount() - 1);</span>
+
+<span class="fc" id="L101">                counter++;</span>
+
+            }
+<span class="fc" id="L104">            totalChange.put(c.getName(), counter);</span>
+<span class="fc" id="L105">            System.out.println(change);</span>
+<span class="fc" id="L106">        }</span>
+
+<span class="fc" id="L108">        int fiveCentsChange = totalChange.get(&quot;5c&quot;);</span>
+
+        //rounding change less than 5 cents
+<span class="fc" id="L111">        HashMap&lt;String, Integer&gt; cashMap = this.getCashMap(reverseCashList);</span>
+<span class="fc bfc" id="L112" title="All 2 branches covered.">        if (change &lt; 0.05){</span>
+<span class="fc" id="L113">            change = Math.round(change*20.0)/20.0;</span>
+
+<span class="fc bfc" id="L115" title="All 2 branches covered.">            if (change == 0.05){</span>
+<span class="pc bpc" id="L116" title="1 of 2 branches missed.">                if (cashMap.get(&quot;5c&quot;) &gt;= 1){</span>
+<span class="pc bpc" id="L117" title="1 of 2 branches missed.">                    for (Cash c: reverseCashList){</span>
+<span class="fc bfc" id="L118" title="All 2 branches covered.">                        if (c.getName().equals(&quot;5c&quot;)){</span>
+<span class="fc" id="L119">                            c.setAmount(c.getAmount()-1);</span>
+<span class="fc" id="L120">                            totalChange.replace(&quot;5c&quot;, fiveCentsChange, fiveCentsChange+1);</span>
+<span class="fc" id="L121">                            change -= 0.05;</span>
+                            // System.out.println(change);
+<span class="fc" id="L123">                            break;</span>
+                        }
+<span class="fc" id="L125">                    }</span>
+                }
+                else{
+<span class="nc" id="L128">                    throw new InsufficientChangeException(&quot;Not enough change&quot;);</span>
+                }
+            }
+        }
+        // System.out.println(change);
+<span class="fc bfc" id="L133" title="All 2 branches covered.">        if (change &gt; 0){</span>
+<span class="fc" id="L134">            throw new InsufficientChangeException(&quot;Not enough change&quot;);</span>
+        }
+
+
+        //update change amount with reversing the reversed list
+<span class="fc" id="L139">        Collections.reverse(reverseCashList);</span>
+<span class="fc" id="L140">        this.cashList = reverseCashList;</span>
+<span class="fc" id="L141">        JsonParser jp = new JsonParser();</span>
+<span class="fc" id="L142">        jp.updateCash(this.cashList, this.cashPath);</span>
+
+<span class="fc" id="L144">        return totalChange;</span>
+    }
+
+    public static void main(String[] args){
+
+<span class="nc" id="L149">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
