@@ -8,6 +8,7 @@ import com.google.gson.Gson;
 public class MainModel {
 
     private LastFiveProductsModel lastFiveProductsModel;
+    private CardPaymentModel cardPaymentModel;
     private LoginModel loginModel;
     private CashPaymentModel cashPaymentModel;
     private ProductOptionsModel productOptionsModel;
@@ -19,12 +20,12 @@ public class MainModel {
 
     public MainModel(){
         this.lastFiveProductsModel = new LastFiveProductsModel();
+        this.cardPaymentModel = new CardPaymentModel(this);
+
         this.productOptionsModel = new ProductOptionsModel();   ////////
 
         this.loginModel = new LoginModel(jsonParser.getUsers("src/test/resources/test_users.json"));
 //                "src/main/resources/users.json"));
-
-        System.out.println(loginModel.getUsers());
 
         this.user = loginModel.getAnonymousUser();
         this.isLoggedIn = false;
@@ -49,6 +50,8 @@ public class MainModel {
     public CashPaymentModel getCashPaymentModel(){
         return this.cashPaymentModel;
     }
+
+    public CardPaymentModel getCardPaymentModel(){return cardPaymentModel;}
 
     public boolean isLoggedIn(){
         return isLoggedIn;
