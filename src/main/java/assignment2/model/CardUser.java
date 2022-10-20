@@ -2,16 +2,16 @@ package assignment2.model;
 
 public class CardUser{
     private String name;
-    private String cardNumber;
-    public CardUser(String name, String cardNumber){
+    private String number;
+    public CardUser(String name, String number){
         this.name = name;
-        this.cardNumber = cardNumber;
+        this.number = number;
     }
     public String getName(){
         return name;
     }
     public String getCardNumber() {
-        return cardNumber;
+        return number;
     }
 
 }

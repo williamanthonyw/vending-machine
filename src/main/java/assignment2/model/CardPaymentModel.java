@@ -14,11 +14,6 @@ public class CardPaymentModel {
     public void paymentProcess(String name, String number){
         cardUserList = jsonParser.getCardDetail("src/main/resources/credit_cards.json");
 
-        //can't get CardNumber using gson
-        System.out.println(cardUserList.get(1).getName());
-
-        cardUserList.get(0).getCardNumber();
-
         for(CardUser user: cardUserList){
             if(user.getName().equals(name) && user.getCardNumber().equals(number)){
                 mainModel.getUser().setCardUser(user);

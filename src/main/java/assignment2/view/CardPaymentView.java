@@ -47,8 +47,12 @@ public class CardPaymentView implements View{
         scene.getStylesheets().add("Style.css");
 
         mainBox = new VBox(30);
-        BorderPane.setMargin(mainBox,new Insets(200,0,0,300));
+        BorderPane.setMargin(mainBox, new Insets(50, 50, 50, 50));
         borderPane.setCenter(mainBox);
+
+        Label titleLBL = new Label("Checkout");
+        titleLBL.setId("title");
+        mainBox.getChildren().add(titleLBL);
 
         cardUserNameBox = new HBox(20);
         mainBox.getChildren().add(cardUserNameBox);
@@ -75,7 +79,7 @@ public class CardPaymentView implements View{
         cardNumberTF.setSkin(new PasswordSkin(cardNumberTF));
         cardNumberBox.getChildren().addAll(cardNumberLBL,cardNumberTF);
 
-        Button confirmBTN = new Button("Confirm");
+        Button confirmBTN = new Button("Checkout");
         mainBox.getChildren().add(confirmBTN);
 
         confirmBTN.setOnMousePressed(event -> {
