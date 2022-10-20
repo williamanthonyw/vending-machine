@@ -70,12 +70,21 @@ public class CashPaymentView implements View{
         mainBox.getChildren().add(0, menuBTN);
     }
 
+    @Override
+    public void setUpCancelBTN(Button cancelBTN){
+        mainBox.getChildren().add(0, cancelBTN);
+    }
+
+    // @Override
+    // public void setupPopupTimeoutHandler(MainView mainView){
+
+    // }
+
     
     @Override
     public void setUp(){
 
         this.borderPane = new BorderPane();
-
         scene = new Scene(borderPane, 1000, 600);
         scene.getStylesheets().add("Style.css");
 
@@ -94,7 +103,6 @@ public class CashPaymentView implements View{
 
         //if card is selected. go to cardpaymentview.java
         if (paymentMode.getValue().equals("Card")){
-
         };
 
         cashLabel = new HBox();

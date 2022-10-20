@@ -9,11 +9,8 @@ public class MainModel {
 
     private LastFiveProductsModel lastFiveProductsModel;
     private LoginModel loginModel;
-<<<<<<< HEAD
     private CashPaymentModel cashPaymentModel;
-=======
-    private ProductOptionsModel productOptionsModel;  ////
->>>>>>> 9ca2739f40322e414bb8faf5363706c77429be33
+    private ProductOptionsModel productOptionsModel;
 
     private User user;
     private boolean isLoggedIn;
@@ -22,10 +19,9 @@ public class MainModel {
 
     public MainModel(){
         this.lastFiveProductsModel = new LastFiveProductsModel();
-        this.productOptionsModel = new ProductOptionsModel();   ////////
+        this.productOptionsModel = new ProductOptionsModel();  
 
-        this.loginModel = new LoginModel(jsonParser.getUsers("src/test/resources/test_users.json"));
-//                "src/main/resources/users.json"));
+        this.loginModel = new LoginModel(jsonParser.getUsers("src/test/resources/test_users.json"));//"src/main/resources/users.json"));
 
         System.out.println(loginModel.getUsers());
 
