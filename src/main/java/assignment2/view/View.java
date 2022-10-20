@@ -4,9 +4,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
 
+import java.util.List;
+
 public interface View {
 
-    public Scene getScene();
+    public List<Scene> getScenes();
 
     public void setUp();
 

@@ -16,6 +16,9 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import org.json.simple.JSONObject;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class LoginView implements View{
     private MainModel mainModel;
     private LoginModel loginModel;
@@ -33,8 +36,8 @@ public class LoginView implements View{
     }
 
     @Override
-    public Scene getScene() {
-        return scene;
+    public List<Scene> getScenes(){
+        return Arrays.asList(new Scene[] { scene });
     }
 
     @Override
