@@ -29,7 +29,7 @@ public class MainModel {
         this.user = loginModel.getAnonymousUser();
         this.isLoggedIn = false;
 
-        this.cashPaymentModel = new CashPaymentModel("src/main/resources/InitialCash.json");
+        this.cashPaymentModel = new CashPaymentModel("src/main/resources/cash.json");
 
         purchaseProduct(new Product("milk", 28), 2);
 

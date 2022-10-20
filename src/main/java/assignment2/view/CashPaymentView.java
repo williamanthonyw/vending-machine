@@ -51,17 +51,7 @@ public class CashPaymentView implements View{
     private Button cancel;
 
     private HashMap<Double, Integer> payment = new HashMap<Double, Integer>();
-    // payment.put(0.05, 0);
-    // payment.put(0.10, 0);
-    // payment.put(0.20, 0);
-    // payment.put(0.50, 0);
-    // payment.put(1.0, 0);
-    // payment.put(2.0, 0);
-    // payment.put(5.0, 0);
-    // payment.put(10.0, 0);
-    // payment.put(20.0, 0);
-    // payment.put(50.0, 0);
-    // payment.put(100.0, 0);
+    
 
     private Popup changePopup;
     private Popup notEnoughChange;
@@ -96,6 +86,18 @@ public class CashPaymentView implements View{
     
     @Override
     public void setUp(){
+
+        payment.put(0.05, 0);
+        payment.put(0.10, 0);
+        payment.put(0.20, 0);
+        payment.put(0.50, 0);
+        payment.put(1.0, 0);
+        payment.put(2.0, 0);
+        payment.put(5.0, 0);
+        payment.put(10.0, 0);
+        payment.put(20.0, 0);
+        payment.put(50.0, 0);
+        payment.put(100.0, 0);
  
         stage = new Stage();
 
@@ -192,37 +194,37 @@ public class CashPaymentView implements View{
             try {
                 switch(cashList.getValue()){
                     case "5c":
-                        payment.put(0.05, Integer.parseInt(quantityInput.getText()));
+                        payment.put(0.05, payment.get(0.05) + Integer.parseInt(quantityInput.getText()));
                         break;
                     case "10c":
-                        payment.put(0.10, Integer.parseInt(quantityInput.getText()));
+                        payment.put(0.10, payment.get(0.10) + Integer.parseInt(quantityInput.getText()));
                         break;
                     case "20c":
-                        payment.put(0.20, Integer.parseInt(quantityInput.getText()));
+                        payment.put(0.20, payment.get(0.20) + Integer.parseInt(quantityInput.getText()));
                         break;
                     case "50c":
-                        payment.put(0.50, Integer.parseInt(quantityInput.getText()));
+                        payment.put(0.50, payment.get(0.50) + Integer.parseInt(quantityInput.getText()));
                         break;
                     case "$1":
-                        payment.put(1.00, Integer.parseInt(quantityInput.getText()));
+                        payment.put(1.00, payment.get(1.00) + Integer.parseInt(quantityInput.getText()));
                         break;
                     case "$2":
-                        payment.put(2.00, Integer.parseInt(quantityInput.getText()));
+                        payment.put(2.00, payment.get(2.00) + Integer.parseInt(quantityInput.getText()));
                         break;
                     case "$5":
-                        payment.put(5.00, Integer.parseInt(quantityInput.getText()));
+                        payment.put(5.00, payment.get(5.00) + Integer.parseInt(quantityInput.getText()));
                         break;
                     case "$10":
-                        payment.put(10.00, Integer.parseInt(quantityInput.getText()));
+                        payment.put(10.00, payment.get(10.00) + Integer.parseInt(quantityInput.getText()));
                         break;
                     case "$20":
-                        payment.put(20.00, Integer.parseInt(quantityInput.getText()));
+                        payment.put(20.00, payment.get(20.00) + Integer.parseInt(quantityInput.getText()));
                         break;
                     case "$50":
-                        payment.put(50.00, Integer.parseInt(quantityInput.getText()));
+                        payment.put(50.00, payment.get(50.00) + Integer.parseInt(quantityInput.getText()));
                         break;
                     case "$100":
-                        payment.put(100.00, Integer.parseInt(quantityInput.getText()));
+                        payment.put(100.00, payment.get(100.00) + Integer.parseInt(quantityInput.getText()));
                         break;
                 }
 
@@ -243,16 +245,11 @@ public class CashPaymentView implements View{
 
         popupScene.getStylesheets().add("Style.css");
         
-
+        changePopupStage.show();
 
         popupBox = new VBox(60);
         popupBorderpane.setMargin(popupBox, new Insets(50,50,50,50));
         popupBorderpane.setCenter(popupBox);
-
-        pay.setOnAction((ActionEvent e) -> {
-            changePopupStage.show();
-            
-        });
 
         try{
             System.out.println(payment);
@@ -267,7 +264,8 @@ public class CashPaymentView implements View{
             Label thankYouText = new Label("Thank you for your purchase");
 
             //String formatting for change
-            String changeFormat = String.format("Here is your change: %d\n", Math.round(((totalPayment-totalPrice)*100.0)/100.0));
+            Label totalChangeText = new Label("Here is your change: $" + Math.round((totalPayment-totalPrice)*100.0)/100.0);
+            String changeFormat = "";
             for (Map.Entry<String, Integer> c: change.entrySet()){
                 String temp = String.format("%s: %d\n", c.getKey(), c.getValue());
                 changeFormat = changeFormat.concat(temp);
@@ -275,7 +273,7 @@ public class CashPaymentView implements View{
             Label changeText = new Label(changeFormat);
             Button back = new Button("Back");
 
-            popupBox.getChildren().addAll(thankYouText, changeText, back);
+            popupBox.getChildren().addAll(thankYouText, totalChangeText, changeText, back);
 
 
             back.setOnAction((ActionEvent c) -> {
