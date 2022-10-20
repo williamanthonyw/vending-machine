@@ -12,6 +12,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.Popup;
+import javafx.stage.Modality;
 import javafx.beans.binding.*;
 import javafx.util.*;
 
@@ -21,6 +23,7 @@ import java.io.*;
 
 public class ProductOptionsView implements View{
     private Scene scene;
+    private Stage stage;  ///////////
     private MainModel mainModel;
     private ProductOptionsModel productOptionsModel;
     private VBox mainBox;
@@ -37,9 +40,10 @@ public class ProductOptionsView implements View{
     private Button selectCategoryBTN;
     ComboBox<String> selectCategory;
 
-    public ProductOptionsView(MainModel mainModel){
+    public ProductOptionsView(MainModel mainModel, Stage stage){
         this.mainModel = mainModel;
         this.productOptionsModel = mainModel.getProductOptionsModel();
+        this.stage = stage;
 
     }
 
@@ -99,35 +103,7 @@ public class ProductOptionsView implements View{
         setUpDrinksTable();  //show drinks table as default
 
         setUpSelectCategoryBTN();
-        //////////////////////////////////////////////////////////////////////////////
         
-        // ScrollPane scrollPane = new ScrollPane();
-        // scrollPane.setContent(productOptionsBox);
-        // mainBox.getChildren().add(scrollPane);
-        // scrollPane.setFitToWidth(true);
-
-        // Label drinksLBL = new Label("Drinks");
-        // drinksLBL.setId("title");
-        // productOptionsBox.getChildren().add(drinksLBL);
-        // setUpDrinksTable();
-
-        // Label chocolatesLBL = new Label("Chocolates");
-        // chocolatesLBL.setId("title");
-        // productOptionsBox.getChildren().add(chocolatesLBL);
-        // setUpChocolatesTable();
-
-        // Label chipsLBL = new Label("Chips");
-        // chipsLBL.setId("title");
-        // productOptionsBox.getChildren().add(chipsLBL);
-        // setUpChipsTable();
-
-        // Label candiesLBL = new Label("Candies");
-        // candiesLBL.setId("title");
-        // productOptionsBox.getChildren().add(candiesLBL);
-        // setUpCandiesTable();
-        
-        // setUpCheckoutButton();
-        // setUpCancelButton();
     }
 
 
@@ -174,6 +150,7 @@ public class ProductOptionsView implements View{
                         } else {
                             btn.setOnAction(event -> {
                                 // add to cart 
+                                setUpPopupScreen(getTableView().getItems().get(getIndex())); //passes in the producttodisplay obj of the selected row in table
                             });
                             setGraphic(btn);
                             setText(null);
@@ -189,11 +166,6 @@ public class ProductOptionsView implements View{
 
         productOptionsBox.getChildren().add(drinksTable);
         drinksTable.getColumns().add(addBTNColumn);
-
-        //
-        // drinksTable.prefHeightProperty().bind(drinksTable.fixedCellSizeProperty().multiply(Bindings.size(drinksTable.getItems()).add(1.01)));
-        // drinksTable.minHeightProperty().bind(drinksTable.prefHeightProperty());
-        // drinksTable.maxHeightProperty().bind(drinksTable.prefHeightProperty());
 
     }
 
@@ -237,7 +209,7 @@ public class ProductOptionsView implements View{
                             setText(null);
                         } else {
                             btn.setOnAction(event -> {
-                                // add to cart 
+                                setUpPopupScreen(getTableView().getItems().get(getIndex()));
                             });
                             setGraphic(btn);
                             setText(null);
@@ -297,7 +269,7 @@ public class ProductOptionsView implements View{
                             setText(null);
                         } else {
                             btn.setOnAction(event -> {
-                                // add to cart 
+                                setUpPopupScreen(getTableView().getItems().get(getIndex()));
                             });
                             setGraphic(btn);
                             setText(null);
@@ -356,7 +328,7 @@ public class ProductOptionsView implements View{
                             setText(null);
                         } else {
                             btn.setOnAction(event -> {
-                                // add to cart 
+                                setUpPopupScreen(getTableView().getItems().get(getIndex()));
                             });
                             setGraphic(btn);
                             setText(null);
@@ -386,7 +358,6 @@ public class ProductOptionsView implements View{
         for (ProductToDisplay product: products){
             if (product.getCategory().equals(category)){
                 table.getItems().add(product);
-
             }
         }
     }
@@ -409,6 +380,43 @@ public class ProductOptionsView implements View{
             if (selectedCategory.equals("candies")){
                 setUpCandiesTable();
             }
+        });
+    }
+
+    public void setUpPopupScreen(ProductToDisplay product){   //todo: popup screen doesnt close after timeout - mouse presses not registered + window doesnt close
+
+        BorderPane bp = new BorderPane();
+        Scene popupScene = new Scene(bp, 500, 300);
+        popupScene.getStylesheets().add("Style.css");
+        
+        Stage popupStage = new Stage();
+
+        popupStage.setScene(popupScene);
+        popupStage.initModality(Modality.APPLICATION_MODAL);
+        popupStage.initOwner(this.stage);
+        popupStage.show();
+
+        VBox popupMainBox = new VBox(60);
+        bp.setMargin(popupMainBox, new Insets(50, 50, 50, 50));
+        bp.setCenter(popupMainBox);
+        popupMainBox.getChildren().add(new Label("Select Quantity to purchase"));
+        HBox selectionBox = new HBox(80);
+        popupMainBox.getChildren().add(selectionBox);
+
+        ArrayList<Integer> quantities = new ArrayList<>();
+        for (int i = 1; i <= product.getQuantity(); i++){
+            quantities.add(i);
+        } 
+        ComboBox<Integer> selectQuantity = new ComboBox<Integer>();
+        selectQuantity.getItems().addAll(quantities);
+        selectQuantity.setValue(1);  // 1 by default
+        Button addToCartBTN = new Button("Add to cart");
+        selectionBox.getChildren().addAll(selectQuantity, addToCartBTN);
+
+        addToCartBTN.setOnAction((e) -> {
+            int selectedQuantity = selectQuantity.getValue();
+
+            ///// add the product obj + selected quantity to cart
         });
     }
 

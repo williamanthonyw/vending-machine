@@ -4,7 +4,7 @@ import java.util.*;
 
 public class ProductOptionsModel {
 
-    // private List<ProductToDisplay> productsToDisplay;
+    private List<ProductToDisplay> productsToDisplay;
     
     // public ProductOptionsModel(List<ProductToDisplay> productsToDisplay){
         
@@ -13,9 +13,13 @@ public class ProductOptionsModel {
 
     public List<ProductToDisplay> getProductsToDisplay(){
         JsonParser jparser = new JsonParser();
-        List<ProductToDisplay> productsToDisplay = jparser.getProductsToDisplay("src/main/resources/Inventory.json");
+        productsToDisplay = jparser.getProductsToDisplay("src/main/resources/Inventory.json");
         
         return productsToDisplay;
+    }
+
+    public void updateInventory(){   /////////// after purchase/changes
+        ;
     }
 
     public ArrayList<String> getCategories(){
