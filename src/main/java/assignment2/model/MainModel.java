@@ -24,13 +24,12 @@ public class MainModel {
 
         this.productOptionsModel = new ProductOptionsModel();   ////////
 
-        this.loginModel = new LoginModel(jsonParser.getUsers("src/test/resources/test_users.json"));
-//                "src/main/resources/users.json"));
+        this.loginModel = new LoginModel(jsonParser.getUsers("src/test/resources/test_users.json"));//"src/main/resources/users.json"));
 
         this.user = loginModel.getAnonymousUser();
         this.isLoggedIn = false;
 
-        this.cashPaymentModel = new CashPaymentModel("src/test/resources/initialCash.json");
+        this.cashPaymentModel = new CashPaymentModel("src/main/resources/InitialCash.json");
 
         purchaseProduct(new Product("milk", 28), 2);
 

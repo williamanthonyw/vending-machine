@@ -18,24 +18,17 @@ public class Cash{
         return this.name;
     }
 
-    public void setName(String newName){
-        this.name = newName;
-    }
 
     public double getValue(){
         return this.value;
-    }
-
-    public void setValue(double newValue){
-        this.value = newValue;
     }
 
     public int getAmount(){
         return this.amount;
     }
 
-    public void setAmount(int newAmount){
-        this.amount = newAmount;
+    public void setAmount(int amount){
+        this.amount = amount;
     }
 
 }

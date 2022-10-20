@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
 <testsuite name="assignment2.CashPaymentTest" tests="12" skipped="0" failures="0" errors="0" timestamp="2022-10-20T17:34:52" hostname="Chius-MacBook-Pro.local" time="0.141">
   <properties/>
   <testcase name="cashValueCheck()" classname="assignment2.CashPaymentTest" time="0.027"/>
@@ -13,6 +14,22 @@
   <testcase name="updateChangeList()" classname="assignment2.CashPaymentTest" time="0.006"/>
   <testcase name="changeNotesOnly()" classname="assignment2.CashPaymentTest" time="0.003"/>
   <testcase name="numberOfDifferentNotesandCoins()" classname="assignment2.CashPaymentTest" time="0.0"/>
+=======
+<testsuite name="assignment2.CashPaymentTest" tests="12" skipped="0" failures="0" errors="0" timestamp="2022-10-20T11:30:30" hostname="DESKTOP-Q9TS4JK" time="0.072">
+  <properties/>
+  <testcase name="cashValueCheck()" classname="assignment2.CashPaymentTest" time="0.022"/>
+  <testcase name="multiplePayments()" classname="assignment2.CashPaymentTest" time="0.013"/>
+  <testcase name="changeisNotSufficient()" classname="assignment2.CashPaymentTest" time="0.004"/>
+  <testcase name="changeCoinsOnly()" classname="assignment2.CashPaymentTest" time="0.004"/>
+  <testcase name="initialAmountCheck()" classname="assignment2.CashPaymentTest" time="0.001"/>
+  <testcase name="NotEnoughPayment()" classname="assignment2.CashPaymentTest" time="0.001"/>
+  <testcase name="calculateTotalPayment()" classname="assignment2.CashPaymentTest" time="0.0"/>
+  <testcase name="smallChangeInsufficient()" classname="assignment2.CashPaymentTest" time="0.001"/>
+  <testcase name="smallChangeRound()" classname="assignment2.CashPaymentTest" time="0.006"/>
+  <testcase name="updateChangeList()" classname="assignment2.CashPaymentTest" time="0.003"/>
+  <testcase name="changeNotesOnly()" classname="assignment2.CashPaymentTest" time="0.003"/>
+  <testcase name="numberOfDifferentNotesandCoins()" classname="assignment2.CashPaymentTest" time="0.001"/>
+>>>>>>> 62775cd9da0514aa3b0cd6e556f8b51e50a3d14f
   <system-out><![CDATA[95.96
 45.96
 5.96
