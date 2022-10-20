@@ -11,9 +11,9 @@ public class ProductOptionsModel {
     //     this.productsToDisplay = productsToDisplay;
     // }
 
-    public List<ProductToDisplay> getProductsToDisplay(){
+    public List<ProductToDisplay> getProductsToDisplay(String filename){
         JsonParser jparser = new JsonParser();
-        productsToDisplay = jparser.getProductsToDisplay("src/main/resources/Inventory.json");
+        productsToDisplay = jparser.getProductsToDisplay(filename);
         
         return productsToDisplay;
     }
@@ -22,9 +22,9 @@ public class ProductOptionsModel {
         ;
     }
 
-    public ArrayList<String> getCategories(){
+    public ArrayList<String> getCategories(String filename){
         ArrayList<String> categories = new ArrayList<>();
-        List<ProductToDisplay> allProducts = getProductsToDisplay();
+        List<ProductToDisplay> allProducts = getProductsToDisplay(filename);
 
         for (ProductToDisplay product : allProducts){
             if (! categories.contains(product.getCategory())){
