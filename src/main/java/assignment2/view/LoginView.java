@@ -23,6 +23,7 @@ public class LoginView implements View{
     private Scene scene;
     private BorderPane root;
 
+    private VBox mainBox;
     private VBox loginBox;
     private VBox registerBox;
 
@@ -38,7 +39,7 @@ public class LoginView implements View{
 
     @Override
     public void setUpMenuBTN(MenuButton menuBTN) {
-
+        mainBox.getChildren().add(0, menuBTN);
     }
 
     @Override
@@ -50,6 +51,10 @@ public class LoginView implements View{
         root = new BorderPane();
         scene = new Scene(root, 1000, 600);
         scene.getStylesheets().add("Style.css");
+
+        mainBox = new VBox(30);
+        BorderPane.setMargin(mainBox, new Insets(50, 50, 50, 50));
+        root.setCenter(mainBox);
 
         loginBox = new VBox(20);
         root.setLeft(loginBox);

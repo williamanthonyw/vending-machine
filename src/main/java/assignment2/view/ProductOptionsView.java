@@ -33,9 +33,10 @@ public class ProductOptionsView implements View{
     private TableView<ProductToDisplay> chipsTable;
     private TableView<ProductToDisplay> candiesTable;
     private Button checkoutBTN;
-    private Button cancelBTN;
     private Button selectCategoryBTN;
     ComboBox<String> selectCategory;
+
+    private HBox buttonBox;
 
     public ProductOptionsView(MainModel mainModel){
         this.mainModel = mainModel;
@@ -66,19 +67,14 @@ public class ProductOptionsView implements View{
         titleLBL.setId("title");
         topBox.getChildren().add(titleLBL);
 
-        HBox buttonBox = new HBox(5);
+        buttonBox = new HBox(5);
         topBox.getChildren().add(buttonBox);
 
         checkoutBTN = new Button("CHECKOUT");
         checkoutBTN.setMaxHeight(10);
         buttonBox.getChildren().add(checkoutBTN);
 
-        cancelBTN = new Button("Cancel");
-        cancelBTN.setMaxHeight(10);
-        buttonBox.getChildren().add(cancelBTN);
-
         setUpCheckoutButton();
-        setUpCancelBTN(cancelBTN);
 
         Label selectCategoryLBL = new Label("Select category");
         // selectCategoryLBL.setID("align");
@@ -155,7 +151,7 @@ public class ProductOptionsView implements View{
         drinksTable.getColumns().add(quantityColumn);
 
         TableColumn addBTNColumn = new TableColumn("Action");
-        addBTNColumn.setCellValueFactory(new PropertyValueFactory<>("DUMMY"));
+        addBTNColumn.setCellValueFactory(new PropertyValueFactory<>(""));
         Callback<TableColumn<ProductToDisplay, String>, TableCell<ProductToDisplay, String>> cellFactory
                 = //
                 new Callback<TableColumn<ProductToDisplay, String>, TableCell<ProductToDisplay, String>>() {
@@ -219,7 +215,7 @@ public class ProductOptionsView implements View{
         chocolatesTable.getColumns().add(quantityColumn);
 
         TableColumn addBTNColumn = new TableColumn("Action");
-        addBTNColumn.setCellValueFactory(new PropertyValueFactory<>("DUMMY"));
+        addBTNColumn.setCellValueFactory(new PropertyValueFactory<>(""));
         Callback<TableColumn<ProductToDisplay, String>, TableCell<ProductToDisplay, String>> cellFactory
                 = //
                 new Callback<TableColumn<ProductToDisplay, String>, TableCell<ProductToDisplay, String>>() {
@@ -279,7 +275,7 @@ public class ProductOptionsView implements View{
         chipsTable.getColumns().add(quantityColumn);
 
         TableColumn addBTNColumn = new TableColumn("Action");
-        addBTNColumn.setCellValueFactory(new PropertyValueFactory<>("DUMMY"));
+        addBTNColumn.setCellValueFactory(new PropertyValueFactory<>(""));
         Callback<TableColumn<ProductToDisplay, String>, TableCell<ProductToDisplay, String>> cellFactory
                 = //
                 new Callback<TableColumn<ProductToDisplay, String>, TableCell<ProductToDisplay, String>>() {
@@ -338,7 +334,7 @@ public class ProductOptionsView implements View{
         candiesTable.getColumns().add(quantityColumn);
 
         TableColumn addBTNColumn = new TableColumn("Action");
-        addBTNColumn.setCellValueFactory(new PropertyValueFactory<>("DUMMY"));
+        addBTNColumn.setCellValueFactory(new PropertyValueFactory<>(""));
         Callback<TableColumn<ProductToDisplay, String>, TableCell<ProductToDisplay, String>> cellFactory
                 = //
                 new Callback<TableColumn<ProductToDisplay, String>, TableCell<ProductToDisplay, String>>() {
@@ -418,7 +414,8 @@ public class ProductOptionsView implements View{
 
     @Override
     public void setUpCancelBTN(Button cancelBTN){   ///////////////
-
+        cancelBTN.setMaxHeight(10);
+        buttonBox.getChildren().add(cancelBTN);
     }
 
     @Override
