@@ -11,7 +11,7 @@ public class MainModel {
     private CardPaymentModel cardPaymentModel;
     private LoginModel loginModel;
     private CashPaymentModel cashPaymentModel;
-    private ProductOptionsModel productOptionsModel;  ////
+    private ProductOptionsModel productOptionsModel;
 
     private User user;
     private boolean isLoggedIn;
@@ -26,8 +26,6 @@ public class MainModel {
 
         this.loginModel = new LoginModel(jsonParser.getUsers("src/test/resources/test_users.json"));
 //                "src/main/resources/users.json"));
-
-        System.out.println(loginModel.getUsers());
 
         this.user = loginModel.getAnonymousUser();
         this.isLoggedIn = false;
@@ -54,7 +52,6 @@ public class MainModel {
     public CashPaymentModel getCashPaymentModel(){
         return this.cashPaymentModel;
     }
-
     public boolean isLoggedIn(){
         return isLoggedIn;
     }

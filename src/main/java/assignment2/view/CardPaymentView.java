@@ -12,7 +12,11 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-public class CardPaymentView implements View{
+
+import java.util.List;
+import java.util.Arrays;
+
+public class CardPaymentView implements View {
     private MainModel mainModel;
     private CardPaymentModel cardPaymentModel;
     private Scene scene;
@@ -20,31 +24,34 @@ public class CardPaymentView implements View{
     private HBox cardNumberBox;
     private VBox mainBox;
     private BorderPane borderPane;
-    public CardPaymentView(MainModel mainModel){
+
+    public CardPaymentView(MainModel mainModel) {
         this.mainModel = mainModel;
         this.cardPaymentModel = mainModel.getCardPaymentModel();
     }
+
     @Override
-    public Scene getScene(){
-        return scene;
+    public List<Scene> getScenes() {
+        return Arrays.asList(new Scene[]{scene});
     }
-    @Override
+
     public void setUpMenuBTN(MenuButton menuBTN) {
+        mainBox.getChildren().add(0, menuBTN);
     }
 
-    @Override
     public void setUpCancelBTN(Button cancelBTN) {
+        mainBox.getChildren().add(cancelBTN);
 
     }
 
     @Override
-    public void setUp(){
+    public void setUp() {
         this.borderPane = new BorderPane();
         scene = new Scene(borderPane, 1000, 600);
         scene.getStylesheets().add("Style.css");
 
         mainBox = new VBox(30);
-        BorderPane.setMargin(mainBox,new Insets(200,0,0,300));
+        BorderPane.setMargin(mainBox, new Insets(200, 0, 0, 300));
         BorderPane.setMargin(mainBox, new Insets(50, 50, 50, 50));
         borderPane.setCenter(mainBox);
 
@@ -57,40 +64,42 @@ public class CardPaymentView implements View{
 
         cardNumberBox = new HBox(10);
         mainBox.getChildren().add(cardNumberBox);
-        if(mainModel.getUser().getCardUser() != null){
+        if (mainModel.getUser().getCardUser() != null) {
             setUpSaveCardView();
-        }else{
+        } else {
             setUpView();
         }
     }
-    public void setUpView(){
+
+    public void setUpView() {
         Label cardNameLBL = new Label("Cardholder name: ");
         TextField userNameTF = new TextField();
-        cardUserNameBox.getChildren().addAll(cardNameLBL,userNameTF);
+        cardUserNameBox.getChildren().addAll(cardNameLBL, userNameTF);
         Label cardNumberLBL = new Label("Credit card number: ");
         PasswordField cardNumberTF = new PasswordField();
         cardNumberTF.setSkin(new PasswordSkin(cardNumberTF));
-        cardNumberBox.getChildren().addAll(cardNumberLBL,cardNumberTF);
+        cardNumberBox.getChildren().addAll(cardNumberLBL, cardNumberTF);
 
         Button confirmBTN = new Button("Checkout");
         mainBox.getChildren().add(confirmBTN);
 
         confirmBTN.setOnMousePressed(event -> {
-            cardPaymentModel.paymentProcess(userNameTF.getText(),cardNumberTF.getText());
+            cardPaymentModel.paymentProcess(userNameTF.getText(), cardNumberTF.getText());
         });
     }
-    public void setUpSaveCardView(){
+
+    public void setUpSaveCardView() {
         Label cardNameLBL = new Label("Cardholder name: ");
         TextField userNameTF = new TextField(mainModel.getUser().getCardUser().getName());
-        cardUserNameBox.getChildren().addAll(cardNameLBL,userNameTF);
+        cardUserNameBox.getChildren().addAll(cardNameLBL, userNameTF);
         Label cardNumberLBL = new Label("Credit card number: ");
         PasswordField cardNumberTF = new PasswordField();
         cardNumberTF.setText(mainModel.getUser().getCardUser().getCardNumber());
-        cardNumberBox.getChildren().addAll(cardNumberLBL,cardNumberTF);
+        cardNumberBox.getChildren().addAll(cardNumberLBL, cardNumberTF);
         Button confirmBTN = new Button("Confirm");
         mainBox.getChildren().add(confirmBTN);
         confirmBTN.setOnMousePressed(event -> {
-            cardPaymentModel.paymentProcess(userNameTF.getText(),cardNumberTF.getText());
+            cardPaymentModel.paymentProcess(userNameTF.getText(), cardNumberTF.getText());
         });
     }
 }

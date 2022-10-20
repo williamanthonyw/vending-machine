@@ -27,13 +27,8 @@ javafx {
 
 application {
     // Define the main class for the application.
-<<<<<<< HEAD
-    mainClass = 'assignment2.view.CashPaymentView'
-    // mainClass = 'assignment2.App'
-=======
     mainClass = 'assignment2.App'
     // mainClass = 'assignment2.model.CashPaymentModel'
->>>>>>> 9ca2739f40322e414bb8faf5363706c77429be33
     applicationDefaultJvmArgs = ["--add-opens", "java.base/java.time=ALL-UNNAMED", '-Xss80m']
 }
 
