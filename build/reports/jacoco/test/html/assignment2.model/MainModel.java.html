@@ -9,33 +9,32 @@ public class MainModel {
 
     private LastFiveProductsModel lastFiveProductsModel;
     private LoginModel loginModel;
-    private CashPaymentModel cashPaymentModel;
-    private ProductOptionsModel productOptionsModel;
+    private ProductOptionsModel productOptionsModel;  ////
 
     private User user;
     private boolean isLoggedIn;
 
 <span class="nc" id="L18">    private JsonParser jsonParser = new JsonParser();</span>
 
-<span class="nc" id="L20">    public MainModel(){</span>
-<span class="nc" id="L21">        this.lastFiveProductsModel = new LastFiveProductsModel();</span>
-<span class="nc" id="L22">        this.productOptionsModel = new ProductOptionsModel();  </span>
+<span class="nc" id="L19">    public MainModel(){</span>
+<span class="nc" id="L20">        this.lastFiveProductsModel = new LastFiveProductsModel();</span>
+<span class="nc" id="L21">        this.productOptionsModel = new ProductOptionsModel();   ////////</span>
 
-<span class="nc" id="L24">        this.loginModel = new LoginModel(jsonParser.getUsers(&quot;src/test/resources/test_users.json&quot;));//&quot;src/main/resources/users.json&quot;));</span>
+<span class="nc" id="L23">        this.loginModel = new LoginModel(jsonParser.getUsers(&quot;src/test/resources/test_users.json&quot;));</span>
+//                &quot;src/main/resources/users.json&quot;));
 
 <span class="nc" id="L26">        System.out.println(loginModel.getUsers());</span>
 
 <span class="nc" id="L28">        this.user = loginModel.getAnonymousUser();</span>
 <span class="nc" id="L29">        this.isLoggedIn = false;</span>
 
-<span class="nc" id="L31">        this.cashPaymentModel = new CashPaymentModel(&quot;src/test/resources/initialCash.json&quot;);</span>
 
 <span class="nc" id="L33">        purchaseProduct(new Product(&quot;milk&quot;, 28), 2);</span>
 
         // for now logging in
-<span class="nc" id="L36">        this.user = loginModel.login(&quot;Kylie&quot;, &quot;password&quot;);</span>
-<span class="nc" id="L37">        this.isLoggedIn = true;</span>
-<span class="nc" id="L38">    }</span>
+<span class="nc" id="L35">        this.user = loginModel.login(&quot;Kylie&quot;, &quot;password&quot;);</span>
+<span class="nc" id="L36">        this.isLoggedIn = true;</span>
+<span class="nc" id="L37">    }</span>
 
     public LastFiveProductsModel getLastFiveProductsModel(){
 <span class="nc" id="L41">        return this.lastFiveProductsModel;</span>
@@ -45,54 +44,50 @@ public class MainModel {
 <span class="nc" id="L45">        return loginModel;</span>
     }
 
-    public CashPaymentModel getCashPaymentModel(){
-<span class="nc" id="L49">        return this.cashPaymentModel;</span>
-    }
-
     public boolean isLoggedIn(){
-<span class="nc" id="L53">        return isLoggedIn;</span>
+<span class="nc" id="L48">        return isLoggedIn;</span>
     }
 
     public void setIsLoggedIn(boolean logged){
-<span class="nc" id="L57">        this.isLoggedIn = logged;</span>
-<span class="nc" id="L58">    }</span>
+<span class="nc" id="L52">        this.isLoggedIn = logged;</span>
+<span class="nc" id="L53">    }</span>
 
     public User getUser(){
-<span class="nc" id="L61">        return this.user;</span>
+<span class="nc" id="L56">        return this.user;</span>
     }
 
     public void logout(){
-<span class="nc" id="L65">        this.user = loginModel.getAnonymousUser();</span>
-<span class="nc" id="L66">        this.isLoggedIn = false;</span>
-<span class="nc" id="L67">    }</span>
+<span class="nc" id="L60">        this.user = loginModel.getAnonymousUser();</span>
+<span class="nc" id="L61">        this.isLoggedIn = false;</span>
+<span class="nc" id="L62">    }</span>
 
     public void cancelTransaction(){
 
         // clear cart (look at Katie's stuff)
 
         // log user out
-<span class="nc" id="L74">        logout();</span>
+<span class="nc" id="L69">        logout();</span>
 
-<span class="nc" id="L76">    }</span>
+<span class="nc" id="L71">    }</span>
 
     public void purchaseProduct(Product product, int quantity){
 
         // handle payment stuff
 
         // adds it to user's list of purchases
-<span class="nc" id="L83">        user.purchaseProduct(product, quantity);</span>
+<span class="nc" id="L78">        user.purchaseProduct(product, quantity);</span>
 
         // update users file
-<span class="nc" id="L86">        jsonParser.updateUsers(loginModel.getUsers(), &quot;src/main/resources/users.json&quot;);</span>
+<span class="nc" id="L81">        jsonParser.updateUsers(loginModel.getUsers(), &quot;src/main/resources/users.json&quot;);</span>
 
         // need to update inventory file as well   //////////TODO
 
 
 
-<span class="nc" id="L92">    }</span>
+<span class="nc" id="L87">    }</span>
 
     public ProductOptionsModel getProductOptionsModel(){
-<span class="nc" id="L95">        return this.productOptionsModel;</span>
+<span class="nc" id="L90">        return this.productOptionsModel;</span>
     }
 
 }

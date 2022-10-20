@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class LastFiveProductsView implements View{
@@ -121,11 +122,9 @@ public class LastFiveProductsView implements View{
 
     }
 
-
-
     @Override
-    public Scene getScene(){
-        return scene;
+    public List<Scene> getScenes(){
+        return Arrays.asList(new Scene[] { scene });
     }
 
 

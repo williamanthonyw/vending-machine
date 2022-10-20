@@ -8,6 +8,7 @@ import com.google.gson.Gson;
 public class MainModel {
 
     private LastFiveProductsModel lastFiveProductsModel;
+    private CardPaymentModel cardPaymentModel;
     private LoginModel loginModel;
     private CashPaymentModel cashPaymentModel;
     private ProductOptionsModel productOptionsModel;
@@ -19,22 +20,22 @@ public class MainModel {
 
     public MainModel(){
         this.lastFiveProductsModel = new LastFiveProductsModel();
-        this.productOptionsModel = new ProductOptionsModel();  
+        this.cardPaymentModel = new CardPaymentModel(this);
+
+        this.productOptionsModel = new ProductOptionsModel();   ////////
 
         this.loginModel = new LoginModel(jsonParser.getUsers("src/test/resources/test_users.json"));//"src/main/resources/users.json"));
-
-        System.out.println(loginModel.getUsers());
 
         this.user = loginModel.getAnonymousUser();
         this.isLoggedIn = false;
 
-        this.cashPaymentModel = new CashPaymentModel("src/test/resources/initialCash.json");
+        this.cashPaymentModel = new CashPaymentModel("src/main/resources/InitialCash.json");
 
         purchaseProduct(new Product("milk", 28), 2);
 
         // for now logging in
-        this.user = loginModel.login("Kylie", "password");
-        this.isLoggedIn = true;
+//        this.user = loginModel.login("Kylie", "password");
+//        this.isLoggedIn = true;
     }
 
     public LastFiveProductsModel getLastFiveProductsModel(){
@@ -48,6 +49,8 @@ public class MainModel {
     public CashPaymentModel getCashPaymentModel(){
         return this.cashPaymentModel;
     }
+
+    public CardPaymentModel getCardPaymentModel(){return cardPaymentModel;}
 
     public boolean isLoggedIn(){
         return isLoggedIn;

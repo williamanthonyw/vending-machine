@@ -26,7 +26,7 @@ public class App extends Application{
 
         mainModel = new MainModel();
         mainView = new MainView(mainModel);
-
+        
         launch();
 
     }
