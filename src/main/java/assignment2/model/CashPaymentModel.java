@@ -62,8 +62,12 @@ public class CashPaymentModel{
         }
     }
 
-    public HashMap<String, Integer> calculateChange(double payment, double price, HashMap<Double, Integer> cashPayment) throws InsufficientChangeException{
+    public HashMap<String, Integer> calculateChange(double payment, double price, HashMap<Double, Integer> cashPayment) throws InsufficientChangeException, PaymentNotEnoughException{
         HashMap<String, Integer> totalChange = new HashMap<String, Integer>();
+
+        if (payment < price){
+            throw new PaymentNotEnoughException("Please add more cash or cancel");
+        }
         double change = payment - price; 
 
         
@@ -141,51 +145,6 @@ public class CashPaymentModel{
     }
 
     public static void main(String[] args){
-        String initialPath = "src/main/resources/test6cash.json";
-        CashPaymentModel Test12 = new CashPaymentModel(initialPath);
-        List<Cash> cashList = Test12.getCashList();
-        HashMap<String, Integer> cashMap1 = Test12.getCashMap(cashList);
-        // cashMap1.forEach((k,v) ->{
-        //     System.out.printf("key: %s, value: %d%n", k, v);
-        // }
 
-        // );
-        HashMap<Double, Integer> payment1 = new HashMap<Double, Integer>();
-        payment1.put(0.05, 10);
-        payment1.put(0.10, 8);  
-        payment1.put(0.20, 8);
-        payment1.put(0.50, 5);
-        payment1.put(1.00, 7);
-        payment1.put(2.00, 6);
-        payment1.put(5.00, 4);
-        payment1.put(10.00, 1);
-        payment1.put(20.00, 3);
-        payment1.put(50.00, 1);
-        payment1.put(100.00, 4);
-
-        double totalPayment1 = Test12.calculatePayment(payment1);
-        double price1 = 368.44;
-        try{
-            
-            HashMap<String, Integer> change1 = Test12.calculateChange(totalPayment1, price1, payment1);
-            
-            System.out.println(change1);
-            for (Cash c: Test12.getCashList()){
-                
-                System.out.println(cashMap1.get(c.getName()) + payment1.get(c.getValue()) - change1.get(c.getName()) == c.getAmount());
-                // System.out.println("After: " + c.getAmount());
-            }
-
-            
-        }
-        catch (InsufficientChangeException e){
-            e.printStackTrace();
-        }
-        //reset json
-        JsonParser jp = new JsonParser();
-        jp.updateCash(jp.getCash("src/main/resources/richcash.json"), initialPath);
-        
-        
-        
     }
 }

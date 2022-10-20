@@ -4,47 +4,55 @@ package assignment2.view;
 import assignment2.model.ProductToDisplay; 
 import assignment2.model.MainModel;
 import assignment2.model.ProductOptionsModel;
+import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.InputEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.stage.Stage;
-import javafx.stage.Popup;
 import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.beans.binding.*;
 import javafx.util.*;
 
+import javax.swing.*;
 import java.util.*;
 
 import java.io.*;
 
 public class ProductOptionsView implements View{
     private Scene scene;
-    private Stage stage;  ///////////
     private MainModel mainModel;
     private ProductOptionsModel productOptionsModel;
     private VBox mainBox;
     private VBox productOptionsBox;
+    private Scene popupScene;
+    private BorderPane popupBorderPane;
 
     private BorderPane borderPane;
+    private Stage stage;
 
     private TableView<ProductToDisplay> drinksTable; 
     private TableView<ProductToDisplay> chocolatesTable; 
     private TableView<ProductToDisplay> chipsTable;
     private TableView<ProductToDisplay> candiesTable;
     private Button checkoutBTN;
-    private Button cancelBTN;
     private Button selectCategoryBTN;
     ComboBox<String> selectCategory;
     ComboBox<Integer> selectQuantity;
 
-    public ProductOptionsView(MainModel mainModel, Stage stage){
+    private MainView mainView;
+
+    private HBox buttonBox;
+
+    public ProductOptionsView(MainModel mainModel, Stage stage, MainView mainView){
         this.mainModel = mainModel;
         this.productOptionsModel = mainModel.getProductOptionsModel();
         this.stage = stage;
+        this.mainView = mainView;
 
     }
 
@@ -71,19 +79,12 @@ public class ProductOptionsView implements View{
         titleLBL.setId("title");
         topBox.getChildren().add(titleLBL);
 
-        HBox buttonBox = new HBox(5);
+        buttonBox = new HBox(5);
         topBox.getChildren().add(buttonBox);
 
         checkoutBTN = new Button("CHECKOUT");
         checkoutBTN.setMaxHeight(10);
         buttonBox.getChildren().add(checkoutBTN);
-
-        cancelBTN = new Button("Cancel");
-        cancelBTN.setMaxHeight(10);
-        buttonBox.getChildren().add(cancelBTN);
-
-        setUpCheckoutButton();
-        setUpCancelBTN(cancelBTN);
 
         Label selectCategoryLBL = new Label("Select category");
         // selectCategoryLBL.setID("align");
@@ -104,7 +105,11 @@ public class ProductOptionsView implements View{
         setUpDrinksTable();  //show drinks table as default
 
         setUpSelectCategoryBTN();
-        
+
+        this.popupBorderPane = new BorderPane();
+        popupScene = new Scene(popupBorderPane, 500, 300);
+
+        setUpCheckoutButton();
     }
 
 
@@ -132,7 +137,7 @@ public class ProductOptionsView implements View{
         drinksTable.getColumns().add(quantityColumn);
 
         TableColumn addBTNColumn = new TableColumn("Action");
-        addBTNColumn.setCellValueFactory(new PropertyValueFactory<>("DUMMY"));
+        addBTNColumn.setCellValueFactory(new PropertyValueFactory<>(""));
         Callback<TableColumn<ProductToDisplay, String>, TableCell<ProductToDisplay, String>> cellFactory
                 = //
                 new Callback<TableColumn<ProductToDisplay, String>, TableCell<ProductToDisplay, String>>() {
@@ -150,8 +155,8 @@ public class ProductOptionsView implements View{
                             setText(null);
                         } else {
                             btn.setOnAction(event -> {
-                                // add to cart 
-                                setUpPopupScreen(getTableView().getItems().get(getIndex())); //passes in the producttodisplay obj of the selected row in table
+                                // add to cart
+                                setUpPopupScreen(getTableView().getItems().get(getIndex()));
                             });
                             setGraphic(btn);
                             setText(null);
@@ -167,6 +172,11 @@ public class ProductOptionsView implements View{
 
         productOptionsBox.getChildren().add(drinksTable);
         drinksTable.getColumns().add(addBTNColumn);
+
+        //
+        // drinksTable.prefHeightProperty().bind(drinksTable.fixedCellSizeProperty().multiply(Bindings.size(drinksTable.getItems()).add(1.01)));
+        // drinksTable.minHeightProperty().bind(drinksTable.prefHeightProperty());
+        // drinksTable.maxHeightProperty().bind(drinksTable.prefHeightProperty());
 
     }
 
@@ -192,7 +202,7 @@ public class ProductOptionsView implements View{
         chocolatesTable.getColumns().add(quantityColumn);
 
         TableColumn addBTNColumn = new TableColumn("Action");
-        addBTNColumn.setCellValueFactory(new PropertyValueFactory<>("DUMMY"));
+        addBTNColumn.setCellValueFactory(new PropertyValueFactory<>(""));
         Callback<TableColumn<ProductToDisplay, String>, TableCell<ProductToDisplay, String>> cellFactory
                 = //
                 new Callback<TableColumn<ProductToDisplay, String>, TableCell<ProductToDisplay, String>>() {
@@ -210,6 +220,7 @@ public class ProductOptionsView implements View{
                             setText(null);
                         } else {
                             btn.setOnAction(event -> {
+                                // add to cart
                                 setUpPopupScreen(getTableView().getItems().get(getIndex()));
                             });
                             setGraphic(btn);
@@ -252,7 +263,7 @@ public class ProductOptionsView implements View{
         chipsTable.getColumns().add(quantityColumn);
 
         TableColumn addBTNColumn = new TableColumn("Action");
-        addBTNColumn.setCellValueFactory(new PropertyValueFactory<>("DUMMY"));
+        addBTNColumn.setCellValueFactory(new PropertyValueFactory<>(""));
         Callback<TableColumn<ProductToDisplay, String>, TableCell<ProductToDisplay, String>> cellFactory
                 = //
                 new Callback<TableColumn<ProductToDisplay, String>, TableCell<ProductToDisplay, String>>() {
@@ -270,6 +281,7 @@ public class ProductOptionsView implements View{
                             setText(null);
                         } else {
                             btn.setOnAction(event -> {
+                                // add to cart
                                 setUpPopupScreen(getTableView().getItems().get(getIndex()));
                             });
                             setGraphic(btn);
@@ -311,7 +323,7 @@ public class ProductOptionsView implements View{
         candiesTable.getColumns().add(quantityColumn);
 
         TableColumn addBTNColumn = new TableColumn("Action");
-        addBTNColumn.setCellValueFactory(new PropertyValueFactory<>("DUMMY"));
+        addBTNColumn.setCellValueFactory(new PropertyValueFactory<>(""));
         Callback<TableColumn<ProductToDisplay, String>, TableCell<ProductToDisplay, String>> cellFactory
                 = //
                 new Callback<TableColumn<ProductToDisplay, String>, TableCell<ProductToDisplay, String>>() {
@@ -329,6 +341,7 @@ public class ProductOptionsView implements View{
                             setText(null);
                         } else {
                             btn.setOnAction(event -> {
+                                // add to cart
                                 setUpPopupScreen(getTableView().getItems().get(getIndex()));
                             });
                             setGraphic(btn);
@@ -359,6 +372,7 @@ public class ProductOptionsView implements View{
         for (ProductToDisplay product: products){
             if (product.getCategory().equals(category)){
                 table.getItems().add(product);
+
             }
         }
     }
@@ -386,10 +400,8 @@ public class ProductOptionsView implements View{
 
     public void setUpPopupScreen(ProductToDisplay product){   //todo: popup screen doesnt close after timeout - mouse presses not registered + window doesnt close
 
-        BorderPane bp = new BorderPane();
-        Scene popupScene = new Scene(bp, 500, 300);
         popupScene.getStylesheets().add("Style.css");
-        
+
         Stage popupStage = new Stage();
 
         popupStage.setScene(popupScene);
@@ -398,8 +410,8 @@ public class ProductOptionsView implements View{
         popupStage.show();
 
         VBox popupMainBox = new VBox(60);
-        bp.setMargin(popupMainBox, new Insets(50, 50, 50, 50));
-        bp.setCenter(popupMainBox);
+        popupBorderPane.setMargin(popupMainBox, new Insets(50, 50, 50, 50));
+        popupBorderPane.setCenter(popupMainBox);
         popupMainBox.getChildren().add(new Label("Select Quantity to purchase"));
         HBox selectionBox = new HBox(80);
         popupMainBox.getChildren().add(selectionBox);
@@ -416,6 +428,7 @@ public class ProductOptionsView implements View{
 
         addToCartBTN.setOnAction((e) -> {
             int selectedQuantity = selectQuantity.getValue();
+            popupStage.hide();
 
             ///// add the product obj + selected quantity to cart
         });
@@ -423,16 +436,61 @@ public class ProductOptionsView implements View{
 
     public void setUpCheckoutButton(){
 
+        popupScene.getStylesheets().add("Style.css");
+
+        Stage popupStage = new Stage();
+
+        checkoutBTN.setOnAction((e) -> {
+            popupStage.show();
+        });
+
+
+        popupStage.setScene(popupScene);
+        popupStage.initModality(Modality.APPLICATION_MODAL);
+        popupStage.initOwner(this.stage);
+
+        VBox popupMainBox = new VBox(60);
+        popupBorderPane.setMargin(popupMainBox, new Insets(50, 50, 50, 50));
+        popupBorderPane.setCenter(popupMainBox);
+        popupMainBox.getChildren().add(new Label("Select payment type"));
+        HBox selectionBox = new HBox(80);
+        popupMainBox.getChildren().add(selectionBox);
+
+        List<String> paymentTypes = Arrays.asList(new String[] { "Cash", "Card"});
+
+        ComboBox<String> selectPaymentType = new ComboBox<String>();
+        selectPaymentType.getItems().addAll(paymentTypes);
+        selectPaymentType.setValue("Cash");  // 1 by default
+        Button checkoutBTN = new Button("Continue to Checkout");
+        selectionBox.getChildren().addAll(selectPaymentType, checkoutBTN);
+
+        checkoutBTN.setOnAction((e) -> {
+           String paymentTypeValue = selectPaymentType.getValue();
+
+           System.out.println(paymentTypeValue);
+
+           if (paymentTypeValue.equals("Cash")){
+               mainView.goToCashPaymentView();
+           } else {
+               mainView.goToCardPaymentView();
+           }
+
+            popupStage.hide();
+
+            ///// add the product obj + selected quantity to cart
+        });
+
     }
 
     @Override
     public void setUpCancelBTN(Button cancelBTN){   ///////////////
-
+        cancelBTN.setMaxHeight(10);
+        buttonBox.getChildren().add(cancelBTN);
     }
 
     @Override
-    public Scene getScene(){
-        return scene;
+    public List<Scene> getScenes(){
+        return Arrays.asList(new Scene[] { scene, popupScene });
     }
 
 }

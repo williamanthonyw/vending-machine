@@ -6,6 +6,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
 import javafx.scene.layout.BorderPane;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class CardPaymentView implements View{
     private MainModel mainModel;
     private Scene scene;
@@ -17,8 +20,8 @@ public class CardPaymentView implements View{
         //CardPaymentModel
     }
     @Override
-    public Scene getScene(){
-        return scene;
+    public List<Scene> getScenes(){
+        return Arrays.asList(new Scene[] { scene });
     }
 
     @Override
