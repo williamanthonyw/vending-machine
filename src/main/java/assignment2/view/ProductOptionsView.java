@@ -42,6 +42,7 @@ public class ProductOptionsView implements View{
     private Button checkoutBTN;
     private Button selectCategoryBTN;
     ComboBox<String> selectCategory;
+    ComboBox<Integer> selectQuantity;
 
     private MainView mainView;
 
@@ -88,7 +89,7 @@ public class ProductOptionsView implements View{
         Label selectCategoryLBL = new Label("Select category");
         // selectCategoryLBL.setID("align");
         selectCategory = new ComboBox<String>();
-        selectCategory.getItems().addAll(productOptionsModel.getCategories());
+        selectCategory.getItems().addAll(productOptionsModel.getCategories("src/main/resources/Inventory.json"));
         selectCategory.setValue("drinks");  // drinks by default
 
         selectCategoryBTN = new Button("View Products");
@@ -360,7 +361,7 @@ public class ProductOptionsView implements View{
     }
 
     public void populateTable(TableView table, String category){
-        List<ProductToDisplay> products = productOptionsModel.getProductsToDisplay();
+        List<ProductToDisplay> products = productOptionsModel.getProductsToDisplay("src/main/resources/Inventory.json");
 
         table.getItems().clear();
 
@@ -418,8 +419,8 @@ public class ProductOptionsView implements View{
         ArrayList<Integer> quantities = new ArrayList<>();
         for (int i = 1; i <= product.getQuantity(); i++){
             quantities.add(i);
-        }
-        ComboBox<Integer> selectQuantity = new ComboBox<Integer>();
+        } 
+        selectQuantity = new ComboBox<Integer>();
         selectQuantity.getItems().addAll(quantities);
         selectQuantity.setValue(1);  // 1 by default
         Button addToCartBTN = new Button("Add to cart");
