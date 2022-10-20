@@ -89,11 +89,7 @@ public class MainView {
         goToView(new CardPaymentView(mainModel));
     }
 
-<<<<<<< HEAD
-=======
     public void goToCashPaymentView(){ goToView(new CashPaymentView(mainModel)); }
-
->>>>>>> 570459fc90158017f2a9167b8961360b42879dac
 
     public void setUpCancelOnTimeOut(){
 
