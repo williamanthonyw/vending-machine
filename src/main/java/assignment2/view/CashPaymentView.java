@@ -70,7 +70,12 @@ public class CashPaymentView implements View{
         mainBox.getChildren().add(0, menuBTN);
     }
 
-    
+    @Override
+    public void setUpCancelBTN(Button cancelBTN) {
+
+    }
+
+
     @Override
     public void setUp(){
 

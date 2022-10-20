@@ -76,9 +76,13 @@ public class MainView {
     public void goToProductOptionsView(){
         goToView(new ProductOptionsView(mainModel, stage));
     }
-    
+
     public void goToLoginView(){
         goToView(new LoginView(mainModel));
+    }
+
+    public void goToCardPaymentView(){
+        goToView(new CardPaymentView(mainModel));
     }
 
 
