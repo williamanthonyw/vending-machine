@@ -7,33 +7,33 @@ public class LoginModel {
     private List&lt;User&gt; users;
     private User anonymousUser;
 
-<span class="nc" id="L10">    public LoginModel(List&lt;User&gt; users){</span>
-<span class="nc" id="L11">        this.users = users;</span>
+<span class="fc" id="L10">    public LoginModel(List&lt;User&gt; users){</span>
+<span class="fc" id="L11">        this.users = users;</span>
 
-<span class="nc bnc" id="L13" title="All 2 branches missed.">        for (User user : users){</span>
+<span class="fc bfc" id="L13" title="All 2 branches covered.">        for (User user : users){</span>
 
-<span class="nc bnc" id="L15" title="All 2 branches missed.">            if (user.getUsername().equals(&quot;anonymous&quot;)){</span>
-<span class="nc" id="L16">                this.anonymousUser = user;</span>
+<span class="fc bfc" id="L15" title="All 2 branches covered.">            if (user.getUsername().equals(&quot;anonymous&quot;)){</span>
+<span class="fc" id="L16">                this.anonymousUser = user;</span>
             }
 
-<span class="nc" id="L19">        }</span>
-<span class="nc" id="L20">    }</span>
+<span class="fc" id="L19">        }</span>
+<span class="fc" id="L20">    }</span>
 
     public List&lt;User&gt; getUsers(){
-<span class="nc" id="L23">        return users;</span>
+<span class="fc" id="L23">        return users;</span>
     }
 
     public User getAnonymousUser(){
-<span class="nc" id="L27">        return anonymousUser;</span>
+<span class="fc" id="L27">        return anonymousUser;</span>
     }
 
     public User login(String username, String password){
-<span class="nc bnc" id="L31" title="All 2 branches missed.">        for (User user : users){</span>
+<span class="pc bpc" id="L31" title="1 of 2 branches missed.">        for (User user : users){</span>
 
-<span class="nc bnc" id="L33" title="All 2 branches missed.">            if (user.getUsername().equals(username)){</span>
+<span class="pc bpc" id="L33" title="1 of 2 branches missed.">            if (user.getUsername().equals(username)){</span>
 
-<span class="nc bnc" id="L35" title="All 2 branches missed.">                if (user.getPassword().equals(password)){</span>
-<span class="nc" id="L36">                    return user;</span>
+<span class="pc bpc" id="L35" title="1 of 2 branches missed.">                if (user.getPassword().equals(password)){</span>
+<span class="fc" id="L36">                    return user;</span>
                 }
             }
 
@@ -43,13 +43,13 @@ public class LoginModel {
     }
 
     public boolean addUser(User user){
-<span class="nc bnc" id="L46" title="All 2 branches missed.">        for(User user1: users){</span>
-<span class="nc bnc" id="L47" title="All 2 branches missed.">            if(user1.getUsername() == user.getUsername()){</span>
-<span class="nc" id="L48">                return false;</span>
+<span class="fc bfc" id="L46" title="All 2 branches covered.">        for(User user1: users){</span>
+<span class="fc bfc" id="L47" title="All 2 branches covered.">            if(user1.getUsername() == user.getUsername()){</span>
+<span class="fc" id="L48">                return false;</span>
             }
-<span class="nc" id="L50">        }</span>
-<span class="nc" id="L51">        users.add(user);</span>
-<span class="nc" id="L52">        return true;</span>
+<span class="fc" id="L50">        }</span>
+<span class="fc" id="L51">        users.add(user);</span>
+<span class="fc" id="L52">        return true;</span>
     }
 
 }
