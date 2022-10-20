@@ -1,20 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>LastFiveProductsModel.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">CC_18_Ken_FRI12_GRP3_ASSIGNMENT2</a> &gt; <a href="index.source.html" class="el_package">assignment2.model</a> &gt; <span class="el_source">LastFiveProductsModel.java</span></div><h1>LastFiveProductsModel.java</h1><pre class="source lang-java linenums">package assignment2.model;
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>LastFiveProductsModel.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">assignment2</a> &gt; <a href="index.source.html" class="el_package">assignment2.model</a> &gt; <span class="el_source">LastFiveProductsModel.java</span></div><h1>LastFiveProductsModel.java</h1><pre class="source lang-java linenums">package assignment2.model;
 
 import java.util.List;
 
-<span class="nc" id="L5">public class LastFiveProductsModel {</span>
+<span class="fc" id="L5">public class LastFiveProductsModel {</span>
 
     public List&lt;Purchase&gt; getLastFiveProductsBoughtByUser(User user){
 
-<span class="nc" id="L9">        int size = user.getPurchases().size();</span>
+<span class="fc" id="L9">        int size = user.getPurchases().size();</span>
 
-<span class="nc bnc" id="L11" title="All 2 branches missed.">        if (size &lt;= 5){</span>
+<span class="fc bfc" id="L11" title="All 2 branches covered.">        if (size &lt;= 5){</span>
             // get all the  purchases
-<span class="nc" id="L13">            return user.getPurchases();</span>
+<span class="fc" id="L13">            return user.getPurchases();</span>
         } else {
 
             // get the last 5 purchases from list
-<span class="nc" id="L17">            return user.getPurchases().subList(size - 5, size);</span>
+<span class="fc" id="L17">            return user.getPurchases().subList(size - 5, size);</span>
         }
 
     }

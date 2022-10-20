@@ -16,6 +16,9 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import org.json.simple.JSONObject;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class LoginView implements View{
     private MainModel mainModel;
     private LoginModel loginModel;
@@ -23,6 +26,7 @@ public class LoginView implements View{
     private Scene scene;
     private BorderPane root;
 
+    private VBox mainBox;
     private VBox loginBox;
     private VBox registerBox;
 
@@ -32,13 +36,13 @@ public class LoginView implements View{
     }
 
     @Override
-    public Scene getScene() {
-        return scene;
+    public List<Scene> getScenes(){
+        return Arrays.asList(new Scene[] { scene });
     }
 
     @Override
     public void setUpMenuBTN(MenuButton menuBTN) {
-
+        mainBox.getChildren().add(0, menuBTN);
     }
 
     @Override
@@ -50,6 +54,10 @@ public class LoginView implements View{
         root = new BorderPane();
         scene = new Scene(root, 1000, 600);
         scene.getStylesheets().add("Style.css");
+
+        mainBox = new VBox(30);
+        BorderPane.setMargin(mainBox, new Insets(50, 50, 50, 50));
+        root.setCenter(mainBox);
 
         loginBox = new VBox(20);
         root.setLeft(loginBox);
@@ -128,4 +136,10 @@ public class LoginView implements View{
             }
         });
     }
+
+    @Override
+    public void setUpCancelBTN(Button cancelBTN){
+//        mainBox.getChildren().add(cancelBTN);
+    }
+
 }

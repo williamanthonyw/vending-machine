@@ -10,6 +10,8 @@ public class MainModel {
     private LastFiveProductsModel lastFiveProductsModel;
     private CardPaymentModel cardPaymentModel;
     private LoginModel loginModel;
+    private CashPaymentModel cashPaymentModel;
+    private ProductOptionsModel productOptionsModel;
 
     private User user;
     private boolean isLoggedIn;
@@ -20,15 +22,15 @@ public class MainModel {
         this.lastFiveProductsModel = new LastFiveProductsModel();
         this.cardPaymentModel = new CardPaymentModel(this);
 
+        this.productOptionsModel = new ProductOptionsModel();   ////////
 
         this.loginModel = new LoginModel(jsonParser.getUsers("src/test/resources/test_users.json"));
 //                "src/main/resources/users.json"));
 
-        System.out.println(loginModel.getUsers());
-
         this.user = loginModel.getAnonymousUser();
         this.isLoggedIn = false;
 
+        this.cashPaymentModel = new CashPaymentModel("src/test/resources/initialCash.json");
 
         purchaseProduct(new Product("milk", 28), 2);
 
@@ -45,6 +47,10 @@ public class MainModel {
         return loginModel;
     }
 
+    public CashPaymentModel getCashPaymentModel(){
+        return this.cashPaymentModel;
+    }
+
     public CardPaymentModel getCardPaymentModel(){return cardPaymentModel;}
 
     public boolean isLoggedIn(){
@@ -59,6 +65,20 @@ public class MainModel {
         return this.user;
     }
 
+    public void logout(){
+        this.user = loginModel.getAnonymousUser();
+        this.isLoggedIn = false;
+    }
+
+    public void cancelTransaction(){
+
+        // clear cart (look at Katie's stuff)
+
+        // log user out
+        logout();
+
+    }
+
     public void purchaseProduct(Product product, int quantity){
 
         // handle payment stuff
@@ -69,10 +89,14 @@ public class MainModel {
         // update users file
         jsonParser.updateUsers(loginModel.getUsers(), "src/main/resources/users.json");
 
-        // need to update inventory file as well
+        // need to update inventory file as well   //////////TODO
 
 
 
+    }
+
+    public ProductOptionsModel getProductOptionsModel(){
+        return this.productOptionsModel;
     }
 
 }

@@ -13,6 +13,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
+import java.util.List;
+import java.util.Arrays;
+
 public class CardPaymentView implements View{
     private MainModel mainModel;
     private CardPaymentModel cardPaymentModel;
@@ -30,13 +33,17 @@ public class CardPaymentView implements View{
         this.cardPaymentModel = mainModel.getCardPaymentModel();
     }
     @Override
-    public Scene getScene(){
-        return scene;
+    public List<Scene> getScenes(){
+        return Arrays.asList(new Scene[] { scene });
     }
 
     @Override
-    public void setUpMenuBTN(MenuButton menuBTN) {
+    public void setUpMenuBTN(MenuButton menuBTN){
+        mainBox.getChildren().add(0, menuBTN);
+    }
 
+    public void setUpCancelBTN(Button cancelBTN){
+        mainBox.getChildren().add(cancelBTN);
     }
 
     @Override
