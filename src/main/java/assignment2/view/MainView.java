@@ -78,12 +78,16 @@ public class MainView {
 
     /////
     public void goToProductOptionsView(){
-        goToView(new ProductOptionsView(mainModel, stage));
+        goToView(new ProductOptionsView(mainModel, stage, this));
     }
     
     public void goToLoginView(){
         goToView(new LoginView(mainModel));
     }
+
+    public void goToCashPaymentView(){ goToView(new CashPaymentView(mainModel)); }
+
+    public void goToCardPaymentView(){ goToView(new CardPaymentView(mainModel)); }
 
 
     public void setUpCancelOnTimeOut(){

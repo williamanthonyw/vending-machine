@@ -4,6 +4,7 @@ package assignment2.view;
 import assignment2.model.ProductToDisplay; 
 import assignment2.model.MainModel;
 import assignment2.model.ProductOptionsModel;
+import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -17,6 +18,7 @@ import javafx.stage.Stage;
 import javafx.beans.binding.*;
 import javafx.util.*;
 
+import javax.swing.*;
 import java.util.*;
 
 import java.io.*;
@@ -41,12 +43,15 @@ public class ProductOptionsView implements View{
     private Button selectCategoryBTN;
     ComboBox<String> selectCategory;
 
+    private MainView mainView;
+
     private HBox buttonBox;
 
-    public ProductOptionsView(MainModel mainModel, Stage stage){
+    public ProductOptionsView(MainModel mainModel, Stage stage, MainView mainView){
         this.mainModel = mainModel;
         this.productOptionsModel = mainModel.getProductOptionsModel();
         this.stage = stage;
+        this.mainView = mainView;
 
     }
 
@@ -80,8 +85,6 @@ public class ProductOptionsView implements View{
         checkoutBTN.setMaxHeight(10);
         buttonBox.getChildren().add(checkoutBTN);
 
-        setUpCheckoutButton();
-
         Label selectCategoryLBL = new Label("Select category");
         // selectCategoryLBL.setID("align");
         selectCategory = new ComboBox<String>();
@@ -104,6 +107,8 @@ public class ProductOptionsView implements View{
 
         this.popupBorderPane = new BorderPane();
         popupScene = new Scene(popupBorderPane, 500, 300);
+
+        setUpCheckoutButton();
     }
 
 
@@ -429,6 +434,50 @@ public class ProductOptionsView implements View{
     }
 
     public void setUpCheckoutButton(){
+
+        popupScene.getStylesheets().add("Style.css");
+
+        Stage popupStage = new Stage();
+
+        checkoutBTN.setOnAction((e) -> {
+            popupStage.show();
+        });
+
+
+        popupStage.setScene(popupScene);
+        popupStage.initModality(Modality.APPLICATION_MODAL);
+        popupStage.initOwner(this.stage);
+
+        VBox popupMainBox = new VBox(60);
+        popupBorderPane.setMargin(popupMainBox, new Insets(50, 50, 50, 50));
+        popupBorderPane.setCenter(popupMainBox);
+        popupMainBox.getChildren().add(new Label("Select payment type"));
+        HBox selectionBox = new HBox(80);
+        popupMainBox.getChildren().add(selectionBox);
+
+        List<String> paymentTypes = Arrays.asList(new String[] { "Cash", "Card"});
+
+        ComboBox<String> selectPaymentType = new ComboBox<String>();
+        selectPaymentType.getItems().addAll(paymentTypes);
+        selectPaymentType.setValue("Cash");  // 1 by default
+        Button checkoutBTN = new Button("Continue to Checkout");
+        selectionBox.getChildren().addAll(selectPaymentType, checkoutBTN);
+
+        checkoutBTN.setOnAction((e) -> {
+           String paymentTypeValue = selectPaymentType.getValue();
+
+           System.out.println(paymentTypeValue);
+
+           if (paymentTypeValue.equals("Cash")){
+               mainView.goToCashPaymentView();
+           } else {
+               mainView.goToCardPaymentView();
+           }
+
+            popupStage.hide();
+
+            ///// add the product obj + selected quantity to cart
+        });
 
     }
 
