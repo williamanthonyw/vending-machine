@@ -52,6 +52,22 @@ public class JsonParser {
 
 
     }
+    ///////////////////
+    public List<ProductToDisplay> getProductsToDisplay(String filename){
+        try {
+            Reader reader = new BufferedReader(new FileReader(filename));
+
+            // Convert json file to a list of products to display
+            List<ProductToDisplay> productsToDisplay = gson.fromJson(reader, new TypeToken<List<ProductToDisplay>>() {}.getType());
+
+            return productsToDisplay;
+
+        } catch (IOException e) {
+            return new ArrayList<ProductToDisplay>();
+        }
+    }
+
+    // + updateInventory 
 
     public List<Cash> getCash(String filename){
         try{

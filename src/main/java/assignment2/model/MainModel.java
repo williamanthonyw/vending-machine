@@ -9,7 +9,11 @@ public class MainModel {
 
     private LastFiveProductsModel lastFiveProductsModel;
     private LoginModel loginModel;
+<<<<<<< HEAD
     private CashPaymentModel cashPaymentModel;
+=======
+    private ProductOptionsModel productOptionsModel;  ////
+>>>>>>> 9ca2739f40322e414bb8faf5363706c77429be33
 
     private User user;
     private boolean isLoggedIn;
@@ -18,6 +22,7 @@ public class MainModel {
 
     public MainModel(){
         this.lastFiveProductsModel = new LastFiveProductsModel();
+        this.productOptionsModel = new ProductOptionsModel();   ////////
 
         this.loginModel = new LoginModel(jsonParser.getUsers("src/test/resources/test_users.json"));
 //                "src/main/resources/users.json"));
@@ -32,8 +37,8 @@ public class MainModel {
         purchaseProduct(new Product("milk", 28), 2);
 
         // for now logging in
-//        this.user = loginModel.login("Kylie", "password");
-//        this.isLoggedIn = true;
+        this.user = loginModel.login("Kylie", "password");
+        this.isLoggedIn = true;
     }
 
     public LastFiveProductsModel getLastFiveProductsModel(){
@@ -60,6 +65,20 @@ public class MainModel {
         return this.user;
     }
 
+    public void logout(){
+        this.user = loginModel.getAnonymousUser();
+        this.isLoggedIn = false;
+    }
+
+    public void cancelTransaction(){
+
+        // clear cart (look at Katie's stuff)
+
+        // log user out
+        logout();
+
+    }
+
     public void purchaseProduct(Product product, int quantity){
 
         // handle payment stuff
@@ -70,10 +89,14 @@ public class MainModel {
         // update users file
         jsonParser.updateUsers(loginModel.getUsers(), "src/main/resources/users.json");
 
-        // need to update inventory file as well
+        // need to update inventory file as well   //////////TODO
 
 
 
+    }
+
+    public ProductOptionsModel getProductOptionsModel(){
+        return this.productOptionsModel;
     }
 
 }

@@ -23,8 +23,6 @@ public class LoginModel {
         return users;
     }
 
-
-
     public User getAnonymousUser(){
         return anonymousUser;
     }
