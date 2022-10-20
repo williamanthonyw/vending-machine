@@ -8,18 +8,16 @@ import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Popup;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -32,8 +30,7 @@ public class CashPaymentView implements View{
     private BorderPane borderPane;
 
     private VBox mainBox;
-    private ChoiceBox<String> paymentMode;
-    private ChoiceBox<String> cashList;
+    private ComboBox<String> cashList;
 
     private HBox cashLabel;
     private HBox paymentHBox;
@@ -45,7 +42,6 @@ public class CashPaymentView implements View{
 
     private Button add;
     private Button pay;
-    private Button cancel;
 
     private HashMap<Double, Integer> payment;
 
@@ -54,6 +50,8 @@ public class CashPaymentView implements View{
     private Popup insertMoreCash;
     private Popup cancelPopup;
 
+    private Label insertedAmount;
+    private Label totalCartPriceLBL;
    
     public CashPaymentView(MainModel mainModel){
         this.mainModel = mainModel;
@@ -61,8 +59,8 @@ public class CashPaymentView implements View{
     }
 
     @Override
-    public Scene getScene(){
-        return this.scene;
+    public List<Scene> getScenes(){
+        return Arrays.asList(new Scene[] { scene });
     }
 
     @Override
@@ -89,13 +87,13 @@ public class CashPaymentView implements View{
         mainBox.getChildren().add(titleLBL);
 
         //mode: cash payment/card payment
-        paymentMode = new ChoiceBox<String>();
-        paymentMode.getItems().addAll("Cash", "Card");
-
-        //if card is selected. go to cardpaymentview.java
-        if (paymentMode.getValue().equals("Card")){
-
-        };
+//        paymentMode = new ChoiceBox<String>();
+//        paymentMode.getItems().addAll("Cash", "Card");
+//
+//        //if card is selected. go to cardpaymentview.java
+//        if (paymentMode.getValue().equals("Card")){
+//
+//        };
 
         cashLabel = new HBox();
         Label cashLbl = new Label("Cash");
@@ -105,7 +103,7 @@ public class CashPaymentView implements View{
         
         //dropdown of notes and coins + quantity + add button
         paymentHBox = new HBox();
-        cashList = new ChoiceBox<String>();
+        cashList = new ComboBox<String>();
         cashList.getItems().addAll("5c", "10c", "20c", "50c", "$1", "$2", "$5", "$10", "$20", "$50", "$100");
 
         quantityInput = new TextField("Quantity");
@@ -116,19 +114,20 @@ public class CashPaymentView implements View{
 
         // Total cash inserted
         cashInserted = new HBox();
-        Text insertedAmount = new Text("Total Cash Inserted: ");
+        insertedAmount = new Label("Total Cash Inserted: ");
         cashInserted.getChildren().add(insertedAmount);
         mainBox.getChildren().add(cashInserted);
 
         //Total price
         totalCartPrice = new HBox();
+        totalCartPriceLBL = new Label("Total Cart Price: $5");
+        totalCartPrice.getChildren().add(totalCartPriceLBL);
         mainBox.getChildren().add(totalCartPrice);
 
         //Pay and Cancel button
         payOrCancel = new HBox();
         pay = new Button("Pay");
-        cancel = new Button("Cancel");
-        payOrCancel.getChildren().addAll(pay, cancel);
+        payOrCancel.getChildren().addAll(pay);
         mainBox.getChildren().add(payOrCancel);
 
         //listener for quantity input
@@ -138,34 +137,69 @@ public class CashPaymentView implements View{
             }
         });
 
-        
+        payment = new HashMap<Double, Integer>();
+        payment.put(0.05, 0);
+        payment.put(0.10, 0);
+        payment.put(0.20, 0);
+        payment.put(0.50, 0);
+        payment.put(1.0, 0);
+        payment.put(2.0, 0);
+        payment.put(5.0, 0);
+        payment.put(10.0, 0);
+        payment.put(20.0, 0);
+        payment.put(50.0, 0);
+        payment.put(100.0, 0);
+
 
         //add button
         add.setOnAction((ActionEvent e) -> {
-            switch(cashList.getValue()){
-                case "5c":
-                    payment.put(0.05, Integer.parseInt(quantityInput.getText()));
-                case "10c":
-                    payment.put(0.10, Integer.parseInt(quantityInput.getText()));
-                case "20c":
-                    payment.put(0.20, Integer.parseInt(quantityInput.getText()));
-                case "50c":
-                    payment.put(0.50, Integer.parseInt(quantityInput.getText()));
-                case "$1":
-                    payment.put(1.00, Integer.parseInt(quantityInput.getText()));
-                case "$2":
-                    payment.put(2.00, Integer.parseInt(quantityInput.getText()));
-                case "$5":
-                    payment.put(5.00, Integer.parseInt(quantityInput.getText()));
-                case "$10":
-                    payment.put(10.00, Integer.parseInt(quantityInput.getText()));
-                case "$20":
-                    payment.put(20.00, Integer.parseInt(quantityInput.getText()));
-                case "$50":
-                    payment.put(50.00, Integer.parseInt(quantityInput.getText()));
-                case "$100":
-                    payment.put(100.00, Integer.parseInt(quantityInput.getText()));
+
+            try {
+                switch(cashList.getValue()){
+                    case "5c":
+                        payment.put(0.05, Integer.parseInt(quantityInput.getText()));
+                        break;
+                    case "10c":
+                        payment.put(0.10, Integer.parseInt(quantityInput.getText()));
+                        break;
+                    case "20c":
+                        payment.put(0.20, Integer.parseInt(quantityInput.getText()));
+                        break;
+                    case "50c":
+                        payment.put(0.50, Integer.parseInt(quantityInput.getText()));
+                        break;
+                    case "$1":
+                        payment.put(1.00, Integer.parseInt(quantityInput.getText()));
+                        break;
+                    case "$2":
+                        payment.put(2.00, Integer.parseInt(quantityInput.getText()));
+                        break;
+                    case "$5":
+                        payment.put(5.00, Integer.parseInt(quantityInput.getText()));
+                        break;
+                    case "$10":
+                        payment.put(10.00, Integer.parseInt(quantityInput.getText()));
+                        break;
+                    case "$20":
+                        payment.put(20.00, Integer.parseInt(quantityInput.getText()));
+                        break;
+                    case "$50":
+                        payment.put(50.00, Integer.parseInt(quantityInput.getText()));
+                        break;
+                    case "$100":
+                        payment.put(100.00, Integer.parseInt(quantityInput.getText()));
+                        break;
+                }
+
+                calculateCashUserInserted();
+
+
+            } catch (NumberFormatException n) {
+                System.out.println("Please input a valid number");
             }
+
+
+
         });
 
         //pay button
@@ -173,24 +207,26 @@ public class CashPaymentView implements View{
             setupCashPayment();
         });
 
-        //cancel button
-        cancel.setOnAction((ActionEvent e) -> {
-            cancelPopup = new Popup();
-            Label cancelText = new Label("Your transaction has been cancelled");
-            cancelPopup.getContent().add(cancelText);
-            //cancel
-        });
 
-        
+    }
 
+    public void calculateCashUserInserted(){
+
+        double total = 0;
+
+        for (double note : payment.keySet()){
+            total += note * payment.get(note);
+        }
+
+        System.out.println(total);
+
+        insertedAmount.setText("Total cash inserted: " +  Math.round(total*100.0)/100.0 );
     }
 
     public void setupCashPayment(){
 
         double totalPayment = this.cashPaymentModel.calculatePayment(payment);
         double totalPrice = 5.0;
-
-
 
         try{
             HashMap<String, Integer> change = this.cashPaymentModel.calculateChange(totalPayment, totalPrice, payment);
@@ -250,7 +286,12 @@ public class CashPaymentView implements View{
 
     }
 
-   
+    public void setUpCancelBTN(Button cancelBTN){
+        payOrCancel.getChildren().add(cancelBTN);
+    }
+
+
+
 
 
 }

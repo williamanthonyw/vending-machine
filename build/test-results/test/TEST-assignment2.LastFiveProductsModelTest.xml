@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="assignment2.LastFiveProductsModelTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2022-10-20T10:56:28" hostname="DESKTOP-Q9TS4JK" time="0.008">
+<testsuite name="assignment2.LastFiveProductsModelTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2022-10-20T11:00:22" hostname="Kylies-MBP" time="0.009">
   <properties/>
   <testcase name="getLastFiveProductsBoughtByUserTestMoreThanFivePurchases()" classname="assignment2.LastFiveProductsModelTest" time="0.006"/>
-  <testcase name="getLastFiveProductsBoughtByUserTestEmpty()" classname="assignment2.LastFiveProductsModelTest" time="0.0"/>
-  <testcase name="getLastFiveProductsBoughtByUserTestLessThanFivePurchases()" classname="assignment2.LastFiveProductsModelTest" time="0.001"/>
+  <testcase name="getLastFiveProductsBoughtByUserTestEmpty()" classname="assignment2.LastFiveProductsModelTest" time="0.001"/>
+  <testcase name="getLastFiveProductsBoughtByUserTestLessThanFivePurchases()" classname="assignment2.LastFiveProductsModelTest" time="0.0"/>
   <testcase name="getLastFiveProductsBoughtByUserTestExactlyFivePurchases()" classname="assignment2.LastFiveProductsModelTest" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>

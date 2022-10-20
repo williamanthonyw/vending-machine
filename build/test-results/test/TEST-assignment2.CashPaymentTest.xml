@@ -1,18 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="assignment2.CashPaymentTest" tests="12" skipped="0" failures="0" errors="0" timestamp="2022-10-20T10:56:28" hostname="DESKTOP-Q9TS4JK" time="0.076">
+<testsuite name="assignment2.CashPaymentTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2022-10-20T11:00:22" hostname="Kylies-MBP" time="0.073">
   <properties/>
-  <testcase name="cashValueCheck()" classname="assignment2.CashPaymentTest" time="0.024"/>
-  <testcase name="multiplePayments()" classname="assignment2.CashPaymentTest" time="0.012"/>
-  <testcase name="changeisNotSufficient()" classname="assignment2.CashPaymentTest" time="0.004"/>
-  <testcase name="changeCoinsOnly()" classname="assignment2.CashPaymentTest" time="0.004"/>
-  <testcase name="initialAmountCheck()" classname="assignment2.CashPaymentTest" time="0.002"/>
-  <testcase name="NotEnoughPayment()" classname="assignment2.CashPaymentTest" time="0.001"/>
-  <testcase name="calculateTotalPayment()" classname="assignment2.CashPaymentTest" time="0.001"/>
-  <testcase name="smallChangeInsufficient()" classname="assignment2.CashPaymentTest" time="0.001"/>
-  <testcase name="smallChangeRound()" classname="assignment2.CashPaymentTest" time="0.006"/>
-  <testcase name="updateChangeList()" classname="assignment2.CashPaymentTest" time="0.004"/>
-  <testcase name="changeNotesOnly()" classname="assignment2.CashPaymentTest" time="0.003"/>
-  <testcase name="numberOfDifferentNotesandCoins()" classname="assignment2.CashPaymentTest" time="0.001"/>
+  <testcase name="cashValueCheck()" classname="assignment2.CashPaymentTest" time="0.025"/>
+  <testcase name="multiplePayments()" classname="assignment2.CashPaymentTest" time="0.013"/>
+  <testcase name="changeisNotSufficient()" classname="assignment2.CashPaymentTest" time="0.005"/>
+  <testcase name="changeCoinsOnly()" classname="assignment2.CashPaymentTest" time="0.005"/>
+  <testcase name="initialAmountCheck()" classname="assignment2.CashPaymentTest" time="0.001"/>
+  <testcase name="smallChangeRound()" classname="assignment2.CashPaymentTest" time="0.008"/>
+  <testcase name="changeNotesOnly()" classname="assignment2.CashPaymentTest" time="0.004"/>
+  <testcase name="numberOfDifferentNotesandCoins()" classname="assignment2.CashPaymentTest" time="0.002"/>
   <system-out><![CDATA[95.96
 45.96
 5.96
@@ -79,17 +75,6 @@
 0.020000000000000004
 0.020000000000000004
 0.020000000000000004
-16.549999999999997
-16.549999999999997
-16.549999999999997
-6.55
-1.55
-1.55
-0.55
-0.05
-0.05
-0.05
-0.0
 76.0
 26.0
 6.0

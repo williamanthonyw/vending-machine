@@ -7,6 +7,7 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventType;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -52,20 +53,23 @@ public class MainView {
 
     public void goToView(View view){
         view.setUp();
-        stage.setScene(view.getScene());
+        stage.setScene(view.getScenes().get(0));
         view.setUpMenuBTN(menuBTN);
         view.setUpCancelBTN(cancelBTN);
 
         // restart timer on key press
-        view.getScene().addEventFilter(InputEvent.ANY, evt -> {
+        for (Scene scene : view.getScenes()){
+            scene.addEventFilter(InputEvent.ANY, evt -> {
 
-            if (evt.getEventType().getName().equals("MOUSE_PRESSED") ||
-                evt.getEventType().getName().equals("KEY_PRESSED")){
-                timer.playFromStart();
-                System.out.println("Restart timer" + evt.getEventType());
+                    if (evt.getEventType().getName().equals("MOUSE_PRESSED") ||
+                            evt.getEventType().getName().equals("KEY_PRESSED")){
+                        timer.playFromStart();
+                        System.out.println("Restart timer" + evt.getEventType());
+                    }
             }
+            );
         }
-        );
+
     }
 
     public void goToLastFiveProductsView(){
@@ -74,17 +78,21 @@ public class MainView {
 
     /////
     public void goToProductOptionsView(){
-        goToView(new ProductOptionsView(mainModel, stage));
+        goToView(new ProductOptionsView(mainModel, stage, this));
     }
     
     public void goToLoginView(){
         goToView(new LoginView(mainModel));
     }
 
+    public void goToCashPaymentView(){ goToView(new CashPaymentView(mainModel)); }
+
+    public void goToCardPaymentView(){ goToView(new CardPaymentView(mainModel)); }
+
 
     public void setUpCancelOnTimeOut(){
 
-        Duration delay = Duration.seconds(10);
+        Duration delay = Duration.seconds(120);
 
         this.timer = new PauseTransition(delay);
 
@@ -167,6 +175,7 @@ public class MainView {
 
 
     }
+
 }
 
 
