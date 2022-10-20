@@ -2,19 +2,19 @@
 
 import java.util.List;
 
-<span class="nc" id="L5">public class LastFiveProductsModel {</span>
+<span class="fc" id="L5">public class LastFiveProductsModel {</span>
 
     public List&lt;Purchase&gt; getLastFiveProductsBoughtByUser(User user){
 
-<span class="nc" id="L9">        int size = user.getPurchases().size();</span>
+<span class="fc" id="L9">        int size = user.getPurchases().size();</span>
 
-<span class="nc bnc" id="L11" title="All 2 branches missed.">        if (size &lt;= 5){</span>
+<span class="fc bfc" id="L11" title="All 2 branches covered.">        if (size &lt;= 5){</span>
             // get all the  purchases
-<span class="nc" id="L13">            return user.getPurchases();</span>
+<span class="fc" id="L13">            return user.getPurchases();</span>
         } else {
 
             // get the last 5 purchases from list
-<span class="nc" id="L17">            return user.getPurchases().subList(size - 5, size);</span>
+<span class="fc" id="L17">            return user.getPurchases().subList(size - 5, size);</span>
         }
 
     }

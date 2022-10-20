@@ -44,6 +44,15 @@ public class LoginModel {
 <span class="nc" id="L44">        return null;</span>
     }
 
+    public boolean addUser(User user){
+<span class="nc bnc" id="L48" title="All 2 branches missed.">        for(User user1: users){</span>
+<span class="nc bnc" id="L49" title="All 2 branches missed.">            if(user1.getUsername() == user.getUsername()){</span>
+<span class="nc" id="L50">                return false;</span>
+            }
+<span class="nc" id="L52">        }</span>
+<span class="nc" id="L53">        users.add(user);</span>
+<span class="nc" id="L54">        return true;</span>
+    }
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
