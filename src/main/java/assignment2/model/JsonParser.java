@@ -53,17 +53,17 @@ public class JsonParser {
 
     }
     ///////////////////
-    public List<ProductToDisplay> getProductsToDisplay(String filename){
+    public List<Product> getProductsToDisplay(String filename){
         try {
             Reader reader = new BufferedReader(new FileReader(filename));
 
             // Convert json file to a list of products to display
-            List<ProductToDisplay> productsToDisplay = gson.fromJson(reader, new TypeToken<List<ProductToDisplay>>() {}.getType());
+            List<Product> productsToDisplay = gson.fromJson(reader, new TypeToken<List<Product>>() {}.getType());
 
             return productsToDisplay;
 
         } catch (IOException e) {
-            return new ArrayList<ProductToDisplay>();
+            return new ArrayList<Product>();
         }
     }
 
@@ -74,11 +74,12 @@ public class JsonParser {
             Reader reader = new BufferedReader(new FileReader(filename));
 
             List<Cash> cashList = gson.fromJson(reader, new TypeToken<List<Cash>>() {}.getType());
+            System.out.println("hello");
 
             return cashList;
         }
 
-        catch (Exception e){
+        catch (IOException e){
             return new ArrayList<Cash>();
         }
     }

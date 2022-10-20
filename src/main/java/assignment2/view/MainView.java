@@ -82,10 +82,10 @@ public class MainView {
     }
     
     public void goToLoginView(){
-        goToView(new LoginView(mainModel));
+        goToView(new LoginView(mainModel, this));
     }
 
-    public void goToCashPaymentView(){ goToView(new CashPaymentView(mainModel)); }
+    public void goToCashPaymentView(){ goToView(new CashPaymentView(mainModel, this)); }
 
     public void goToCardPaymentView(){ goToView(new CardPaymentView(mainModel)); }
 

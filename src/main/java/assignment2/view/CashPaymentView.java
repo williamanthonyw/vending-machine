@@ -4,6 +4,7 @@ import assignment2.model.MainModel;
 import assignment2.model.PaymentNotEnoughException;
 import assignment2.model.CashPaymentModel;
 import assignment2.model.InsufficientChangeException;
+import com.sun.tools.javac.Main;
 import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
@@ -45,17 +46,18 @@ public class CashPaymentView implements View{
 
     private HashMap<Double, Integer> payment;
 
-    private Popup changePopup;
-    private Popup notEnoughChange;
-    private Popup insertMoreCash;
-    private Popup cancelPopup;
+    private Alert changePopup;
+    private Alert notEnoughChange;
+    private Alert insertMoreCash;
 
     private Label insertedAmount;
     private Label totalCartPriceLBL;
+    private MainView mainView;
    
-    public CashPaymentView(MainModel mainModel){
+    public CashPaymentView(MainModel mainModel, MainView mainView){
         this.mainModel = mainModel;
         this.cashPaymentModel = this.mainModel.getCashPaymentModel();
+        this.mainView = mainView;
     }
 
     @Override
@@ -120,7 +122,7 @@ public class CashPaymentView implements View{
 
         //Total price
         totalCartPrice = new HBox();
-        totalCartPriceLBL = new Label("Total Cart Price: $5");
+        totalCartPriceLBL = new Label("Total Cart Price: " + mainModel.getCartPrice());
         totalCartPrice.getChildren().add(totalCartPriceLBL);
         mainBox.getChildren().add(totalCartPrice);
 
@@ -157,34 +159,34 @@ public class CashPaymentView implements View{
             try {
                 switch(cashList.getValue()){
                     case "5c":
-                        payment.put(0.05, Integer.parseInt(quantityInput.getText()));
+                        payment.put(0.05, Integer.parseInt(quantityInput.getText()) + payment.get(0.05));
                         break;
                     case "10c":
-                        payment.put(0.10, Integer.parseInt(quantityInput.getText()));
+                        payment.put(0.10, Integer.parseInt(quantityInput.getText()) + payment.get(0.10));
                         break;
                     case "20c":
-                        payment.put(0.20, Integer.parseInt(quantityInput.getText()));
+                        payment.put(0.20, Integer.parseInt(quantityInput.getText()) + payment.get(0.20));
                         break;
                     case "50c":
-                        payment.put(0.50, Integer.parseInt(quantityInput.getText()));
+                        payment.put(0.50, Integer.parseInt(quantityInput.getText()) + payment.get(0.50));
                         break;
                     case "$1":
-                        payment.put(1.00, Integer.parseInt(quantityInput.getText()));
+                        payment.put(1.00, Integer.parseInt(quantityInput.getText()) + payment.get(1.0));
                         break;
                     case "$2":
-                        payment.put(2.00, Integer.parseInt(quantityInput.getText()));
+                        payment.put(2.00, Integer.parseInt(quantityInput.getText()) +  payment.get(2.00));
                         break;
                     case "$5":
-                        payment.put(5.00, Integer.parseInt(quantityInput.getText()));
+                        payment.put(5.00, Integer.parseInt(quantityInput.getText()) + payment.get(5.00) );
                         break;
                     case "$10":
-                        payment.put(10.00, Integer.parseInt(quantityInput.getText()));
+                        payment.put(10.00, Integer.parseInt(quantityInput.getText()) + payment.get(10.00));
                         break;
                     case "$20":
-                        payment.put(20.00, Integer.parseInt(quantityInput.getText()));
+                        payment.put(20.00, Integer.parseInt(quantityInput.getText()) + payment.get(20.0));
                         break;
                     case "$50":
-                        payment.put(50.00, Integer.parseInt(quantityInput.getText()));
+                        payment.put(50.00, Integer.parseInt(quantityInput.getText()) + payment.get(50.0));
                         break;
                     case "$100":
                         payment.put(100.00, Integer.parseInt(quantityInput.getText()));
@@ -218,69 +220,66 @@ public class CashPaymentView implements View{
             total += note * payment.get(note);
         }
 
-        System.out.println(total);
-
         insertedAmount.setText("Total cash inserted: " +  Math.round(total*100.0)/100.0 );
     }
 
     public void setupCashPayment(){
 
         double totalPayment = this.cashPaymentModel.calculatePayment(payment);
-        double totalPrice = 5.0;
+        double totalPrice = mainModel.getCartPrice();
 
         try{
             HashMap<String, Integer> change = this.cashPaymentModel.calculateChange(totalPayment, totalPrice, payment);
-            changePopup = new Popup();
-            Text thankYouText = new Text("Thank you for your purchase");
+            changePopup = new Alert(Alert.AlertType.INFORMATION);
+            changePopup.setHeaderText("Thank you for your purchase");
 
             //String formatting for change
-            String changeFormat = String.format("Here is your change: %f", totalPayment-totalPrice);
+
+            double changeD = Math.round((totalPayment - totalPrice)*100)/100.0;
+            String changeFormat = String.format("Here is your change: $%.2f\n", changeD);
+
             for (Map.Entry<String, Integer> c: change.entrySet()){
                 String temp = String.format("%s: %d\n", c.getKey(), c.getValue());
                 changeFormat = changeFormat.concat(temp);
             }
-            Text changeText = new Text(changeFormat);
-            Button back = new Button("Back");
 
-            changePopup.getContent().addAll(thankYouText, changeText, back);
+            changePopup.setContentText(changeFormat);
+            changePopup.showAndWait();
 
-            back.setOnAction((ActionEvent e) -> {
-                changePopup.hide();
-            });
+            mainModel.logout();
+            mainView.goToLastFiveProductsView();
         }
 
         //change in vending machine is not enough
         catch(InsufficientChangeException e){
-            notEnoughChange = new Popup();
-            Text notEnoughText = new Text("No change available. Please insert different notes/coins or cancel your transaction");
-            HBox cancelOrBack = new HBox();
-            Button cancel = new Button("Cancel");
-            Button back = new Button("Button");
-            cancelOrBack.getChildren().addAll(back, cancel);
-            notEnoughChange.getContent().addAll(notEnoughText, cancelOrBack);
+            notEnoughChange = new Alert(Alert.AlertType.ERROR);
+
+
+            notEnoughChange.setHeaderText("No change available. Please insert different notes/coins or cancel your transaction");
+
+            ((Button) notEnoughChange.getDialogPane().lookupButton(ButtonType.OK)).setText("Back");
+
+            notEnoughChange.showAndWait();
         }
 
 
         //customer payment is not enough
         catch(PaymentNotEnoughException f){
-            insertMoreCash = new Popup();
-            Text insertLbl = new Text("Please insert more cash or cancel your transaction");
-            HBox cancelOrBack = new HBox();
-            Button cancel = new Button("Cancel");
-            Button back = new Button("Button");
-            cancelOrBack.getChildren().addAll(back, cancel);
-            insertMoreCash.getContent().addAll(insertLbl, cancelOrBack);
 
-            //back button
-            back.setOnAction((ActionEvent e) -> {
-                insertMoreCash.hide();
-            });
+            insertMoreCash = new Alert(Alert.AlertType.ERROR);
+            insertMoreCash.setHeaderText("Please insert more cash or cancel your transaction");
+//            //cancel button
+//            ((Button) insertMoreCash.getDialogPane().lookupButton(ButtonType.OK)).setOnAction((ActionEvent e) -> {
+//                insertMoreCash.hide();
+//                //cancel
+//            });
 
-            //cancel button
-            cancel.setOnAction((ActionEvent e) -> {
-                insertMoreCash.hide();
-                //cancel
-            });
+            ((Button) insertMoreCash.getDialogPane().lookupButton(ButtonType.OK)).setText("Back");
+
+            insertMoreCash.showAndWait();
+
+
+
 
         }
 

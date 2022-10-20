@@ -17,14 +17,15 @@ public class CashPaymentModel{
     private String cashPath;
     private List<Cash> cashList;
     // src/main/resources/Cash.json;
+    private double currentChange;
     
     public CashPaymentModel(String cp){
         this.cashPath = cp;
         JsonParser jp = new JsonParser();
-        
-        
-        //read from a json file into list of available notes/coins 
+
+        //read from a json file into list of available notes/coins
         List<Cash> cash = jp.getCash(this.cashPath);
+        System.out.println(cash);
         this.cashList = cash;
     }
 
@@ -52,7 +53,7 @@ public class CashPaymentModel{
         return totalPayment;
     }
 
-    public void addPaymentToMachine(HashMap<Double, Integer> cashPayment, List<Cash> cashList){
+    public void addPaymentToMachine(HashMap<Double, Integer> cashPayment){
         for (Cash c: cashList){
             if (cashPayment.get(c.getValue()) == null){
                 cashPayment.put(c.getValue(),0);
@@ -68,12 +69,14 @@ public class CashPaymentModel{
         if (payment < price){
             throw new PaymentNotEnoughException("Please add more cash or cancel");
         }
-        double change = payment - price; 
+        double change = payment - price;
 
-        
+        System.out.println(cashList);
 
         //add payment cash to machine
-        addPaymentToMachine(cashPayment, this.cashList);
+        addPaymentToMachine(cashPayment);
+
+        System.out.println(cashList);
 
         //calculate total amount of cash available
         double totalCash = 0;
@@ -147,4 +150,6 @@ public class CashPaymentModel{
     public static void main(String[] args){
 
     }
+
+
 }

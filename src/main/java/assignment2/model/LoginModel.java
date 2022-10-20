@@ -1,5 +1,6 @@
 package assignment2.model;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class LoginModel {
@@ -28,11 +29,19 @@ public class LoginModel {
     }
 
     public User login(String username, String password){
-        for (User user : users){
 
-            if (user.getUsername().equals(username)){
+        System.out.println(username);
+
+        for (User user : users){
+            System.out.println(user.getUsername());
+
+            if (user.getUsername().equalsIgnoreCase(username)){
+                System.out.println("hello");
 
                 if (user.getPassword().equals(password)){
+
+                    // reset cart for user logged in
+                    user.clearCart();
                     return user;
                 }
             }
@@ -43,8 +52,9 @@ public class LoginModel {
     }
 
     public boolean addUser(User user){
+
         for(User user1: users){
-            if(user1.getUsername() == user.getUsername()){
+            if(user1.getUsername().equalsIgnoreCase(user.getUsername())){
                 return false;
             }
         }
