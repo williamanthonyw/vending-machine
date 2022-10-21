@@ -76,12 +76,6 @@ public class MainModelTest {
 
     }
 
-    @Test
-    public void purchaseProductTest(){
-
-        mainModel.purchaseProduct(new Product("Coca cola", 4.50), 3);
-        // need to test purchase been added to users.json
-    }
 
 
     
