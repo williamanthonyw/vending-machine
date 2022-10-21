@@ -7,19 +7,24 @@ public class CardPaymentModel {
     public CardPaymentModel(MainModel mainModel){
         this.mainModel = mainModel;
     }
-    public void paymentProcess(String name, String number){
+
+
+    public boolean paymentProcess(String name, String number){
         cardUserList = jsonParser.getCardDetail("src/main/resources/credit_cards.json");
 
-        //can't get CardNumber using gson
-        System.out.println(cardUserList.get(1).getName());
-
-        cardUserList.get(0).getCardNumber();
+//        //can't get CardNumber using gson
+//        System.out.println(cardUserList.get(1).getName());
+//
+//
 
         for(CardUser user: cardUserList){
             if(user.getName().equals(name) && user.getCardNumber().equals(number)){
                 mainModel.getUser().setCardUser(user);
-//                System.out.println("payment success");
+                System.out.println("payment success");
+                return true;
             }
         }
+
+        return false;
     }
 }

@@ -30,9 +30,10 @@ public class LoginView implements View{
     private VBox loginBox;
     private VBox registerBox;
 
-    public LoginView(MainModel mainModel){
+    public LoginView(MainModel mainModel, MainView mainView){
         this.mainModel = mainModel;
         this.loginModel = mainModel.getLoginModel();
+        this.mainView = mainView;
     }
 
     @Override
@@ -87,6 +88,7 @@ public class LoginView implements View{
 
         Label passwordLBL = new Label("Password: ");
         PasswordField passwordTF = new PasswordField();
+        passwordTF.setSkin(new PasswordSkin(passwordTF));
         loginBox.getChildren().addAll(passwordLBL, passwordTF);
 
         Region space = new Region();
@@ -95,10 +97,18 @@ public class LoginView implements View{
         Button signInBTN = new Button("Sign in");
         loginBox.getChildren().add(signInBTN);
 
+        Label signInErrorLBL = new Label("");
+        loginBox.getChildren().add(signInErrorLBL);
+
         signInBTN.setOnAction((ActionEvent e)->{
-            loginModel.login(passwordTF.getText(),passwordTF.getText());
-            mainModel.setIsLoggedIn(true);
-            //View update?
+
+            if (mainModel.login(userNameTF.getText(),passwordTF.getText())){
+                //View update?
+                mainView.goToLastFiveProductsView();
+            } else {
+
+                signInErrorLBL.setText("Incorrect username or password");
+            }
 
         });
 
@@ -114,6 +124,7 @@ public class LoginView implements View{
 
         Label newPasswordLBL = new Label("Password: ");
         PasswordField newPasswordTF = new PasswordField();
+        newPasswordTF.setSkin(new PasswordSkin(newPasswordTF));
         registerBox.getChildren().addAll(newPasswordLBL, newPasswordTF);
 
         Region space = new Region();
@@ -122,17 +133,18 @@ public class LoginView implements View{
         Button registerBTN = new Button("Register");
         registerBox.getChildren().add(registerBTN);
 
+        Label registerErrorLBL = new Label("");
+        registerBox.getChildren().add(registerErrorLBL);
+
         registerBTN.setOnAction((ActionEvent e)->{
             User user = new User(newUserNameTF.getText(),newPasswordTF.getText());
             if(loginModel.addUser(user)){
-                loginModel.login(newUserNameTF.getText(),newPasswordTF.getText());
-                mainModel.setIsLoggedIn(true);
+
+                mainModel.login(newUserNameTF.getText(),newPasswordTF.getText());
+
+                mainView.goToLastFiveProductsView();
             }else{
-                Text t = new Text();
-                t.setFont(new Font(20));
-                t.setText("UserName already used!");
-                t.setFill(Color.WHITE);
-                root.setCenter(t);
+                registerErrorLBL.setText("Account with username already exists!");
             }
         });
     }
