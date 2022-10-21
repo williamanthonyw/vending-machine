@@ -157,7 +157,7 @@ public class CashPaymentTest {
         List<Cash> cashList = Test6.getCashList();
 
         HashMap<Double, Integer> cash = new HashMap<Double, Integer>();
-        cash.put(100.0, 200);
+        cash.put(100.0, 1000);
         
         double payment = Test6.calculatePayment(cash);
         double price = 12.00;

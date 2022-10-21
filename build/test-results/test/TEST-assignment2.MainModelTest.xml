@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="assignment2.MainModelTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2022-10-20T23:25:42" hostname="DESKTOP-Q9TS4JK" time="0.026">
+  <properties/>
+  <testcase name="getLoginModelTest()" classname="assignment2.MainModelTest" time="0.005"/>
+  <testcase name="getCardPaymentModelTest()" classname="assignment2.MainModelTest" time="0.003"/>
+  <testcase name="getCashPaymentModelTest()" classname="assignment2.MainModelTest" time="0.002"/>
+  <testcase name="getProductOptionsModelTest()" classname="assignment2.MainModelTest" time="0.002"/>
+  <testcase name="cancelTransactionTest()" classname="assignment2.MainModelTest" time="0.003"/>
+  <testcase name="loginStatusCorrectTest()" classname="assignment2.MainModelTest" time="0.002"/>
+  <testcase name="getLastFiveProductsModelTest()" classname="assignment2.MainModelTest" time="0.002"/>
+  <testcase name="purchaseProductTest()" classname="assignment2.MainModelTest" time="0.003"/>
+  <testcase name="setIsLoggedInTest()" classname="assignment2.MainModelTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
