@@ -10,9 +10,6 @@ public class Product {
     private double price;
     private int quantity;
 
-    //might be set to null by gson fromjson method(?)- check
-    // private int quantityInBasket;
-    // private Button addButton;
 
     public Product(String name, double price) {
         this.name = name;

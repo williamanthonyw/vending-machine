@@ -75,7 +75,7 @@ public class JsonParser {
             Reader reader = new BufferedReader(new FileReader(filename));
 
             List<Cash> cashList = gson.fromJson(reader, new TypeToken<List<Cash>>() {}.getType());
-            System.out.println("hello");
+            // System.out.println("hello");
 
             return cashList;
         }
