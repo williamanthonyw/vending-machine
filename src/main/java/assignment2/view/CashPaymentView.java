@@ -4,7 +4,6 @@ import assignment2.model.MainModel;
 import assignment2.model.PaymentNotEnoughException;
 import assignment2.model.CashPaymentModel;
 import assignment2.model.InsufficientChangeException;
-import com.sun.tools.javac.Main;
 import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
@@ -15,6 +14,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Popup;
+import javafx.stage.Stage;
+import javafx.stage.Modality;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -27,10 +28,14 @@ public class CashPaymentView implements View{
     private CashPaymentModel cashPaymentModel;
     private MainModel mainModel;
 
+    private Stage stage;
     private Scene scene;
+    private Scene popupScene;
     private BorderPane borderPane;
+    private BorderPane popupBorderpane;
 
     private VBox mainBox;
+    private VBox popupBox;
     private ComboBox<String> cashList;
 
     private HBox cashLabel;
@@ -43,8 +48,10 @@ public class CashPaymentView implements View{
 
     private Button add;
     private Button pay;
+    private Button cancel;
 
-    private HashMap<Double, Integer> payment;
+    private HashMap<Double, Integer> payment = new HashMap<Double, Integer>();
+
 
     private Alert changePopup;
     private Alert notEnoughChange;
@@ -53,7 +60,9 @@ public class CashPaymentView implements View{
     private Label insertedAmount;
     private Label totalCartPriceLBL;
     private MainView mainView;
-   
+
+    private double total;
+
     public CashPaymentView(MainModel mainModel, MainView mainView){
         this.mainModel = mainModel;
         this.cashPaymentModel = this.mainModel.getCashPaymentModel();
@@ -70,12 +79,18 @@ public class CashPaymentView implements View{
         mainBox.getChildren().add(0, menuBTN);
     }
 
-    
+
+    // @Override
+    // public void setupPopupTimeoutHandler(MainView mainView){
+
+    // }
+
     @Override
     public void setUp(){
 
-        this.borderPane = new BorderPane();
+        stage = new Stage();
 
+        this.borderPane = new BorderPane();
         scene = new Scene(borderPane, 1000, 600);
         scene.getStylesheets().add("Style.css");
 
@@ -83,19 +98,13 @@ public class CashPaymentView implements View{
         BorderPane.setMargin(this.mainBox, new Insets(50, 50, 50, 50));
         borderPane.setCenter(this.mainBox);
 
+        this.popupBorderpane = new BorderPane();
+        popupScene = new Scene(popupBorderpane);
+
         //title
         Label titleLBL = new Label("Checkout");
         titleLBL.setId("title");
         mainBox.getChildren().add(titleLBL);
-
-        //mode: cash payment/card payment
-//        paymentMode = new ChoiceBox<String>();
-//        paymentMode.getItems().addAll("Cash", "Card");
-//
-//        //if card is selected. go to cardpaymentview.java
-//        if (paymentMode.getValue().equals("Card")){
-//
-//        };
 
         cashLabel = new HBox();
         Label cashLbl = new Label("Cash");
@@ -114,9 +123,21 @@ public class CashPaymentView implements View{
         paymentHBox.getChildren().addAll(cashList, quantityInput, add);
         mainBox.getChildren().add(paymentHBox);
 
+        payment.put(0.05, 0);
+        payment.put(0.10, 0);
+        payment.put(0.20, 0);
+        payment.put(0.50, 0);
+        payment.put(1.0, 0);
+        payment.put(2.0, 0);
+        payment.put(5.0, 0);
+        payment.put(10.0, 0);
+        payment.put(20.0, 0);
+        payment.put(50.0, 0);
+        payment.put(100.0, 0);
+
         // Total cash inserted
         cashInserted = new HBox();
-        insertedAmount = new Label("Total Cash Inserted: ");
+        insertedAmount = new Label("Total Cash Inserted: $");
         cashInserted.getChildren().add(insertedAmount);
         mainBox.getChildren().add(cashInserted);
 
@@ -139,24 +160,47 @@ public class CashPaymentView implements View{
             }
         });
 
-        payment = new HashMap<Double, Integer>();
-        payment.put(0.05, 0);
-        payment.put(0.10, 0);
-        payment.put(0.20, 0);
-        payment.put(0.50, 0);
-        payment.put(1.0, 0);
-        payment.put(2.0, 0);
-        payment.put(5.0, 0);
-        payment.put(10.0, 0);
-        payment.put(20.0, 0);
-        payment.put(50.0, 0);
-        payment.put(100.0, 0);
+        setUpAddButton();
 
+
+        pay.setOnAction((ActionEvent e) -> {
+            setupCashPayment();
+        });
+
+    }
+
+    public void calculateCashUserInserted(){
+
+        total = 0;
+
+        for (double note : payment.keySet()){
+            total += note * payment.get(note);
+        }
+
+        insertedAmount.setText("Total Cash inserted: $" +  Math.round(total*100.0)/100.0 );
+    }
+
+    public void setUpAddButton(){
 
         //add button
         add.setOnAction((ActionEvent e) -> {
 
+            if (cashList.getValue() == null){
+                Alert notLoggedin = new Alert(Alert.AlertType.ERROR);
+                notLoggedin.setHeaderText("Please select a cash quantity.");
+                notLoggedin.showAndWait();
+                return;
+            }
+
             try {
+
+                if (Integer.parseInt(quantityInput.getText()) <= 0){
+                    Alert notLoggedin = new Alert(Alert.AlertType.ERROR);
+                    notLoggedin.setHeaderText("Invalid quantity. Quantities must be more than 0.");
+                    notLoggedin.showAndWait();
+                    return;
+                }
+
                 switch(cashList.getValue()){
                     case "5c":
                         payment.put(0.05, Integer.parseInt(quantityInput.getText()) + payment.get(0.05));
@@ -197,7 +241,9 @@ public class CashPaymentView implements View{
 
 
             } catch (NumberFormatException n) {
-                System.out.println("Please input a valid number");
+                Alert notLoggedin = new Alert(Alert.AlertType.ERROR);
+                notLoggedin.setHeaderText("Invalid quantity. Please insert a valid integer.");
+                notLoggedin.showAndWait();
             }
 
 
@@ -207,21 +253,11 @@ public class CashPaymentView implements View{
         //pay button
         pay.setOnAction((ActionEvent e) -> {
             setupCashPayment();
+
         });
 
-
     }
 
-    public void calculateCashUserInserted(){
-
-        double total = 0;
-
-        for (double note : payment.keySet()){
-            total += note * payment.get(note);
-        }
-
-        insertedAmount.setText("Total cash inserted: " +  Math.round(total*100.0)/100.0 );
-    }
 
     public void setupCashPayment(){
 
@@ -229,29 +265,31 @@ public class CashPaymentView implements View{
         double totalPrice = mainModel.getCartPrice();
 
         try{
+
             HashMap<String, Integer> change = this.cashPaymentModel.calculateChange(totalPayment, totalPrice, payment);
+
             changePopup = new Alert(Alert.AlertType.INFORMATION);
             changePopup.setHeaderText("Thank you for your purchase");
 
             //String formatting for change
-
-            double changeD = Math.round((totalPayment - totalPrice)*100)/100.0;
-            String changeFormat = String.format("Here is your change: $%.2f\n", changeD);
+            String changeFormat = String.format("Here is your change: $%.2f\n", Math.round(((totalPayment-totalPrice)*100.0))/100.0);
 
             for (Map.Entry<String, Integer> c: change.entrySet()){
                 String temp = String.format("%s: %d\n", c.getKey(), c.getValue());
                 changeFormat = changeFormat.concat(temp);
             }
+            Label changeText = new Label(changeFormat);
+
 
             changePopup.setContentText(changeFormat);
             changePopup.showAndWait();
 
-            mainModel.logout();
+            mainModel.checkout();
             mainView.goToLastFiveProductsView();
         }
 
         //change in vending machine is not enough
-        catch(InsufficientChangeException e){
+       catch(InsufficientChangeException e){
             notEnoughChange = new Alert(Alert.AlertType.ERROR);
 
 
@@ -260,11 +298,7 @@ public class CashPaymentView implements View{
             ((Button) notEnoughChange.getDialogPane().lookupButton(ButtonType.OK)).setText("Back");
 
             notEnoughChange.showAndWait();
-        }
-
-
-        //customer payment is not enough
-        catch(PaymentNotEnoughException f){
+        } catch(PaymentNotEnoughException f){
 
             insertMoreCash = new Alert(Alert.AlertType.ERROR);
             insertMoreCash.setHeaderText("Please insert more cash or cancel your transaction");
@@ -279,12 +313,11 @@ public class CashPaymentView implements View{
             insertMoreCash.showAndWait();
 
 
-
-
         }
 
     }
 
+    @Override
     public void setUpCancelBTN(Button cancelBTN){
         payOrCancel.getChildren().add(cancelBTN);
     }

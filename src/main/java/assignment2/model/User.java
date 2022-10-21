@@ -12,6 +12,7 @@ public class User {
     private String password;
     private List<Purchase> purchases;
     private Map<Product, Integer> cart;
+    private CardUser cardUser;
 
     public User(String username, String password) {
         this.username = username;
@@ -73,7 +74,10 @@ public class User {
 
 
 
-
-
-
+    public void setCardUser(CardUser cardUser){
+        this.cardUser = cardUser;
+    }
+    public CardUser getCardUser() {
+        return cardUser;
+    }
 }

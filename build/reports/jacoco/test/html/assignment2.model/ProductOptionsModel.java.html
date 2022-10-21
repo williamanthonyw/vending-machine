@@ -2,9 +2,9 @@
 
 import java.util.*;
 
-<span class="nc" id="L5">public class ProductOptionsModel {</span>
+<span class="fc" id="L5">public class ProductOptionsModel {</span>
 
-    // private List&lt;ProductToDisplay&gt; productsToDisplay;
+    private List&lt;ProductToDisplay&gt; productsToDisplay;
     
     // public ProductOptionsModel(List&lt;ProductToDisplay&gt; productsToDisplay){
         
@@ -13,21 +13,25 @@ import java.util.*;
 
     public List&lt;ProductToDisplay&gt; getProductsToDisplay(){
 <span class="nc" id="L15">        JsonParser jparser = new JsonParser();</span>
-<span class="nc" id="L16">        List&lt;ProductToDisplay&gt; productsToDisplay = jparser.getProductsToDisplay(&quot;src/main/resources/Inventory.json&quot;);</span>
+<span class="nc" id="L16">        productsToDisplay = jparser.getProductsToDisplay(&quot;src/main/resources/Inventory.json&quot;);</span>
         
 <span class="nc" id="L18">        return productsToDisplay;</span>
     }
 
-    public ArrayList&lt;String&gt; getCategories(){
-<span class="nc" id="L22">        ArrayList&lt;String&gt; categories = new ArrayList&lt;&gt;();</span>
-<span class="nc" id="L23">        List&lt;ProductToDisplay&gt; allProducts = getProductsToDisplay();</span>
+    public void updateInventory(){   /////////// after purchase/changes
+        ;
+<span class="nc" id="L23">    }</span>
 
-<span class="nc bnc" id="L25" title="All 2 branches missed.">        for (ProductToDisplay product : allProducts){</span>
-<span class="nc bnc" id="L26" title="All 2 branches missed.">            if (! categories.contains(product.getCategory())){</span>
-<span class="nc" id="L27">                categories.add(product.getCategory());</span>
+    public ArrayList&lt;String&gt; getCategories(){
+<span class="nc" id="L26">        ArrayList&lt;String&gt; categories = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L27">        List&lt;ProductToDisplay&gt; allProducts = getProductsToDisplay();</span>
+
+<span class="nc bnc" id="L29" title="All 2 branches missed.">        for (ProductToDisplay product : allProducts){</span>
+<span class="nc bnc" id="L30" title="All 2 branches missed.">            if (! categories.contains(product.getCategory())){</span>
+<span class="nc" id="L31">                categories.add(product.getCategory());</span>
             }
-<span class="nc" id="L29">        }</span>
-<span class="nc" id="L30">        return categories;</span>
+<span class="nc" id="L33">        }</span>
+<span class="nc" id="L34">        return categories;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

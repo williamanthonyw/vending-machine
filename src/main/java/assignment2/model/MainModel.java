@@ -10,6 +10,7 @@ import com.google.gson.Gson;
 public class MainModel {
 
     private LastFiveProductsModel lastFiveProductsModel;
+    private CardPaymentModel cardPaymentModel;
     private LoginModel loginModel;
     private CashPaymentModel cashPaymentModel;
     private ProductOptionsModel productOptionsModel;
@@ -21,10 +22,11 @@ public class MainModel {
 
     public MainModel(){
         this.lastFiveProductsModel = new LastFiveProductsModel();
+        this.cardPaymentModel = new CardPaymentModel(this);
+
         this.productOptionsModel = new ProductOptionsModel();   ////////
 
         this.loginModel = new LoginModel(jsonParser.getUsers("src/main/resources/users.json"));
-//                "src/main/resources/users.json"));
 
         System.out.println(loginModel.getUsers());
 
@@ -49,10 +51,11 @@ public class MainModel {
         return loginModel;
     }
 
+    public CardPaymentModel getCardPaymentModel(){return cardPaymentModel;}
+
     public CashPaymentModel getCashPaymentModel(){
         return this.cashPaymentModel;
     }
-
     public boolean isLoggedIn(){
         return isLoggedIn;
     }
@@ -67,6 +70,7 @@ public class MainModel {
 
     public void logout(){
         this.user = loginModel.getAnonymousUser();
+        this.user.clearCart();
         this.isLoggedIn = false;
     }
 
@@ -98,6 +102,7 @@ public class MainModel {
             return true;
         }
 
+        // need to update inventory file as well
     }
 
     public void addToCart(Product product, int quantity){
@@ -109,28 +114,25 @@ public class MainModel {
         System.out.println(user.getCart());
     }
 
-//
-//    public void checkout(PaymentType paymentType){
-//
-//        if (paymentType == PaymentType.CARD){
-//
-//        } else {
-//            // handle payment stuff
-//
-//            // adds it to user's list of purchases
-//            user.purchaseProduct(product, quantity);
-//
-//            // update users file
-//            jsonParser.updateUsers(loginModel.getUsers(), "src/main/resources/users.json");
-//
-//
-//        }
-//
-//
-//
-//
-//
-//    }
+
+    public void checkout(){
+
+        // adds it to user's list of purchases
+        for (Product product : user.getCart().keySet()){
+            user.purchaseProduct(product, user.getCart().get(product));
+        }
+
+        user.clearCart();
+
+        // update users file
+        jsonParser.updateUsers(loginModel.getUsers(), "src/main/resources/users.json");
+
+        // update inventory file
+        productOptionsModel.updateInventory();
+
+        logout();
+
+    }
 
     public ProductOptionsModel getProductOptionsModel(){
         return this.productOptionsModel;

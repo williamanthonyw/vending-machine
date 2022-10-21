@@ -105,7 +105,6 @@ public class CashPaymentModel{
 
             }
             totalChange.put(c.getName(), counter);
-            System.out.println(change);
         }
 
         int fiveCentsChange = totalChange.get("5c");

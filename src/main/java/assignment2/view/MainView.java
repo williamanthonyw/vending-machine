@@ -80,15 +80,16 @@ public class MainView {
     public void goToProductOptionsView(){
         goToView(new ProductOptionsView(mainModel, stage, this));
     }
-    
+
     public void goToLoginView(){
         goToView(new LoginView(mainModel, this));
     }
 
+    public void goToCardPaymentView(){
+        goToView(new CardPaymentView(mainModel, this));
+    }
+
     public void goToCashPaymentView(){ goToView(new CashPaymentView(mainModel, this)); }
-
-    public void goToCardPaymentView(){ goToView(new CardPaymentView(mainModel)); }
-
 
     public void setUpCancelOnTimeOut(){
 
@@ -154,6 +155,7 @@ public class MainView {
 
         this.menuBTN = new MenuButton();
 
+
         ImageView menuIV = new ImageView(new Image("white-menu.png"));
         menuIV.setFitHeight(20.0);
         menuIV.setFitWidth(20.0);
@@ -162,16 +164,39 @@ public class MainView {
             menuBTN.fire();
         });
 
+        MenuItem homeBTN = new MenuItem("Home");
+        homeBTN.setOnAction((ActionEvent e) -> {
+            goToLastFiveProductsView();
+        });
+
         MenuItem loginBTN = new MenuItem("Login");
         loginBTN.setOnAction((ActionEvent e) -> {
             goToLoginView();
         });
+
+        MenuItem logoutBTN = new MenuItem("Logout");
+
+        logoutBTN.setOnAction((ActionEvent e) -> {
+            if (mainModel.isLoggedIn()){
+                mainModel.logout();
+                goToLastFiveProductsView();
+            } else {
+
+                Alert notLoggedin = new Alert(Alert.AlertType.ERROR);
+                notLoggedin.setHeaderText("You were not logged in");
+                notLoggedin.showAndWait();
+
+            }
+
+        });
+
+
         MenuItem productOptionsBTN = new MenuItem("Products");
         productOptionsBTN.setOnAction((ActionEvent e) -> {
             goToProductOptionsView();
         });
 
-        menuBTN.getItems().addAll(loginBTN, productOptionsBTN);
+        menuBTN.getItems().addAll(homeBTN, loginBTN, logoutBTN, productOptionsBTN);
 
 
     }

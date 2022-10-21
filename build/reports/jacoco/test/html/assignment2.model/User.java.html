@@ -9,47 +9,51 @@ public class User {
     private String username;
     private String password;
     private List&lt;Purchase&gt; purchases;
+    private CardUser cardUser;
 
-<span class="fc" id="L13">    public User(String username, String password) {</span>
-<span class="fc" id="L14">        this.username = username;</span>
-<span class="fc" id="L15">        this.password = password;</span>
-<span class="fc" id="L16">        this.purchases = new ArrayList&lt;Purchase&gt;();</span>
-<span class="fc" id="L17">    }</span>
+<span class="fc" id="L14">    public User(String username, String password) {</span>
+<span class="fc" id="L15">        this.username = username;</span>
+<span class="fc" id="L16">        this.password = password;</span>
+<span class="fc" id="L17">        this.purchases = new ArrayList&lt;Purchase&gt;();</span>
+<span class="fc" id="L18">    }</span>
 
     public void purchaseProduct(Product product, int quantity){
-<span class="fc" id="L20">        Purchase purchase = new Purchase(product.getName(), product.getPrice(), quantity, LocalDateTime.now());</span>
-<span class="fc" id="L21">        this.purchases.add(purchase);</span>
+<span class="fc" id="L21">        Purchase purchase = new Purchase(product.getName(), product.getPrice(), quantity, LocalDateTime.now());</span>
+<span class="fc" id="L22">        this.purchases.add(purchase);</span>
 
         // need to write to file
-<span class="fc" id="L24">    }</span>
+<span class="fc" id="L25">    }</span>
 
     public List&lt;Purchase&gt; getPurchases(){
-<span class="fc" id="L27">        return purchases;</span>
+<span class="fc" id="L28">        return purchases;</span>
     }
 
     public String getUsername() {
-<span class="nc" id="L31">        return username;</span>
+<span class="fc" id="L32">        return username;</span>
     }
 
     public void setUsername(String username) {
-<span class="nc" id="L35">        this.username = username;</span>
-<span class="nc" id="L36">    }</span>
+<span class="nc" id="L36">        this.username = username;</span>
+<span class="nc" id="L37">    }</span>
 
     public String getPassword() {
-<span class="nc" id="L39">        return password;</span>
+<span class="fc" id="L40">        return password;</span>
     }
 
     public void setPassword(String password) {
-<span class="nc" id="L43">        this.password = password;</span>
-<span class="nc" id="L44">    }</span>
+<span class="nc" id="L44">        this.password = password;</span>
+<span class="nc" id="L45">    }</span>
 
     public void setPurchases(List&lt;Purchase&gt; purchases) {
-<span class="fc" id="L47">        this.purchases = purchases;</span>
-<span class="fc" id="L48">    }</span>
+<span class="fc" id="L48">        this.purchases = purchases;</span>
+<span class="fc" id="L49">    }</span>
 
 
-
-
-
+    public void setCardUser(CardUser cardUser){
+<span class="fc" id="L53">        this.cardUser = cardUser;</span>
+<span class="fc" id="L54">    }</span>
+    public CardUser getCardUser() {
+<span class="nc" id="L56">        return cardUser;</span>
+    }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

@@ -88,6 +88,7 @@ public class LoginView implements View{
 
         Label passwordLBL = new Label("Password: ");
         PasswordField passwordTF = new PasswordField();
+        passwordTF.setSkin(new PasswordSkin(passwordTF));
         loginBox.getChildren().addAll(passwordLBL, passwordTF);
 
         Region space = new Region();
@@ -123,6 +124,7 @@ public class LoginView implements View{
 
         Label newPasswordLBL = new Label("Password: ");
         PasswordField newPasswordTF = new PasswordField();
+        newPasswordTF.setSkin(new PasswordSkin(newPasswordTF));
         registerBox.getChildren().addAll(newPasswordLBL, newPasswordTF);
 
         Region space = new Region();

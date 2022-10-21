@@ -37,14 +37,15 @@ public class ProductOptionsView implements View{
     private BorderPane borderPane;
     private Stage stage;
 
-    private TableView<Product> drinksTable; 
-    private TableView<Product> chocolatesTable; 
+    private TableView<Product> drinksTable;
+    private TableView<Product> chocolatesTable;
     private TableView<Product> chipsTable;
     private TableView<Product> candiesTable;
     private Button checkoutBTN;
     private Button selectCategoryBTN;
     private Button cartBTN;
     ComboBox<String> selectCategory;
+    ComboBox<Integer> selectQuantity;
 
     private MainView mainView;
 
@@ -74,7 +75,7 @@ public class ProductOptionsView implements View{
         BorderPane.setMargin(mainBox, new Insets(50, 50, 50, 50));
         borderPane.setCenter(mainBox);
 
-        HBox topBox = new HBox(560);
+        HBox topBox = new HBox(380);
         mainBox.getChildren().add(topBox);
 
         Label titleLBL = new Label("All Products");
@@ -98,7 +99,7 @@ public class ProductOptionsView implements View{
         Label selectCategoryLBL = new Label("Select category");
         // selectCategoryLBL.setID("align");
         selectCategory = new ComboBox<String>();
-        selectCategory.getItems().addAll(productOptionsModel.getCategories());
+        selectCategory.getItems().addAll(productOptionsModel.getCategories("src/main/resources/Inventory.json"));
         selectCategory.setValue("drinks");  // drinks by default
 
         selectCategoryBTN = new Button("View Products");
@@ -370,7 +371,8 @@ public class ProductOptionsView implements View{
     }
 
     public void populateTable(TableView table, String category){
-        List<Product> products = productOptionsModel.getProductsToDisplay();
+
+        List<Product> products = productOptionsModel.getProductsToDisplay("src/main/resources/Inventory.json");
 
         table.getItems().clear();
 
@@ -429,7 +431,7 @@ public class ProductOptionsView implements View{
         for (int i = 1; i <= product.getQuantity(); i++){
             quantities.add(i);
         }
-        ComboBox<Integer> selectQuantity = new ComboBox<Integer>();
+        selectQuantity = new ComboBox<Integer>();
         selectQuantity.getItems().addAll(quantities);
         selectQuantity.setValue(1);  // 1 by default
         Button addToCartBTN = new Button("Add to cart");
@@ -478,7 +480,7 @@ public class ProductOptionsView implements View{
             ComboBox<String> selectPaymentType = new ComboBox<String>();
             selectPaymentType.getItems().addAll(paymentTypes);
             selectPaymentType.setValue("Cash");  // 1 by default
-            Button continueToCheckoutBTN = new Button("Continue to Checkout");
+            Button continueToCheckoutBTN = new Button("Continue");
             selectionBox.getChildren().addAll(selectPaymentType, continueToCheckoutBTN);
 
             continueToCheckoutBTN.setOnAction((e) -> {
