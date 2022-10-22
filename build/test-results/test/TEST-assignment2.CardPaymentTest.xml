@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="assignment2.CardPaymentTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-10-21T12:00:13" hostname="DESKTOP-Q9TS4JK" time="0.101">
+  <properties/>
+  <testcase name="paymentProcessTest()" classname="assignment2.CardPaymentTest" time="0.101"/>
+  <system-out><![CDATA[[assignment2.model.User@1a950fdd, assignment2.model.User@77724cbe, assignment2.model.User@27dc627a, assignment2.model.User@570ba13, assignment2.model.User@37a9b687]
+[assignment2.model.Cash@661d6bb6, assignment2.model.Cash@733fb462, assignment2.model.Cash@623e0631, assignment2.model.Cash@359066bc, assignment2.model.Cash@385dfb63, assignment2.model.Cash@364fd4ae, assignment2.model.Cash@245253d8, assignment2.model.Cash@12417468, assignment2.model.Cash@459003a0, assignment2.model.Cash@d325518, assignment2.model.Cash@3b481bf5]
+payment success
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

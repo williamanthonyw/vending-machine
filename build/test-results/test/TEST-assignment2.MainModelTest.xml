@@ -1,15 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="assignment2.MainModelTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2022-10-20T23:25:42" hostname="DESKTOP-Q9TS4JK" time="0.026">
+<testsuite name="assignment2.MainModelTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2022-10-21T12:00:13" hostname="DESKTOP-Q9TS4JK" time="0.027">
   <properties/>
-  <testcase name="getLoginModelTest()" classname="assignment2.MainModelTest" time="0.005"/>
-  <testcase name="getCardPaymentModelTest()" classname="assignment2.MainModelTest" time="0.003"/>
-  <testcase name="getCashPaymentModelTest()" classname="assignment2.MainModelTest" time="0.002"/>
+  <testcase name="getLoginModelTest()" classname="assignment2.MainModelTest" time="0.003"/>
+  <testcase name="getCardPaymentModelTest()" classname="assignment2.MainModelTest" time="0.002"/>
+  <testcase name="getCashPaymentModelTest()" classname="assignment2.MainModelTest" time="0.003"/>
   <testcase name="getProductOptionsModelTest()" classname="assignment2.MainModelTest" time="0.002"/>
-  <testcase name="cancelTransactionTest()" classname="assignment2.MainModelTest" time="0.003"/>
-  <testcase name="loginStatusCorrectTest()" classname="assignment2.MainModelTest" time="0.002"/>
+  <testcase name="cancelTransactionTest()" classname="assignment2.MainModelTest" time="0.002"/>
+  <testcase name="loginStatusCorrectTest()" classname="assignment2.MainModelTest" time="0.001"/>
   <testcase name="getLastFiveProductsModelTest()" classname="assignment2.MainModelTest" time="0.002"/>
-  <testcase name="purchaseProductTest()" classname="assignment2.MainModelTest" time="0.003"/>
   <testcase name="setIsLoggedInTest()" classname="assignment2.MainModelTest" time="0.002"/>
-  <system-out><![CDATA[]]></system-out>
+  <system-out><![CDATA[[assignment2.model.User@61608e1a, assignment2.model.User@7c46c9c3, assignment2.model.User@7197b07f, assignment2.model.User@1f10fec6, assignment2.model.User@7a65a360]
+[assignment2.model.Cash@30a7653e, assignment2.model.Cash@7cff3f1d, assignment2.model.Cash@6401188a, assignment2.model.Cash@33a8c9c9, assignment2.model.Cash@382dc417, assignment2.model.Cash@3daf03d8, assignment2.model.Cash@510689af, assignment2.model.Cash@2415e4c7, assignment2.model.Cash@72ce812e, assignment2.model.Cash@373afd6c, assignment2.model.Cash@521441d5]
+[assignment2.model.User@592ca48c, assignment2.model.User@5fed9976, assignment2.model.User@3fdcde7a, assignment2.model.User@4f363abd, assignment2.model.User@7302ff13]
+[assignment2.model.Cash@4017fe2c, assignment2.model.Cash@1961d75a, assignment2.model.Cash@677ce519, assignment2.model.Cash@3e26482, assignment2.model.Cash@7cfb0c4c, assignment2.model.Cash@6b37df8e, assignment2.model.Cash@6b63abdc, assignment2.model.Cash@7b351446, assignment2.model.Cash@5f08fe00, assignment2.model.Cash@a1691c0, assignment2.model.Cash@7c5df615]
+[assignment2.model.User@2f995afc, assignment2.model.User@377949f1, assignment2.model.User@9df564f, assignment2.model.User@1a21f43f, assignment2.model.User@7f0a133d]
+[assignment2.model.Cash@241fbec, assignment2.model.Cash@715fa8c5, assignment2.model.Cash@644a3add, assignment2.model.Cash@4b765e92, assignment2.model.Cash@4665428b, assignment2.model.Cash@4a70d302, assignment2.model.Cash@7fd99443, assignment2.model.Cash@622d7e4, assignment2.model.Cash@6a3fbcb1, assignment2.model.Cash@261b9a37, assignment2.model.Cash@15d3793b]
+[assignment2.model.User@55e1192, assignment2.model.User@1213ffbc, assignment2.model.User@68a305eb, assignment2.model.User@6637a365, assignment2.model.User@1310fcb0]
+[assignment2.model.Cash@1ef31f71, assignment2.model.Cash@6e8fdd19, assignment2.model.Cash@35787726, assignment2.model.Cash@2199e845, assignment2.model.Cash@27976390, assignment2.model.Cash@37e0056e, assignment2.model.Cash@415795f3, assignment2.model.Cash@2fe2965c, assignment2.model.Cash@3375ebd3, assignment2.model.Cash@40943a6, assignment2.model.Cash@798cb6d9]
+[assignment2.model.User@42679fc2, assignment2.model.User@5e50df2e, assignment2.model.User@100aa331, assignment2.model.User@c2cf597, assignment2.model.User@724bf25f]
+[assignment2.model.Cash@2abafa97, assignment2.model.Cash@6f6cc7da, assignment2.model.Cash@40717ed, assignment2.model.Cash@29f3c438, assignment2.model.Cash@5460edd3, assignment2.model.Cash@5dbbb292, assignment2.model.Cash@613f7eb7, assignment2.model.Cash@565aa4ac, assignment2.model.Cash@587c5c1, assignment2.model.Cash@528c8c1, assignment2.model.Cash@1f78d415]
+[assignment2.model.User@1c046c92, assignment2.model.User@27960b1e, assignment2.model.User@643ba1ed, assignment2.model.User@3d3a1903, assignment2.model.User@26582ca]
+[assignment2.model.Cash@153cb763, assignment2.model.Cash@2c3158e0, assignment2.model.Cash@412ebe64, assignment2.model.Cash@6f731759, assignment2.model.Cash@1f84327b, assignment2.model.Cash@39549f33, assignment2.model.Cash@dbddbe3, assignment2.model.Cash@7a83ccd2, assignment2.model.Cash@44aa2e13, assignment2.model.Cash@599a9cb2, assignment2.model.Cash@3a1b36a1]
+[assignment2.model.User@5e1a986c, assignment2.model.User@4b55ff0a, assignment2.model.User@46a795de, assignment2.model.User@256a0d95, assignment2.model.User@2f3928ac]
+[assignment2.model.Cash@4bf03fee, assignment2.model.Cash@31834a2b, assignment2.model.Cash@44f0ff2b, assignment2.model.Cash@22ead351, assignment2.model.Cash@68af87ad, assignment2.model.Cash@43d65a81, assignment2.model.Cash@9cfc77, assignment2.model.Cash@7418d76e, assignment2.model.Cash@601eb4af, assignment2.model.Cash@11ede87f, assignment2.model.Cash@7675c171]
+[assignment2.model.User@44e4cb76, assignment2.model.User@51cab489, assignment2.model.User@2f9a10df, assignment2.model.User@773c2214, assignment2.model.User@15e1f8fe]
+[assignment2.model.Cash@110b7837, assignment2.model.Cash@6ee88e21, assignment2.model.Cash@78d23d6a, assignment2.model.Cash@626e0c86, assignment2.model.Cash@28ee0a3c, assignment2.model.Cash@2dd1086, assignment2.model.Cash@6b8d54da, assignment2.model.Cash@79957f11, assignment2.model.Cash@217235f5, assignment2.model.Cash@4b41587d, assignment2.model.Cash@4aebee4b]
+]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

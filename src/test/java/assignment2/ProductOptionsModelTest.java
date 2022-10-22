@@ -17,7 +17,7 @@ public class ProductOptionsModelTest {
 
     @Test
     public void getProductsToDisplayTest(){
-        List<ProductToDisplay> products = productOptionsModel.getProductsToDisplay("src/main/resources/InventoryTest1.json");
+        List<Product> products = productOptionsModel.getProductsToDisplay("src/main/resources/InventoryTest1.json");
         assertEquals(16, products.size());
         assertEquals(3.95, products.get(0).getPrice());
         assertEquals(7, products.get(0).getQuantity());
@@ -27,7 +27,7 @@ public class ProductOptionsModelTest {
 
     @Test
     public void getCategoriesTest(){
-        ArrayList<String> categories = productOptionsModel.getCategories("src/main/resources/Inventory.json");
+        ArrayList<String> categories = productOptionsModel.getCategories("src/main/resources/InventoryTest1.json");
         assertEquals(4, categories.size());
         assertEquals("drinks", categories.get(0));
         assertEquals("candies", categories.get(3));

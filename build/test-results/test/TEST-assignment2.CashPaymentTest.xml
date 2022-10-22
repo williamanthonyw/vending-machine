@@ -1,18 +1,143 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="assignment2.CashPaymentTest" tests="12" skipped="0" failures="0" errors="0" timestamp="2022-10-20T23:25:42" hostname="DESKTOP-Q9TS4JK" time="0.069">
+<testsuite name="assignment2.CashPaymentTest" tests="12" skipped="0" failures="1" errors="0" timestamp="2022-10-21T12:00:13" hostname="DESKTOP-Q9TS4JK" time="0.054">
   <properties/>
-  <testcase name="cashValueCheck()" classname="assignment2.CashPaymentTest" time="0.024"/>
-  <testcase name="multiplePayments()" classname="assignment2.CashPaymentTest" time="0.01"/>
-  <testcase name="changeisNotSufficient()" classname="assignment2.CashPaymentTest" time="0.004"/>
+  <testcase name="cashValueCheck()" classname="assignment2.CashPaymentTest" time="0.007"/>
+  <testcase name="multiplePayments()" classname="assignment2.CashPaymentTest" time="0.007"/>
+  <testcase name="changeisNotSufficient()" classname="assignment2.CashPaymentTest" time="0.003"/>
   <testcase name="changeCoinsOnly()" classname="assignment2.CashPaymentTest" time="0.003"/>
-  <testcase name="initialAmountCheck()" classname="assignment2.CashPaymentTest" time="0.001"/>
-  <testcase name="NotEnoughPayment()" classname="assignment2.CashPaymentTest" time="0.001"/>
+  <testcase name="initialAmountCheck()" classname="assignment2.CashPaymentTest" time="0.003">
+    <failure message="org.opentest4j.AssertionFailedError: expected: &lt;5&gt; but was: &lt;7&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: expected: &lt;5&gt; but was: &lt;7&gt;
+	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:55)
+	at app//org.junit.jupiter.api.AssertionUtils.failNotEqual(AssertionUtils.java:62)
+	at app//org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:150)
+	at app//org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:145)
+	at app//org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:510)
+	at app//assignment2.CashPaymentTest.initialAmountCheck(CashPaymentTest.java:34)
+	at java.base@11.0.16.1/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base@11.0.16.1/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base@11.0.16.1/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base@11.0.16.1/java.lang.reflect.Method.invoke(Method.java:566)
+	at app//org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:688)
+	at app//org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:60)
+	at app//org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:131)
+	at app//org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:149)
+	at app//org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:140)
+	at app//org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:84)
+	at app//org.junit.jupiter.engine.execution.ExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(ExecutableInvoker.java:115)
+	at app//org.junit.jupiter.engine.execution.ExecutableInvoker.lambda$invoke$0(ExecutableInvoker.java:105)
+	at app//org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:106)
+	at app//org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:64)
+	at app//org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:45)
+	at app//org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:37)
+	at app//org.junit.jupiter.engine.execution.ExecutableInvoker.invoke(ExecutableInvoker.java:104)
+	at app//org.junit.jupiter.engine.execution.ExecutableInvoker.invoke(ExecutableInvoker.java:98)
+	at app//org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$6(TestMethodTestDescriptor.java:210)
+	at app//org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at app//org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:206)
+	at app//org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:131)
+	at app//org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:65)
+	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$5(NodeTestTask.java:139)
+	at app//org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$7(NodeTestTask.java:129)
+	at app//org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:127)
+	at app//org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:126)
+	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:84)
+	at java.base@11.0.16.1/java.util.ArrayList.forEach(ArrayList.java:1541)
+	at app//org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:38)
+	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$5(NodeTestTask.java:143)
+	at app//org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$7(NodeTestTask.java:129)
+	at app//org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:127)
+	at app//org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:126)
+	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:84)
+	at java.base@11.0.16.1/java.util.ArrayList.forEach(ArrayList.java:1541)
+	at app//org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:38)
+	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$5(NodeTestTask.java:143)
+	at app//org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$7(NodeTestTask.java:129)
+	at app//org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:127)
+	at app//org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:126)
+	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:84)
+	at app//org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:32)
+	at app//org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57)
+	at app//org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:51)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:107)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:88)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:54)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:67)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:52)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:114)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:86)
+	at org.junit.platform.launcher.core.DefaultLauncherSession$DelegatingLauncher.execute(DefaultLauncherSession.java:86)
+	at org.junit.platform.launcher.core.SessionPerRequestLauncher.execute(SessionPerRequestLauncher.java:53)
+	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestClassProcessor$CollectAllTestClassesExecutor.processAllTestClasses(JUnitPlatformTestClassProcessor.java:99)
+	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestClassProcessor$CollectAllTestClassesExecutor.access$000(JUnitPlatformTestClassProcessor.java:79)
+	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestClassProcessor.stop(JUnitPlatformTestClassProcessor.java:75)
+	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.stop(SuiteTestClassProcessor.java:61)
+	at java.base@11.0.16.1/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base@11.0.16.1/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base@11.0.16.1/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base@11.0.16.1/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
+	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33)
+	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:94)
+	at com.sun.proxy.$Proxy5.stop(Unknown Source)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker$3.run(TestWorker.java:193)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.executeAndMaintainThreadName(TestWorker.java:129)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:100)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:60)
+	at org.gradle.process.internal.worker.child.ActionExecutionWorker.execute(ActionExecutionWorker.java:56)
+	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:133)
+	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:71)
+	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69)
+	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
+</failure>
+  </testcase>
+  <testcase name="NotEnoughPayment()" classname="assignment2.CashPaymentTest" time="0.002"/>
   <testcase name="calculateTotalPayment()" classname="assignment2.CashPaymentTest" time="0.001"/>
   <testcase name="smallChangeInsufficient()" classname="assignment2.CashPaymentTest" time="0.001"/>
-  <testcase name="smallChangeRound()" classname="assignment2.CashPaymentTest" time="0.005"/>
-  <testcase name="updateChangeList()" classname="assignment2.CashPaymentTest" time="0.002"/>
-  <testcase name="changeNotesOnly()" classname="assignment2.CashPaymentTest" time="0.003"/>
+  <testcase name="smallChangeRound()" classname="assignment2.CashPaymentTest" time="0.007"/>
+  <testcase name="updateChangeList()" classname="assignment2.CashPaymentTest" time="0.003"/>
+  <testcase name="changeNotesOnly()" classname="assignment2.CashPaymentTest" time="0.004"/>
   <testcase name="numberOfDifferentNotesandCoins()" classname="assignment2.CashPaymentTest" time="0.001"/>
-  <system-out><![CDATA[]]></system-out>
+  <system-out><![CDATA[[assignment2.model.Cash@594131f2, assignment2.model.Cash@51d0ec6f, assignment2.model.Cash@7bee8621, assignment2.model.Cash@4e0cc334, assignment2.model.Cash@1e12a5a6, assignment2.model.Cash@4877919f, assignment2.model.Cash@47a7c93e, assignment2.model.Cash@6f9ab79d, assignment2.model.Cash@64ae105d, assignment2.model.Cash@10a18e3e, assignment2.model.Cash@69364b2d]
+[assignment2.model.Cash@739265f1, assignment2.model.Cash@58eac00e, assignment2.model.Cash@6acffb2d, assignment2.model.Cash@61149fa5, assignment2.model.Cash@149c39b, assignment2.model.Cash@f2d890c, assignment2.model.Cash@1a2e0d57, assignment2.model.Cash@5f025000, assignment2.model.Cash@10980560, assignment2.model.Cash@739e8b96, assignment2.model.Cash@19b07407]
+[assignment2.model.Cash@739265f1, assignment2.model.Cash@58eac00e, assignment2.model.Cash@6acffb2d, assignment2.model.Cash@61149fa5, assignment2.model.Cash@149c39b, assignment2.model.Cash@f2d890c, assignment2.model.Cash@1a2e0d57, assignment2.model.Cash@5f025000, assignment2.model.Cash@10980560, assignment2.model.Cash@739e8b96, assignment2.model.Cash@19b07407]
+[assignment2.model.Cash@739265f1, assignment2.model.Cash@58eac00e, assignment2.model.Cash@6acffb2d, assignment2.model.Cash@61149fa5, assignment2.model.Cash@149c39b, assignment2.model.Cash@f2d890c, assignment2.model.Cash@1a2e0d57, assignment2.model.Cash@5f025000, assignment2.model.Cash@10980560, assignment2.model.Cash@739e8b96, assignment2.model.Cash@19b07407]
+[assignment2.model.Cash@739265f1, assignment2.model.Cash@58eac00e, assignment2.model.Cash@6acffb2d, assignment2.model.Cash@61149fa5, assignment2.model.Cash@149c39b, assignment2.model.Cash@f2d890c, assignment2.model.Cash@1a2e0d57, assignment2.model.Cash@5f025000, assignment2.model.Cash@10980560, assignment2.model.Cash@739e8b96, assignment2.model.Cash@19b07407]
+[assignment2.model.Cash@739265f1, assignment2.model.Cash@58eac00e, assignment2.model.Cash@6acffb2d, assignment2.model.Cash@61149fa5, assignment2.model.Cash@149c39b, assignment2.model.Cash@f2d890c, assignment2.model.Cash@1a2e0d57, assignment2.model.Cash@5f025000, assignment2.model.Cash@10980560, assignment2.model.Cash@739e8b96, assignment2.model.Cash@19b07407]
+[assignment2.model.Cash@93501be, assignment2.model.Cash@11d4d979, assignment2.model.Cash@195580ba, assignment2.model.Cash@3c25cfe1, assignment2.model.Cash@1d3c112a, assignment2.model.Cash@2a140ce5, assignment2.model.Cash@1f71194d, assignment2.model.Cash@db99785, assignment2.model.Cash@70716259, assignment2.model.Cash@7a083b96, assignment2.model.Cash@6da4feeb]
+[assignment2.model.Cash@93501be, assignment2.model.Cash@11d4d979, assignment2.model.Cash@195580ba, assignment2.model.Cash@3c25cfe1, assignment2.model.Cash@1d3c112a, assignment2.model.Cash@2a140ce5, assignment2.model.Cash@1f71194d, assignment2.model.Cash@db99785, assignment2.model.Cash@70716259, assignment2.model.Cash@7a083b96, assignment2.model.Cash@6da4feeb]
+[assignment2.model.Cash@93501be, assignment2.model.Cash@11d4d979, assignment2.model.Cash@195580ba, assignment2.model.Cash@3c25cfe1, assignment2.model.Cash@1d3c112a, assignment2.model.Cash@2a140ce5, assignment2.model.Cash@1f71194d, assignment2.model.Cash@db99785, assignment2.model.Cash@70716259, assignment2.model.Cash@7a083b96, assignment2.model.Cash@6da4feeb]
+[assignment2.model.Cash@2c30c81d, assignment2.model.Cash@415a3f6a, assignment2.model.Cash@a54acec, assignment2.model.Cash@19da993b, assignment2.model.Cash@3380ca3d, assignment2.model.Cash@23310248, assignment2.model.Cash@c2df90e, assignment2.model.Cash@41f3aaf1, assignment2.model.Cash@741741d0, assignment2.model.Cash@5f9f3e58, assignment2.model.Cash@3c19592c]
+[assignment2.model.Cash@2c30c81d, assignment2.model.Cash@415a3f6a, assignment2.model.Cash@a54acec, assignment2.model.Cash@19da993b, assignment2.model.Cash@3380ca3d, assignment2.model.Cash@23310248, assignment2.model.Cash@c2df90e, assignment2.model.Cash@41f3aaf1, assignment2.model.Cash@741741d0, assignment2.model.Cash@5f9f3e58, assignment2.model.Cash@3c19592c]
+[assignment2.model.Cash@2c30c81d, assignment2.model.Cash@415a3f6a, assignment2.model.Cash@a54acec, assignment2.model.Cash@19da993b, assignment2.model.Cash@3380ca3d, assignment2.model.Cash@23310248, assignment2.model.Cash@c2df90e, assignment2.model.Cash@41f3aaf1, assignment2.model.Cash@741741d0, assignment2.model.Cash@5f9f3e58, assignment2.model.Cash@3c19592c]
+[assignment2.model.Cash@60e1d87c, assignment2.model.Cash@2eb60c71, assignment2.model.Cash@87d9a01, assignment2.model.Cash@7e5b621b, assignment2.model.Cash@10177794, assignment2.model.Cash@e5c2463, assignment2.model.Cash@6a950a3b, assignment2.model.Cash@4f7be6c8, assignment2.model.Cash@647b9364, assignment2.model.Cash@b6bccb4, assignment2.model.Cash@49edcb30]
+[assignment2.model.Cash@79afa369, assignment2.model.Cash@3b9ac754, assignment2.model.Cash@5e002356, assignment2.model.Cash@4f820f42, assignment2.model.Cash@4b325930, assignment2.model.Cash@267f9765, assignment2.model.Cash@79ba0a6f, assignment2.model.Cash@261de205, assignment2.model.Cash@7f3fc42f, assignment2.model.Cash@25a1a012, assignment2.model.Cash@ce12fbb]
+[assignment2.model.Cash@6c33da7a, assignment2.model.Cash@69aabcb0, assignment2.model.Cash@32a72c4, assignment2.model.Cash@15986dd5, assignment2.model.Cash@678a9516, assignment2.model.Cash@5bf9ea6b, assignment2.model.Cash@b950f82, assignment2.model.Cash@5d352de0, assignment2.model.Cash@6e243175, assignment2.model.Cash@7a1a3468, assignment2.model.Cash@59d0cdb6]
+[]
+[]
+[]
+[assignment2.model.Cash@16ee9aa7, assignment2.model.Cash@4e424582, assignment2.model.Cash@58dad04a, assignment2.model.Cash@73e776b7, assignment2.model.Cash@113ee1ce, assignment2.model.Cash@4d0cc83e, assignment2.model.Cash@43da0955, assignment2.model.Cash@bc09d57, assignment2.model.Cash@6d963d70, assignment2.model.Cash@467045c4, assignment2.model.Cash@55736cfe]
+[assignment2.model.Cash@16ee9aa7, assignment2.model.Cash@4e424582, assignment2.model.Cash@58dad04a, assignment2.model.Cash@73e776b7, assignment2.model.Cash@113ee1ce, assignment2.model.Cash@4d0cc83e, assignment2.model.Cash@43da0955, assignment2.model.Cash@bc09d57, assignment2.model.Cash@6d963d70, assignment2.model.Cash@467045c4, assignment2.model.Cash@55736cfe]
+[assignment2.model.Cash@16ee9aa7, assignment2.model.Cash@4e424582, assignment2.model.Cash@58dad04a, assignment2.model.Cash@73e776b7, assignment2.model.Cash@113ee1ce, assignment2.model.Cash@4d0cc83e, assignment2.model.Cash@43da0955, assignment2.model.Cash@bc09d57, assignment2.model.Cash@6d963d70, assignment2.model.Cash@467045c4, assignment2.model.Cash@55736cfe]
+[assignment2.model.Cash@5a566922, assignment2.model.Cash@6f7a2a5, assignment2.model.Cash@42ed89da, assignment2.model.Cash@c3719e5, assignment2.model.Cash@65c17e38, assignment2.model.Cash@5e180aaf, assignment2.model.Cash@7015ebef, assignment2.model.Cash@44592c39, assignment2.model.Cash@2a87ba34, assignment2.model.Cash@34d480b9, assignment2.model.Cash@6b415f5f]
+[assignment2.model.Cash@5a566922, assignment2.model.Cash@6f7a2a5, assignment2.model.Cash@42ed89da, assignment2.model.Cash@c3719e5, assignment2.model.Cash@65c17e38, assignment2.model.Cash@5e180aaf, assignment2.model.Cash@7015ebef, assignment2.model.Cash@44592c39, assignment2.model.Cash@2a87ba34, assignment2.model.Cash@34d480b9, assignment2.model.Cash@6b415f5f]
+[assignment2.model.Cash@5a566922, assignment2.model.Cash@6f7a2a5, assignment2.model.Cash@42ed89da, assignment2.model.Cash@c3719e5, assignment2.model.Cash@65c17e38, assignment2.model.Cash@5e180aaf, assignment2.model.Cash@7015ebef, assignment2.model.Cash@44592c39, assignment2.model.Cash@2a87ba34, assignment2.model.Cash@34d480b9, assignment2.model.Cash@6b415f5f]
+[assignment2.model.Cash@66749eea, assignment2.model.Cash@7135ce0a, assignment2.model.Cash@617449dd, assignment2.model.Cash@2e590b, assignment2.model.Cash@42ef042a, assignment2.model.Cash@1df5c7e3, assignment2.model.Cash@5e0c4f21, assignment2.model.Cash@2c18a3ea, assignment2.model.Cash@166c2c17, assignment2.model.Cash@25953be6, assignment2.model.Cash@19dc0d32]
+[assignment2.model.Cash@66749eea, assignment2.model.Cash@7135ce0a, assignment2.model.Cash@617449dd, assignment2.model.Cash@2e590b, assignment2.model.Cash@42ef042a, assignment2.model.Cash@1df5c7e3, assignment2.model.Cash@5e0c4f21, assignment2.model.Cash@2c18a3ea, assignment2.model.Cash@166c2c17, assignment2.model.Cash@25953be6, assignment2.model.Cash@19dc0d32]
+[assignment2.model.Cash@66749eea, assignment2.model.Cash@7135ce0a, assignment2.model.Cash@617449dd, assignment2.model.Cash@2e590b, assignment2.model.Cash@42ef042a, assignment2.model.Cash@1df5c7e3, assignment2.model.Cash@5e0c4f21, assignment2.model.Cash@2c18a3ea, assignment2.model.Cash@166c2c17, assignment2.model.Cash@25953be6, assignment2.model.Cash@19dc0d32]
+[assignment2.model.Cash@70b2fa10, assignment2.model.Cash@7c96c85, assignment2.model.Cash@b0f2d91, assignment2.model.Cash@7243145f, assignment2.model.Cash@15c6027d, assignment2.model.Cash@5927f904, assignment2.model.Cash@2bb62414, assignment2.model.Cash@413d2cd1, assignment2.model.Cash@644d1b61, assignment2.model.Cash@2443135, assignment2.model.Cash@184823ed]
+[assignment2.model.Cash@70b2fa10, assignment2.model.Cash@7c96c85, assignment2.model.Cash@b0f2d91, assignment2.model.Cash@7243145f, assignment2.model.Cash@15c6027d, assignment2.model.Cash@5927f904, assignment2.model.Cash@2bb62414, assignment2.model.Cash@413d2cd1, assignment2.model.Cash@644d1b61, assignment2.model.Cash@2443135, assignment2.model.Cash@184823ed]
+[assignment2.model.Cash@70b2fa10, assignment2.model.Cash@7c96c85, assignment2.model.Cash@b0f2d91, assignment2.model.Cash@7243145f, assignment2.model.Cash@15c6027d, assignment2.model.Cash@5927f904, assignment2.model.Cash@2bb62414, assignment2.model.Cash@413d2cd1, assignment2.model.Cash@644d1b61, assignment2.model.Cash@2443135, assignment2.model.Cash@184823ed]
+[assignment2.model.Cash@30bbcf91, assignment2.model.Cash@3ca14cf4, assignment2.model.Cash@1f4f0fcc, assignment2.model.Cash@46c10083, assignment2.model.Cash@28e8888d, assignment2.model.Cash@1e98b788, assignment2.model.Cash@794eeaf8, assignment2.model.Cash@37c5284a, assignment2.model.Cash@5b8572df, assignment2.model.Cash@7aaad0, assignment2.model.Cash@eed890d]
+]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
