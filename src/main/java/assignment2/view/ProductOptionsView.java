@@ -1,10 +1,11 @@
 package assignment2.view;
 
 // import assignment2.model.Product;
+import assignment2.model.InventoryModel;
 import assignment2.model.Product;
 import assignment2.model.Product;
 import assignment2.model.MainModel;
-import assignment2.model.ProductOptionsModel;
+import assignment2.model.InventoryModel;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -27,7 +28,7 @@ import java.io.*;
 public class ProductOptionsView implements View{
     private Scene scene;
     private MainModel mainModel;
-    private ProductOptionsModel productOptionsModel;
+    private InventoryModel inventoryModel;
     private VBox mainBox;
     private VBox productOptionsBox;
     private Scene popupScene;
@@ -53,7 +54,7 @@ public class ProductOptionsView implements View{
 
     public ProductOptionsView(MainModel mainModel, Stage stage, MainView mainView){
         this.mainModel = mainModel;
-        this.productOptionsModel = mainModel.getProductOptionsModel();
+        this.inventoryModel = mainModel.getInventoryModel();
         this.stage = stage;
         this.mainView = mainView;
 
@@ -99,7 +100,7 @@ public class ProductOptionsView implements View{
         Label selectCategoryLBL = new Label("Select category");
         // selectCategoryLBL.setID("align");
         selectCategory = new ComboBox<String>();
-        selectCategory.getItems().addAll(productOptionsModel.getCategories("src/main/resources/Inventory.json"));
+        selectCategory.getItems().addAll(inventoryModel.getCategories());
         selectCategory.setValue("drinks");  // drinks by default
 
         selectCategoryBTN = new Button("View Products");
@@ -372,7 +373,7 @@ public class ProductOptionsView implements View{
 
     public void populateTable(TableView table, String category){
 
-        List<Product> products = productOptionsModel.getProductsToDisplay("src/main/resources/Inventory.json");
+        List<Product> products = inventoryModel.getInventory();
 
         table.getItems().clear();
 
@@ -540,6 +541,12 @@ public class ProductOptionsView implements View{
             alert.setContentText(cart.toString());
             alert.showAndWait();
         });
+
+
+    }
+
+    @Override
+    public void refresh(){
 
 
     }

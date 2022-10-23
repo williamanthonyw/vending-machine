@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>InventoryModel.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">assignment2</a> &gt; <a href="index.source.html" class="el_package">assignment2.model</a> &gt; <span class="el_source">InventoryModel.java</span></div><h1>InventoryModel.java</h1><pre class="source lang-java linenums">package assignment2.model;
+
+import java.util.*;
+
+public class InventoryModel {
+
+    private List&lt;Product&gt; inventory;
+    private List&lt;String&gt; categories;
+    private String filename;
+    
+<span class="fc" id="L11">    public InventoryModel(String filename){</span>
+<span class="fc" id="L12">        this.filename = filename;</span>
+<span class="fc" id="L13">        this.inventory = JsonParser.getInventory(filename);</span>
+<span class="fc" id="L14">        this.categories = new ArrayList&lt;String&gt;();</span>
+
+<span class="fc bfc" id="L16" title="All 2 branches covered.">        for (Product product : inventory){</span>
+<span class="fc bfc" id="L17" title="All 2 branches covered.">            if (!categories.contains(product.getCategory())){</span>
+<span class="fc" id="L18">                categories.add(product.getCategory());</span>
+            }
+<span class="fc" id="L20">        }</span>
+<span class="fc" id="L21">     }</span>
+
+    public List&lt;Product&gt; getInventory(){
+<span class="fc" id="L24">        return inventory;</span>
+    }
+
+    public void updateInventory(){   /////////// after purchase/changes
+
+        // write back to inventory
+<span class="fc" id="L30">        JsonParser jparser = new JsonParser();</span>
+<span class="fc" id="L31">        jparser.updateInventory(inventory, &quot;src/main/resources/Inventory.json&quot; );</span>
+
+<span class="fc" id="L33">    }</span>
+
+    public List&lt;String&gt; getCategories(){
+<span class="fc" id="L36">        return categories;</span>
+    }
+
+    public void updateQuantity(Product product, int numBought){
+<span class="nc" id="L40">       product.setQuantity(product.getQuantity() - numBought);</span>
+
+<span class="nc" id="L42">    }</span>
+
+    public void putBack(Map&lt;Product, Integer&gt; cart){
+
+<span class="pc bpc" id="L46" title="1 of 2 branches missed.">        for (Product p : cart.keySet()){</span>
+<span class="nc" id="L47">            p.setQuantity(p.getQuantity() + cart.get(p));</span>
+<span class="nc" id="L48">        }</span>
+
+<span class="fc" id="L50">        updateInventory();</span>
+
+<span class="fc" id="L52">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

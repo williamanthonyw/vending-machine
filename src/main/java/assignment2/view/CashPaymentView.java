@@ -169,6 +169,11 @@ public class CashPaymentView implements View{
 
     }
 
+    @Override
+    public void refresh(){
+
+    }
+
     public void calculateCashUserInserted(){
 
         total = 0;

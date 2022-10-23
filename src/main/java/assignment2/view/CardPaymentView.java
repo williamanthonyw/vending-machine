@@ -45,6 +45,10 @@ public class CardPaymentView implements View {
 
     public void setUpCancelBTN(Button cancelBTN) {
         mainBox.getChildren().add(cancelBTN);
+    }
+
+    @Override
+    public void refresh(){
 
     }
 

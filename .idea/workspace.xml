@@ -5,55 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5356118e-f346-44f2-8753-e28fee851481" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/main/assignment2/App.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/main/assignment2/model/CardPaymentModel.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/main/assignment2/model/CardUser.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/main/assignment2/model/Cash.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/main/assignment2/model/InsufficientChangeException.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/main/assignment2/model/JsonParser$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/main/assignment2/model/JsonParser$2.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/main/assignment2/model/JsonParser$3.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/main/assignment2/model/JsonParser$4.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/main/assignment2/model/LastFiveProductsModel.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/main/assignment2/model/LoginModel.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/main/assignment2/model/PaymentNotEnoughException.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/main/assignment2/model/Product.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/main/assignment2/model/ProductOptionsModel.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/main/assignment2/model/ProductToDisplay.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/main/assignment2/model/Purchase.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/main/assignment2/model/User.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/main/assignment2/view/CardPaymentView.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/main/assignment2/view/CashPaymentView.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/main/assignment2/view/LastFiveProductsView.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/main/assignment2/view/LoginView.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/main/assignment2/view/PasswordSkin.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/main/credit_cards.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/test/assignment2/MainModelTest.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/test/assignment2/ProductOptionsModelTest.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/test/assignment2/ProductToDisplayTest.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/classes/java/main/assignment2/model/CardPaymentModel.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/reports/jacoco/test/html/assignment2.model/CardPaymentModel.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/reports/jacoco/test/html/assignment2.model/CardPaymentModel.java.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/reports/jacoco/test/html/assignment2.model/CardUser.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/reports/jacoco/test/html/assignment2.model/CardUser.java.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/reports/jacoco/test/html/assignment2.model/JsonParser$4.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/reports/tests/test/classes/assignment2.CardPaymentTest.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/reports/tests/test/classes/assignment2.LoginTest.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/test-results/test/TEST-assignment2.CardPaymentTest.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/test-results/test/TEST-assignment2.LoginTest.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/assignment2/model/CardPaymentModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/assignment2/model/CardUser.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/assignment2/view/PasswordSkin.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/InventoryTest1.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/credit_cards.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/assignment2/CardPaymentTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/assignment2/LoginTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/assignment2/MainModelTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/assignment2/ProductOptionsModelTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/assignment2/ProductToDisplayTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/7.4.2/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4.2/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/7.4.2/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4.2/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/assignment2/model/UpdateProductState.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/assignment2/view/AddProductView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/assignment2/view/ProductView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/assignment2/view/SellerInventoryView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/assignment2/view/UpdateProductView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.5.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.5.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.5.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.5.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.5.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.5.1/fileHashes/fileHashes.lock" afterDir="false" />
@@ -61,155 +17,29 @@
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/main/InitialCash.json" beforeDir="false" afterPath="$PROJECT_DIR$/bin/main/InitialCash.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/main/Style.css" beforeDir="false" afterPath="$PROJECT_DIR$/bin/main/Style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/main/assignment2/model/CashPaymentModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/main/assignment2/model/CashPaymentModel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/main/assignment2/model/JsonParser.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/main/assignment2/model/JsonParser.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/main/assignment2/model/MainModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/main/assignment2/model/MainModel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/main/assignment2/view/MainView.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/main/assignment2/view/MainView.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/main/assignment2/view/ProductOptionsView$1$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/main/assignment2/view/ProductOptionsView$1$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/main/assignment2/view/ProductOptionsView$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/main/assignment2/view/ProductOptionsView$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/main/assignment2/view/ProductOptionsView$2$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/main/assignment2/view/ProductOptionsView$2$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/main/assignment2/view/ProductOptionsView$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/main/assignment2/view/ProductOptionsView$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/main/assignment2/view/ProductOptionsView$3$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/main/assignment2/view/ProductOptionsView$3$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/main/assignment2/view/ProductOptionsView$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/main/assignment2/view/ProductOptionsView$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/main/assignment2/view/ProductOptionsView$4$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/main/assignment2/view/ProductOptionsView$4$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/main/assignment2/view/ProductOptionsView$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/main/assignment2/view/ProductOptionsView$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/main/assignment2/view/ProductOptionsView.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/main/assignment2/view/ProductOptionsView.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/main/users.json" beforeDir="false" afterPath="$PROJECT_DIR$/bin/main/users.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/assignment2/App.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/assignment2/model/Cash.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/assignment2/model/CashPaymentModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/assignment2/model/CashPaymentModel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/assignment2/model/InsufficientChangeException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/assignment2/model/JsonParser$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/assignment2/model/JsonParser$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/assignment2/model/JsonParser$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/assignment2/model/JsonParser.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/assignment2/model/JsonParser.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/assignment2/model/LastFiveProductsModel.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/assignment2/model/LoginModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/assignment2/model/LoginModel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/assignment2/model/MainModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/assignment2/model/MainModel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/assignment2/model/PaymentNotEnoughException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/assignment2/model/Product.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/assignment2/model/Product.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/assignment2/model/Purchase.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/assignment2/model/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/assignment2/model/User.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/assignment2/view/CardPaymentView.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/assignment2/view/CardPaymentView.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/assignment2/view/CashPaymentView.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/assignment2/view/CashPaymentView.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/assignment2/view/LastFiveProductsView.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/assignment2/view/LoginView.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/assignment2/view/LoginView.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/assignment2/view/MainView.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/assignment2/view/MainView.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/assignment2/view/View.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/main/assignment2/view/View.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/test/assignment2/CashPaymentTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/test/assignment2/JsonParserTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/test/assignment2/LastFiveProductsModelTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/test/assignment2/LastFiveProductsModelTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/jacoco/test.exec" beforeDir="false" afterPath="$PROJECT_DIR$/build/jacoco/test.exec" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/jacoco/test/html/assignment2.model/Cash.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/jacoco/test/html/assignment2.model/Cash.java.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/jacoco/test/html/assignment2.model/CashPaymentModel.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/jacoco/test/html/assignment2.model/CashPaymentModel.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/jacoco/test/html/assignment2.model/CashPaymentModel.java.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/jacoco/test/html/assignment2.model/CashPaymentModel.java.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/jacoco/test/html/assignment2.model/InsufficientChangeException.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/jacoco/test/html/assignment2.model/InsufficientChangeException.java.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/jacoco/test/html/assignment2.model/JsonParser$1.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/jacoco/test/html/assignment2.model/JsonParser$1.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/jacoco/test/html/assignment2.model/JsonParser$2.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/jacoco/test/html/assignment2.model/JsonParser$2.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/jacoco/test/html/assignment2.model/JsonParser$3.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/jacoco/test/html/assignment2.model/JsonParser$3.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/jacoco/test/html/assignment2.model/JsonParser.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/jacoco/test/html/assignment2.model/JsonParser.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/jacoco/test/html/assignment2.model/JsonParser.java.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/jacoco/test/html/assignment2.model/JsonParser.java.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/jacoco/test/html/assignment2.model/LastFiveProductsModel.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/jacoco/test/html/assignment2.model/LastFiveProductsModel.java.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/jacoco/test/html/assignment2.model/LoginModel.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/jacoco/test/html/assignment2.model/LoginModel.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/jacoco/test/html/assignment2.model/LoginModel.java.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/jacoco/test/html/assignment2.model/LoginModel.java.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/jacoco/test/html/assignment2.model/MainModel.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/jacoco/test/html/assignment2.model/MainModel.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/jacoco/test/html/assignment2.model/MainModel.java.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/jacoco/test/html/assignment2.model/MainModel.java.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/jacoco/test/html/assignment2.model/PaymentNotEnoughException.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/jacoco/test/html/assignment2.model/PaymentNotEnoughException.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/jacoco/test/html/assignment2.model/PaymentNotEnoughException.java.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/jacoco/test/html/assignment2.model/PaymentNotEnoughException.java.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/jacoco/test/html/assignment2.model/Product.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/jacoco/test/html/assignment2.model/Product.java.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/jacoco/test/html/assignment2.model/ProductOptionsModel.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/jacoco/test/html/assignment2.model/ProductOptionsModel.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/jacoco/test/html/assignment2.model/ProductOptionsModel.java.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/jacoco/test/html/assignment2.model/ProductOptionsModel.java.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/jacoco/test/html/assignment2.model/ProductToDisplay.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/jacoco/test/html/assignment2.model/ProductToDisplay.java.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/jacoco/test/html/assignment2.model/Purchase.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/jacoco/test/html/assignment2.model/Purchase.java.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/jacoco/test/html/assignment2.model/User.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/jacoco/test/html/assignment2.model/User.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/jacoco/test/html/assignment2.model/User.java.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/jacoco/test/html/assignment2.model/User.java.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/jacoco/test/html/assignment2.model/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/jacoco/test/html/assignment2.model/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/jacoco/test/html/assignment2.model/index.source.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/jacoco/test/html/assignment2.model/index.source.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/jacoco/test/html/assignment2/App.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/jacoco/test/html/assignment2/App.java.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/jacoco/test/html/assignment2/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/jacoco/test/html/assignment2/index.source.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/jacoco/test/html/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/jacoco/test/html/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/jacoco/test/html/jacoco-resources/branchfc.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/jacoco/test/html/jacoco-resources/branchnc.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/jacoco/test/html/jacoco-resources/branchpc.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/jacoco/test/html/jacoco-resources/bundle.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/jacoco/test/html/jacoco-resources/class.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/jacoco/test/html/jacoco-resources/down.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/jacoco/test/html/jacoco-resources/greenbar.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/jacoco/test/html/jacoco-resources/group.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/jacoco/test/html/jacoco-resources/method.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/jacoco/test/html/jacoco-resources/package.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/jacoco/test/html/jacoco-resources/prettify.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/jacoco/test/html/jacoco-resources/prettify.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/jacoco/test/html/jacoco-resources/redbar.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/jacoco/test/html/jacoco-resources/report.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/jacoco/test/html/jacoco-resources/report.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/jacoco/test/html/jacoco-resources/session.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/jacoco/test/html/jacoco-resources/sort.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/jacoco/test/html/jacoco-resources/sort.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/jacoco/test/html/jacoco-resources/source.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/jacoco/test/html/jacoco-resources/up.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/jacoco/test/html/jacoco-sessions.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/jacoco/test/html/jacoco-sessions.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/classes/assignment2.CashPaymentTest.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/tests/test/classes/assignment2.CashPaymentTest.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/classes/assignment2.JsonParserTest.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/tests/test/classes/assignment2.JsonParserTest.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/classes/assignment2.LastFiveProductsModelTest.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/tests/test/classes/assignment2.LastFiveProductsModelTest.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/css/base-style.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/css/style.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/tests/test/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/js/report.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/packages/assignment2.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/tests/test/packages/assignment2.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/Comfortaa-Bold.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/Comfortaa-VariableFont_wght.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/InitialCash.json" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/InitialCash.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/Inventory.json" beforeDir="false" afterPath="$PROJECT_DIR$/bin/main/InventoryTest1.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/Style.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/cash.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/richcash.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/test1cash.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/test2cash.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/test3cash.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/test4json.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/test5cash.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/test6cash.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/testnotenough.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/users.json" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/users.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/white-menu.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/test/empty_users.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/test/test_users.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/test/test_users2.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/test-results/test/TEST-assignment2.CashPaymentTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build/test-results/test/TEST-assignment2.CashPaymentTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/test-results/test/TEST-assignment2.JsonParserTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build/test-results/test/TEST-assignment2.JsonParserTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/test-results/test/TEST-assignment2.LastFiveProductsModelTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build/test-results/test/TEST-assignment2.LastFiveProductsModelTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/test-results/test/binary/output.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/test-results/test/binary/output.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/test-results/test/binary/output.bin.idx" beforeDir="false" afterPath="$PROJECT_DIR$/build/test-results/test/binary/output.bin.idx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/test-results/test/binary/results.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/test-results/test/binary/results.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileTestJava/previous-compilation-data.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/expandedArchives/org.jacoco.agent-0.8.8.jar_a33b649e552c51298e5a242c2f0d0e3c/org/jacoco/agent/AgentJar.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/assignment2/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/assignment2/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/assignment2/model/Cash.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/assignment2/model/Cash.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/assignment2/model/CashPaymentModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/assignment2/model/CashPaymentModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/assignment2/model/JsonParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/assignment2/model/JsonParser.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/assignment2/model/MainModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/assignment2/model/MainModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/assignment2/model/ProductOptionsModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/assignment2/model/ProductOptionsModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/assignment2/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/assignment2/model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/assignment2/model/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/assignment2/model/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/assignment2/model/ProductOptionsModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/assignment2/model/InventoryModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/assignment2/view/CardPaymentView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/assignment2/view/CardPaymentView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/assignment2/view/CashPaymentView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/assignment2/view/CashPaymentView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/assignment2/view/LastFiveProductsView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/assignment2/view/LastFiveProductsView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/assignment2/view/LoginView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/assignment2/view/LoginView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/assignment2/view/MainView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/assignment2/view/MainView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/assignment2/view/ProductOptionsView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/assignment2/view/ProductOptionsView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/assignment2/view/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/assignment2/view/View.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/InitialCash.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/InitialCash.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/Inventory.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Inventory.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/Style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/test1cash.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/test1cash.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/test2cash.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/test2cash.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/test3cash.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/test3cash.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/test5cash.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/test5cash.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/test6cash.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/test6cash.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/users.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/users.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/assignment2/MainModelTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/assignment2/MainModelTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/assignment2/ProductOptionsModelTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/assignment2/InventoryModelTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -236,6 +66,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>
@@ -259,7 +90,14 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -312,6 +150,10 @@
       <workItem from="1666079729874" duration="2998000" />
       <workItem from="1666093076115" duration="100000" />
       <workItem from="1666285411198" duration="2169000" />
+      <workItem from="1666490443416" duration="102000" />
+      <workItem from="1666490774040" duration="8404000" />
+      <workItem from="1666500274163" duration="1137000" />
+      <workItem from="1666513242735" duration="3573000" />
     </task>
     <servers />
   </component>
