@@ -42,7 +42,6 @@ public class ProductOptionsView implements View{
     private TableView<Product> chipsTable;
     private TableView<Product> candiesTable;
     private Button checkoutBTN;
-    private Button selectCategoryBTN;
     private Button cartBTN;
     ComboBox<String> selectCategory;
     ComboBox<Integer> selectQuantity;
@@ -89,7 +88,7 @@ public class ProductOptionsView implements View{
         buttonBox.getChildren().add(cartBTN);
 
 
-        checkoutBTN = new Button("CHECKOUT");
+        checkoutBTN = new Button("Checkout");
         checkoutBTN.setMaxHeight(10);
         buttonBox.getChildren().add(checkoutBTN);
         checkoutBTN.setOnAction((e) -> {
@@ -102,10 +101,8 @@ public class ProductOptionsView implements View{
         selectCategory.getItems().addAll(productOptionsModel.getCategories("src/main/resources/Inventory.json"));
         selectCategory.setValue("drinks");  // drinks by default
 
-        selectCategoryBTN = new Button("View Products");
-
         HBox categorySelectionBox = new HBox(5);
-        categorySelectionBox.getChildren().addAll(selectCategoryLBL, selectCategory, selectCategoryBTN);
+        categorySelectionBox.getChildren().addAll(selectCategoryLBL, selectCategory);
         mainBox.getChildren().add(categorySelectionBox);
 
         productOptionsBox = new VBox(10);
@@ -114,7 +111,7 @@ public class ProductOptionsView implements View{
 
         setUpDrinksTable();  //show drinks table as default
 
-        setUpSelectCategoryBTN();
+        setUpSelectCategory();
 
         this.popupBorderPane = new BorderPane();
         popupScene = new Scene(popupBorderPane, 500, 300);
@@ -388,8 +385,8 @@ public class ProductOptionsView implements View{
         }
     }
 
-    public void setUpSelectCategoryBTN(){
-        selectCategoryBTN.setOnAction((e) -> {
+    public void setUpSelectCategory(){
+        selectCategory.setOnAction((e) -> {
             String selectedCategory = selectCategory.getValue();
 
             productOptionsBox.getChildren().clear();  //clear existing table
