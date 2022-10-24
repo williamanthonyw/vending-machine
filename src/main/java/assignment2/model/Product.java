@@ -11,6 +11,10 @@ public class Product {
     private int quantity;
 
 
+    public Product(){
+
+    }
+
     public Product(String name, double price) {
         this.name = name;
         this.price = price;

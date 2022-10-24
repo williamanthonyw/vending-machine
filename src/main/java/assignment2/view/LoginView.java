@@ -104,7 +104,7 @@ public class LoginView implements View{
 
             if (mainModel.login(userNameTF.getText(),passwordTF.getText())){
                 //View update?
-                mainView.goToLastFiveProductsView();
+                mainView.goToProductOptionsView();
             } else {
 
                 signInErrorLBL.setText("Incorrect username or password");
@@ -142,7 +142,7 @@ public class LoginView implements View{
 
                 mainModel.login(newUserNameTF.getText(),newPasswordTF.getText());
 
-                mainView.goToLastFiveProductsView();
+                mainView.goToProductOptionsView();
             }else{
                 registerErrorLBL.setText("Account with username already exists!");
             }
@@ -152,6 +152,11 @@ public class LoginView implements View{
     @Override
     public void setUpCancelBTN(Button cancelBTN){
 //        mainBox.getChildren().add(cancelBTN);
+    }
+
+    @Override
+    public void refresh(){
+
     }
 
 }

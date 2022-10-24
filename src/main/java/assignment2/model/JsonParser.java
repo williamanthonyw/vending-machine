@@ -54,14 +54,18 @@ public class JsonParser {
 
     }
     ///////////////////
-    public List<Product> getProductsToDisplay(String filename){
+    public static List<Product> getInventory(String filename){
         try {
             Reader reader = new BufferedReader(new FileReader(filename));
 
-            // Convert json file to a list of products to display
-            List<Product> productsToDisplay = gson.fromJson(reader, new TypeToken<List<Product>>() {}.getType());
+            // Convert json file to a list of products
+            List<Product> inventory = gson.fromJson(reader, new TypeToken<List<Product>>() {}.getType());
 
-            return productsToDisplay;
+            if (inventory == null){
+                return new ArrayList<Product>();
+            }
+
+            return inventory;
 
         } catch (IOException e) {
             return new ArrayList<Product>();
@@ -76,6 +80,10 @@ public class JsonParser {
 
             List<Cash> cashList = gson.fromJson(reader, new TypeToken<List<Cash>>() {}.getType());
             // System.out.println("hello");
+
+            if (cashList == null){
+                return new ArrayList<Cash>();
+            }
 
             return cashList;
         }
@@ -97,7 +105,7 @@ public class JsonParser {
         }
     }
 
-    public void updateInventory(List<Product> productList, String filename){
+    public static void updateInventory(List<Product> productList, String filename){
 
         try(FileWriter file = new FileWriter(filename)){
 
