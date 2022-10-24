@@ -5,41 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5356118e-f346-44f2-8753-e28fee851481" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/assignment2/model/UpdateProductState.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/assignment2/view/AddProductView.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/assignment2/view/ProductView.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/assignment2/view/SellerInventoryView.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/assignment2/view/UpdateProductView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.5.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.5.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.5.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.5.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.5.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.5.1/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.5.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.5.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/assignment2/model/JsonParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/assignment2/model/JsonParser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/assignment2/model/MainModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/assignment2/model/MainModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/assignment2/model/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/assignment2/model/Product.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/assignment2/model/ProductOptionsModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/assignment2/model/InventoryModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/assignment2/view/CardPaymentView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/assignment2/view/CardPaymentView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/assignment2/view/CashPaymentView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/assignment2/view/CashPaymentView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/assignment2/view/LastFiveProductsView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/assignment2/view/LastFiveProductsView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/assignment2/view/LoginView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/assignment2/view/LoginView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/assignment2/view/MainView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/assignment2/view/MainView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/assignment2/view/ProductOptionsView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/assignment2/view/ProductOptionsView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/assignment2/view/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/assignment2/view/View.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/InitialCash.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/InitialCash.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/assignment2/model/InventoryModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/assignment2/model/InventoryModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/Inventory.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Inventory.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/test1cash.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/test1cash.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/test2cash.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/test2cash.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/test3cash.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/test3cash.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/test5cash.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/test5cash.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/test6cash.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/test6cash.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/users.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/users.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/assignment2/MainModelTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/assignment2/MainModelTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/assignment2/ProductOptionsModelTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/assignment2/InventoryModelTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -154,6 +128,7 @@
       <workItem from="1666490774040" duration="8404000" />
       <workItem from="1666500274163" duration="1137000" />
       <workItem from="1666513242735" duration="3573000" />
+      <workItem from="1666530212172" duration="644000" />
     </task>
     <servers />
   </component>

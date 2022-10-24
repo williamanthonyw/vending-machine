@@ -96,8 +96,6 @@ public class InventoryModel {
 
         if (result == UpdateProductState.SUCCESS){
             inventory.add(product);
-            productNamesByCategory.get(category).add(name);
-            allProductNames.add(name);
 
             updateInventory();
         }
@@ -182,8 +180,6 @@ public class InventoryModel {
 
     public void deleteProduct(Product product) {
         inventory.remove(product);
-        productNamesByCategory.get(product.getCategory()).remove(product.getName());
-        allProductNames.remove(product.getName());
 
         updateInventory();
     }
