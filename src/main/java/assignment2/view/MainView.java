@@ -1,6 +1,7 @@
 package assignment2.view;
 
 import assignment2.model.MainModel;
+import assignment2.model.Product;
 import javafx.animation.PauseTransition;
 import javafx.animation.Transition;
 import javafx.application.Platform;
@@ -45,10 +46,15 @@ public class MainView {
 
     public void setUp(Stage stage){
         this.stage = stage;
-        goToLastFiveProductsView();
+        goToSellerInventoryView();
+//        goToLastFiveProductsView();
         // goToProductOptionsView();    ///////////
 
         stage.show();
+    }
+
+    private void goToSellerInventoryView() {
+        goToView(new SellerInventoryView(this.mainModel, this));
     }
 
     public void goToView(View view){
@@ -64,12 +70,16 @@ public class MainView {
                     if (evt.getEventType().getName().equals("MOUSE_PRESSED") ||
                             evt.getEventType().getName().equals("KEY_PRESSED")){
                         timer.playFromStart();
-                        System.out.println("Restart timer" + evt.getEventType());
                     }
             }
             );
         }
 
+    }
+
+    public void returnToView(View view){
+        stage.setScene(view.getScenes().get(0));
+        view.refresh();
     }
 
     public void goToLastFiveProductsView(){
@@ -201,6 +211,13 @@ public class MainView {
 
     }
 
+    public void goToUpdateProductView(SellerInventoryView sellerInventoryView, Product product) {
+        goToView(new UpdateProductView(mainModel, this, sellerInventoryView, product));
+    }
+
+    public void gotoAddProductView(SellerInventoryView sellerInventoryView) {
+        goToView(new AddProductView(mainModel, this, sellerInventoryView));
+    }
 }
 
 

@@ -154,4 +154,9 @@ public class LoginView implements View{
 //        mainBox.getChildren().add(cancelBTN);
     }
 
+    @Override
+    public void refresh(){
+
+    }
+
 }

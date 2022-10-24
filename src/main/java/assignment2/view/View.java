@@ -16,4 +16,6 @@ public interface View {
 
     public void setUpCancelBTN(Button cancelBTN);
 
+    public void refresh();
+
 }

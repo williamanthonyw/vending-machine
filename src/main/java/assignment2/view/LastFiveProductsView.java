@@ -128,6 +128,11 @@ public class LastFiveProductsView implements View{
     }
 
 
+    @Override
+    public void refresh(){
+
+    }
+
 
 
 
