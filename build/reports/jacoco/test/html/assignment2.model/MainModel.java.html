@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MainModel.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">assignment2</a> &gt; <a href="index.source.html" class="el_package">assignment2.model</a> &gt; <span class="el_source">MainModel.java</span></div><h1>MainModel.java</h1><pre class="source lang-java linenums">package assignment2.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.google.gson.Gson;
 
@@ -16,87 +18,135 @@ public class MainModel {
     private User user;
     private boolean isLoggedIn;
 
-<span class="fc" id="L19">    private JsonParser jsonParser = new JsonParser();</span>
+<span class="fc" id="L21">    private JsonParser jsonParser = new JsonParser();</span>
 
-<span class="fc" id="L21">    public MainModel(){</span>
-<span class="fc" id="L22">        this.lastFiveProductsModel = new LastFiveProductsModel();</span>
-<span class="fc" id="L23">        this.cardPaymentModel = new CardPaymentModel(this);</span>
+<span class="fc" id="L23">    public MainModel(){</span>
+<span class="fc" id="L24">        this.lastFiveProductsModel = new LastFiveProductsModel();</span>
+<span class="fc" id="L25">        this.cardPaymentModel = new CardPaymentModel(this);</span>
 
-<span class="fc" id="L25">        this.productOptionsModel = new ProductOptionsModel();   ////////</span>
+<span class="fc" id="L27">        this.productOptionsModel = new ProductOptionsModel();   ////////</span>
 
-<span class="fc" id="L27">        this.loginModel = new LoginModel(jsonParser.getUsers(&quot;src/test/resources/test_users.json&quot;));//&quot;src/main/resources/users.json&quot;));</span>
+<span class="fc" id="L29">        this.loginModel = new LoginModel(jsonParser.getUsers(&quot;src/main/resources/users.json&quot;));</span>
 
-<span class="fc" id="L29">        this.user = loginModel.getAnonymousUser();</span>
-<span class="fc" id="L30">        this.isLoggedIn = false;</span>
+<span class="fc" id="L31">        System.out.println(loginModel.getUsers());</span>
 
-<span class="fc" id="L32">        this.cashPaymentModel = new CashPaymentModel(&quot;src/main/resources/cash.json&quot;);</span>
+<span class="fc" id="L33">        this.user = loginModel.getAnonymousUser();</span>
+<span class="fc" id="L34">        this.user.clearCart();</span>
+<span class="fc" id="L35">        this.isLoggedIn = false;</span>
 
-<span class="fc" id="L34">        purchaseProduct(new Product(&quot;milk&quot;, 28), 2);</span>
+<span class="fc" id="L37">        this.cashPaymentModel = new CashPaymentModel(&quot;src/main/resources/InitialCash.json&quot;);</span>
+
+//        purchaseProduct(new Product(&quot;milk&quot;, 28), 2);
 
         // for now logging in
 //        this.user = loginModel.login(&quot;Kylie&quot;, &quot;password&quot;);
 //        this.isLoggedIn = true;
-<span class="fc" id="L39">    }</span>
+<span class="fc" id="L44">    }</span>
 
     public LastFiveProductsModel getLastFiveProductsModel(){
-<span class="fc" id="L42">        return this.lastFiveProductsModel;</span>
+<span class="fc" id="L47">        return this.lastFiveProductsModel;</span>
     }
 
     public LoginModel getLoginModel() {
-<span class="fc" id="L46">        return loginModel;</span>
+<span class="fc" id="L51">        return loginModel;</span>
     }
+
+<span class="fc" id="L54">    public CardPaymentModel getCardPaymentModel(){return cardPaymentModel;}</span>
 
     public CashPaymentModel getCashPaymentModel(){
-<span class="fc" id="L50">        return this.cashPaymentModel;</span>
+<span class="fc" id="L57">        return this.cashPaymentModel;</span>
     }
-
-<span class="fc" id="L53">    public CardPaymentModel getCardPaymentModel(){return cardPaymentModel;}</span>
-
     public boolean isLoggedIn(){
-<span class="fc" id="L56">        return isLoggedIn;</span>
+<span class="fc" id="L60">        return isLoggedIn;</span>
     }
 
     public void setIsLoggedIn(boolean logged){
-<span class="fc" id="L60">        this.isLoggedIn = logged;</span>
-<span class="fc" id="L61">    }</span>
+<span class="fc" id="L64">        this.isLoggedIn = logged;</span>
+<span class="fc" id="L65">    }</span>
 
     public User getUser(){
-<span class="fc" id="L64">        return this.user;</span>
+<span class="fc" id="L68">        return this.user;</span>
     }
 
     public void logout(){
-<span class="fc" id="L68">        this.user = loginModel.getAnonymousUser();</span>
-<span class="fc" id="L69">        this.isLoggedIn = false;</span>
-<span class="fc" id="L70">    }</span>
+<span class="fc" id="L72">        this.user = loginModel.getAnonymousUser();</span>
+<span class="fc" id="L73">        this.user.clearCart();</span>
+<span class="fc" id="L74">        this.isLoggedIn = false;</span>
+<span class="fc" id="L75">    }</span>
+
+    public Map&lt;Product, Integer&gt; getCart(){
+<span class="nc" id="L78">        return user.getCart();</span>
+    }
 
     public void cancelTransaction(){
 
         // clear cart (look at Katie's stuff)
+<span class="fc" id="L84">        productOptionsModel.putBack(user.getCart());</span>
+<span class="fc" id="L85">        user.clearCart();</span>
+
 
         // log user out
-<span class="fc" id="L77">        logout();</span>
+<span class="fc" id="L89">        logout();</span>
 
-<span class="fc" id="L79">    }</span>
+<span class="fc" id="L91">    }</span>
 
-    public void purchaseProduct(Product product, int quantity){
+    public boolean login(String username, String password){
 
-        // handle payment stuff
+<span class="nc" id="L95">        User attempt = loginModel.login(username, password);</span>
 
-        // adds it to user's list of purchases
-<span class="fc" id="L86">        user.purchaseProduct(product, quantity);</span>
+<span class="nc bnc" id="L97" title="All 2 branches missed.">        if (attempt == null){</span>
+<span class="nc" id="L98">            return false;</span>
+        } else {
+<span class="nc" id="L100">            this.user = attempt;</span>
+<span class="nc" id="L101">            this.isLoggedIn = true;</span>
+<span class="nc" id="L102">            return true;</span>
+        }
 
-        // update users file
-<span class="fc" id="L89">        jsonParser.updateUsers(loginModel.getUsers(), &quot;src/main/resources/users.json&quot;);</span>
-
-        // need to update inventory file as well   //////////TODO
-
-
-
-<span class="fc" id="L95">    }</span>
-
-    public ProductOptionsModel getProductOptionsModel(){
-<span class="fc" id="L98">        return this.productOptionsModel;</span>
+        // need to update inventory file as well
     }
 
+    public void addToCart(Product product, int quantity){
+<span class="nc" id="L109">        user.addToCart(product, quantity);</span>
+
+        // update quantity in inventory
+<span class="nc" id="L112">        productOptionsModel.updateQuantity(product, quantity);</span>
+
+<span class="nc" id="L114">        System.out.println(user.getCart());</span>
+<span class="nc" id="L115">    }</span>
+
+
+    public void checkout(){
+
+        // adds it to user's list of purchases
+<span class="nc bnc" id="L121" title="All 2 branches missed.">        for (Product product : user.getCart().keySet()){</span>
+<span class="nc" id="L122">            user.purchaseProduct(product, user.getCart().get(product));</span>
+<span class="nc" id="L123">        }</span>
+
+<span class="nc" id="L125">        user.clearCart();</span>
+
+        // update users file
+<span class="nc" id="L128">        jsonParser.updateUsers(loginModel.getUsers(), &quot;src/main/resources/users.json&quot;);</span>
+
+        // update inventory file
+<span class="nc" id="L131">        productOptionsModel.updateInventory();</span>
+
+<span class="nc" id="L133">        logout();</span>
+
+<span class="nc" id="L135">    }</span>
+
+    public ProductOptionsModel getProductOptionsModel(){
+<span class="fc" id="L138">        return this.productOptionsModel;</span>
+    }
+
+    public double getCartPrice() {
+
+<span class="nc" id="L143">        double sum = 0;</span>
+
+<span class="nc bnc" id="L145" title="All 2 branches missed.">        for (Product p : user.getCart().keySet()){</span>
+<span class="nc" id="L146">            sum += p.getPrice() * user.getCart().get(p); // price * quantity</span>
+<span class="nc" id="L147">        }</span>
+
+<span class="nc" id="L149">        return sum;</span>
+    }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

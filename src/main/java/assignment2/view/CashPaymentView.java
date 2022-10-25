@@ -169,6 +169,11 @@ public class CashPaymentView implements View{
 
     }
 
+    @Override
+    public void refresh(){
+
+    }
+
     public void calculateCashUserInserted(){
 
         total = 0;
@@ -285,7 +290,7 @@ public class CashPaymentView implements View{
             changePopup.showAndWait();
 
             mainModel.checkout();
-            mainView.goToLastFiveProductsView();
+            mainView.goToProductOptionsView();
         }
 
         //change in vending machine is not enough
