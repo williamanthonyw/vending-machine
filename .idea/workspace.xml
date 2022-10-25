@@ -5,6 +5,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5356118e-f346-44f2-8753-e28fee851481" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gradle/7.5.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.5.1/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.5.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.5.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.5.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.5.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.5.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.5.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/jacoco/test.exec" beforeDir="false" afterPath="$PROJECT_DIR$/build/jacoco/test.exec" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/reports/jacoco/test/html/jacoco-sessions.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/jacoco/test/html/jacoco-sessions.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/classes/assignment2.CardPaymentTest.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/tests/test/classes/assignment2.CardPaymentTest.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/classes/assignment2.CashPaymentTest.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/tests/test/classes/assignment2.CashPaymentTest.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/classes/assignment2.JsonParserTest.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/tests/test/classes/assignment2.JsonParserTest.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/classes/assignment2.LastFiveProductsModelTest.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/tests/test/classes/assignment2.LastFiveProductsModelTest.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/classes/assignment2.LoginTest.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/tests/test/classes/assignment2.LoginTest.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/classes/assignment2.MainModelTest.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/tests/test/classes/assignment2.MainModelTest.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/classes/assignment2.ProductOptionsModelTest.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/tests/test/classes/assignment2.ProductOptionsModelTest.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/tests/test/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/packages/assignment2.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/tests/test/packages/assignment2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/Inventory.json" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/Inventory.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/test-results/test/TEST-assignment2.CardPaymentTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build/test-results/test/TEST-assignment2.CardPaymentTest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/test-results/test/TEST-assignment2.CashPaymentTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build/test-results/test/TEST-assignment2.CashPaymentTest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/test-results/test/TEST-assignment2.JsonParserTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build/test-results/test/TEST-assignment2.JsonParserTest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/test-results/test/TEST-assignment2.LastFiveProductsModelTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build/test-results/test/TEST-assignment2.LastFiveProductsModelTest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/test-results/test/TEST-assignment2.LoginTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build/test-results/test/TEST-assignment2.LoginTest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/test-results/test/TEST-assignment2.MainModelTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build/test-results/test/TEST-assignment2.MainModelTest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/test-results/test/TEST-assignment2.ProductOptionsModelTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build/test-results/test/TEST-assignment2.ProductOptionsModelTest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/test-results/test/binary/results.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/test-results/test/binary/results.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/Inventory.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Inventory.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -54,17 +80,17 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/resources" />
@@ -116,7 +142,10 @@
       <workItem from="1666079729874" duration="2998000" />
       <workItem from="1666093076115" duration="100000" />
       <workItem from="1666285411198" duration="2169000" />
-      <workItem from="1666348412320" duration="4906000" />
+      <workItem from="1666348412320" duration="5048000" />
+      <workItem from="1666356807446" duration="1233000" />
+      <workItem from="1666442405386" duration="835000" />
+      <workItem from="1666578287852" duration="18000" />
     </task>
     <servers />
   </component>

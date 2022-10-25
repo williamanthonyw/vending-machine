@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="assignment2.MainModelTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2022-10-21T12:28:14" hostname="Chius-MacBook-Pro.local" time="0.035">
+<testsuite name="assignment2.MainModelTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2022-10-21T12:32:30" hostname="Chius-MacBook-Pro.local" time="0.053">
   <properties/>
-  <testcase name="getLoginModelTest()" classname="assignment2.MainModelTest" time="0.005"/>
-  <testcase name="getCardPaymentModelTest()" classname="assignment2.MainModelTest" time="0.003"/>
-  <testcase name="getCashPaymentModelTest()" classname="assignment2.MainModelTest" time="0.005"/>
+  <testcase name="getLoginModelTest()" classname="assignment2.MainModelTest" time="0.018"/>
+  <testcase name="getCardPaymentModelTest()" classname="assignment2.MainModelTest" time="0.006"/>
+  <testcase name="getCashPaymentModelTest()" classname="assignment2.MainModelTest" time="0.007"/>
   <testcase name="getProductOptionsModelTest()" classname="assignment2.MainModelTest" time="0.003"/>
-  <testcase name="cancelTransactionTest()" classname="assignment2.MainModelTest" time="0.003"/>
-  <testcase name="loginStatusCorrectTest()" classname="assignment2.MainModelTest" time="0.007"/>
+  <testcase name="cancelTransactionTest()" classname="assignment2.MainModelTest" time="0.004"/>
+  <testcase name="loginStatusCorrectTest()" classname="assignment2.MainModelTest" time="0.003"/>
   <testcase name="getLastFiveProductsModelTest()" classname="assignment2.MainModelTest" time="0.002"/>
-  <testcase name="setIsLoggedInTest()" classname="assignment2.MainModelTest" time="0.002"/>
+  <testcase name="setIsLoggedInTest()" classname="assignment2.MainModelTest" time="0.003"/>
   <system-out><![CDATA[[assignment2.model.User@488b50ec, assignment2.model.User@18a645fd, assignment2.model.User@6090f3ca, assignment2.model.User@37a64f9d, assignment2.model.User@25b865b5]
 [assignment2.model.Cash@f9b5552, assignment2.model.Cash@6872f9c8, assignment2.model.Cash@6d2d99fc, assignment2.model.Cash@bdecc21, assignment2.model.Cash@5e3a39cd, assignment2.model.Cash@21f9277b, assignment2.model.Cash@201aa8c1, assignment2.model.Cash@5d58c727, assignment2.model.Cash@52a36910, assignment2.model.Cash@3a095ec0, assignment2.model.Cash@4f20a5e0]
 [assignment2.model.User@54da32dc, assignment2.model.User@1d782abe, assignment2.model.User@6df7988f, assignment2.model.User@27b22f74, assignment2.model.User@22fba58c]

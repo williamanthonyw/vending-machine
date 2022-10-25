@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="assignment2.CardPaymentTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-10-21T12:28:13" hostname="Chius-MacBook-Pro.local" time="0.197">
+<testsuite name="assignment2.CardPaymentTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-10-21T12:32:30" hostname="Chius-MacBook-Pro.local" time="0.18">
   <properties/>
-  <testcase name="paymentProcessTest()" classname="assignment2.CardPaymentTest" time="0.197"/>
+  <testcase name="paymentProcessTest()" classname="assignment2.CardPaymentTest" time="0.18"/>
   <system-out><![CDATA[[assignment2.model.User@2375b321, assignment2.model.User@5baaae4c, assignment2.model.User@5b6e8f77, assignment2.model.User@41a6d121, assignment2.model.User@4f449e8f]
 [assignment2.model.Cash@27e32fe4, assignment2.model.Cash@c3c4c1c, assignment2.model.Cash@17d238b1, assignment2.model.Cash@3d7cc3cb, assignment2.model.Cash@35e478f, assignment2.model.Cash@6d6cb754, assignment2.model.Cash@6b7d1df8, assignment2.model.Cash@3044e9c7, assignment2.model.Cash@41d7b27f, assignment2.model.Cash@49096b06, assignment2.model.Cash@4a183d02]
 payment success
