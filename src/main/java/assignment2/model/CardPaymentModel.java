@@ -9,7 +9,7 @@ public class CardPaymentModel {
     }
 
 
-    public boolean paymentProcess(String name, String number){
+    public boolean paymentProcess(String name, String number,boolean saveDetail){
         cardUserList = jsonParser.getCardDetail("src/main/resources/credit_cards.json");
 
 //        //can't get CardNumber using gson
@@ -19,8 +19,10 @@ public class CardPaymentModel {
 
         for(CardUser user: cardUserList){
             if(user.getName().equals(name) && user.getCardNumber().equals(number)){
-                mainModel.getUser().setCardUser(user);
-                System.out.println("payment success");
+                if(saveDetail){
+                    mainModel.getUser().setCardUser(user);
+                }
+                System.out.println(mainModel.getUser().getCardUser());
                 return true;
             }
         }

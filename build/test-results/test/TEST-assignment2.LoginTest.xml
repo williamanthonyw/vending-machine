@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="assignment2.LoginTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2022-10-21T12:32:30" hostname="Chius-MacBook-Pro.local" time="0.027">
+<testsuite name="assignment2.LoginTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2022-10-25T07:40:09" hostname="Chius-MacBook-Pro.local" time="0.011">
   <properties/>
-  <testcase name="loginTest()" classname="assignment2.LoginTest" time="0.002"/>
-  <testcase name="addUserTest()" classname="assignment2.LoginTest" time="0.02"/>
-  <testcase name="getAnonymousUser()" classname="assignment2.LoginTest" time="0.002"/>
-  <testcase name="getUsersTest()" classname="assignment2.LoginTest" time="0.001"/>
+  <testcase name="loginTest()" classname="assignment2.LoginTest" time="0.001"/>
+  <testcase name="addUserTest()" classname="assignment2.LoginTest" time="0.003"/>
+  <testcase name="getAnonymousUser()" classname="assignment2.LoginTest" time="0.001"/>
+  <testcase name="getUsersTest()" classname="assignment2.LoginTest" time="0.002"/>
   <system-out><![CDATA[Allen
 Allen
 hello
