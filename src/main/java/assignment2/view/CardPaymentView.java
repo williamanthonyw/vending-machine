@@ -118,7 +118,7 @@ public class CardPaymentView implements View {
                 successAlert.showAndWait();
 
                 mainModel.checkout();
-                mainView.goToLastFiveProductsView();
+                mainView.goToProductOptionsView();
 
             } else {
 

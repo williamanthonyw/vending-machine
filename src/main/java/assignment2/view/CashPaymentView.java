@@ -290,7 +290,7 @@ public class CashPaymentView implements View{
             changePopup.showAndWait();
 
             mainModel.checkout();
-            mainView.goToLastFiveProductsView();
+            mainView.goToProductOptionsView();
         }
 
         //change in vending machine is not enough

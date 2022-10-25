@@ -82,9 +82,9 @@ public class MainView {
         view.refresh();
     }
 
-    public void goToLastFiveProductsView(){
-        goToView(new LastFiveProductsView(mainModel));
-    }
+    // public void goToLastFiveProductsView(){
+    //     goToView(new LastFiveProductsView(mainModel));
+    // }
 
     /////
     public void goToProductOptionsView(){
@@ -124,7 +124,7 @@ public class MainView {
             });
 
             // back to default page
-            goToLastFiveProductsView();
+            goToProductOptionsView();
 
             timer.playFromStart();
         });
@@ -156,7 +156,7 @@ public class MainView {
             alert.showAndWait();
 
             // back to default page
-            goToLastFiveProductsView();
+            goToProductOptionsView();
         });
 
     }
@@ -174,10 +174,10 @@ public class MainView {
             menuBTN.fire();
         });
 
-        MenuItem homeBTN = new MenuItem("Home");
-        homeBTN.setOnAction((ActionEvent e) -> {
-            goToLastFiveProductsView();
-        });
+        // MenuItem homeBTN = new MenuItem("Home");
+        // homeBTN.setOnAction((ActionEvent e) -> {
+        //     goToLastFiveProductsView();
+        // });
 
         MenuItem loginBTN = new MenuItem("Login");
         loginBTN.setOnAction((ActionEvent e) -> {
@@ -189,7 +189,7 @@ public class MainView {
         logoutBTN.setOnAction((ActionEvent e) -> {
             if (mainModel.isLoggedIn()){
                 mainModel.logout();
-                goToLastFiveProductsView();
+                goToProductOptionsView();
             } else {
 
                 Alert notLoggedin = new Alert(Alert.AlertType.ERROR);
@@ -206,7 +206,7 @@ public class MainView {
             goToProductOptionsView();
         });
 
-        menuBTN.getItems().addAll(homeBTN, loginBTN, logoutBTN, productOptionsBTN);
+        menuBTN.getItems().addAll(productOptionsBTN, loginBTN, logoutBTN);
 
 
     }
