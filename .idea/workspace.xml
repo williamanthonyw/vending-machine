@@ -10,6 +10,7 @@
       <change beforePath="$PROJECT_DIR$/.gradle/7.5.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.5.1/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.5.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.5.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/jacoco/test.exec" beforeDir="false" afterPath="$PROJECT_DIR$/build/jacoco/test.exec" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/reports/jacoco/test/html/jacoco-sessions.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/jacoco/test/html/jacoco-sessions.html" afterDir="false" />
@@ -31,6 +32,11 @@
       <change beforePath="$PROJECT_DIR$/build/test-results/test/TEST-assignment2.MainModelTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build/test-results/test/TEST-assignment2.MainModelTest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/test-results/test/TEST-assignment2.ProductOptionsModelTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build/test-results/test/TEST-assignment2.ProductOptionsModelTest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/test-results/test/binary/results.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/test-results/test/binary/results.bin" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/assignment2/model/InventoryModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/assignment2/model/InventoryModel.java" afterDir="false" />
+>>>>>>> af671e505b68f086f4123eb3f03328d96f5abc03
       <change beforePath="$PROJECT_DIR$/src/main/resources/Inventory.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Inventory.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -58,6 +64,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>
@@ -80,6 +87,7 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
+<<<<<<< HEAD
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
@@ -91,6 +99,18 @@
     &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
   }
 }</component>
+=======
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+  </component>
+>>>>>>> af671e505b68f086f4123eb3f03328d96f5abc03
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/resources" />
@@ -142,10 +162,18 @@
       <workItem from="1666079729874" duration="2998000" />
       <workItem from="1666093076115" duration="100000" />
       <workItem from="1666285411198" duration="2169000" />
+<<<<<<< HEAD
       <workItem from="1666348412320" duration="5048000" />
       <workItem from="1666356807446" duration="1233000" />
       <workItem from="1666442405386" duration="835000" />
       <workItem from="1666578287852" duration="18000" />
+=======
+      <workItem from="1666490443416" duration="102000" />
+      <workItem from="1666490774040" duration="8404000" />
+      <workItem from="1666500274163" duration="1137000" />
+      <workItem from="1666513242735" duration="3573000" />
+      <workItem from="1666530212172" duration="644000" />
+>>>>>>> af671e505b68f086f4123eb3f03328d96f5abc03
     </task>
     <servers />
   </component>

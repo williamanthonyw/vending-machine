@@ -40,9 +40,9 @@ public class MainModelTest {
     }
     
     @Test
-    public void getProductOptionsModelTest(){
-        ProductOptionsModel productOptionsModel = mainModel.getProductOptionsModel();
-        assertNotNull(productOptionsModel);
+    public void getInventoryModelTest(){
+       InventoryModel inventoryModel = mainModel.getInventoryModel();
+        assertNotNull(inventoryModel);
     }
 
     @Test

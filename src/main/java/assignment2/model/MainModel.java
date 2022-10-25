@@ -13,7 +13,7 @@ public class MainModel {
     private CardPaymentModel cardPaymentModel;
     private LoginModel loginModel;
     private CashPaymentModel cashPaymentModel;
-    private ProductOptionsModel productOptionsModel;
+    private InventoryModel inventoryModel;
 
     private User user;
     private boolean isLoggedIn;
@@ -24,7 +24,7 @@ public class MainModel {
         this.lastFiveProductsModel = new LastFiveProductsModel();
         this.cardPaymentModel = new CardPaymentModel(this);
 
-        this.productOptionsModel = new ProductOptionsModel();   ////////
+        this.inventoryModel = new InventoryModel("src/main/resources/Inventory.json");   ////////
 
         this.loginModel = new LoginModel(jsonParser.getUsers("src/main/resources/users.json"));
 
@@ -81,7 +81,7 @@ public class MainModel {
     public void cancelTransaction(){
 
         // clear cart (look at Katie's stuff)
-        productOptionsModel.putBack(user.getCart());
+        inventoryModel.putBack(user.getCart());
         user.clearCart();
 
 
@@ -109,7 +109,7 @@ public class MainModel {
         user.addToCart(product, quantity);
 
         // update quantity in inventory
-        productOptionsModel.updateQuantity(product, quantity);
+        inventoryModel.updateQuantity(product, quantity);
 
         System.out.println(user.getCart());
     }
@@ -128,14 +128,14 @@ public class MainModel {
         jsonParser.updateUsers(loginModel.getUsers(), "src/main/resources/users.json");
 
         // update inventory file
-        productOptionsModel.updateInventory();
+        inventoryModel.updateInventory();
 
         logout();
 
     }
 
-    public ProductOptionsModel getProductOptionsModel(){
-        return this.productOptionsModel;
+    public InventoryModel getInventoryModel(){
+        return this.inventoryModel;
     }
 
     public double getCartPrice() {
