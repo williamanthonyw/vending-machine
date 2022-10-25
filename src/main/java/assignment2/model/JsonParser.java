@@ -127,5 +127,6 @@ public class JsonParser {
         }
         return new ArrayList<CardUser>();
     }
+
 }
 
