@@ -91,6 +91,7 @@ public class SellerDashboardView implements View{
             transTemp = transTemp.concat(s.toString());
         }
         transactionText.setText(transTemp);
+        mainBox.getChildren().addAll(transactionLBL, transactionText);
 
         //List of Available Items
         Label inventoryLBL = new Label("List of Items Available");
@@ -108,6 +109,8 @@ public class SellerDashboardView implements View{
         }
  
         inventoryText.setText(invTemp);
+
+        mainBox.getChildren().addAll(inventoryLBL, inventoryText);
 
          
 

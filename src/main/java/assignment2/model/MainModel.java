@@ -87,8 +87,8 @@ public class MainModel {
     }
 
     public void logout(){
-        this.user = loginModel.getAnonymousUser();
         this.user.clearCart();
+        this.user = loginModel.getAnonymousUser();
         this.isLoggedIn = false;
     }
 
@@ -229,5 +229,26 @@ public class MainModel {
     }
 
     public static void main(String[] args){
+    String testInventoryCSVPath = "src/test/resources/test_inventory.csv";
+    String inventoryPath = "src/test/resources/test_inventory.json";
+
+    String testTransactionCSVPath = "src/test/resources/transaction.csv";
+
+    JsonParser jp = new JsonParser(inventoryPath, "src/test/resources/test_users3.json", "src/test/resources/InitialCash.json", "src/test/resources/credit_cards.json");
+
+    InventoryModel im = new InventoryModel(jp.getInventory(), jp);
+    MainModel mm = new MainModel(inventoryPath, "src/test/resources/test_users3.json", "src/test/resources/InitialCash.json", "src/test/resources/credit_cards.json");
+
+    // for (Product p: im.getInventory()){
+    //     System.out.println(p.getCategory() + p.getCode() + p.getName() + p.getPrice() + p.getQuantity());
+    // }
+    mm.setUser(mm.getLoginModel().login("test1", "pw"));
+    System.out.println(mm.getUser());
+    
+    for (Product p: im.getInventory()){
+        mm.addToCart(p, 2);
+    }
+
+    mm.checkout();
     }
 }

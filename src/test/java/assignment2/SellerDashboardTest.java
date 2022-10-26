@@ -17,19 +17,22 @@ public class SellerDashboardTest {
 
     private static String testTransactionCSVPath = "src/test/resources/transaction.csv";
 
+    JsonParser jp = new JsonParser(inventoryPath, "src/test/resources/test_users3.json", "src/test/resources/InitialCash.json", "src/test/resources/credit_cards.json");
+
     //default
-    private List<Product> defaultInventory = JsonParser.getInventory(inventoryPath);
+    private List<Product> defaultInventory = jp.getInventory();
 
     @AfterEach
     public void writeToDefault(){
-        JsonParser.updateInventory(defaultInventory, inventoryPath);
+        jp.updateInventory(defaultInventory);
     }
 
     //test for reading and writing inventory to CSV File
     @Test
     public void readAndWriteInventoryTest(){
-        InventoryModel inventoryModel = new InventoryModel(inventoryPath);
-        List<Product> inventory = inventoryModel.getInventory();
+        List<Product> inventory = jp.getInventory();
+        InventoryModel inventoryModel = new InventoryModel(inventory, jp);
+        
 
         //write to csv file
         inventoryModel.writeInventoryToFile(testInventoryCSVPath);
@@ -68,13 +71,16 @@ public class SellerDashboardTest {
     //test for reading and writing transactions to CSV file
     @Test
     public void readAndWriteTransactionTest(){
-        InventoryModel inventoryModel = new InventoryModel(inventoryPath);
-        List<Product> inventory = inventoryModel.getInventory();
+        List<Product> inventory = jp.getInventory();
+        InventoryModel inventoryModel = new InventoryModel(inventory, jp);
 
-        MainModel mainModel = new MainModel();
+        MainModel mainModel = new MainModel(inventoryPath, "src/test/resources/test_users3.json", "src/test/resources/InitialCash.json", "src/test/resources/credit_cards.json");
+
+        // login user 1
+        mainModel.setUser(mainModel.getLoginModel().login("test1", "pw"));
 
         //add 2 of each items to cart
-        for (Product p : inventory){
+        for (Product p : inventoryModel.getInventory()){
             mainModel.addToCart(p, 2);
         }
 
@@ -109,13 +115,16 @@ public class SellerDashboardTest {
     //multiple transactions
     @Test
     public void multipleTransactionsTest(){
-        InventoryModel inventoryModel = new InventoryModel(inventoryPath);
-        List<Product> inventory = inventoryModel.getInventory();
+        List<Product> inventory = jp.getInventory();
+        InventoryModel inventoryModel = new InventoryModel(inventory, jp);
 
-        MainModel mainModel = new MainModel();
+        MainModel mainModel = new MainModel(inventoryPath, "src/test/resources/test_users3.json", "src/test/resources/InitialCash.json", "src/test/resources/credit_cards.json");
+
+        //login user 1
+        mainModel.setUser(mainModel.getLoginModel().login("test1", "pw"));
 
         //add 2 of each items to cart -> User 1
-        for (Product p : inventory){
+        for (Product p : inventoryModel.getInventory()){
             mainModel.addToCart(p, 2);
         }
 
@@ -145,6 +154,9 @@ public class SellerDashboardTest {
 
         assertEquals(ip1, ap1);
 
+        //login user 2
+        mainModel.setUser(mainModel.getLoginModel().login("test2", "pw"));
+
         //add 3 of each items to cart -> User 2
         for (Product p : inventory){
             mainModel.addToCart(p, 3);
@@ -173,6 +185,9 @@ public class SellerDashboardTest {
         }
 
         assertEquals(ip2, ap2);
+
+        //login user 3
+        mainModel.setUser(mainModel.getLoginModel().login("test3", "pw"));
 
         //add 5 of each items to cart -> User 3
         for (Product p : inventory){

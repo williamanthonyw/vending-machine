@@ -241,6 +241,17 @@ public class InventoryModel {
     }
 
     public static void main(String[] args){
-        
+    String testInventoryCSVPath = "src/test/resources/test_inventory.csv";
+    String inventoryPath = "src/test/resources/test_inventory.json";
+
+    String testTransactionCSVPath = "src/test/resources/transaction.csv";
+
+    JsonParser jp = new JsonParser(inventoryPath, "", "", "");
+
+    InventoryModel im = new InventoryModel(jp.getInventory(), jp);
+
+    for (Product p: im.getInventory()){
+        System.out.println(p.getCategory() + p.getCode() + p.getName() + p.getPrice() + p.getQuantity());
+    }
     }
 }
