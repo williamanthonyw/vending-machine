@@ -29,17 +29,12 @@ public class MainView {
     private Stage stage;
     private MenuButton menuBTN;
     private Button cancelBTN;
-//    private Timer timer;
-
     private Transition timer;
-
-//    private Handler timeoutHandler;
 
 
     public MainView(MainModel mainModel){
         this.mainModel = mainModel;
 
-        setUpMenu();
         setUpCancelBTN();
         setUpCancelOnTimeOut();
     }
@@ -47,8 +42,6 @@ public class MainView {
     public void setUp(Stage stage){
         this.stage = stage;
         goToSellerInventoryView();
-//        goToLastFiveProductsView();
-        // goToProductOptionsView();    ///////////
 
         stage.show();
     }
@@ -60,6 +53,7 @@ public class MainView {
     public void goToView(View view){
         view.setUp();
         stage.setScene(view.getScenes().get(0));
+        setUpMenu();
         view.setUpMenuBTN(menuBTN);
         view.setUpCancelBTN(cancelBTN);
 
@@ -67,10 +61,10 @@ public class MainView {
         for (Scene scene : view.getScenes()){
             scene.addEventFilter(InputEvent.ANY, evt -> {
 
-                    if (evt.getEventType().getName().equals("MOUSE_PRESSED") ||
-                            evt.getEventType().getName().equals("KEY_PRESSED")){
-                        timer.playFromStart();
-                    }
+                if (evt.getEventType().getName().equals("MOUSE_PRESSED") ||
+                        evt.getEventType().getName().equals("KEY_PRESSED")){
+                    timer.playFromStart();
+                }
             }
             );
         }
@@ -82,11 +76,6 @@ public class MainView {
         view.refresh();
     }
 
-    // public void goToLastFiveProductsView(){
-    //     goToView(new LastFiveProductsView(mainModel));
-    // }
-
-    /////
     public void goToProductOptionsView(){
         goToView(new ProductOptionsView(mainModel, stage, this));
     }
@@ -206,7 +195,13 @@ public class MainView {
             goToProductOptionsView();
         });
 
-        menuBTN.getItems().addAll(productOptionsBTN, loginBTN, logoutBTN);
+        menuBTN.getItems().addAll(productOptionsBTN);
+
+        if (mainModel.isLoggedIn()){
+            menuBTN.getItems().addAll(logoutBTN);
+        } else {
+            menuBTN.getItems().addAll(loginBTN);
+        }
 
 
     }
