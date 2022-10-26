@@ -23,7 +23,6 @@ public class JsonParserTest {
     @BeforeEach
     public void setup(){
 
-        jsonParser = new JsonParser();
 
     }
 
@@ -31,8 +30,12 @@ public class JsonParserTest {
     @Test
     public void getUsersFileDoesNotExist(){
 
+        jsonParser = new JsonParser("",
+                "not exist",
+                "",
+                "");
 
-        List<User> actual = jsonParser.getUsers("not exist");
+        List<User> actual = jsonParser.getUsers();
 
         assertNotNull(actual);
         assertEquals(actual.size(), 0);
@@ -42,8 +45,12 @@ public class JsonParserTest {
     @Test
     public void getUsersEmptyFile(){
 
+        jsonParser = new JsonParser("",
+                "src/test/resources/empty_users.json",
+                "",
+                "");
 
-        List<User> actual = jsonParser.getUsers("src/test/resources/empty_users.json");
+        List<User> actual = jsonParser.getUsers();
 
         assertNotNull(actual);
         assertEquals(actual.size(), 0);
@@ -53,7 +60,12 @@ public class JsonParserTest {
     @Test
     public void getUsersValidFile(){
 
-        List<User> actual = jsonParser.getUsers("src/test/resources/test_users.json");
+        jsonParser = new JsonParser("",
+                "src/test/resources/test_users.json",
+                "",
+                "");
+
+        List<User> actual = jsonParser.getUsers();
 
         assertNotNull(actual);
         assertEquals(actual.size(), 2);
@@ -63,10 +75,16 @@ public class JsonParserTest {
     @Test
     public void updateUsersEmptyList(){
 
-        List<User> users = new ArrayList<User>();
         String filename = "src/test/resources/test_users2.json";
 
-        jsonParser.updateUsers(users, filename);
+        jsonParser = new JsonParser("",
+                filename,
+                "",
+                "");
+
+        List<User> users = new ArrayList<User>();
+
+        jsonParser.updateUsers(users);
 
          try {
              String file = Files.readString(Path.of(filename));
@@ -87,7 +105,11 @@ public class JsonParserTest {
 
         String filename = "src/test/resources/test_users3.json";
 
-        jsonParser.updateUsers(users, filename);
+        jsonParser = new JsonParser("",
+                filename,
+                "",
+                "");
+
 
         try {
             String file = Files.readString(Path.of(filename));
@@ -121,10 +143,14 @@ public class JsonParserTest {
         users.get(1).setPurchases(purchaseList2);
         users.get(2).setPurchases(purchaseList3);
 
-
         String filename = "src/test/resources/test_users2.json";
 
-        jsonParser.updateUsers(users, filename);
+        jsonParser = new JsonParser("",
+                filename,
+                "",
+                "");
+
+        jsonParser.updateUsers(users);
 
         try {
             String file = Files.readString(Path.of(filename));
@@ -132,6 +158,44 @@ public class JsonParserTest {
         } catch (IOException e){
             fail();
         }
+
+    }
+
+    @Test
+    public void updateInventoryTest(){
+
+        List<Product> products = new ArrayList<Product>();
+
+        Product cocaCola = new Product("Coca Cola", 3 );
+        cocaCola.setQuantity(2);
+        cocaCola.setCategory("drinks");
+        cocaCola.setCode(121);
+
+        Product skittles = new Product("Skittles", 2.3 );
+        skittles.setQuantity(3);
+        skittles.setCategory("candies");
+        skittles.setCode(423);
+
+        products.add(cocaCola);
+        products.add(skittles);
+
+
+        String filename = "src/test/resources/test_inventory_2.json";
+
+        jsonParser = new JsonParser(filename,
+                "",
+                "",
+                "");
+
+        jsonParser.updateInventory(products);
+
+        try {
+            String file = Files.readString(Path.of(filename));
+            assertEquals(file, "[{\"name\":\"Coca Cola\",\"code\":121,\"category\":\"drinks\",\"price\":3.0,\"quantity\":2},{\"name\":\"Skittles\",\"code\":423,\"category\":\"candies\",\"price\":2.3,\"quantity\":3}]");
+        } catch (IOException e){
+            fail();
+        }
+
 
     }
 }

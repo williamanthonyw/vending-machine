@@ -20,6 +20,10 @@ public class LoginModel {
         }
     }
 
+    public void setAnonymousUser(User user){
+        this.anonymousUser = user;
+    }
+
     public List<User> getUsers(){
         return users;
     }
@@ -36,7 +40,6 @@ public class LoginModel {
             System.out.println(user.getUsername());
 
             if (user.getUsername().equalsIgnoreCase(username)){
-                System.out.println("hello");
 
                 if (user.getPassword().equals(password)){
 
