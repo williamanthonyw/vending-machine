@@ -1,5 +1,1 @@
-<<<<<<< HEAD
-[{"name":"5c","value":0.05,"amount":916},{"name":"10c","value":0.1,"amount":33},{"name":"20c","value":0.2,"amount":218},{"name":"50c","value":0.5,"amount":30},{"name":"$1","value":1.0,"amount":7},{"name":"$2","value":2.0,"amount":0},{"name":"$5","value":5.0,"amount":38},{"name":"$10","value":10.0,"amount":45},{"name":"$20","value":20.0,"amount":4},{"name":"$50","value":50.0,"amount":5},{"name":"$100","value":100.0,"amount":0}]
-=======
-[{"name":"5c","value":0.05,"amount":1954},{"name":"10c","value":0.1,"amount":33},{"name":"20c","value":0.2,"amount":218},{"name":"50c","value":0.5,"amount":30},{"name":"$1","value":1.0,"amount":3},{"name":"$2","value":2.0,"amount":0},{"name":"$5","value":5.0,"amount":34},{"name":"$10","value":10.0,"amount":45},{"name":"$20","value":20.0,"amount":3},{"name":"$50","value":50.0,"amount":5},{"name":"$100","value":100.0,"amount":0}]
->>>>>>> af671e505b68f086f4123eb3f03328d96f5abc03
+[{"name":"5c","value":0.05,"amount":916},{"name":"10c","value":0.1,"amount":33},{"name":"20c","value":0.2,"amount":218},{"name":"50c","value":0.5,"amount":30},{"name":"$1","value":1.0,"amount":7},{"name":"$2","value":2.0,"amount":44},{"name":"$5","value":5.0,"amount":38},{"name":"$10","value":10.0,"amount":89},{"name":"$20","value":20.0,"amount":4},{"name":"$50","value":50.0,"amount":5},{"name":"$100","value":100.0,"amount":0}]

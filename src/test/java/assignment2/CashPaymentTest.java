@@ -20,14 +20,26 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 public class CashPaymentTest {
-    JsonParser jp = new JsonParser();
-    private List<Cash> defaultCash = jp.getCash("src/main/resources/InitialCash.json");
+
+    JsonParser jp;
+    private List<Cash> defaultCash;
+
 
     //Test on initial amount of each notes and coins available
     @Test
     public void initialAmountCheck(){
+
         String initialPath = "src/main/resources/cash.json";
-        CashPaymentModel Test1 = new CashPaymentModel(initialPath);
+
+        jp = new JsonParser("",
+                "",
+                initialPath,
+                ""
+        );
+
+        defaultCash = jp.getCash();
+
+        CashPaymentModel Test1 = new CashPaymentModel(defaultCash, jp);
         List<Cash> cashList = Test1.getCashList();
 
         for (Cash c: cashList){
@@ -38,8 +50,18 @@ public class CashPaymentTest {
     //Test on values of each notes and coins
     @Test 
     public void cashValueCheck(){
+
         String initialPath = "src/main/resources/InitialCash.json";
-        CashPaymentModel Test2 = new CashPaymentModel(initialPath);
+
+        jp = new JsonParser("",
+                "",
+                initialPath,
+                ""
+        );
+
+        defaultCash = jp.getCash();
+
+        CashPaymentModel Test2 = new CashPaymentModel(defaultCash, jp);
         List<Cash> cashList = Test2.getCashList();
 
         for (Cash c: cashList){
@@ -86,8 +108,18 @@ public class CashPaymentTest {
     //Test on initial different notes and coins available: 11 different notes and coins
     @Test
     public void numberOfDifferentNotesandCoins(){
+
         String initialPath = "src/main/resources/InitialCash.json";
-        CashPaymentModel Test3 = new CashPaymentModel(initialPath);
+
+        jp = new JsonParser("",
+                "",
+                initialPath,
+                ""
+        );
+
+        defaultCash = jp.getCash();
+        CashPaymentModel Test3 = new CashPaymentModel(defaultCash, jp);
+
         List<Cash> cashList = Test3.getCashList();
 
         assertEquals(11, cashList.size());
@@ -97,8 +129,15 @@ public class CashPaymentTest {
     @Test
     public void changeNotesOnly() throws InsufficientChangeException, PaymentNotEnoughException{
         String initialPath = "src/main/resources/test1cash.json";
-        CashPaymentModel Test4 = new CashPaymentModel(initialPath);
-        List<Cash> cashList = Test4.getCashList();
+
+        jp = new JsonParser("",
+                "",
+                initialPath,
+                ""
+        );
+
+        defaultCash = jp.getCash();
+        CashPaymentModel Test4 = new CashPaymentModel(defaultCash, jp);
 
         HashMap<Double, Integer> cash = new HashMap<Double, Integer>();
         cash.put(100.0, 2);
@@ -120,15 +159,24 @@ public class CashPaymentTest {
         assertEquals(1, change.get("$1"));
 
         //reset json
-        JsonParser jp = new JsonParser();
-        jp.updateCash(defaultCash, initialPath);
+
+        jp.updateCash(defaultCash);
     }
 
     //Test on payment where changes are in coins only
     @Test
     public void changeCoinsOnly() throws InsufficientChangeException, PaymentNotEnoughException{
         String initialPath = "src/main/resources/test2cash.json";
-        CashPaymentModel Test5 = new CashPaymentModel(initialPath);
+
+        jp = new JsonParser("",
+                "",
+                initialPath,
+                ""
+        );
+
+        defaultCash = jp.getCash();
+
+        CashPaymentModel Test5 = new CashPaymentModel(defaultCash, jp);
         List<Cash> cashList = Test5.getCashList();
 
         HashMap<Double, Integer> cash = new HashMap<Double, Integer>();
@@ -144,8 +192,7 @@ public class CashPaymentTest {
         assertEquals(1, change.get("5c"));
 
         //reset json
-        JsonParser jp = new JsonParser();
-        jp.updateCash(defaultCash, initialPath);
+        jp.updateCash(defaultCash);
 
     }
 
@@ -153,7 +200,15 @@ public class CashPaymentTest {
     @Test
     public void changeisNotSufficient() throws InsufficientChangeException, PaymentNotEnoughException{
         String initialPath = "src/main/resources/testnotenough.json";
-        CashPaymentModel Test6 = new CashPaymentModel(initialPath);
+
+        jp = new JsonParser("",
+                "",
+                initialPath,
+                ""
+        );
+
+        defaultCash = jp.getCash();
+        CashPaymentModel Test6 = new CashPaymentModel(defaultCash, jp);
         List<Cash> cashList = Test6.getCashList();
 
         HashMap<Double, Integer> cash = new HashMap<Double, Integer>();
@@ -168,8 +223,17 @@ public class CashPaymentTest {
     // //Test on update cash inventory after a successful payment
     @Test
     public void updateChangeList() throws InsufficientChangeException, PaymentNotEnoughException{
+
         String initialPath = "src/main/resources/test3cash.json";
-        CashPaymentModel Test7 = new CashPaymentModel(initialPath);
+
+        jp = new JsonParser("",
+                "",
+                initialPath,
+                ""
+        );
+
+        defaultCash = jp.getCash();
+        CashPaymentModel Test7 = new CashPaymentModel(defaultCash, jp);
         List<Cash> cashList = Test7.getCashList();
         
 
@@ -191,15 +255,22 @@ public class CashPaymentTest {
         }
 
         //reset json
-        JsonParser jp = new JsonParser();
-        jp.updateCash(defaultCash, initialPath);
+        jp.updateCash(defaultCash);
     }
 
     // //Test on small change not sufficient
     @Test
     public void smallChangeInsufficient() throws InsufficientChangeException, PaymentNotEnoughException{
         String initialPath = "src/main/resources/test4cash.json";
-        CashPaymentModel Test8 = new CashPaymentModel(initialPath);
+
+        jp = new JsonParser("",
+                "",
+                initialPath,
+                ""
+        );
+
+        defaultCash = jp.getCash();
+        CashPaymentModel Test8 = new CashPaymentModel(defaultCash, jp);
         List<Cash> cashList = Test8.getCashList();
 
         HashMap<Double, Integer> cash = new HashMap<Double, Integer>();
@@ -216,7 +287,15 @@ public class CashPaymentTest {
     @Test
     public void calculateTotalPayment(){
         String initialPath = "src/main/resources/cash.json";
-        CashPaymentModel Test9 = new CashPaymentModel(initialPath);
+
+        jp = new JsonParser("",
+                "",
+                initialPath,
+                ""
+        );
+
+        defaultCash = jp.getCash();
+        CashPaymentModel Test9 = new CashPaymentModel(defaultCash, jp);
         
         HashMap<Double, Integer> cash = new HashMap<Double, Integer>();
         cash.put(0.05, 2);
@@ -240,8 +319,15 @@ public class CashPaymentTest {
     public void smallChangeRound() throws InsufficientChangeException, PaymentNotEnoughException{
         String initialPath = "src/main/resources/test5cash.json";
 
-        //rounding up
-        CashPaymentModel Test10 = new CashPaymentModel(initialPath);
+        jp = new JsonParser("",
+                "",
+                initialPath,
+                ""
+        );
+
+        defaultCash = jp.getCash();
+        CashPaymentModel Test10 = new CashPaymentModel(defaultCash, jp);
+
 
         HashMap<Double, Integer> cash1 = new HashMap<Double, Integer>();
         cash1.put(0.05, 2);
@@ -253,12 +339,11 @@ public class CashPaymentTest {
         assertEquals(1, change1.get("5c"));
 
         //reset json
-        JsonParser jp = new JsonParser();
-        jp.updateCash(defaultCash, initialPath);
+        jp.updateCash(defaultCash);
 
 
         //rounding down
-        CashPaymentModel Test11 = new CashPaymentModel(initialPath);
+        CashPaymentModel Test11 = new CashPaymentModel(jp.getCash(), jp);
 
         HashMap<Double, Integer> cash2 = new HashMap<Double, Integer>();
         cash2.put(0.05, 2);
@@ -270,14 +355,22 @@ public class CashPaymentTest {
         assertEquals(0, change2.get("5c"));
 
         //reset json
-        jp.updateCash(defaultCash, initialPath);
+        jp.updateCash(defaultCash);
     }
 
     //Test on multiple payments
     @Test
     public void multiplePayments() throws InsufficientChangeException, PaymentNotEnoughException{
         String initialPath = "src/main/resources/test6cash.json";
-        CashPaymentModel Test12 = new CashPaymentModel(initialPath);
+
+        jp = new JsonParser("",
+                "",
+                initialPath,
+                ""
+        );
+
+        defaultCash = jp.getCash();
+        CashPaymentModel Test12 = new CashPaymentModel(defaultCash, jp);
         List<Cash> cashList = Test12.getCashList();
        
 
@@ -328,8 +421,7 @@ public class CashPaymentTest {
         }
 
         //reset json
-        JsonParser jp = new JsonParser();
-        jp.updateCash(defaultCash, initialPath);
+        jp.updateCash(defaultCash);
 
     }
 
@@ -337,7 +429,16 @@ public class CashPaymentTest {
     @Test 
     public void NotEnoughPayment() throws InsufficientChangeException, PaymentNotEnoughException{
         String initialPath = "src/main/resources/InitialCash.json";
-        CashPaymentModel Test13 = new CashPaymentModel(initialPath);
+
+        jp = new JsonParser("",
+                "",
+                initialPath,
+                ""
+        );
+
+        defaultCash = jp.getCash();
+        CashPaymentModel Test13 = new CashPaymentModel(defaultCash, jp);
+
         List<Cash> cashList = Test13.getCashList();
        
 

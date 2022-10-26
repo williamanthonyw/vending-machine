@@ -14,19 +14,15 @@ import java.lang.Math.*;
 
 
 public class CashPaymentModel{
-    private String cashPath;
+
+    private JsonParser jsonParser;
     private List<Cash> cashList;
-    // src/main/resources/Cash.json;
     private double currentChange;
     
-    public CashPaymentModel(String cp){
-        this.cashPath = cp;
-        JsonParser jp = new JsonParser();
+    public CashPaymentModel(List<Cash> cashList, JsonParser jsonParser){
 
-        //read from a json file into list of available notes/coins
-        List<Cash> cash = jp.getCash(this.cashPath);
-        System.out.println(cash);
-        this.cashList = cash;
+        this.jsonParser = jsonParser;
+        this.cashList = cashList;
     }
 
     public List<Cash> getCashList(){
@@ -140,8 +136,8 @@ public class CashPaymentModel{
         //update change amount with reversing the reversed list
         Collections.reverse(reverseCashList);
         this.cashList = reverseCashList;
-        JsonParser jp = new JsonParser();
-        jp.updateCash(this.cashList, this.cashPath);
+
+        jsonParser.updateCash(this.cashList);
 
         return totalChange;
     }

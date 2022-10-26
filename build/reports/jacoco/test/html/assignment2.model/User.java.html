@@ -57,16 +57,16 @@ public class User {
     }
 
     public void addToCart(Product product, int quantity){
-<span class="nc bnc" id="L60" title="All 2 branches missed.">        if (cart.get(product) == null){</span>
-<span class="nc" id="L61">            cart.put(product, quantity);</span>
+<span class="pc bpc" id="L60" title="1 of 2 branches missed.">        if (cart.get(product) == null){</span>
+<span class="fc" id="L61">            cart.put(product, quantity);</span>
         } else {
 <span class="nc" id="L63">            cart.put(product, cart.get(product) + quantity);</span>
         }
-<span class="nc" id="L65">    }</span>
+<span class="fc" id="L65">    }</span>
 
     public void setCart(Map&lt;Product, Integer&gt; cart){
-<span class="nc" id="L68">        this.cart = cart;</span>
-<span class="nc" id="L69">    }</span>
+<span class="fc" id="L68">        this.cart = cart;</span>
+<span class="fc" id="L69">    }</span>
 
     public void clearCart(){
 <span class="fc" id="L72">       this.cart = new HashMap&lt;Product, Integer&gt;();</span>
@@ -75,8 +75,8 @@ public class User {
 
 
     public void setCardUser(CardUser cardUser){
-<span class="fc" id="L78">        this.cardUser = cardUser;</span>
-<span class="fc" id="L79">    }</span>
+<span class="nc" id="L78">        this.cardUser = cardUser;</span>
+<span class="nc" id="L79">    }</span>
     public CardUser getCardUser() {
 <span class="nc" id="L81">        return cardUser;</span>
     }
