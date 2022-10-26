@@ -26,6 +26,7 @@ public class User {
         this.purchases.add(purchase);
 
         // need to write to file
+
     }
 
     public List<Purchase> getPurchases(){
