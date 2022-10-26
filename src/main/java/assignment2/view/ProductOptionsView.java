@@ -70,7 +70,7 @@ public class ProductOptionsView implements View{
         ///
         this.lastFiveProductsModel = mainModel.getLastFiveProductsModel();
         
-        headerBox = new HBox(120);
+        headerBox = new HBox(200);
         headerBox.setMaxHeight(400);
         lastFiveProductsBox = new VBox(10);
         topBox = new VBox(20);
@@ -95,15 +95,13 @@ public class ProductOptionsView implements View{
         BorderPane.setMargin(mainBox, new Insets(50, 50, 50, 50));
         borderPane.setCenter(mainBox);
 
-
-        ////
         Label lastFiveProductsTitleLBL;
+
         if (mainModel.isLoggedIn()){
             lastFiveProductsTitleLBL = new Label("Last Five Products Bought By You");
         } else {
             lastFiveProductsTitleLBL = new Label("Last Five Products Bought By Anonymous Users");
         }
-        lastFiveProductsTitleLBL.setId("title");
         
         productsTable = new TableView<Purchase>();
 
@@ -287,7 +285,6 @@ public class ProductOptionsView implements View{
         Label chipsLBL = new Label("Chips");
         chipsLBL.setId("title");
         productOptionsBox.getChildren().add(chipsLBL);
-
 
         chipsTable = new TableView<Product>();
         chipsTable.setPlaceholder(new Label("No chips available"));
@@ -592,18 +589,6 @@ public class ProductOptionsView implements View{
         itemColumn.setCellValueFactory(new PropertyValueFactory<Purchase, String>("Item"));
         productsTable.getColumns().add(itemColumn);
 
-        TableColumn<Purchase, Double> priceColumn = new TableColumn<Purchase, Double>("Price");
-        priceColumn.setCellValueFactory(new PropertyValueFactory<Purchase, Double>("price"));
-        productsTable.getColumns().add(priceColumn);
-
-        TableColumn<Purchase, Integer> quantityColumn = new TableColumn<Purchase, Integer>("Quantity");
-        quantityColumn.setCellValueFactory(new PropertyValueFactory<Purchase,Integer>("quantity"));
-        productsTable.getColumns().add(quantityColumn);
-
-        // TableColumn<Purchase, LocalDateTime> datePurchasedColumn = new TableColumn<Purchase, LocalDateTime>("Date Purchased");
-        // datePurchasedColumn.setCellValueFactory(new PropertyValueFactory<Purchase,LocalDateTime>("datePurchased"));
-        // productsTable.getColumns().add(datePurchasedColumn);
-
     }
     public void showProducts(){
 
@@ -616,8 +601,7 @@ public class ProductOptionsView implements View{
             productsTable.setPlaceholder(new Label("You have bought 0 products"));
         }
 
-        // add them in reverse order, so most recent appear first
-        for (int i = purchases.size() - 1; i >= 0; i--){
+        for (int i = 0; i < purchases.size(); i++){
             productsTable.getItems().add(purchases.get(i));
         }
 
