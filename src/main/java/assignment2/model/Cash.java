@@ -18,7 +18,6 @@ public class Cash{
         return this.name;
     }
 
-
     public double getValue(){
         return this.value;
     }
