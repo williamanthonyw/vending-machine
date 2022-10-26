@@ -180,7 +180,7 @@ public class MainModel {
 <span class="fc bfc" id="L180" title="All 2 branches covered.">        for (Product product : user.getCart().keySet()){</span>
 <span class="fc" id="L181">            user.purchaseProduct(product, user.getCart().get(product));</span>
 
-<span class="pc bpc" id="L183" title="1 of 2 branches missed.">            if (aggregatePurchases.get(product) == null){</span>
+<span class="fc bfc" id="L183" title="All 2 branches covered.">            if (aggregatePurchases.get(product) == null){</span>
 <span class="fc" id="L184">                this.aggregatePurchases.put(product, 0);</span>
             }
 <span class="fc" id="L186">            this.aggregatePurchases.put(product, user.getCart().get(product) + this.aggregatePurchases.get(product));</span>
@@ -219,47 +219,6 @@ public class MainModel {
     }
 
     public static void main(String[] args){
-
-<span class="nc" id="L223">    String testInventoryCSVPath = &quot;src/test/resources/test_inventory.csv&quot;;</span>
-<span class="nc" id="L224">    String inventoryPath = &quot;src/test/resources/test_inventory.json&quot;;</span>
-
-<span class="nc" id="L226">    String testTransactionCSVPath = &quot;src/test/resources/transaction.csv&quot;;</span>
-
-<span class="nc" id="L228">        InventoryModel inventoryModel = new InventoryModel(inventoryPath);</span>
-<span class="nc" id="L229">        List&lt;Product&gt; inventory = inventoryModel.getInventory();</span>
-
-<span class="nc" id="L231">        MainModel mainModel = new MainModel();</span>
-
-        //add 2 of each items to cart
-<span class="nc bnc" id="L234" title="All 2 branches missed.">        for (Product p : inventory){</span>
-<span class="nc" id="L235">            mainModel.addToCart(p, 2);</span>
-<span class="nc" id="L236">        }</span>
-
-<span class="nc" id="L238">        int cartSize = mainModel.user.getCart().size();</span>
-        //complete transaction and write to file 
-<span class="nc" id="L240">        mainModel.checkout();</span>
-
-<span class="nc" id="L242">        List&lt;List&lt;String&gt;&gt; itemsPurchased = mainModel.readPurchasesFromFile(testTransactionCSVPath);</span>
-        
-        //System.out.println(cartSize == itemsPurchased.size());
-
-        //put into maps for both
-<span class="nc" id="L247">        HashMap&lt;String, Integer&gt; ip = new HashMap&lt;String, Integer&gt;();</span>
-
-<span class="nc bnc" id="L249" title="All 2 branches missed.">        for (int i=0; i&lt;itemsPurchased.size(); i++){</span>
-<span class="nc" id="L250">            List&lt;String&gt; item = itemsPurchased.get(i);</span>
-<span class="nc" id="L251">            ip.put(item.get(1), Integer.parseInt(item.get(2)));</span>
-        }
-
-<span class="nc" id="L254">        HashMap&lt;String, Integer&gt; ap = new HashMap&lt;String, Integer&gt;();</span>
-
-<span class="nc bnc" id="L256" title="All 2 branches missed.">        for (Product p: mainModel.getAggregatePurchases().keySet()){</span>
-<span class="nc" id="L257">            ap.put(p.getName(), mainModel.getAggregatePurchases().get(p));</span>
-<span class="nc" id="L258">        }</span>
-
-<span class="nc" id="L260">        System.out.println(ip);</span>
-<span class="nc" id="L261">        System.out.println(ap);</span>
-<span class="nc" id="L262">        System.out.println(ip.equals(ap));</span>
-<span class="nc" id="L263">    }</span>
+<span class="nc" id="L222">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

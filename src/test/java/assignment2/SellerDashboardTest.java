@@ -27,7 +27,7 @@ public class SellerDashboardTest {
 
     //test for reading and writing inventory to CSV File
     @Test
-    public void ReadAndWriteInventoryTest(){
+    public void readAndWriteInventoryTest(){
         InventoryModel inventoryModel = new InventoryModel(inventoryPath);
         List<Product> inventory = inventoryModel.getInventory();
 
@@ -67,7 +67,7 @@ public class SellerDashboardTest {
 
     //test for reading and writing transactions to CSV file
     @Test
-    public void ReadAndWriteTransactionTest(){
+    public void readAndWriteTransactionTest(){
         InventoryModel inventoryModel = new InventoryModel(inventoryPath);
         List<Product> inventory = inventoryModel.getInventory();
 
@@ -79,7 +79,7 @@ public class SellerDashboardTest {
         }
 
         int cartSize = mainModel.getUser().getCart().size();
-        
+
 
         //complete transaction and write to file 
         mainModel.checkout();
@@ -104,6 +104,104 @@ public class SellerDashboardTest {
 
         assertEquals(ip, ap);
 
+    }
+
+    //multiple transactions
+    @Test
+    public void multipleTransactionsTest(){
+        InventoryModel inventoryModel = new InventoryModel(inventoryPath);
+        List<Product> inventory = inventoryModel.getInventory();
+
+        MainModel mainModel = new MainModel();
+
+        //add 2 of each items to cart -> User 1
+        for (Product p : inventory){
+            mainModel.addToCart(p, 2);
+        }
+
+        int cartSizeUser1 = mainModel.getUser().getCart().size();
+
+
+        //complete transaction and write to file 
+        mainModel.checkout();
+
+        List<List<String>> itemsPurchasedUser1 = mainModel.readPurchasesFromFile(testTransactionCSVPath);
+        
+        assertEquals(cartSizeUser1, itemsPurchasedUser1.size());
+
+        //put into maps for both
+        HashMap<String, Integer> ip1 = new HashMap<String, Integer>();
+
+        for (int i=0; i<itemsPurchasedUser1.size(); i++){
+            List<String> item = itemsPurchasedUser1.get(i);
+            ip1.put(item.get(1), Integer.parseInt(item.get(2)));
+        }
+
+        HashMap<String, Integer> ap1 = new HashMap<String, Integer>();
+
+        for (Product p: mainModel.getAggregatePurchases().keySet()){
+            ap1.put(p.getName(), mainModel.getAggregatePurchases().get(p));
+        }
+
+        assertEquals(ip1, ap1);
+
+        //add 3 of each items to cart -> User 2
+        for (Product p : inventory){
+            mainModel.addToCart(p, 3);
+        }
+
+        int cartSizeUser2 = mainModel.getUser().getCart().size();
+
+        mainModel.checkout();
+
+        List<List<String>> itemsPurchasedUser2 = mainModel.readPurchasesFromFile(testTransactionCSVPath);
+
+        assertEquals(cartSizeUser2, itemsPurchasedUser2.size());
+
+        //put into maps for both
+        HashMap<String, Integer> ip2 = new HashMap<String, Integer>();
+
+        for (int i=0; i<itemsPurchasedUser2.size(); i++){
+            List<String> item = itemsPurchasedUser2.get(i);
+            ip2.put(item.get(1), Integer.parseInt(item.get(2)));
+        }
+
+        HashMap<String, Integer> ap2 = new HashMap<String, Integer>();
+
+        for (Product p: mainModel.getAggregatePurchases().keySet()){
+            ap2.put(p.getName(), mainModel.getAggregatePurchases().get(p));
+        }
+
+        assertEquals(ip2, ap2);
+
+        //add 5 of each items to cart -> User 3
+        for (Product p : inventory){
+            mainModel.addToCart(p, 5);
+        }
+
+        int cartSizeUser3 = mainModel.getUser().getCart().size();
+
+        mainModel.checkout();
+
+        List<List<String>> itemsPurchasedUser3 = mainModel.readPurchasesFromFile(testTransactionCSVPath);
+
+        assertEquals(cartSizeUser3, itemsPurchasedUser3.size());
+
+        //put into maps for both
+        HashMap<String, Integer> ip3 = new HashMap<String, Integer>();
+
+        for (int i=0; i<itemsPurchasedUser3.size(); i++){
+            List<String> item = itemsPurchasedUser3.get(i);
+            ip3.put(item.get(1), Integer.parseInt(item.get(2)));
+        }
+
+        HashMap<String, Integer> ap3 = new HashMap<String, Integer>();
+
+        for (Product p: mainModel.getAggregatePurchases().keySet()){
+            ap3.put(p.getName(), mainModel.getAggregatePurchases().get(p));
+        }
+
+        assertEquals(ip3, ap3);
     }
 
 
