@@ -54,17 +54,21 @@ import java.util.Scanner;
 
 <span class="fc" id="L55">    }</span>
     ///////////////////
-    public List&lt;Product&gt; getProductsToDisplay(String filename){
+    public static List&lt;Product&gt; getInventory(String filename){
         try {
 <span class="fc" id="L59">            Reader reader = new BufferedReader(new FileReader(filename));</span>
 
-            // Convert json file to a list of products to display
-<span class="fc" id="L62">            List&lt;Product&gt; productsToDisplay = gson.fromJson(reader, new TypeToken&lt;List&lt;Product&gt;&gt;() {}.getType());</span>
+            // Convert json file to a list of products
+<span class="fc" id="L62">            List&lt;Product&gt; inventory = gson.fromJson(reader, new TypeToken&lt;List&lt;Product&gt;&gt;() {}.getType());</span>
 
-<span class="fc" id="L64">            return productsToDisplay;</span>
+<span class="pc bpc" id="L64" title="1 of 2 branches missed.">            if (inventory == null){</span>
+<span class="nc" id="L65">                return new ArrayList&lt;Product&gt;();</span>
+            }
 
-<span class="nc" id="L66">        } catch (IOException e) {</span>
-<span class="nc" id="L67">            return new ArrayList&lt;Product&gt;();</span>
+<span class="fc" id="L68">            return inventory;</span>
+
+<span class="nc" id="L70">        } catch (IOException e) {</span>
+<span class="nc" id="L71">            return new ArrayList&lt;Product&gt;();</span>
         }
     }
 
@@ -72,61 +76,66 @@ import java.util.Scanner;
 
     public List&lt;Cash&gt; getCash(String filename){
         try{
-<span class="fc" id="L75">            Reader reader = new BufferedReader(new FileReader(filename));</span>
+<span class="fc" id="L79">            Reader reader = new BufferedReader(new FileReader(filename));</span>
 
-<span class="fc" id="L77">            List&lt;Cash&gt; cashList = gson.fromJson(reader, new TypeToken&lt;List&lt;Cash&gt;&gt;() {}.getType());</span>
+<span class="fc" id="L81">            List&lt;Cash&gt; cashList = gson.fromJson(reader, new TypeToken&lt;List&lt;Cash&gt;&gt;() {}.getType());</span>
             // System.out.println(&quot;hello&quot;);
 
-<span class="fc" id="L80">            return cashList;</span>
+<span class="pc bpc" id="L84" title="1 of 2 branches missed.">            if (cashList == null){</span>
+<span class="nc" id="L85">                return new ArrayList&lt;Cash&gt;();</span>
+            }
+
+<span class="fc" id="L88">            return cashList;</span>
         }
 
-<span class="fc" id="L83">        catch (IOException e){</span>
-<span class="fc" id="L84">            return new ArrayList&lt;Cash&gt;();</span>
+<span class="fc" id="L91">        catch (IOException e){</span>
+<span class="fc" id="L92">            return new ArrayList&lt;Cash&gt;();</span>
         }
     }
 
     public void updateCash(List&lt;Cash&gt; cashList, String filename){
         
-<span class="fc" id="L90">        try(FileWriter file = new FileWriter(filename)){</span>
-<span class="fc" id="L91">            file.write(gson.toJson(cashList));</span>
-<span class="fc" id="L92">            file.flush();</span>
+<span class="fc" id="L98">        try(FileWriter file = new FileWriter(filename)){</span>
+<span class="fc" id="L99">            file.write(gson.toJson(cashList));</span>
+<span class="fc" id="L100">            file.flush();</span>
         }
         
-<span class="nc" id="L95">        catch(Exception e){</span>
-<span class="nc" id="L96">            e.printStackTrace();</span>
-<span class="fc" id="L97">        }</span>
-<span class="fc" id="L98">    }</span>
+<span class="nc" id="L103">        catch(Exception e){</span>
+<span class="nc" id="L104">            e.printStackTrace();</span>
+<span class="fc" id="L105">        }</span>
+<span class="fc" id="L106">    }</span>
 
-    public void updateInventory(List&lt;Product&gt; productList, String filename){
+    public static void updateInventory(List&lt;Product&gt; productList, String filename){
 
-<span class="fc" id="L102">        try(FileWriter file = new FileWriter(filename)){</span>
+<span class="fc" id="L110">        try(FileWriter file = new FileWriter(filename)){</span>
 
-<span class="pc bpc" id="L104" title="1 of 2 branches missed.">            if (productList != null){</span>
-<span class="nc" id="L105">                file.write(gson.toJson(productList));</span>
-<span class="nc" id="L106">                file.flush();</span>
+<span class="pc bpc" id="L112" title="1 of 2 branches missed.">            if (productList != null){</span>
+<span class="fc" id="L113">                file.write(gson.toJson(productList));</span>
+<span class="fc" id="L114">                file.flush();</span>
             }
 
 
         }
 
-<span class="nc" id="L112">        catch(Exception e){</span>
-<span class="nc" id="L113">            e.printStackTrace();</span>
-<span class="fc" id="L114">        }</span>
-<span class="fc" id="L115">    }</span>
+<span class="nc" id="L120">        catch(Exception e){</span>
+<span class="nc" id="L121">            e.printStackTrace();</span>
+<span class="fc" id="L122">        }</span>
+<span class="fc" id="L123">    }</span>
 
     public List&lt;CardUser&gt; getCardDetail(String filename) {
         try {
 
-<span class="fc" id="L120">            Reader reader = new BufferedReader(new FileReader(filename));</span>
+<span class="nc" id="L128">            Reader reader = new BufferedReader(new FileReader(filename));</span>
 
             // Convert json file to a list of exchange rates
-<span class="fc" id="L123">            List&lt;CardUser&gt; cardUsers = gson.fromJson(reader, new TypeToken&lt;List&lt;CardUser&gt;&gt;() {}.getType());</span>
-<span class="fc" id="L124">            return cardUsers;</span>
-<span class="nc" id="L125">        } catch (IOException e) {</span>
-<span class="nc" id="L126">            e.printStackTrace();</span>
+<span class="nc" id="L131">            List&lt;CardUser&gt; cardUsers = gson.fromJson(reader, new TypeToken&lt;List&lt;CardUser&gt;&gt;() {}.getType());</span>
+<span class="nc" id="L132">            return cardUsers;</span>
+<span class="nc" id="L133">        } catch (IOException e) {</span>
+<span class="nc" id="L134">            e.printStackTrace();</span>
         }
-<span class="nc" id="L128">        return new ArrayList&lt;CardUser&gt;();</span>
+<span class="nc" id="L136">        return new ArrayList&lt;CardUser&gt;();</span>
     }
+
 }
 
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

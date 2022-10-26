@@ -15,13 +15,14 @@ public class SellerDashboardTest {
     private static String testInventoryCSVPath = "src/test/resources/test_inventory.csv";
     private static String inventoryPath = "src/test/resources/test_inventory.json";
 
+    private static String testTransactionCSVPath = "src/test/resources/transaction.csv";
+
     //default
-    JsonParser jp = new JsonParser();
-    private List<Product> defaultInventory = jp.getInventory(inventoryPath);
+    private List<Product> defaultInventory = JsonParser.getInventory(inventoryPath);
 
     @AfterEach
     public void writeToDefault(){
-        jp.updateInventory(defaultInventory, inventoryPath);
+        JsonParser.updateInventory(defaultInventory, inventoryPath);
     }
 
     //test for reading and writing inventory to CSV File
@@ -34,37 +35,76 @@ public class SellerDashboardTest {
         inventoryModel.writeInventoryToFile(testInventoryCSVPath);
 
         //read from file
-        List<String[]> inventoryRead = inventoryModel.readInventoryFromFile(testInventoryCSVPath);
+        List<List<String>> inventoryRead = inventoryModel.readInventoryFromFile(testInventoryCSVPath);
 
         //check for equivalent length
-        // assertEquals(inventory.size(), inventoryRead.size());
-        System.out.println(inventory.size());
-        System.out.println(inventoryRead.size());
+        assertEquals(inventory.size(), inventoryRead.size());
 
         //check if the content is equivalent
 
         for (int i=0; i < inventory.size(); i++){
-            String[] productString = inventoryRead.get(i);
-            assertEquals(5, productString.length);
+            List<String> productString = inventoryRead.get(i);
+            assertEquals(5, productString.size());
             
             //name
-            assertEquals(inventory.get(i).getName(), productString[0]);
+            assertEquals(inventory.get(i).getName(), productString.get(0));
 
             //code
-            assertEquals(String.valueOf(inventory.get(i).getCode()), productString[1]);
+            assertEquals(String.valueOf(inventory.get(i).getCode()), productString.get(1));
 
             //category
-            assertEquals(inventory.get(i).getCategory(), productString[2]);
+            assertEquals(inventory.get(i).getCategory(), productString.get(2));
 
             //price
-            assertEquals(String.valueOf(inventory.get(i).getPrice()), productString[3]);
+            assertEquals(String.valueOf(inventory.get(i).getPrice()), productString.get(3));
 
             //quantity
-            assertEquals(String.valueOf(inventory.get(i).getQuantity()), productString[4]);
+            assertEquals(String.valueOf(inventory.get(i).getQuantity()), productString.get(4));
 
         }
         
+    }
 
+    //test for reading and writing transactions to CSV file
+    @Test
+    public void ReadAndWriteTransactionTest(){
+        InventoryModel inventoryModel = new InventoryModel(inventoryPath);
+        List<Product> inventory = inventoryModel.getInventory();
+
+        MainModel mainModel = new MainModel();
+
+        //add 2 of each items to cart
+        for (Product p : inventory){
+            mainModel.addToCart(p, 2);
+        }
+
+        int cartSize = mainModel.getUser().getCart().size();
+        
+
+        //complete transaction and write to file 
+        mainModel.checkout();
+
+        List<List<String>> itemsPurchased = mainModel.readPurchasesFromFile(testTransactionCSVPath);
+        
+        assertEquals(cartSize, itemsPurchased.size());
+
+        //put into maps for both
+        HashMap<String, Integer> ip = new HashMap<String, Integer>();
+
+        for (int i=0; i<itemsPurchased.size(); i++){
+            List<String> item = itemsPurchased.get(i);
+            ip.put(item.get(1), Integer.parseInt(item.get(2)));
+        }
+
+        HashMap<String, Integer> ap = new HashMap<String, Integer>();
+
+        for (Product p: mainModel.getAggregatePurchases().keySet()){
+            ap.put(p.getName(), mainModel.getAggregatePurchases().get(p));
+        }
+
+        assertEquals(ip, ap);
 
     }
+
+
 }

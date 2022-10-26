@@ -85,9 +85,9 @@ public class SellerDashboardView implements View{
 
         //read transactions done from file
         String transTemp = "";
-        List<String[]> transactions = this.mainModel.readPurchasesFromFile(transactionsPath);
+        List<List<String>> transactions = this.mainModel.readPurchasesFromFile(transactionsPath);
 
-        for (String[] s : transactions){
+        for (List<String> s : transactions){
             transTemp = transTemp.concat(s.toString());
         }
         transactionText.setText(transTemp);
@@ -101,9 +101,9 @@ public class SellerDashboardView implements View{
 
         //read inventory from file 
         String invTemp = "";
-        List<String[]> inventoryItems = this.inventoryModel.readInventoryFromFile(productsPath);
+        List<List<String>> inventoryItems = this.inventoryModel.readInventoryFromFile(productsPath);
 
-        for (String[] s : inventoryItems){
+        for (List<String> s : inventoryItems){
             invTemp = invTemp.concat(s.toString());
         }
  

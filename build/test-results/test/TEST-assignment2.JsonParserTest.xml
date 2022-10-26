@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="assignment2.JsonParserTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2022-10-26T05:24:29" hostname="DESKTOP-Q9TS4JK" time="0.022">
+<testsuite name="assignment2.JsonParserTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2022-10-26T09:09:33" hostname="DESKTOP-Q9TS4JK" time="0.022">
   <properties/>
-  <testcase name="getUsersEmptyFile()" classname="assignment2.JsonParserTest" time="0.004"/>
+  <testcase name="getUsersEmptyFile()" classname="assignment2.JsonParserTest" time="0.003"/>
   <testcase name="getUsersValidFile()" classname="assignment2.JsonParserTest" time="0.01"/>
   <testcase name="getUsersFileDoesNotExist()" classname="assignment2.JsonParserTest" time="0.001"/>
   <testcase name="updateUsersValidListWithPurchases()" classname="assignment2.JsonParserTest" time="0.003"/>

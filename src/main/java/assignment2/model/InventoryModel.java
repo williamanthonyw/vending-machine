@@ -192,16 +192,17 @@ public class InventoryModel {
         updateInventory();
     }
 
-    public List<String[]> readInventoryFromFile(String filename){
-        List<String[]> items = new ArrayList<String[]>();
+    public List<List<String>> readInventoryFromFile(String filename){
+        List<List<String>> items = new ArrayList<List<String>>();
         File file = new File(filename);
+
+        String[] item;
 
         try{
             CSVReader reader = new CSVReader(new FileReader(file));
 
-            while(reader.readNext() != null){
-                String[] item = (reader.readNext());
-                items.add(item);
+            while((item = reader.readNext()) != null){
+                items.add(Arrays.asList(item));
             }
 
             reader.close();
@@ -227,6 +228,8 @@ public class InventoryModel {
                 items.add(new String[] {p.getName(),String.valueOf(p.getCode()), p.getCategory(),  String.valueOf(p.getPrice()), String.valueOf(p.getQuantity())});
             }
 
+
+
             writer.writeAll(items);
 
             writer.close();
@@ -235,5 +238,9 @@ public class InventoryModel {
         catch(IOException e){
             e.printStackTrace();
         }
+    }
+
+    public static void main(String[] args){
+        
     }
 }

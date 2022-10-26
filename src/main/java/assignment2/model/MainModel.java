@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -147,16 +148,16 @@ public class MainModel {
         }
     }
 
-    public List<String[]> readPurchasesFromFile(String filename){
-        List<String[]> items = new ArrayList<String[]>();
+    public List<List<String>> readPurchasesFromFile(String filename){
+        List<List<String>> items = new ArrayList<List<String>>();
         File file = new File(filename);
+        String[] item;
 
         try{
             CSVReader reader = new CSVReader(new FileReader(file));
 
-            while(reader.readNext() != null){
-                String[] item = reader.readNext();
-                items.add(item);
+            while((item = reader.readNext()) != null){
+                items.add(Arrays.asList(item));
             }
 
             reader.close();
@@ -178,7 +179,13 @@ public class MainModel {
         // adds it to user's list of purchases
         for (Product product : user.getCart().keySet()){
             user.purchaseProduct(product, user.getCart().get(product));
-            this.aggregatePurchases.put(product, user.getCart().get(product) + aggregatePurchases.get(product));
+
+            if (aggregatePurchases.get(product) == null){
+                this.aggregatePurchases.put(product, 0);
+            }
+            this.aggregatePurchases.put(product, user.getCart().get(product) + this.aggregatePurchases.get(product));
+
+            
         }
 
         user.clearCart();
@@ -190,7 +197,7 @@ public class MainModel {
         inventoryModel.updateInventory();
 
         //write purchases to file
-        writePurchasesToFile(this.aggregatePurchases, "src/main/resources/transaction.csv");
+        writePurchasesToFile(this.aggregatePurchases, "src/test/resources/transaction.csv");
 
         logout();
 
@@ -209,5 +216,9 @@ public class MainModel {
         }
 
         return sum;
+    }
+
+    public static void main(String[] args){
+
     }
 }
