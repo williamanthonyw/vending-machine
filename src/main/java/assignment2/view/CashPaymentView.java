@@ -60,13 +60,15 @@ public class CashPaymentView implements View{
     private Label insertedAmount;
     private Label totalCartPriceLBL;
     private MainView mainView;
+    private ProductOptionsView productOptionsView;
 
     private double total;
 
-    public CashPaymentView(MainModel mainModel, MainView mainView){
+    public CashPaymentView(MainModel mainModel, MainView mainView, ProductOptionsView productOptionsView){
         this.mainModel = mainModel;
         this.cashPaymentModel = this.mainModel.getCashPaymentModel();
         this.mainView = mainView;
+        this.productOptionsView = productOptionsView;
     }
 
     @Override
@@ -97,6 +99,13 @@ public class CashPaymentView implements View{
         this.mainBox = new VBox(30);
         BorderPane.setMargin(this.mainBox, new Insets(50, 50, 50, 50));
         borderPane.setCenter(this.mainBox);
+
+        char arrowSymbol = '\u2190';
+        Button backBTN = new Button(arrowSymbol + "");
+        backBTN.setOnAction((e) -> {
+            mainView.returnToView(productOptionsView);
+        });
+        mainBox.getChildren().add(backBTN);
 
         this.popupBorderpane = new BorderPane();
         popupScene = new Scene(popupBorderpane);
