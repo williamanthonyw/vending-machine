@@ -18,10 +18,11 @@ public class InventoryModel {
     private Map<String, List<String>> productNamesByCategory;
     private List<String> allProductNames;
     private String filename;
+    private JsonParser jsonParser;
     
-    public InventoryModel(String filename){
-        this.filename = filename;
-        this.inventory = JsonParser.getInventory(filename);
+    public InventoryModel(List<Product> inventory, JsonParser jsonParser){
+        this.inventory = inventory;
+        this.jsonParser = jsonParser;
         this.categories = Arrays.asList(new String[] {"drinks", "chocolates", "chips", "candies"});
 
         productNamesByCategory = new LinkedHashMap<String, List<String>>();
@@ -63,8 +64,7 @@ public class InventoryModel {
     public void updateInventory(){   /////////// after purchase/changes
 
         // write back to inventory
-        JsonParser jparser = new JsonParser();
-        jparser.updateInventory(inventory, "src/main/resources/Inventory.json" );
+        jsonParser.updateInventory(inventory);
 
     }
 

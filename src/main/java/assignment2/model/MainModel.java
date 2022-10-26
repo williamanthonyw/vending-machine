@@ -23,35 +23,42 @@ public class MainModel {
     private CashPaymentModel cashPaymentModel;
     private InventoryModel inventoryModel;
 
+    private String inventoryFile;
+    private String usersFile;
+    private String initialCashFile;
+    private String cardFile;
+
     private User user;
     private boolean isLoggedIn;
 
-    private JsonParser jsonParser = new JsonParser();
     private HashMap<Product, Integer> aggregatePurchases;
+    private JsonParser jsonParser;
 
-    public MainModel(){
-        this.lastFiveProductsModel = new LastFiveProductsModel();
-        this.cardPaymentModel = new CardPaymentModel(this);
+    public MainModel(String inventoryFile, String usersFile, String initialCashFile, String cardFile){
 
-        this.inventoryModel = new InventoryModel("src/main/resources/Inventory.json");   ////////
+        this.jsonParser = new JsonParser(inventoryFile, usersFile, initialCashFile, cardFile);
 
-        this.loginModel = new LoginModel(jsonParser.getUsers("src/main/resources/users.json"));
-
-        System.out.println(loginModel.getUsers());
-
+        this.loginModel = new LoginModel(jsonParser.getUsers());
         this.user = loginModel.getAnonymousUser();
-        this.user.clearCart();
+
+        if (this.user != null){
+            this.user.clearCart();
+        }
+
         this.isLoggedIn = false;
 
-        this.cashPaymentModel = new CashPaymentModel("src/main/resources/cash.json");
 
         this.aggregatePurchases = new HashMap<Product, Integer>();
+        this.inventoryFile = inventoryFile;
+        this.usersFile = usersFile;
+        this.initialCashFile = initialCashFile;
+        this.cardFile = cardFile;
 
-//        purchaseProduct(new Product("milk", 28), 2);
+        this.lastFiveProductsModel = new LastFiveProductsModel();
+        this.cardPaymentModel = new CardPaymentModel(this, jsonParser );
+        this.cashPaymentModel = new CashPaymentModel(jsonParser.getCash(), jsonParser);
+        this.inventoryModel = new InventoryModel(jsonParser.getInventory(), jsonParser);
 
-        // for now logging in
-//        this.user = loginModel.login("Kylie", "password");
-//        this.isLoggedIn = true;
     }
 
     public LastFiveProductsModel getLastFiveProductsModel(){
@@ -83,6 +90,10 @@ public class MainModel {
         this.user = loginModel.getAnonymousUser();
         this.user.clearCart();
         this.isLoggedIn = false;
+    }
+
+    public void setUser(User user){
+        this.user = user;
     }
 
     public Map<Product, Integer> getCart(){
@@ -126,7 +137,6 @@ public class MainModel {
         // update quantity in inventory
         inventoryModel.updateQuantity(product, quantity);
 
-        System.out.println(user.getCart());
     }
 
     public void writePurchasesToFile(HashMap<Product, Integer> itemsPurchased, String filename){
@@ -191,7 +201,7 @@ public class MainModel {
         user.clearCart();
 
         // update users file
-        jsonParser.updateUsers(loginModel.getUsers(), "src/main/resources/users.json");
+        jsonParser.updateUsers(loginModel.getUsers());
 
         // update inventory file
         inventoryModel.updateInventory();

@@ -24,7 +24,10 @@ public class App extends Application{
 
     public static void main(String[] args){
 
-        mainModel = new MainModel();
+        mainModel = new MainModel("src/main/resources/Inventory.json",
+                                    "src/main/resources/users.json",
+                                "src/main/resources/InitialCash.json",
+                                    "src/main/resources/credit_cards.json");
         mainView = new MainView(mainModel);
         
         launch();

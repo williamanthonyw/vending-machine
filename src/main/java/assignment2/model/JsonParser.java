@@ -18,11 +18,23 @@ public class JsonParser {
 
     static Gson gson = new Gson();
 
-    public List<User> getUsers(String filename){
+    private String inventoryFile;
+    private String usersFile;
+    private String initialCashFile;
+    private String cardFile;
+
+    public JsonParser(String inventoryFile, String usersFile, String initialCashFile, String cardFile){
+        this.inventoryFile = inventoryFile;
+        this.usersFile = usersFile;
+        this.initialCashFile = initialCashFile;
+        this.cardFile = cardFile;
+    }
+
+    public List<User> getUsers(){
 
         try {
 
-            Reader reader = new BufferedReader(new FileReader(filename));
+            Reader reader = new BufferedReader(new FileReader(usersFile));
 
             // Convert json file to a list of exchange rates
             List<User> users = gson.fromJson(reader, new TypeToken<List<User>>() {}.getType());
@@ -39,9 +51,9 @@ public class JsonParser {
 
     }
 
-    public void updateUsers(List<User> users, String filename){
+    public void updateUsers(List<User> users){
 
-        try (FileWriter file = new FileWriter(filename)) {
+        try (FileWriter file = new FileWriter(usersFile)) {
 
             file.write(gson.toJson(users));
             file.flush();
@@ -54,9 +66,9 @@ public class JsonParser {
 
     }
     ///////////////////
-    public static List<Product> getInventory(String filename){
+    public List<Product> getInventory(){
         try {
-            Reader reader = new BufferedReader(new FileReader(filename));
+            Reader reader = new BufferedReader(new FileReader(inventoryFile));
 
             // Convert json file to a list of products
             List<Product> inventory = gson.fromJson(reader, new TypeToken<List<Product>>() {}.getType());
@@ -74,9 +86,9 @@ public class JsonParser {
 
     // + updateInventory 
 
-    public List<Cash> getCash(String filename){
+    public List<Cash> getCash(){
         try{
-            Reader reader = new BufferedReader(new FileReader(filename));
+            Reader reader = new BufferedReader(new FileReader(initialCashFile));
 
             List<Cash> cashList = gson.fromJson(reader, new TypeToken<List<Cash>>() {}.getType());
             // System.out.println("hello");
@@ -93,9 +105,9 @@ public class JsonParser {
         }
     }
 
-    public void updateCash(List<Cash> cashList, String filename){
+    public void updateCash(List<Cash> cashList){
         
-        try(FileWriter file = new FileWriter(filename)){
+        try(FileWriter file = new FileWriter(initialCashFile)){
             file.write(gson.toJson(cashList));
             file.flush();
         }
@@ -105,9 +117,9 @@ public class JsonParser {
         }
     }
 
-    public static void updateInventory(List<Product> productList, String filename){
+    public void updateInventory(List<Product> productList){
 
-        try(FileWriter file = new FileWriter(filename)){
+        try(FileWriter file = new FileWriter(inventoryFile)){
 
             if (productList != null){
                 file.write(gson.toJson(productList));
@@ -122,10 +134,10 @@ public class JsonParser {
         }
     }
 
-    public List<CardUser> getCardDetail(String filename) {
+    public List<CardUser> getCardDetail() {
         try {
 
-            Reader reader = new BufferedReader(new FileReader(filename));
+            Reader reader = new BufferedReader(new FileReader(cardFile));
 
             // Convert json file to a list of exchange rates
             List<CardUser> cardUsers = gson.fromJson(reader, new TypeToken<List<CardUser>>() {}.getType());
