@@ -5,15 +5,8 @@ import assignment2.model.*;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.naming.InsufficientResourcesException;
-
-import org.json.simple.JSONArray;
-import org.json.simple.parser.JSONParser;
-import org.junit.experimental.theories.suppliers.TestedOn;
 import org.junit.jupiter.api.Test;
-import com.google.gson.Gson;
-import com.google.gson.JsonParseException;
-import com.google.gson.internal.bind.JsonAdapterAnnotationTypeAdapterFactory;
+
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -21,12 +14,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class CashPaymentTest {
     JsonParser jp = new JsonParser();
-    private List<Cash> defaultCash = jp.getCash("src/main/resources/InitialCash.json");
+    private List<Cash> defaultCash = jp.getCash("src/test/resources/InitialCash.json");
 
     //Test on initial amount of each notes and coins available
     @Test
     public void initialAmountCheck(){
-        String initialPath = "src/main/resources/cash.json";
+        String initialPath = "src/test/resources/cash.json";
         CashPaymentModel Test1 = new CashPaymentModel(initialPath);
         List<Cash> cashList = Test1.getCashList();
 
@@ -38,7 +31,7 @@ public class CashPaymentTest {
     //Test on values of each notes and coins
     @Test 
     public void cashValueCheck(){
-        String initialPath = "src/main/resources/InitialCash.json";
+        String initialPath = "src/test/resources/InitialCash.json";
         CashPaymentModel Test2 = new CashPaymentModel(initialPath);
         List<Cash> cashList = Test2.getCashList();
 
@@ -86,7 +79,7 @@ public class CashPaymentTest {
     //Test on initial different notes and coins available: 11 different notes and coins
     @Test
     public void numberOfDifferentNotesandCoins(){
-        String initialPath = "src/main/resources/InitialCash.json";
+        String initialPath = "src/test/resources/InitialCash.json";
         CashPaymentModel Test3 = new CashPaymentModel(initialPath);
         List<Cash> cashList = Test3.getCashList();
 
@@ -96,7 +89,7 @@ public class CashPaymentTest {
     //Test on payment where changes are in notes only
     @Test
     public void changeNotesOnly() throws InsufficientChangeException, PaymentNotEnoughException{
-        String initialPath = "src/main/resources/test1cash.json";
+        String initialPath = "src/test/resources/test1cash.json";
         CashPaymentModel Test4 = new CashPaymentModel(initialPath);
         List<Cash> cashList = Test4.getCashList();
 
@@ -127,7 +120,7 @@ public class CashPaymentTest {
     //Test on payment where changes are in coins only
     @Test
     public void changeCoinsOnly() throws InsufficientChangeException, PaymentNotEnoughException{
-        String initialPath = "src/main/resources/test2cash.json";
+        String initialPath = "src/test/resources/test2cash.json";
         CashPaymentModel Test5 = new CashPaymentModel(initialPath);
         List<Cash> cashList = Test5.getCashList();
 
@@ -152,7 +145,7 @@ public class CashPaymentTest {
     // //Test on payment where the cash inventory is not sufficient
     @Test
     public void changeisNotSufficient() throws InsufficientChangeException, PaymentNotEnoughException{
-        String initialPath = "src/main/resources/testnotenough.json";
+        String initialPath = "src/test/resources/testnotenough.json";
         CashPaymentModel Test6 = new CashPaymentModel(initialPath);
         List<Cash> cashList = Test6.getCashList();
 
@@ -168,7 +161,7 @@ public class CashPaymentTest {
     // //Test on update cash inventory after a successful payment
     @Test
     public void updateChangeList() throws InsufficientChangeException, PaymentNotEnoughException{
-        String initialPath = "src/main/resources/test3cash.json";
+        String initialPath = "src/test/resources/test3cash.json";
         CashPaymentModel Test7 = new CashPaymentModel(initialPath);
         List<Cash> cashList = Test7.getCashList();
         
@@ -198,7 +191,7 @@ public class CashPaymentTest {
     // //Test on small change not sufficient
     @Test
     public void smallChangeInsufficient() throws InsufficientChangeException, PaymentNotEnoughException{
-        String initialPath = "src/main/resources/test4cash.json";
+        String initialPath = "src/test/resources/test4cash.json";
         CashPaymentModel Test8 = new CashPaymentModel(initialPath);
         List<Cash> cashList = Test8.getCashList();
 
@@ -215,7 +208,7 @@ public class CashPaymentTest {
     // //Test on calculating the total payment given a hashmap of each coins and notes
     @Test
     public void calculateTotalPayment(){
-        String initialPath = "src/main/resources/cash.json";
+        String initialPath = "src/test/resources/cash.json";
         CashPaymentModel Test9 = new CashPaymentModel(initialPath);
         
         HashMap<Double, Integer> cash = new HashMap<Double, Integer>();
@@ -238,7 +231,7 @@ public class CashPaymentTest {
     // //Test on calculating change less than 5 cents
     @Test 
     public void smallChangeRound() throws InsufficientChangeException, PaymentNotEnoughException{
-        String initialPath = "src/main/resources/test5cash.json";
+        String initialPath = "src/test/resources/test5cash.json";
 
         //rounding up
         CashPaymentModel Test10 = new CashPaymentModel(initialPath);
@@ -276,7 +269,7 @@ public class CashPaymentTest {
     //Test on multiple payments
     @Test
     public void multiplePayments() throws InsufficientChangeException, PaymentNotEnoughException{
-        String initialPath = "src/main/resources/test6cash.json";
+        String initialPath = "src/test/resources/test6cash.json";
         CashPaymentModel Test12 = new CashPaymentModel(initialPath);
         List<Cash> cashList = Test12.getCashList();
        
@@ -336,7 +329,7 @@ public class CashPaymentTest {
     //Test on not enough payment
     @Test 
     public void NotEnoughPayment() throws InsufficientChangeException, PaymentNotEnoughException{
-        String initialPath = "src/main/resources/InitialCash.json";
+        String initialPath = "src/test/resources/InitialCash.json";
         CashPaymentModel Test13 = new CashPaymentModel(initialPath);
         List<Cash> cashList = Test13.getCashList();
        

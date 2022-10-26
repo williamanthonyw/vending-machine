@@ -1,7 +1,7 @@
 package assignment2.view;
 
+import assignment2.model.InventoryModel;
 import assignment2.model.MainModel;
-import assignment2.model.ProductOptionsModel;
 import assignment2.model.Purchase;
 import assignment2.model.Product;
 import assignment2.model.User;
@@ -24,7 +24,7 @@ public class SellerDashboardView implements View{
 
     private MainModel mainModel;
     private MainView mainView;
-    private ProductOptionsModel productOptionsModel;
+    private InventoryModel inventoryModel;
     private User user;
 
     private List<Purchase> purchasedItems;
@@ -40,7 +40,7 @@ public class SellerDashboardView implements View{
     public SellerDashboardView(MainModel mainModel, MainView mainView){
         this.mainModel = mainModel;
         this.mainView = mainView;
-        this.productOptionsModel = this.mainModel.getProductOptionsModel();
+        this.inventoryModel = this.mainModel.getInventoryModel();
         this.user = this.mainModel.getUser();
     }
 
@@ -57,7 +57,7 @@ public class SellerDashboardView implements View{
         this.borderPane = new BorderPane();
 
         this.mainBox = new VBox(30);
-        BorderPane.setMargin(this.mainBox, new Insets(50, 50, 50, 50));\
+        BorderPane.setMargin(this.mainBox, new Insets(50, 50, 50, 50));
         this.borderPane.setCenter(this.mainBox);
 
 
@@ -68,7 +68,7 @@ public class SellerDashboardView implements View{
         
 
         //list of available products
-        availableProducts = this.productOptionsModel.getProductsToDisplay(productsPath);
+        availableProducts = this.inventoryModel.getInventory();
 
         //list of purchased items
         purchasedItems = this.user.getPurchases();
@@ -97,11 +97,11 @@ public class SellerDashboardView implements View{
         TextArea inventoryText = new TextArea();
 
         //write inventory to file
-        this.productOptionsModel.writeInventoryToFile(productsPath);
+        this.inventoryModel.writeInventoryToFile(productsPath);
 
         //read inventory from file 
         String invTemp = "";
-        List<String[]> inventoryItems = this.productOptionsModel.readInventoryFromFile(productsPath);
+        List<String[]> inventoryItems = this.inventoryModel.readInventoryFromFile(productsPath);
 
         for (String[] s : inventoryItems){
             invTemp = invTemp.concat(s.toString());
@@ -121,6 +121,11 @@ public class SellerDashboardView implements View{
     @Override
     public void setUpCancelBTN(Button cancelBTN){
        
+    }
+
+    @Override
+    public void refresh(){
+
     }
 
   

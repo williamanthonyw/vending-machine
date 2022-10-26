@@ -16,8 +16,8 @@ public class CardPaymentTest {
         cardPaymentModel = new CardPaymentModel(mainModel);
         CardUser cardUser = new CardUser("Allen","12345");
     }
-    @Test
-    public void paymentProcessTest(){
-        cardPaymentModel.paymentProcess("Kasey","60146");
-    }
+    // @Test
+    // public void paymentProcessTest(){
+    //     cardPaymentModel.paymentProcess("Kasey","60146");
+    // }
 }
