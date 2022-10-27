@@ -48,7 +48,7 @@ public class MainModel {
         this.cardPaymentModel = new CardPaymentModel(this, jsonParser );
         this.cashPaymentModel = new CashPaymentModel(jsonParser.getCash(), jsonParser);
         this.inventoryModel = new InventoryModel(jsonParser.getInventory(), jsonParser);
-        this.userManagementModel = new UserManagementModel(jsonParser.getUsers());
+        this.userManagementModel = new UserManagementModel(jsonParser.getUsers(), jsonParser);
 
     }
 

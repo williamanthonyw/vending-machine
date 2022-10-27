@@ -34,6 +34,7 @@ public class UserManagementView implements View {
 
     private ComboBox selectNewAccess;
     private Button saveNewAccessBTN;
+    private Button removeUserBTN;
 
     public UserManagementView(MainModel mainModel, Stage stage, MainView mainView){
         this.mainModel = mainModel;
@@ -118,9 +119,43 @@ public class UserManagementView implements View {
         };
         changeAccessBTNColumn.setCellFactory(cellFactory);
 
+        TableColumn removeUserBTNColumn = new TableColumn("Remove User");
+        removeUserBTNColumn.setCellValueFactory(new PropertyValueFactory<>(""));
+        Callback<TableColumn<User, String>, TableCell<User, String>> cellFactory2
+                = //
+                new Callback<TableColumn<User, String>, TableCell<User, String>>() {
+            @Override
+            public TableCell call(final TableColumn<User, String> param) {
+                final TableCell<User, String> cell = new TableCell<User, String>() {
+
+                    final Button removeBTN = new Button("Remove");
+
+                    @Override
+                    public void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                            setText(null);
+                        } else {
+                            removeBTN.setOnAction(event -> {
+
+                                // setUpPopup(getTableView().getItems().get(getIndex()), usersTable);
+                                userManagementModel.removeUser(getTableView().getItems().get(getIndex()));
+                                refresh();
+                            });
+                            setGraphic(removeBTN);
+                            setText(null);
+                        }
+                    }
+                };
+                return cell;
+            }
+        };
+        removeUserBTNColumn.setCellFactory(cellFactory2);
+
         populateTable(usersTable);
 
-        usersTable.getColumns().add(changeAccessBTNColumn);
+        usersTable.getColumns().addAll(changeAccessBTNColumn, removeUserBTNColumn);
 
     }
 
