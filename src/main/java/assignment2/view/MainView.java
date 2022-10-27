@@ -2,6 +2,7 @@ package assignment2.view;
 
 import assignment2.model.MainModel;
 import assignment2.model.Product;
+import assignment2.model.UserAccess;
 import javafx.animation.PauseTransition;
 import javafx.animation.Transition;
 import javafx.application.Platform;
@@ -41,7 +42,8 @@ public class MainView {
 
     public void setUp(Stage stage){
         this.stage = stage;
-        goToSellerInventoryView();
+        // goToSellerInventoryView();
+        goToProductOptionsView();
 
         stage.show();
     }
@@ -195,10 +197,33 @@ public class MainView {
             goToProductOptionsView();
         });
 
+        MenuItem userManagementBTN = new MenuItem("Manage Users");
+        userManagementBTN.setOnAction((ActionEvent e) -> {
+            goToUserManagementView();
+        });
+
+        MenuItem sellerInventoryBTN = new MenuItem("Manage Inventory");
+        sellerInventoryBTN.setOnAction((ActionEvent e) -> {
+            goToSellerInventoryView();
+        });
+
+
         menuBTN.getItems().addAll(productOptionsBTN);
 
         if (mainModel.isLoggedIn()){
             menuBTN.getItems().addAll(logoutBTN);
+            
+
+            if (mainModel.getUser().getUserAccess().equals(UserAccess.OWNER)){
+                menuBTN.getItems().addAll(userManagementBTN);
+            }
+            if (mainModel.getUser().getUserAccess().equals(UserAccess.SELLER)){
+                menuBTN.getItems().addAll(sellerInventoryBTN);
+            }
+            if (mainModel.getUser().getUserAccess().equals(UserAccess.CASHIER)){
+                ;
+            }
+
         } else {
             menuBTN.getItems().addAll(loginBTN);
         }
@@ -212,6 +237,10 @@ public class MainView {
 
     public void gotoAddProductView(SellerInventoryView sellerInventoryView) {
         goToView(new AddProductView(mainModel, this, sellerInventoryView));
+    }
+
+    public void goToUserManagementView(){
+        goToView(new UserManagementView(mainModel, stage, this));
     }
 }
 
