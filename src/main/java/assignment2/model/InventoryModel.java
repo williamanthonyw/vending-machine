@@ -75,6 +75,10 @@ public class InventoryModel {
     public void updateQuantity(Product product, int numBought){
        product.setQuantity(product.getQuantity() - numBought);
 
+       if (product.getQuantity() <= 0){
+           inventory.remove(product);
+       }
+
     }
 
     public int[] getCodeRange(String category){
