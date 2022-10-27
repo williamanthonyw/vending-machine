@@ -273,7 +273,6 @@ public class ProductOptionsView implements View{
         };
         addBTNColumn.setCellFactory(cellFactory);
 
-
         populateTable(chocolatesTable, "chocolates");
 
         productOptionsBox.getChildren().add(chocolatesTable);

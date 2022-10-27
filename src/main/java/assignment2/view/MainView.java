@@ -87,6 +87,8 @@ public class MainView {
         goToView(new ProductOptionsView(mainModel, stage, this));
     }
 
+    public void goToModifyCashView(){goToView(new ModifyCashView(mainModel,stage,this));}
+
     public void goToLoginView(){
         goToView(new LoginView(mainModel, this));
     }
@@ -221,7 +223,7 @@ public class MainView {
 
         if (mainModel.isLoggedIn()){
             menuBTN.getItems().addAll(logoutBTN);
-            
+
 
             if (mainModel.getUser().getUserAccess().equals(UserAccess.OWNER)){
                 menuBTN.getItems().addAll(userManagementBTN);

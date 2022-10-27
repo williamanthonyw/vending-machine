@@ -61,7 +61,13 @@ public class CashPaymentModel{
             c.setAmount(c.getAmount() + cashPayment.get(c.getValue()));
         }
     }
-
+    public void updateCash(int newAmount, Cash cash) {
+        cash.setAmount(newAmount);
+        for(Cash c : cashList){
+            System.out.println(c.getAmount());
+        }
+        jsonParser.updateCash(cashList);
+    }
     public Map<String, Integer> calculateChange(double payment, double price, HashMap<Double, Integer> cashPayment) throws InsufficientChangeException, PaymentNotEnoughException{
         
         LinkedHashMap<String, Integer> totalChange = new LinkedHashMap<String, Integer>();
