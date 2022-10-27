@@ -52,6 +52,10 @@ public class MainView {
         goToView(new SellerInventoryView(this.mainModel, this));
     }
 
+    public void goToSellerDashboardView(){
+        goToView(new SellerDashboardView(this.mainModel, this));
+    }
+
     public void goToView(View view){
         view.setUp();
         stage.setScene(view.getScenes().get(0));
@@ -207,6 +211,11 @@ public class MainView {
             goToSellerInventoryView();
         });
 
+        MenuItem sellerDashboardBTN = new MenuItem("Manage reports");
+        sellerDashboardBTN.setOnAction((ActionEvent e) -> {
+            goToSellerDashboardView();
+        });
+
 
         menuBTN.getItems().addAll(productOptionsBTN);
 
@@ -219,6 +228,7 @@ public class MainView {
             }
             if (mainModel.getUser().getUserAccess().equals(UserAccess.SELLER)){
                 menuBTN.getItems().addAll(sellerInventoryBTN);
+                menuBTN.getItems().addAll(sellerDashboardBTN);
             }
             if (mainModel.getUser().getUserAccess().equals(UserAccess.CASHIER)){
                 ;
