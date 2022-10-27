@@ -95,11 +95,16 @@ public class LoginView implements View{
         Region space = new Region();
         loginBox.getChildren().add(space);
 
-        Button signInBTN = new Button("Sign in/Register");
+        Button signInBTN = new Button("Sign in");
         loginBox.getChildren().add(signInBTN);
+
+        Button registerBTN = new Button("Register");
+        loginBox.getChildren().add(registerBTN);
 
         Label signInErrorLBL = new Label("");
         loginBox.getChildren().add(signInErrorLBL);
+
+
 
         signInBTN.setOnAction((ActionEvent e)->{
 
@@ -107,13 +112,21 @@ public class LoginView implements View{
                 //View update?
                 mainView.goToProductOptionsView();
             } else {
-                //Automatic Register
-                User user = new User(userNameTF.getText(),passwordTF.getText());
-                loginModel.addUser(user);
-//                signInErrorLBL.setText("Incorrect username or password");
-                mainModel.login(userNameTF.getText(),passwordTF.getText());
+                signInErrorLBL.setText("Incorrect username or password");
             }
 
+        });
+
+        registerBTN.setOnAction((ActionEvent e)->{
+            User user = new User(userNameTF.getText(),passwordTF.getText());
+            if(loginModel.addUser(user)){
+
+                mainModel.login(userNameTF.getText(),passwordTF.getText());
+
+                mainView.goToProductOptionsView();
+            }else{
+                signInErrorLBL.setText("Account with username already exists!");
+            }
         });
 
     };

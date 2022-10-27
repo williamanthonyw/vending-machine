@@ -218,6 +218,11 @@ public class MainView {
             goToSellerDashboardView();
         });
 
+        MenuItem modifyCashBTN = new MenuItem("Modify Cash");
+        modifyCashBTN.setOnAction((ActionEvent e) -> {
+            goToModifyCashView();
+        });
+
 
         menuBTN.getItems().addAll(productOptionsBTN);
 
@@ -233,7 +238,7 @@ public class MainView {
                 menuBTN.getItems().addAll(sellerDashboardBTN);
             }
             if (mainModel.getUser().getUserAccess().equals(UserAccess.CASHIER)){
-                ;
+                menuBTN.getItems().add(modifyCashBTN);
             }
 
         } else {
