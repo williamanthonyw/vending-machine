@@ -59,9 +59,9 @@ public class MainView {
     public void goToView(View view){
         view.setUp();
         stage.setScene(view.getScenes().get(0));
+        view.setUpCancelBTN(cancelBTN);
         setUpMenu();
         view.setUpMenuBTN(menuBTN);
-        view.setUpCancelBTN(cancelBTN);
 
         // restart timer on key press
         for (Scene scene : view.getScenes()){
