@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="assignment2.SellerDashboardTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2022-10-27T01:56:15" hostname="DESKTOP-Q9TS4JK" time="0.079">
+<testsuite name="assignment2.SellerDashboardTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2022-10-27T09:18:43" hostname="Williams-MBP" time="0.045">
   <properties/>
-  <testcase name="readAndWriteTransactionTest()" classname="assignment2.SellerDashboardTest" time="0.045"/>
-  <testcase name="readAndWriteInventoryTest()" classname="assignment2.SellerDashboardTest" time="0.003"/>
-  <testcase name="multipleTransactionsTest()" classname="assignment2.SellerDashboardTest" time="0.027"/>
+  <testcase name="readAndWriteTransactionTest()" classname="assignment2.SellerDashboardTest" time="0.026"/>
+  <testcase name="readAndWriteInventoryTest()" classname="assignment2.SellerDashboardTest" time="0.001"/>
+  <testcase name="multipleTransactionsTest()" classname="assignment2.SellerDashboardTest" time="0.016"/>
   <system-out><![CDATA[test1
 test1
 test1
