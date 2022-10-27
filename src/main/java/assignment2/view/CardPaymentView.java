@@ -29,10 +29,13 @@ public class CardPaymentView implements View {
 
     private MainView mainView;
 
-    public CardPaymentView(MainModel mainModel, MainView mainView) {
+    private ProductOptionsView productOptionsView;
+
+    public CardPaymentView(MainModel mainModel, MainView mainView, ProductOptionsView productOptionsView) {
         this.mainModel = mainModel;
         this.mainView = mainView;
         this.cardPaymentModel = mainModel.getCardPaymentModel();
+        this.productOptionsView = productOptionsView;
     }
 
     @Override
@@ -63,6 +66,13 @@ public class CardPaymentView implements View {
         BorderPane.setMargin(mainBox, new Insets(200, 0, 0, 300));
         BorderPane.setMargin(mainBox, new Insets(50, 50, 50, 50));
         borderPane.setCenter(mainBox);
+
+        char arrowSymbol = '\u2190';
+        Button backBTN = new Button(arrowSymbol + "");
+        backBTN.setOnAction((e) -> {
+            mainView.returnToView(productOptionsView);
+        });
+        mainBox.getChildren().add(backBTN);
 
         Label titleLBL = new Label("Checkout");
         titleLBL.setId("title");

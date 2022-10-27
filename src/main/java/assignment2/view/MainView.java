@@ -74,6 +74,7 @@ public class MainView {
     public void returnToView(View view){
         stage.setScene(view.getScenes().get(0));
         view.refresh();
+        view.setUpCancelBTN(cancelBTN);
     }
 
     public void goToProductOptionsView(){
@@ -84,11 +85,11 @@ public class MainView {
         goToView(new LoginView(mainModel, this));
     }
 
-    public void goToCardPaymentView(){
-        goToView(new CardPaymentView(mainModel, this));
+    public void goToCardPaymentView(ProductOptionsView productOptionsView){
+        goToView(new CardPaymentView(mainModel, this, productOptionsView));
     }
 
-    public void goToCashPaymentView(){ goToView(new CashPaymentView(mainModel, this)); }
+    public void goToCashPaymentView(ProductOptionsView productOptionsView){ goToView(new CashPaymentView(mainModel, this, productOptionsView)); }
 
     public void setUpCancelOnTimeOut(){
 
@@ -153,7 +154,6 @@ public class MainView {
     public void setUpMenu() {
 
         this.menuBTN = new MenuButton();
-
 
         ImageView menuIV = new ImageView(new Image("white-menu.png"));
         menuIV.setFitHeight(20.0);
