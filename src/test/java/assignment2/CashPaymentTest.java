@@ -5,6 +5,7 @@ import assignment2.model.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang3.ClassPathUtils;
 import org.junit.jupiter.api.Test;
@@ -141,7 +142,7 @@ public class CashPaymentTest {
         double payment = Test4.calculatePayment(cash);
         double price = 12.00;
 
-        HashMap<String, Integer> change = Test4.calculateChange(payment, price, cash);
+        Map<String, Integer> change = Test4.calculateChange(payment, price, cash);
         assertEquals(2, change.get("$100"));
         assertEquals(1, change.get("$50"));
         assertEquals(1, change.get("$20"));
@@ -171,7 +172,7 @@ public class CashPaymentTest {
         double payment = Test5.calculatePayment(cash);
         double price = 0.15;
 
-        HashMap<String, Integer> change = Test5.calculateChange(payment, price, cash);
+        Map<String, Integer> change = Test5.calculateChange(payment, price, cash);
         assertEquals(1, change.get("20c"));
         assertEquals(1, change.get("10c"));
         assertEquals(1, change.get("5c"));
@@ -223,7 +224,7 @@ public class CashPaymentTest {
         double payment = Test7.calculatePayment(cash);
         double price = 122.45; //16.55
         HashMap<String, Integer> cashMap = Test7.getCashMap(Test7.getCashList());
-        HashMap<String, Integer> change = Test7.calculateChange(payment, price, cash);
+        Map<String, Integer> change = Test7.calculateChange(payment, price, cash);
        
 
         for(Cash c: Test7.getCashList()){
@@ -305,7 +306,7 @@ public class CashPaymentTest {
         double payment1 = Test10.calculatePayment(cash1);
         double price1 = 0.06;
 
-        HashMap<String, Integer> change1 = Test10.calculateChange(payment1, price1, cash1);
+        Map<String, Integer> change1 = Test10.calculateChange(payment1, price1, cash1);
         assertEquals(1, change1.get("5c"));
 
         //reset json
@@ -321,7 +322,7 @@ public class CashPaymentTest {
         double payment2 = Test11.calculatePayment(cash2);
         double price2 = 0.08;
 
-        HashMap<String, Integer> change2 = Test11.calculateChange(payment2, price2, cash2);
+        Map<String, Integer> change2 = Test11.calculateChange(payment2, price2, cash2);
         assertEquals(0, change2.get("5c"));
 
         //reset json
@@ -357,7 +358,7 @@ public class CashPaymentTest {
         double totalPayment1 = Test12.calculatePayment(payment1);
         double price1 = 368.44;
         HashMap<String, Integer> cashMap1 = Test12.getCashMap(cashList);
-        HashMap<String, Integer> change1 = Test12.calculateChange(totalPayment1, price1, payment1);
+        Map<String, Integer> change1 = Test12.calculateChange(totalPayment1, price1, payment1);
         
 
         for (Cash c: cashList){
@@ -380,7 +381,7 @@ public class CashPaymentTest {
         double totalPayment2 = Test12.calculatePayment(payment2);
         double price2 = 223.79;
         HashMap<String, Integer> cashMap2 = Test12.getCashMap(cashList);
-        HashMap<String, Integer> change2 = Test12.calculateChange(totalPayment2, price2, payment2);
+        Map<String, Integer> change2 = Test12.calculateChange(totalPayment2, price2, payment2);
         
 
         for (Cash c: cashList){

@@ -88,7 +88,10 @@ public class SellerDashboardView implements View{
         List<List<String>> transactions = this.mainModel.readPurchasesFromFile(transactionsPath);
 
         for (List<String> s : transactions){
-            transTemp = transTemp.concat(s.toString());
+            String temp2 = String.join(", ", s).stripTrailing();
+            temp2 = temp2.concat("\n");
+        
+            transTemp = transTemp.concat(temp2);
         }
         transactionText.setText(transTemp);
         mainBox.getChildren().addAll(transactionLBL, transactionText);
@@ -105,15 +108,16 @@ public class SellerDashboardView implements View{
         List<List<String>> inventoryItems = this.inventoryModel.readInventoryFromFile(productsPath);
 
         for (List<String> s : inventoryItems){
-            invTemp = invTemp.concat(s.toString());
+            String temp2 = String.join(", ", s).stripTrailing();
+            temp2 = temp2.concat("\n");
+            invTemp = invTemp.concat(temp2);
         }
  
         inventoryText.setText(invTemp);
 
         mainBox.getChildren().addAll(inventoryLBL, inventoryText);
 
-         
-
+        
     }
 
     @Override

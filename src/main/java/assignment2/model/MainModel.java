@@ -229,26 +229,56 @@ public class MainModel {
     }
 
     public static void main(String[] args){
-    String testInventoryCSVPath = "src/test/resources/test_inventory.csv";
-    String inventoryPath = "src/test/resources/test_inventory.json";
+    // String testInventoryCSVPath = "src/test/resources/test_inventory.csv";
+    // String inventoryPath = "src/test/resources/test_inventory.json";
 
-    String testTransactionCSVPath = "src/test/resources/transaction.csv";
+    // String testTransactionCSVPath = "src/test/resources/transaction.csv";
 
-    JsonParser jp = new JsonParser(inventoryPath, "src/test/resources/test_users3.json", "src/test/resources/InitialCash.json", "src/test/resources/credit_cards.json");
 
-    InventoryModel im = new InventoryModel(jp.getInventory(), jp);
-    MainModel mm = new MainModel(inventoryPath, "src/test/resources/test_users3.json", "src/test/resources/InitialCash.json", "src/test/resources/credit_cards.json");
+    // JsonParser jp = new JsonParser(inventoryPath, "src/test/resources/test_users3.json", "src/test/resources/InitialCash.json", "src/test/resources/credit_cards.json");
+    // List<Product> defaultInventory = jp.getInventory();
 
-    // for (Product p: im.getInventory()){
-    //     System.out.println(p.getCategory() + p.getCode() + p.getName() + p.getPrice() + p.getQuantity());
-    // }
-    mm.setUser(mm.getLoginModel().login("test1", "pw"));
-    System.out.println(mm.getUser());
+    // InventoryModel im = new InventoryModel(jp.getInventory(), jp);
+    // MainModel mm = new MainModel(inventoryPath, "src/test/resources/test_users3.json", "src/test/resources/InitialCash.json", "src/test/resources/credit_cards.json");
+
+    // // for (Product p: im.getInventory()){
+    // //     System.out.println(p.getCategory() + p.getCode() + p.getName() + p.getPrice() + p.getQuantity());
+    // // }
+    // // mm.setUser(mm.getLoginModel().login("test1", "pw"));
+    // // System.out.println(mm.getUser());
     
-    for (Product p: im.getInventory()){
-        mm.addToCart(p, 2);
-    }
+    // // for (Product p: im.getInventory()){
+    // //     mm.addToCart(p, 2);
+    // // }
 
-    mm.checkout();
+    // // mm.checkout();
+
+    // // String transTemp = "";
+    // // List<List<String>> transactions = mm.readPurchasesFromFile(testTransactionCSVPath);
+
+    // // System.out.println(transactions);
+
+    // //     for (List<String> s : transactions){
+    // //             String temp2 = String.join(", ", s);
+    // //             temp2 = temp2.concat("\n");
+        
+    // //             transTemp = transTemp.concat(temp2);
+    // //     }
+    // // System.out.println(transTemp);
+
+    // im.writeInventoryToFile(testInventoryCSVPath);
+
+    //     //read inventory from file 
+    // String invTemp = "";
+    // List<List<String>> inventoryItems = im.readInventoryFromFile(testInventoryCSVPath);
+
+    // for (List<String> s : inventoryItems){
+    //     String temp2 = String.join(", ", s).stripTrailing();
+    //     temp2 = temp2.concat("\n");
+    //     invTemp = invTemp.concat(temp2);
+    // }
+
+    // System.out.println(invTemp);
+    // jp.updateInventory(defaultInventory);
     }
 }
