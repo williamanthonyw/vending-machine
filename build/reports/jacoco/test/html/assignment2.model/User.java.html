@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>User.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">assignment2</a> &gt; <a href="index.source.html" class="el_package">assignment2.model</a> &gt; <span class="el_source">User.java</span></div><h1>User.java</h1><pre class="source lang-java linenums">package assignment2.model;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.ArrayList;
+import java.time.LocalDateTime;
+import java.util.Map;
+
+public class User {
+
+    private String username;
+    private String password;
+    private List&lt;Purchase&gt; purchases;
+    private Map&lt;Product, Integer&gt; cart;
+    private CardUser cardUser;
+    private UserAccess userAccess;
+
+<span class="fc" id="L18">    public User(String username, String password) {</span>
+<span class="fc" id="L19">        this.username = username;</span>
+<span class="fc" id="L20">        this.password = password;</span>
+<span class="fc" id="L21">        this.purchases = new ArrayList&lt;Purchase&gt;();</span>
+<span class="fc" id="L22">        this.cart = new HashMap&lt;Product, Integer&gt;();</span>
+
+<span class="pc bpc" id="L24" title="1 of 2 branches missed.">        if (this.username.equals(&quot;owner&quot;)){</span>
+<span class="nc" id="L25">            this.userAccess = UserAccess.OWNER;</span>
+        }
+<span class="fc" id="L27">        else {this.userAccess = UserAccess.CUSTOMER;}</span>
+
+<span class="fc" id="L29">    }</span>
+
+    public void purchaseProduct(Product product, int quantity){
+<span class="fc" id="L32">        Purchase purchase = new Purchase(product.getName(), product.getPrice(), quantity, LocalDateTime.now());</span>
+<span class="fc" id="L33">        this.purchases.add(purchase);</span>
+
+        // need to write to file
+
+<span class="fc" id="L37">    }</span>
+
+    public List&lt;Purchase&gt; getPurchases(){
+<span class="fc" id="L40">        return purchases;</span>
+    }
+
+    public String getUsername() {
+<span class="fc" id="L44">        return username;</span>
+    }
+
+    public void setUsername(String username) {
+<span class="nc" id="L48">        this.username = username;</span>
+<span class="nc" id="L49">    }</span>
+
+    public String getPassword() {
+<span class="fc" id="L52">        return password;</span>
+    }
+
+    public void setPassword(String password) {
+<span class="nc" id="L56">        this.password = password;</span>
+<span class="nc" id="L57">    }</span>
+
+    public void setPurchases(List&lt;Purchase&gt; purchases) {
+<span class="fc" id="L60">        this.purchases = purchases;</span>
+<span class="fc" id="L61">    }</span>
+
+    public Map&lt;Product, Integer&gt; getCart() {
+<span class="fc" id="L64">        return cart;</span>
+    }
+
+    public void addToCart(Product product, int quantity){
+<span class="pc bpc" id="L68" title="1 of 2 branches missed.">        if (cart.get(product) == null){</span>
+<span class="fc" id="L69">            cart.put(product, quantity);</span>
+        } else {
+<span class="nc" id="L71">            cart.put(product, cart.get(product) + quantity);</span>
+        }
+<span class="fc" id="L73">    }</span>
+
+    public void setCart(Map&lt;Product, Integer&gt; cart){
+<span class="fc" id="L76">        this.cart = cart;</span>
+<span class="fc" id="L77">    }</span>
+
+    public void clearCart(){
+<span class="fc" id="L80">       this.cart = new HashMap&lt;Product, Integer&gt;();</span>
+<span class="fc" id="L81">    }</span>
+
+
+
+    public void setCardUser(CardUser cardUser){
+<span class="nc" id="L86">        this.cardUser = cardUser;</span>
+<span class="nc" id="L87">    }</span>
+    public CardUser getCardUser() {
+<span class="nc" id="L89">        return cardUser;</span>
+    }
+
+    public UserAccess getUserAccess(){
+<span class="nc" id="L93">        return this.userAccess;</span>
+    }
+
+    public void setUserAccess(UserAccess userAccess){
+<span class="nc" id="L97">        this.userAccess = userAccess;</span>
+<span class="nc" id="L98">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

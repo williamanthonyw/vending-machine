@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="assignment2.SellerDashboardTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2022-10-27T22:53:58" hostname="kylies-mbp.staff.wireless.sydney.edu.au" time="0.156">
+  <properties/>
+  <testcase name="readAndWriteTransactionTest()" classname="assignment2.SellerDashboardTest" time="0.078"/>
+  <testcase name="readAndWriteInventoryTest()" classname="assignment2.SellerDashboardTest" time="0.002"/>
+  <testcase name="multipleTransactionsTest()" classname="assignment2.SellerDashboardTest" time="0.075"/>
+  <system-out><![CDATA[test1
+test1
+test1
+test1
+test2
+test1
+test2
+test3
+test1
+test2
+test3
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

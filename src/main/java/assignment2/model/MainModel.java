@@ -174,9 +174,7 @@ public class MainModel {
             }
 
             reader.close();
-        }
-
-        catch(IOException e){
+        } catch(IOException e){
             e.printStackTrace();
         }
         catch(CsvValidationException c){
