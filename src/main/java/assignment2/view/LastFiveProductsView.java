@@ -89,20 +89,6 @@ public class LastFiveProductsView implements View{
         itemColumn.setCellValueFactory(new PropertyValueFactory<Purchase, String>("Item"));
         productsTable.getColumns().add(itemColumn);
 
-        TableColumn<Purchase, Double> priceColumn = new TableColumn<Purchase, Double>("Price");
-        priceColumn.setCellValueFactory(new PropertyValueFactory<Purchase, Double>("price"));
-        productsTable.getColumns().add(priceColumn);
-
-        TableColumn<Purchase, Integer> quantityColumn = new TableColumn<Purchase, Integer>("Quantity");
-        quantityColumn.setCellValueFactory(new PropertyValueFactory<Purchase,Integer>("quantity"));
-        productsTable.getColumns().add(quantityColumn);
-
-        TableColumn<Purchase, LocalDateTime> datePurchasedColumn = new TableColumn<Purchase, LocalDateTime>("Date Purchased");
-        datePurchasedColumn.setCellValueFactory(new PropertyValueFactory<Purchase,LocalDateTime>("datePurchased"));
-        productsTable.getColumns().add(datePurchasedColumn);
-
-
-
     }
     public void showProducts(){
 
