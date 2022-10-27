@@ -87,12 +87,18 @@ public class SellerDashboardView implements View{
         String transTemp = "";
         List<List<String>> transactions = this.mainModel.readPurchasesFromFile(transactionsPath);
 
-        for (List<String> s : transactions){
-            String temp2 = String.join(", ", s).stripTrailing();
-            temp2 = temp2.concat("\n");
-        
-            transTemp = transTemp.concat(temp2);
+        if (transactions.size() == 0){
+            transTemp = "No transactions available.";
         }
+        else{
+            for (List<String> s : transactions){
+                String temp2 = String.join(", ", s).stripTrailing();
+                temp2 = temp2.concat("\n");
+            
+                transTemp = transTemp.concat(temp2);
+            }
+        }
+        
         transactionText.setText(transTemp);
         mainBox.getChildren().addAll(transactionLBL, transactionText);
 
@@ -107,12 +113,18 @@ public class SellerDashboardView implements View{
         String invTemp = "";
         List<List<String>> inventoryItems = this.inventoryModel.readInventoryFromFile(productsPath);
 
-        for (List<String> s : inventoryItems){
-            String temp2 = String.join(", ", s).stripTrailing();
-            temp2 = temp2.concat("\n");
-            invTemp = invTemp.concat(temp2);
+        if (inventoryItems.size() == 0){
+            invTemp = "No items available.";
         }
- 
+
+        else{
+            for (List<String> s : inventoryItems){
+                String temp2 = String.join(", ", s).stripTrailing();
+                temp2 = temp2.concat("\n");
+                invTemp = invTemp.concat(temp2);
+            }
+        }
+
         inventoryText.setText(invTemp);
 
         mainBox.getChildren().addAll(inventoryLBL, inventoryText);
