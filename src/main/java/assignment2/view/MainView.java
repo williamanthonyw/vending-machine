@@ -59,9 +59,9 @@ public class MainView {
     public void goToView(View view){
         view.setUp();
         stage.setScene(view.getScenes().get(0));
+        view.setUpCancelBTN(cancelBTN);
         setUpMenu();
         view.setUpMenuBTN(menuBTN);
-        view.setUpCancelBTN(cancelBTN);
 
         // restart timer on key press
         for (Scene scene : view.getScenes()){
@@ -218,6 +218,11 @@ public class MainView {
             goToSellerDashboardView();
         });
 
+        MenuItem modifyCashBTN = new MenuItem("Modify Cash");
+        modifyCashBTN.setOnAction((ActionEvent e) -> {
+            goToModifyCashView();
+        });
+
 
         menuBTN.getItems().addAll(productOptionsBTN);
 
@@ -233,7 +238,7 @@ public class MainView {
                 menuBTN.getItems().addAll(sellerDashboardBTN);
             }
             if (mainModel.getUser().getUserAccess().equals(UserAccess.CASHIER)){
-                ;
+                menuBTN.getItems().add(modifyCashBTN);
             }
 
         } else {

@@ -1,6 +1,7 @@
 package assignment2.view;
 
-import assignment2.model.UserManagementModel;
+import assignment2.model.LoginModel;
+//import assignment2.model.UserManagementModel;
 import assignment2.model.MainModel;
 import assignment2.model.User;
 import assignment2.model.UserAccess;
@@ -20,7 +21,7 @@ import java.util.*;
 public class UserManagementView implements View {
 
     private MainView mainView;
-    private UserManagementModel userManagementModel;
+    private LoginModel userManagementModel;
     private MainModel mainModel;
 
     private TableView usersTable;
@@ -40,7 +41,7 @@ public class UserManagementView implements View {
         this.mainModel = mainModel;
         this.stage = stage;
         this.mainView = mainView;
-        this.userManagementModel = mainModel.getUserManagementModel();
+        this.userManagementModel = mainModel.getLoginModel();
 
     }
 
