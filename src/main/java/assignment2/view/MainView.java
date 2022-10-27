@@ -41,7 +41,8 @@ public class MainView {
 
     public void setUp(Stage stage){
         this.stage = stage;
-        goToSellerInventoryView();
+        //goToSellerInventoryView();
+        goToModifyCashView();
 
         stage.show();
     }
@@ -79,6 +80,8 @@ public class MainView {
     public void goToProductOptionsView(){
         goToView(new ProductOptionsView(mainModel, stage, this));
     }
+
+    public void goToModifyCashView(){goToView(new ModifyCashView(mainModel,stage,this));}
 
     public void goToLoginView(){
         goToView(new LoginView(mainModel, this));
