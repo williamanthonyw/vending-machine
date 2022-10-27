@@ -81,7 +81,7 @@ public class MainModel {
     public void setIsLoggedIn(boolean logged){
         this.isLoggedIn = logged;
     }
-    public List<Cash> getCash(){return jsonParser.getCash();}
+    public List<Cash> getCash(){return cashPaymentModel.getCashList();}
 
     public User getUser(){
         return this.user;

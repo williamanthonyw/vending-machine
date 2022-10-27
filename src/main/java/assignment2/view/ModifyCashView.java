@@ -1,6 +1,7 @@
 package assignment2.view;
 
 import assignment2.model.Cash;
+import assignment2.model.CashPaymentModel;
 import assignment2.model.MainModel;
 import assignment2.model.Product;
 import javafx.geometry.Insets;
@@ -29,11 +30,13 @@ public class ModifyCashView implements View {
     private BorderPane popUpBP;
     private Scene popupScene;
     private Stage stage;
+    private CashPaymentModel cashPaymentModel;
 
     public ModifyCashView(MainModel mainModel,Stage stage, MainView mainView){
         this.mainModel = mainModel;
         this.mainView = mainView;
         this.stage = stage;
+        this.cashPaymentModel = this.mainModel.getCashPaymentModel();
     }
 
     @Override
@@ -84,7 +87,7 @@ public class ModifyCashView implements View {
                     public TableCell call(final TableColumn<Cash, String> param) {
                         final TableCell<Cash, String> cell = new TableCell<Cash, String>() {
 
-                            final Button btn = new Button("Add");
+                            final Button btn = new Button("Modify");
 
                             @Override
                             public void updateItem(String item, boolean empty) {
@@ -96,7 +99,7 @@ public class ModifyCashView implements View {
                                     btn.setOnAction(event -> {
                                         // add to cart
                                         System.out.println("hello");
-//                                        setUpPopupScreen(getTableView().getItems().get(getIndex()), chocolatesTable);
+                                        setUpPopupScreen(getTableView().getItems().get(getIndex()), cashTable);
                                     });
                                     setGraphic(btn);
                                     setText(null);
@@ -107,6 +110,7 @@ public class ModifyCashView implements View {
                     }
                 };
         addBTNColumn.setCellFactory(cellFactory);
+        cashTable.getColumns().addAll(nameColumn,amountColumn,addBTNColumn);
     }
     public void showCashAmount(){
         cashList = mainModel.getCash();
@@ -139,10 +143,23 @@ public class ModifyCashView implements View {
         enterBox.getChildren().addAll(inputAmount,changeBTN);
 
         changeBTN.setOnAction((e)->{
-            int newCashAmount = Integer.parseInt(inputAmount.getText());
-            popupStage.hide();
+            try {
+                int newCashAmount = Integer.parseInt(inputAmount.getText());
+                if(newCashAmount < 0){
+                    Alert notLoggedin = new Alert(Alert.AlertType.ERROR);
+                    notLoggedin.setHeaderText("Invalid quantity. Please enter an integer greater than 0.");
+                    notLoggedin.showAndWait();
+                    return;
+                }
+                cashPaymentModel.updateCash(newCashAmount, cash);
+                popupStage.hide();
+            }catch (NumberFormatException n) {
+                Alert notLoggedin = new Alert(Alert.AlertType.ERROR);
+                notLoggedin.setHeaderText("Invalid quantity. Please insert a valid integer.");
+                notLoggedin.showAndWait();
+            }
 
-            //modify json.
+            cashTable.refresh();
         });
     }
 
