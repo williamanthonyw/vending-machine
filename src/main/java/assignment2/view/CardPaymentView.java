@@ -3,6 +3,7 @@ package assignment2.view;
 import assignment2.model.CardPaymentModel;
 import assignment2.model.JsonParser;
 import assignment2.model.MainModel;
+import com.sun.tools.javac.Main;
 import javafx.event.Event;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -25,8 +26,11 @@ public class CardPaymentView implements View {
     private VBox mainBox;
     private BorderPane borderPane;
 
-    public CardPaymentView(MainModel mainModel) {
+    private MainView mainView;
+
+    public CardPaymentView(MainModel mainModel, MainView mainView) {
         this.mainModel = mainModel;
+        this.mainView = mainView;
         this.cardPaymentModel = mainModel.getCardPaymentModel();
     }
 
@@ -64,11 +68,12 @@ public class CardPaymentView implements View {
 
         cardNumberBox = new HBox(10);
         mainBox.getChildren().add(cardNumberBox);
-        if (mainModel.getUser().getCardUser() != null) {
-            setUpSaveCardView();
-        } else {
-            setUpView();
-        }
+//        if (mainModel.isLoggedIn()) {
+//
+//        } else {
+//
+//        }
+        setUpView();
     }
 
     public void setUpView() {
@@ -76,30 +81,49 @@ public class CardPaymentView implements View {
         TextField userNameTF = new TextField();
         cardUserNameBox.getChildren().addAll(cardNameLBL, userNameTF);
         Label cardNumberLBL = new Label("Credit card number: ");
+
         PasswordField cardNumberTF = new PasswordField();
         cardNumberTF.setSkin(new PasswordSkin(cardNumberTF));
         cardNumberBox.getChildren().addAll(cardNumberLBL, cardNumberTF);
+
+        HBox totalCartPrice = new HBox();
+        Label totalCartPriceLBL = new Label("Total Cart Price: " + mainModel.getCartPrice());
+        totalCartPrice.getChildren().add(totalCartPriceLBL);
+        mainBox.getChildren().add(totalCartPrice);
 
         Button confirmBTN = new Button("Checkout");
         mainBox.getChildren().add(confirmBTN);
 
         confirmBTN.setOnMousePressed(event -> {
-            cardPaymentModel.paymentProcess(userNameTF.getText(), cardNumberTF.getText());
+            if (cardPaymentModel.paymentProcess(userNameTF.getText(), cardNumberTF.getText())) {
+
+                Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
+                successAlert.setHeaderText("Thank you for your purchase");
+
+//                if (mainModel.isLoggedIn()){
+//                    ((Button) successAlert.getDialogPane().lookupButton(ButtonType.OK)).setOnAction(e -> {
+//
+//                    });
+//
+//                    ((Button) successAlert.getDialogPane().lookupButton(ButtonType.OK)).setText("Save Card");
+//
+//                    ((Button) successAlert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("No save card");
+//
+//                }
+
+                successAlert.showAndWait();
+
+                mainModel.checkout();
+                mainView.goToLastFiveProductsView();
+
+            } else {
+
+                Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+                errorAlert.setHeaderText("Invalid credit card details. Please enter valid details.");
+                errorAlert.showAndWait();
+
+            }
         });
     }
 
-    public void setUpSaveCardView() {
-        Label cardNameLBL = new Label("Cardholder name: ");
-        TextField userNameTF = new TextField(mainModel.getUser().getCardUser().getName());
-        cardUserNameBox.getChildren().addAll(cardNameLBL, userNameTF);
-        Label cardNumberLBL = new Label("Credit card number: ");
-        PasswordField cardNumberTF = new PasswordField();
-        cardNumberTF.setText(mainModel.getUser().getCardUser().getCardNumber());
-        cardNumberBox.getChildren().addAll(cardNumberLBL, cardNumberTF);
-        Button confirmBTN = new Button("Confirm");
-        mainBox.getChildren().add(confirmBTN);
-        confirmBTN.setOnMousePressed(event -> {
-            cardPaymentModel.paymentProcess(userNameTF.getText(), cardNumberTF.getText());
-        });
-    }
 }

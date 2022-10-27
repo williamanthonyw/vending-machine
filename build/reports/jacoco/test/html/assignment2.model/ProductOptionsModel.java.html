@@ -4,34 +4,54 @@ import java.util.*;
 
 <span class="fc" id="L5">public class ProductOptionsModel {</span>
 
-    private List&lt;ProductToDisplay&gt; productsToDisplay;
+    private List&lt;Product&gt; productsToDisplay;
     
     // public ProductOptionsModel(List&lt;ProductToDisplay&gt; productsToDisplay){
         
     //     this.productsToDisplay = productsToDisplay;
     // }
 
-    public List&lt;ProductToDisplay&gt; getProductsToDisplay(){
-<span class="nc" id="L15">        JsonParser jparser = new JsonParser();</span>
-<span class="nc" id="L16">        productsToDisplay = jparser.getProductsToDisplay(&quot;src/main/resources/Inventory.json&quot;);</span>
+
+    public List&lt;Product&gt; getProductsToDisplay(String filename){
+<span class="fc" id="L16">        JsonParser jparser = new JsonParser();</span>
+<span class="fc" id="L17">        productsToDisplay = jparser.getProductsToDisplay(filename);</span>
         
-<span class="nc" id="L18">        return productsToDisplay;</span>
+<span class="fc" id="L19">        return productsToDisplay;</span>
     }
 
     public void updateInventory(){   /////////// after purchase/changes
-        ;
-<span class="nc" id="L23">    }</span>
 
-    public ArrayList&lt;String&gt; getCategories(){
-<span class="nc" id="L26">        ArrayList&lt;String&gt; categories = new ArrayList&lt;&gt;();</span>
-<span class="nc" id="L27">        List&lt;ProductToDisplay&gt; allProducts = getProductsToDisplay();</span>
+        // write back to inventory
+<span class="fc" id="L25">        JsonParser jparser = new JsonParser();</span>
+<span class="fc" id="L26">        jparser.updateInventory(productsToDisplay, &quot;src/main/resources/Inventory.json&quot; );</span>
 
-<span class="nc bnc" id="L29" title="All 2 branches missed.">        for (ProductToDisplay product : allProducts){</span>
-<span class="nc bnc" id="L30" title="All 2 branches missed.">            if (! categories.contains(product.getCategory())){</span>
-<span class="nc" id="L31">                categories.add(product.getCategory());</span>
+<span class="fc" id="L28">    }</span>
+
+    public ArrayList&lt;String&gt; getCategories(String filename){
+<span class="fc" id="L31">        ArrayList&lt;String&gt; categories = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L32">        List&lt;Product&gt; allProducts = getProductsToDisplay(filename);</span>
+
+<span class="fc bfc" id="L34" title="All 2 branches covered.">        for (Product product : allProducts){</span>
+<span class="fc bfc" id="L35" title="All 2 branches covered.">            if (! categories.contains(product.getCategory())){</span>
+<span class="fc" id="L36">                categories.add(product.getCategory());</span>
             }
-<span class="nc" id="L33">        }</span>
-<span class="nc" id="L34">        return categories;</span>
+<span class="fc" id="L38">        }</span>
+<span class="fc" id="L39">        return categories;</span>
     }
+
+    public void updateQuantity(Product product, int numBought){
+<span class="nc" id="L43">       product.setQuantity(product.getQuantity() - numBought);</span>
+
+<span class="nc" id="L45">    }</span>
+
+    public void putBack(Map&lt;Product, Integer&gt; cart){
+
+<span class="pc bpc" id="L49" title="1 of 2 branches missed.">        for (Product p : cart.keySet()){</span>
+<span class="nc" id="L50">            p.setQuantity(p.getQuantity() + cart.get(p));</span>
+<span class="nc" id="L51">        }</span>
+
+<span class="fc" id="L53">        updateInventory();</span>
+
+<span class="fc" id="L55">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

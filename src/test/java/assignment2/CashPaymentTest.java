@@ -26,7 +26,7 @@ public class CashPaymentTest {
     //Test on initial amount of each notes and coins available
     @Test
     public void initialAmountCheck(){
-        String initialPath = "src/main/resources/InitialCash.json";
+        String initialPath = "src/main/resources/cash.json";
         CashPaymentModel Test1 = new CashPaymentModel(initialPath);
         List<Cash> cashList = Test1.getCashList();
 
