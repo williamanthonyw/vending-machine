@@ -26,59 +26,60 @@ public class User {
 <span class="fc" id="L26">        this.purchases.add(purchase);</span>
 
         // need to write to file
-<span class="fc" id="L29">    }</span>
+
+<span class="fc" id="L30">    }</span>
 
     public List&lt;Purchase&gt; getPurchases(){
-<span class="fc" id="L32">        return purchases;</span>
+<span class="fc" id="L33">        return purchases;</span>
     }
 
     public String getUsername() {
-<span class="fc" id="L36">        return username;</span>
+<span class="fc" id="L37">        return username;</span>
     }
 
     public void setUsername(String username) {
-<span class="nc" id="L40">        this.username = username;</span>
-<span class="nc" id="L41">    }</span>
+<span class="nc" id="L41">        this.username = username;</span>
+<span class="nc" id="L42">    }</span>
 
     public String getPassword() {
-<span class="fc" id="L44">        return password;</span>
+<span class="fc" id="L45">        return password;</span>
     }
 
     public void setPassword(String password) {
-<span class="nc" id="L48">        this.password = password;</span>
-<span class="nc" id="L49">    }</span>
+<span class="nc" id="L49">        this.password = password;</span>
+<span class="nc" id="L50">    }</span>
 
     public void setPurchases(List&lt;Purchase&gt; purchases) {
-<span class="fc" id="L52">        this.purchases = purchases;</span>
-<span class="fc" id="L53">    }</span>
+<span class="fc" id="L53">        this.purchases = purchases;</span>
+<span class="fc" id="L54">    }</span>
 
     public Map&lt;Product, Integer&gt; getCart() {
-<span class="fc" id="L56">        return cart;</span>
+<span class="fc" id="L57">        return cart;</span>
     }
 
     public void addToCart(Product product, int quantity){
-<span class="nc bnc" id="L60" title="All 2 branches missed.">        if (cart.get(product) == null){</span>
-<span class="nc" id="L61">            cart.put(product, quantity);</span>
+<span class="pc bpc" id="L61" title="1 of 2 branches missed.">        if (cart.get(product) == null){</span>
+<span class="fc" id="L62">            cart.put(product, quantity);</span>
         } else {
-<span class="nc" id="L63">            cart.put(product, cart.get(product) + quantity);</span>
+<span class="nc" id="L64">            cart.put(product, cart.get(product) + quantity);</span>
         }
-<span class="nc" id="L65">    }</span>
+<span class="fc" id="L66">    }</span>
 
     public void setCart(Map&lt;Product, Integer&gt; cart){
-<span class="nc" id="L68">        this.cart = cart;</span>
-<span class="nc" id="L69">    }</span>
+<span class="fc" id="L69">        this.cart = cart;</span>
+<span class="fc" id="L70">    }</span>
 
     public void clearCart(){
-<span class="fc" id="L72">       this.cart = new HashMap&lt;Product, Integer&gt;();</span>
-<span class="fc" id="L73">    }</span>
+<span class="fc" id="L73">       this.cart = new HashMap&lt;Product, Integer&gt;();</span>
+<span class="fc" id="L74">    }</span>
 
 
 
     public void setCardUser(CardUser cardUser){
-<span class="fc" id="L78">        this.cardUser = cardUser;</span>
-<span class="fc" id="L79">    }</span>
+<span class="nc" id="L79">        this.cardUser = cardUser;</span>
+<span class="nc" id="L80">    }</span>
     public CardUser getCardUser() {
-<span class="nc" id="L81">        return cardUser;</span>
+<span class="nc" id="L82">        return cardUser;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

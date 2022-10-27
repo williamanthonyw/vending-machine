@@ -103,7 +103,7 @@ public class JsonParserTest {
         users.add(new User("test2", "pw"));
         users.add(new User("test3", "pw"));
 
-        String filename = "src/test/resources/test_users3.json";
+        String filename = "src/test/resources/test_users4.json";
 
         jsonParser = new JsonParser("",
                 filename,
