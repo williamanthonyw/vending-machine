@@ -140,6 +140,9 @@ public class LoginView implements View{
             User user = new User(newUserNameTF.getText(),newPasswordTF.getText());
             if(loginModel.addUser(user)){
 
+                //
+                mainModel.getJsonParser().updateUsers(loginModel.getUsers());
+
                 mainModel.login(newUserNameTF.getText(),newPasswordTF.getText());
 
                 mainView.goToProductOptionsView();

@@ -14,6 +14,7 @@ public class MainModel {
     private LoginModel loginModel;
     private CashPaymentModel cashPaymentModel;
     private InventoryModel inventoryModel;
+    private UserManagementModel userManagementModel;
 
     private String inventoryFile;
     private String usersFile;
@@ -47,6 +48,7 @@ public class MainModel {
         this.cardPaymentModel = new CardPaymentModel(this, jsonParser );
         this.cashPaymentModel = new CashPaymentModel(jsonParser.getCash(), jsonParser);
         this.inventoryModel = new InventoryModel(jsonParser.getInventory(), jsonParser);
+        this.userManagementModel = new UserManagementModel(jsonParser.getUsers());
 
     }
 
@@ -157,5 +159,13 @@ public class MainModel {
         }
 
         return sum;
+    }
+
+    public JsonParser getJsonParser(){
+        return this.jsonParser;
+    }
+
+    public UserManagementModel getUserManagementModel(){
+        return this.userManagementModel;
     }
 }

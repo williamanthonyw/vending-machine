@@ -13,12 +13,19 @@ public class User {
     private List<Purchase> purchases;
     private Map<Product, Integer> cart;
     private CardUser cardUser;
+    private UserAccess userAccess;
 
     public User(String username, String password) {
         this.username = username;
         this.password = password;
         this.purchases = new ArrayList<Purchase>();
         this.cart = new HashMap<Product, Integer>();
+
+        if (this.username.equals("owner")){
+            this.userAccess = UserAccess.OWNER;
+        }
+        else {this.userAccess = UserAccess.CUSTOMER;}
+
     }
 
     public void purchaseProduct(Product product, int quantity){
@@ -80,4 +87,13 @@ public class User {
     public CardUser getCardUser() {
         return cardUser;
     }
+
+    public UserAccess getUserAccess(){
+        return this.userAccess;
+    }
+
+    public void setUserAccess(UserAccess userAccess){
+        this.userAccess = userAccess;
+    }
+
 }

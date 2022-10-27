@@ -45,6 +45,8 @@ public class LoginModel {
 
                     // reset cart for user logged in
                     user.clearCart();
+
+                    
                     return user;
                 }
             }
