@@ -12,6 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 import java.util.List;
@@ -45,6 +46,10 @@ public class CardPaymentView implements View {
 
     public void setUpCancelBTN(Button cancelBTN) {
         mainBox.getChildren().add(cancelBTN);
+    }
+
+    @Override
+    public void refresh(){
 
     }
 
@@ -83,6 +88,10 @@ public class CardPaymentView implements View {
         Label cardNumberLBL = new Label("Credit card number: ");
 
         PasswordField cardNumberTF = new PasswordField();
+        if(mainModel.getUser().getCardUser() != null && mainModel.isLoggedIn()){
+            userNameTF.setText(mainModel.getUser().getCardUser().getName());
+            cardNumberTF.setText(mainModel.getUser().getCardUser().getCardNumber());
+        }
         cardNumberTF.setSkin(new PasswordSkin(cardNumberTF));
         cardNumberBox.getChildren().addAll(cardNumberLBL, cardNumberTF);
 
@@ -91,11 +100,15 @@ public class CardPaymentView implements View {
         totalCartPrice.getChildren().add(totalCartPriceLBL);
         mainBox.getChildren().add(totalCartPrice);
 
+        CheckBox checkBox = new CheckBox("Save Card Detail");
+        checkBox.setTextFill(Color.WHITE);
+        mainBox.getChildren().add(checkBox);
+
         Button confirmBTN = new Button("Checkout");
         mainBox.getChildren().add(confirmBTN);
 
         confirmBTN.setOnMousePressed(event -> {
-            if (cardPaymentModel.paymentProcess(userNameTF.getText(), cardNumberTF.getText())) {
+            if (cardPaymentModel.paymentProcess(userNameTF.getText(), cardNumberTF.getText(),checkBox.isSelected())) {
 
                 Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
                 successAlert.setHeaderText("Thank you for your purchase");
@@ -114,7 +127,7 @@ public class CardPaymentView implements View {
                 successAlert.showAndWait();
 
                 mainModel.checkout();
-                mainView.goToLastFiveProductsView();
+                mainView.goToProductOptionsView();
 
             } else {
 

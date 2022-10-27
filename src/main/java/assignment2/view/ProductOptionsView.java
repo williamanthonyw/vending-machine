@@ -1,10 +1,15 @@
 package assignment2.view;
+//from last5productsview
+import assignment2.model.Purchase;
+import assignment2.model.MainModel;
+import assignment2.model.LastFiveProductsModel;
+import java.time.LocalDateTime;
 
-// import assignment2.model.Product;
+import assignment2.model.InventoryModel;
 import assignment2.model.Product;
 import assignment2.model.Product;
 import assignment2.model.MainModel;
-import assignment2.model.ProductOptionsModel;
+import assignment2.model.InventoryModel;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -25,14 +30,18 @@ import java.util.*;
 import java.io.*;
 
 public class ProductOptionsView implements View{
+
+    //
+    private TableView<Purchase> productsTable;
+    private LastFiveProductsModel lastFiveProductsModel;
+
     private Scene scene;
     private MainModel mainModel;
-    private ProductOptionsModel productOptionsModel;
+    private InventoryModel inventoryModel;
     private VBox mainBox;
     private VBox productOptionsBox;
     private Scene popupScene;
     private BorderPane popupBorderPane;
-
 
     private BorderPane borderPane;
     private Stage stage;
@@ -42,26 +51,37 @@ public class ProductOptionsView implements View{
     private TableView<Product> chipsTable;
     private TableView<Product> candiesTable;
     private Button checkoutBTN;
-    private Button selectCategoryBTN;
     private Button cartBTN;
     ComboBox<String> selectCategory;
     ComboBox<Integer> selectQuantity;
 
     private MainView mainView;
 
+    private HBox headerBox;  //menubtn + last5products
     private HBox buttonBox;
+    private VBox lastFiveProductsBox;
+    private VBox topBox;
 
     public ProductOptionsView(MainModel mainModel, Stage stage, MainView mainView){
         this.mainModel = mainModel;
-        this.productOptionsModel = mainModel.getProductOptionsModel();
+        this.inventoryModel = mainModel.getInventoryModel();
         this.stage = stage;
         this.mainView = mainView;
-
+        ///
+        this.lastFiveProductsModel = mainModel.getLastFiveProductsModel();
+        
+        headerBox = new HBox(200);
+        headerBox.setMaxHeight(400);
+        lastFiveProductsBox = new VBox(10);
+        topBox = new VBox(20);
     }
 
     @Override
     public void setUpMenuBTN(MenuButton menuBTN) {
-        mainBox.getChildren().add(0, menuBTN);
+        topBox.getChildren().add(0, menuBTN);
+        headerBox.getChildren().addAll(topBox, lastFiveProductsBox);
+
+        mainBox.getChildren().add(0, headerBox);
     }
 
     @Override
@@ -71,25 +91,38 @@ public class ProductOptionsView implements View{
         scene = new Scene(borderPane, 1000, 600);
         scene.getStylesheets().add("Style.css");
 
-        mainBox = new VBox(20);
+        mainBox = new VBox(0);
         BorderPane.setMargin(mainBox, new Insets(50, 50, 50, 50));
         borderPane.setCenter(mainBox);
 
-        HBox topBox = new HBox(380);
-        mainBox.getChildren().add(topBox);
+        Label lastFiveProductsTitleLBL;
+
+        if (mainModel.isLoggedIn()){
+            lastFiveProductsTitleLBL = new Label("Last Five Products Bought By You");
+        } else {
+            lastFiveProductsTitleLBL = new Label("Last Five Products Bought By Anonymous Users");
+        }
+        
+        productsTable = new TableView<Purchase>();
+
+        lastFiveProductsBox.getChildren().addAll(lastFiveProductsTitleLBL, productsTable);
+        setUpProductsTable();
+
+        showProducts();
+        ////
 
         Label titleLBL = new Label("All Products");
         titleLBL.setId("title");
         topBox.getChildren().add(titleLBL);
 
-        buttonBox = new HBox(5);
+        buttonBox = new HBox(10);
         topBox.getChildren().add(buttonBox);
 
         cartBTN = new Button("View Cart");
         buttonBox.getChildren().add(cartBTN);
 
 
-        checkoutBTN = new Button("CHECKOUT");
+        checkoutBTN = new Button("Checkout");
         checkoutBTN.setMaxHeight(10);
         buttonBox.getChildren().add(checkoutBTN);
         checkoutBTN.setOnAction((e) -> {
@@ -99,14 +132,12 @@ public class ProductOptionsView implements View{
         Label selectCategoryLBL = new Label("Select category");
         // selectCategoryLBL.setID("align");
         selectCategory = new ComboBox<String>();
-        selectCategory.getItems().addAll(productOptionsModel.getCategories("src/main/resources/Inventory.json"));
+        selectCategory.getItems().addAll(inventoryModel.getCategories());
         selectCategory.setValue("drinks");  // drinks by default
 
-        selectCategoryBTN = new Button("View Products");
-
-        HBox categorySelectionBox = new HBox(5);
-        categorySelectionBox.getChildren().addAll(selectCategoryLBL, selectCategory, selectCategoryBTN);
-        mainBox.getChildren().add(categorySelectionBox);
+        HBox categorySelectionBox = new HBox(10);
+        categorySelectionBox.getChildren().addAll(selectCategoryLBL, selectCategory);
+        topBox.getChildren().add(categorySelectionBox);
 
         productOptionsBox = new VBox(10);
         productOptionsBox.setAlignment(Pos.CENTER_LEFT);
@@ -114,7 +145,7 @@ public class ProductOptionsView implements View{
 
         setUpDrinksTable();  //show drinks table as default
 
-        setUpSelectCategoryBTN();
+        setUpSelectCategory();
 
         this.popupBorderPane = new BorderPane();
         popupScene = new Scene(popupBorderPane, 500, 300);
@@ -255,7 +286,6 @@ public class ProductOptionsView implements View{
         chipsLBL.setId("title");
         productOptionsBox.getChildren().add(chipsLBL);
 
-
         chipsTable = new TableView<Product>();
         chipsTable.setPlaceholder(new Label("No chips available"));
         chipsTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
@@ -372,7 +402,7 @@ public class ProductOptionsView implements View{
 
     public void populateTable(TableView table, String category){
 
-        List<Product> products = productOptionsModel.getProductsToDisplay("src/main/resources/Inventory.json");
+        List<Product> products = inventoryModel.getInventory();
 
         table.getItems().clear();
 
@@ -388,8 +418,8 @@ public class ProductOptionsView implements View{
         }
     }
 
-    public void setUpSelectCategoryBTN(){
-        selectCategoryBTN.setOnAction((e) -> {
+    public void setUpSelectCategory(){
+        selectCategory.setOnAction((e) -> {
             String selectedCategory = selectCategory.getValue();
 
             productOptionsBox.getChildren().clear();  //clear existing table
@@ -541,7 +571,42 @@ public class ProductOptionsView implements View{
             alert.showAndWait();
         });
 
+    }
+
+    @Override
+    public void refresh(){
+
 
     }
+
+    //////
+    public void setUpProductsTable() {
+
+        productsTable.setPlaceholder(new Label("You have bought 0 products"));
+        productsTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
+        TableColumn<Purchase, String> itemColumn  = new TableColumn<Purchase, String>("Item");
+        itemColumn.setCellValueFactory(new PropertyValueFactory<Purchase, String>("Item"));
+        productsTable.getColumns().add(itemColumn);
+
+    }
+    public void showProducts(){
+
+        List<Purchase> purchases = lastFiveProductsModel.getLastFiveProductsBoughtByUser(mainModel.getUser());
+
+        // reset table
+        productsTable.getItems().clear();
+
+        if (purchases.size() == 0){
+            productsTable.setPlaceholder(new Label("You have bought 0 products"));
+        }
+
+        for (int i = 0; i < purchases.size(); i++){
+            productsTable.getItems().add(purchases.get(i));
+        }
+
+    }
+
+
 
 }

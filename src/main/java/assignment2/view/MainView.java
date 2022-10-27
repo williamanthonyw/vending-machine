@@ -1,6 +1,7 @@
 package assignment2.view;
 
 import assignment2.model.MainModel;
+import assignment2.model.Product;
 import javafx.animation.PauseTransition;
 import javafx.animation.Transition;
 import javafx.application.Platform;
@@ -28,32 +29,31 @@ public class MainView {
     private Stage stage;
     private MenuButton menuBTN;
     private Button cancelBTN;
-//    private Timer timer;
-
     private Transition timer;
-
-//    private Handler timeoutHandler;
 
 
     public MainView(MainModel mainModel){
         this.mainModel = mainModel;
 
-        setUpMenu();
         setUpCancelBTN();
         setUpCancelOnTimeOut();
     }
 
     public void setUp(Stage stage){
         this.stage = stage;
-        goToLastFiveProductsView();
-        // goToProductOptionsView();    ///////////
+        goToSellerInventoryView();
 
         stage.show();
+    }
+
+    private void goToSellerInventoryView() {
+        goToView(new SellerInventoryView(this.mainModel, this));
     }
 
     public void goToView(View view){
         view.setUp();
         stage.setScene(view.getScenes().get(0));
+        setUpMenu();
         view.setUpMenuBTN(menuBTN);
         view.setUpCancelBTN(cancelBTN);
 
@@ -61,22 +61,21 @@ public class MainView {
         for (Scene scene : view.getScenes()){
             scene.addEventFilter(InputEvent.ANY, evt -> {
 
-                    if (evt.getEventType().getName().equals("MOUSE_PRESSED") ||
-                            evt.getEventType().getName().equals("KEY_PRESSED")){
-                        timer.playFromStart();
-                        System.out.println("Restart timer" + evt.getEventType());
-                    }
+                if (evt.getEventType().getName().equals("MOUSE_PRESSED") ||
+                        evt.getEventType().getName().equals("KEY_PRESSED")){
+                    timer.playFromStart();
+                }
             }
             );
         }
 
     }
 
-    public void goToLastFiveProductsView(){
-        goToView(new LastFiveProductsView(mainModel));
+    public void returnToView(View view){
+        stage.setScene(view.getScenes().get(0));
+        view.refresh();
     }
 
-    /////
     public void goToProductOptionsView(){
         goToView(new ProductOptionsView(mainModel, stage, this));
     }
@@ -114,7 +113,7 @@ public class MainView {
             });
 
             // back to default page
-            goToLastFiveProductsView();
+            goToProductOptionsView();
 
             timer.playFromStart();
         });
@@ -146,7 +145,7 @@ public class MainView {
             alert.showAndWait();
 
             // back to default page
-            goToLastFiveProductsView();
+            goToProductOptionsView();
         });
 
     }
@@ -164,10 +163,10 @@ public class MainView {
             menuBTN.fire();
         });
 
-        MenuItem homeBTN = new MenuItem("Home");
-        homeBTN.setOnAction((ActionEvent e) -> {
-            goToLastFiveProductsView();
-        });
+        // MenuItem homeBTN = new MenuItem("Home");
+        // homeBTN.setOnAction((ActionEvent e) -> {
+        //     goToLastFiveProductsView();
+        // });
 
         MenuItem loginBTN = new MenuItem("Login");
         loginBTN.setOnAction((ActionEvent e) -> {
@@ -179,7 +178,7 @@ public class MainView {
         logoutBTN.setOnAction((ActionEvent e) -> {
             if (mainModel.isLoggedIn()){
                 mainModel.logout();
-                goToLastFiveProductsView();
+                goToProductOptionsView();
             } else {
 
                 Alert notLoggedin = new Alert(Alert.AlertType.ERROR);
@@ -196,11 +195,24 @@ public class MainView {
             goToProductOptionsView();
         });
 
-        menuBTN.getItems().addAll(homeBTN, loginBTN, logoutBTN, productOptionsBTN);
+        menuBTN.getItems().addAll(productOptionsBTN);
+
+        if (mainModel.isLoggedIn()){
+            menuBTN.getItems().addAll(logoutBTN);
+        } else {
+            menuBTN.getItems().addAll(loginBTN);
+        }
 
 
     }
 
+    public void goToUpdateProductView(SellerInventoryView sellerInventoryView, Product product) {
+        goToView(new UpdateProductView(mainModel, this, sellerInventoryView, product));
+    }
+
+    public void gotoAddProductView(SellerInventoryView sellerInventoryView) {
+        goToView(new AddProductView(mainModel, this, sellerInventoryView));
+    }
 }
 
 
