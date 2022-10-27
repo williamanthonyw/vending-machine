@@ -23,7 +23,6 @@ public class ProductView implements View {
 
     private VBox mainBox;
 
-
     private BorderPane borderPane;
     protected InventoryModel inventoryModel;
     private MainView mainView;

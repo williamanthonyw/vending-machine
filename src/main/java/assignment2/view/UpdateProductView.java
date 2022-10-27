@@ -22,7 +22,6 @@ public class UpdateProductView extends ProductView{
     public UpdateProductView(MainModel mainModel,  MainView mainView, SellerInventoryView sellerInventoryView, Product product){
         super(mainModel, mainView, sellerInventoryView);
         this.product = product;
-        System.out.println(product);
     }
 
 

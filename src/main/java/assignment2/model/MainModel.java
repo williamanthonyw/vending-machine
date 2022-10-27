@@ -1,10 +1,18 @@
 package assignment2.model;
 
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.opencsv.CSVReader;
+import com.opencsv.CSVWriter;
+import com.opencsv.exceptions.CsvValidationException;
 import com.google.gson.Gson;
 
 public class MainModel {
@@ -24,6 +32,7 @@ public class MainModel {
     private User user;
     private boolean isLoggedIn;
 
+    private HashMap<Product, Integer> aggregatePurchases;
     private JsonParser jsonParser;
 
     public MainModel(String inventoryFile, String usersFile, String initialCashFile, String cardFile){
@@ -39,6 +48,8 @@ public class MainModel {
 
         this.isLoggedIn = false;
 
+
+        this.aggregatePurchases = new HashMap<Product, Integer>();
         this.inventoryFile = inventoryFile;
         this.usersFile = usersFile;
         this.initialCashFile = initialCashFile;
@@ -78,8 +89,8 @@ public class MainModel {
     }
 
     public void logout(){
-        this.user = loginModel.getAnonymousUser();
         this.user.clearCart();
+        this.user = loginModel.getAnonymousUser();
         this.isLoggedIn = false;
     }
 
@@ -89,6 +100,10 @@ public class MainModel {
 
     public Map<Product, Integer> getCart(){
         return user.getCart();
+    }
+
+    public Map<Product, Integer> getAggregatePurchases(){
+        return this.aggregatePurchases;
     }
 
     public void cancelTransaction(){
@@ -126,12 +141,63 @@ public class MainModel {
 
     }
 
+    public void writePurchasesToFile(HashMap<Product, Integer> itemsPurchased, String filename){
+        File file = new File(filename);
+
+        try{
+            List<String[]> items = new ArrayList<String[]>();
+            CSVWriter writer = new CSVWriter(new FileWriter(file));
+            
+            for (Product p: itemsPurchased.keySet()){
+                items.add(new String[] {String.valueOf(p.getCode()), p.getName(), String.valueOf(itemsPurchased.get(p))});
+            }
+            writer.writeAll(items);
+            writer.close();
+
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public List<List<String>> readPurchasesFromFile(String filename){
+        List<List<String>> items = new ArrayList<List<String>>();
+        File file = new File(filename);
+        String[] item;
+
+        try{
+            CSVReader reader = new CSVReader(new FileReader(file));
+
+            while((item = reader.readNext()) != null){
+                items.add(Arrays.asList(item));
+            }
+
+            reader.close();
+        }
+
+        catch(IOException e){
+            e.printStackTrace();
+        }
+        catch(CsvValidationException c){
+            c.printStackTrace();
+        }
+
+        return items;
+    }
+
 
     public void checkout(){
 
         // adds it to user's list of purchases
         for (Product product : user.getCart().keySet()){
             user.purchaseProduct(product, user.getCart().get(product));
+
+            if (aggregatePurchases.get(product) == null){
+                this.aggregatePurchases.put(product, 0);
+            }
+            this.aggregatePurchases.put(product, user.getCart().get(product) + this.aggregatePurchases.get(product));
+
+            
         }
 
         user.clearCart();
@@ -141,6 +207,9 @@ public class MainModel {
 
         // update inventory file
         inventoryModel.updateInventory();
+
+        //write purchases to file
+        writePurchasesToFile(this.aggregatePurchases, "src/test/resources/transaction.csv");
 
         logout();
 

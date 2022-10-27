@@ -517,9 +517,9 @@ public class ProductOptionsView implements View{
                 String paymentTypeValue = selectPaymentType.getValue();
 
                 if (paymentTypeValue.equals("Cash")){
-                    mainView.goToCashPaymentView();
+                    mainView.goToCashPaymentView(this);
                 } else {
-                    mainView.goToCardPaymentView();
+                    mainView.goToCardPaymentView(this);
                 }
 
                 popupStage.hide();

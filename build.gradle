@@ -2,7 +2,7 @@ plugins {
     id 'java'
     id 'application'
     id 'jacoco'
-    id 'org.openjfx.javafxplugin' version '0.0.10'
+    id 'org.openjfx.javafxplugin' version '0.0.13'
 }
 
 group 'org.example'
@@ -18,17 +18,18 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
     testImplementation 'org.hamcrest:hamcrest:2.2'
     implementation 'com.googlecode.json-simple:json-simple:1.1.1'
+    implementation group: 'com.opencsv', name: 'opencsv', version: '5.2'
 }
 
 javafx {
-    version = "16"
+    version = "19"
     modules = [ 'javafx.controls' ]
 }
 
 application {
     // Define the main class for the application.
     mainClass = 'assignment2.App'
-    // mainClass = 'assignment2.model.CashPaymentModel'
+    // mainClass = 'assignment2.model.MainModel'
     applicationDefaultJvmArgs = ["--add-opens", "java.base/java.time=ALL-UNNAMED", '-Xss80m']
 }
 
