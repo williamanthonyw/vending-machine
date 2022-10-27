@@ -22,7 +22,7 @@ public class MainModel {
     private LoginModel loginModel;
     private CashPaymentModel cashPaymentModel;
     private InventoryModel inventoryModel;
-    private UserManagementModel userManagementModel;
+//    private UserManagementModel userManagementModel;
 
     private String inventoryFile;
     private String usersFile;
@@ -39,7 +39,7 @@ public class MainModel {
 
         this.jsonParser = new JsonParser(inventoryFile, usersFile, initialCashFile, cardFile);
 
-        this.loginModel = new LoginModel(jsonParser.getUsers());
+        this.loginModel = new LoginModel(jsonParser.getUsers(),this.getJsonParser());
         this.user = loginModel.getAnonymousUser();
 
         if (this.user != null){
@@ -59,7 +59,7 @@ public class MainModel {
         this.cardPaymentModel = new CardPaymentModel(this, jsonParser );
         this.cashPaymentModel = new CashPaymentModel(jsonParser.getCash(), jsonParser);
         this.inventoryModel = new InventoryModel(jsonParser.getInventory(), jsonParser);
-        this.userManagementModel = new UserManagementModel(jsonParser.getUsers(), jsonParser);
+//        this.userManagementModel = new UserManagementModel(jsonParser.getUsers(), jsonParser);
 
     }
 
@@ -83,6 +83,7 @@ public class MainModel {
     public void setIsLoggedIn(boolean logged){
         this.isLoggedIn = logged;
     }
+    public List<Cash> getCash(){return cashPaymentModel.getCashList();}
 
     public User getUser(){
         return this.user;
@@ -176,10 +177,10 @@ public class MainModel {
         }
 
         catch(IOException e){
-            e.printStackTrace();
+//            e.printStackTrace();
         }
         catch(CsvValidationException c){
-            c.printStackTrace();
+//            c.printStackTrace();
         }
 
         return items;
@@ -234,7 +235,7 @@ public class MainModel {
         return this.jsonParser;
     }
 
-    public UserManagementModel getUserManagementModel(){
-        return this.userManagementModel;
-    }
+////    public UserManagementModel getUserManagementModel(){
+//        return this.userManagementModel;
+//    }
 }
