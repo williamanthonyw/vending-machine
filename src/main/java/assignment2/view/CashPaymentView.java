@@ -126,7 +126,7 @@ public class CashPaymentView implements View{
         cashList = new ComboBox<String>();
         cashList.getItems().addAll("5c", "10c", "20c", "50c", "$1", "$2", "$5", "$10", "$20", "$50", "$100");
 
-        quantityInput = new TextField("Quantity");
+        quantityInput = new TextField("");
         add = new Button("Add");
 
         paymentHBox.getChildren().addAll(cashList, quantityInput, add);
@@ -280,7 +280,7 @@ public class CashPaymentView implements View{
 
         try{
 
-            HashMap<String, Integer> change = this.cashPaymentModel.calculateChange(totalPayment, totalPrice, payment);
+            Map<String, Integer> change = this.cashPaymentModel.calculateChange(totalPayment, totalPrice, payment);
 
             changePopup = new Alert(Alert.AlertType.INFORMATION);
             changePopup.setHeaderText("Thank you for your purchase");
@@ -289,8 +289,10 @@ public class CashPaymentView implements View{
             String changeFormat = String.format("Here is your change: $%.2f\n", Math.round(((totalPayment-totalPrice)*100.0))/100.0);
 
             for (Map.Entry<String, Integer> c: change.entrySet()){
-                String temp = String.format("%s: %d\n", c.getKey(), c.getValue());
-                changeFormat = changeFormat.concat(temp);
+                if (c.getValue() != 0) {
+                    String temp = String.format("%s: %d\n", c.getKey(), c.getValue());
+                    changeFormat = changeFormat.concat(temp);
+                }
             }
             Label changeText = new Label(changeFormat);
 

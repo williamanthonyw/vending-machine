@@ -9,7 +9,10 @@ import java.io.Reader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.lang.Math.*;
 
 
@@ -59,8 +62,23 @@ public class CashPaymentModel{
         }
     }
 
-    public HashMap<String, Integer> calculateChange(double payment, double price, HashMap<Double, Integer> cashPayment) throws InsufficientChangeException, PaymentNotEnoughException{
-        HashMap<String, Integer> totalChange = new HashMap<String, Integer>();
+    public Map<String, Integer> calculateChange(double payment, double price, HashMap<Double, Integer> cashPayment) throws InsufficientChangeException, PaymentNotEnoughException{
+        
+        LinkedHashMap<String, Integer> totalChange = new LinkedHashMap<String, Integer>();
+
+        //initialize total change
+        totalChange.put("5c", 0);
+        totalChange.put("10c", 0);
+        totalChange.put("20c", 0);
+        totalChange.put("50c", 0);
+        totalChange.put("$1", 0);
+        totalChange.put("$2", 0);
+        totalChange.put("$5", 0);
+        totalChange.put("$10", 0);
+        totalChange.put("$20", 0);
+        totalChange.put("$50", 0);
+        totalChange.put("$100", 0);
+        System.out.println(totalChange);
 
         if (payment < price){
             throw new PaymentNotEnoughException("Please add more cash or cancel");
@@ -71,8 +89,6 @@ public class CashPaymentModel{
 
         //add payment cash to machine
         addPaymentToMachine(cashPayment);
-
-        System.out.println(cashList);
 
         //calculate total amount of cash available
         double totalCash = 0;
@@ -100,7 +116,8 @@ public class CashPaymentModel{
                 counter++;
 
             }
-            totalChange.put(c.getName(), counter);
+            //totalChange.put(c.getName(), counter);
+            totalChange.replace(c.getName(), totalChange.get(c.getName()), counter);
         }
 
         int fiveCentsChange = totalChange.get("5c");
@@ -138,6 +155,10 @@ public class CashPaymentModel{
         this.cashList = reverseCashList;
 
         jsonParser.updateCash(this.cashList);
+
+
+
+        System.out.println(totalChange);
 
         return totalChange;
     }
