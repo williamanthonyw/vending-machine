@@ -7,9 +7,12 @@ public class LoginModel {
 
     private List<User> users;
     private User anonymousUser;
+    private JsonParser jsonParser;
+    private MainModel mainModel;
 
-    public LoginModel(List<User> users){
+    public LoginModel(List<User> users,JsonParser jsonParser){
         this.users = users;
+
 
         for (User user : users){
 
@@ -18,6 +21,7 @@ public class LoginModel {
             }
 
         }
+        this.jsonParser = jsonParser;
     }
 
     public void setAnonymousUser(User user){
@@ -45,6 +49,8 @@ public class LoginModel {
 
                     // reset cart for user logged in
                     user.clearCart();
+
+                    
                     return user;
                 }
             }
@@ -62,7 +68,13 @@ public class LoginModel {
             }
         }
         users.add(user);
+        jsonParser.updateUsers(users);
         return true;
+    }
+
+    public void removeUser(User user){
+        this.users.remove(user);
+        jsonParser.updateUsers(this.users);
     }
 
 }

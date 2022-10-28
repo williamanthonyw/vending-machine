@@ -1,6 +1,7 @@
 
 package assignment2.view;
 import assignment2.model.CardPaymentModel;
+import assignment2.model.CardUser;
 import assignment2.model.JsonParser;
 import assignment2.model.MainModel;
 import com.sun.tools.javac.Main;
@@ -94,14 +95,18 @@ public class CardPaymentView implements View {
     public void setUpView() {
         Label cardNameLBL = new Label("Cardholder name: ");
         TextField userNameTF = new TextField();
-        cardUserNameBox.getChildren().addAll(cardNameLBL, userNameTF);
         Label cardNumberLBL = new Label("Credit card number: ");
 
         PasswordField cardNumberTF = new PasswordField();
+
         if(mainModel.getUser().getCardUser() != null && mainModel.isLoggedIn()){
+            System.out.println("hello" + mainModel.getUser().getCardUser().getName());
             userNameTF.setText(mainModel.getUser().getCardUser().getName());
             cardNumberTF.setText(mainModel.getUser().getCardUser().getCardNumber());
         }
+
+        cardUserNameBox.getChildren().addAll(cardNameLBL, userNameTF);
+
         cardNumberTF.setSkin(new PasswordSkin(cardNumberTF));
         cardNumberBox.getChildren().addAll(cardNumberLBL, cardNumberTF);
 
@@ -110,29 +115,32 @@ public class CardPaymentView implements View {
         totalCartPrice.getChildren().add(totalCartPriceLBL);
         mainBox.getChildren().add(totalCartPrice);
 
-        CheckBox checkBox = new CheckBox("Save Card Detail");
-        checkBox.setTextFill(Color.WHITE);
-        mainBox.getChildren().add(checkBox);
 
         Button confirmBTN = new Button("Checkout");
         mainBox.getChildren().add(confirmBTN);
 
         confirmBTN.setOnMousePressed(event -> {
-            if (cardPaymentModel.paymentProcess(userNameTF.getText(), cardNumberTF.getText(),checkBox.isSelected())) {
 
-                Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
+            CardUser response = cardPaymentModel.paymentProcess(userNameTF.getText(), cardNumberTF.getText());
+
+            if (response != null) {
+                Alert successAlert = new Alert(Alert.AlertType.CONFIRMATION);
                 successAlert.setHeaderText("Thank you for your purchase");
 
-//                if (mainModel.isLoggedIn()){
-//                    ((Button) successAlert.getDialogPane().lookupButton(ButtonType.OK)).setOnAction(e -> {
-//
-//                    });
-//
-//                    ((Button) successAlert.getDialogPane().lookupButton(ButtonType.OK)).setText("Save Card");
-//
-//                    ((Button) successAlert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("No save card");
-//
-//                }
+                if (mainModel.isLoggedIn() && mainModel.getUser().getCardUser() == null){
+
+                    successAlert.setContentText("Do you wish to save your card details?");
+                    ((Button) successAlert.getDialogPane().lookupButton(ButtonType.OK)).setOnAction(e -> {
+                        cardPaymentModel.saveCard(response);
+                    });
+
+                    ((Button) successAlert.getDialogPane().lookupButton(ButtonType.OK)).setText("Save Card");
+
+                    ((Button) successAlert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("No");
+
+                } else {
+                    ((Button) successAlert.getDialogPane().lookupButton(ButtonType.CANCEL)).setVisible(false);
+                }
 
                 successAlert.showAndWait();
 

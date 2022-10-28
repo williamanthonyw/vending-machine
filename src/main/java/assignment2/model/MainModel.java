@@ -22,6 +22,7 @@ public class MainModel {
     private LoginModel loginModel;
     private CashPaymentModel cashPaymentModel;
     private InventoryModel inventoryModel;
+//    private UserManagementModel userManagementModel;
 
     private String inventoryFile;
     private String usersFile;
@@ -38,7 +39,7 @@ public class MainModel {
 
         this.jsonParser = new JsonParser(inventoryFile, usersFile, initialCashFile, cardFile);
 
-        this.loginModel = new LoginModel(jsonParser.getUsers());
+        this.loginModel = new LoginModel(jsonParser.getUsers(),this.getJsonParser());
         this.user = loginModel.getAnonymousUser();
 
         if (this.user != null){
@@ -58,6 +59,7 @@ public class MainModel {
         this.cardPaymentModel = new CardPaymentModel(this, jsonParser );
         this.cashPaymentModel = new CashPaymentModel(jsonParser.getCash(), jsonParser);
         this.inventoryModel = new InventoryModel(jsonParser.getInventory(), jsonParser);
+//        this.userManagementModel = new UserManagementModel(jsonParser.getUsers(), jsonParser);
 
     }
 
@@ -81,6 +83,7 @@ public class MainModel {
     public void setIsLoggedIn(boolean logged){
         this.isLoggedIn = logged;
     }
+    public List<Cash> getCash(){return cashPaymentModel.getCashList();}
 
     public User getUser(){
         return this.user;
@@ -144,8 +147,10 @@ public class MainModel {
 
         try{
             List<String[]> items = new ArrayList<String[]>();
-            CSVWriter writer = new CSVWriter(new FileWriter(file));
-            
+
+            FileWriter fileWriter = new FileWriter(file);
+            CSVWriter writer = new CSVWriter(fileWriter);
+
             for (Product p: itemsPurchased.keySet()){
                 items.add(new String[] {String.valueOf(p.getCode()), p.getName(), String.valueOf(itemsPurchased.get(p))});
             }
@@ -156,6 +161,35 @@ public class MainModel {
         catch(IOException e){
             e.printStackTrace();
         }
+    }
+
+    public void checkout(){
+
+        // adds it to user's list of purchases
+        for (Product product : user.getCart().keySet()){
+            user.purchaseProduct(product, user.getCart().get(product));
+
+            if (aggregatePurchases.get(product) == null){
+                this.aggregatePurchases.put(product, 0);
+            }
+
+            this.aggregatePurchases.put(product, user.getCart().get(product) + this.aggregatePurchases.get(product));
+
+        }
+
+        user.clearCart();
+
+        // update users file
+        jsonParser.updateUsers(loginModel.getUsers());
+
+        // update inventory file
+        inventoryModel.updateInventory();
+
+        //write purchases to file
+        writePurchasesToFile(this.aggregatePurchases, "src/main/resources/transaction.csv");
+
+        logout();
+
     }
 
     public List<List<String>> readPurchasesFromFile(String filename){
@@ -174,43 +208,13 @@ public class MainModel {
         }
 
         catch(IOException e){
-            e.printStackTrace();
+//            e.printStackTrace();
         }
         catch(CsvValidationException c){
-            c.printStackTrace();
+//            c.printStackTrace();
         }
 
         return items;
-    }
-
-
-    public void checkout(){
-
-        // adds it to user's list of purchases
-        for (Product product : user.getCart().keySet()){
-            user.purchaseProduct(product, user.getCart().get(product));
-
-            if (aggregatePurchases.get(product) == null){
-                this.aggregatePurchases.put(product, 0);
-            }
-            this.aggregatePurchases.put(product, user.getCart().get(product) + this.aggregatePurchases.get(product));
-
-            
-        }
-
-        user.clearCart();
-
-        // update users file
-        jsonParser.updateUsers(loginModel.getUsers());
-
-        // update inventory file
-        inventoryModel.updateInventory();
-
-        //write purchases to file
-        writePurchasesToFile(this.aggregatePurchases, "src/test/resources/transaction.csv");
-
-        logout();
-
     }
 
     public InventoryModel getInventoryModel(){
@@ -228,7 +232,11 @@ public class MainModel {
         return sum;
     }
 
-    public static void main(String[] args){
-    
+    public JsonParser getJsonParser(){
+        return this.jsonParser;
     }
+
+////    public UserManagementModel getUserManagementModel(){
+//        return this.userManagementModel;
+//    }
 }

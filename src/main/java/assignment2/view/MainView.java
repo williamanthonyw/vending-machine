@@ -2,6 +2,7 @@ package assignment2.view;
 
 import assignment2.model.MainModel;
 import assignment2.model.Product;
+import assignment2.model.UserAccess;
 import javafx.animation.PauseTransition;
 import javafx.animation.Transition;
 import javafx.application.Platform;
@@ -41,7 +42,8 @@ public class MainView {
 
     public void setUp(Stage stage){
         this.stage = stage;
-        goToSellerInventoryView();
+        // goToSellerInventoryView();
+        goToProductOptionsView();
 
         stage.show();
     }
@@ -50,12 +52,16 @@ public class MainView {
         goToView(new SellerInventoryView(this.mainModel, this));
     }
 
+    public void goToSellerDashboardView(){
+        goToView(new SellerDashboardView(this.mainModel, this));
+    }
+
     public void goToView(View view){
         view.setUp();
         stage.setScene(view.getScenes().get(0));
+        view.setUpCancelBTN(cancelBTN);
         setUpMenu();
         view.setUpMenuBTN(menuBTN);
-        view.setUpCancelBTN(cancelBTN);
 
         // restart timer on key press
         for (Scene scene : view.getScenes()){
@@ -80,6 +86,8 @@ public class MainView {
     public void goToProductOptionsView(){
         goToView(new ProductOptionsView(mainModel, stage, this));
     }
+
+    public void goToModifyCashView(){goToView(new ModifyCashView(mainModel,stage,this));}
 
     public void goToLoginView(){
         goToView(new LoginView(mainModel, this));
@@ -195,10 +203,44 @@ public class MainView {
             goToProductOptionsView();
         });
 
+        MenuItem userManagementBTN = new MenuItem("Manage Users");
+        userManagementBTN.setOnAction((ActionEvent e) -> {
+            goToUserManagementView();
+        });
+
+        MenuItem sellerInventoryBTN = new MenuItem("Manage Inventory");
+        sellerInventoryBTN.setOnAction((ActionEvent e) -> {
+            goToSellerInventoryView();
+        });
+
+        MenuItem sellerDashboardBTN = new MenuItem("Manage reports");
+        sellerDashboardBTN.setOnAction((ActionEvent e) -> {
+            goToSellerDashboardView();
+        });
+
+        MenuItem modifyCashBTN = new MenuItem("Modify Cash");
+        modifyCashBTN.setOnAction((ActionEvent e) -> {
+            goToModifyCashView();
+        });
+
+
         menuBTN.getItems().addAll(productOptionsBTN);
 
         if (mainModel.isLoggedIn()){
             menuBTN.getItems().addAll(logoutBTN);
+
+
+            if (mainModel.getUser().getUserAccess().equals(UserAccess.OWNER)){
+                menuBTN.getItems().addAll(userManagementBTN);
+            }
+            if (mainModel.getUser().getUserAccess().equals(UserAccess.SELLER)){
+                menuBTN.getItems().addAll(sellerInventoryBTN);
+                menuBTN.getItems().addAll(sellerDashboardBTN);
+            }
+            if (mainModel.getUser().getUserAccess().equals(UserAccess.CASHIER)){
+                menuBTN.getItems().add(modifyCashBTN);
+            }
+
         } else {
             menuBTN.getItems().addAll(loginBTN);
         }
@@ -212,6 +254,10 @@ public class MainView {
 
     public void gotoAddProductView(SellerInventoryView sellerInventoryView) {
         goToView(new AddProductView(mainModel, this, sellerInventoryView));
+    }
+
+    public void goToUserManagementView(){
+        goToView(new UserManagementView(mainModel, stage, this));
     }
 }
 

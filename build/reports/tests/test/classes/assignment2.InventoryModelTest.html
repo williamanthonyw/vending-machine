@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.023s</div>
+<div class="counter">0.052s</div>
 <p>duration</p>
 </div>
 </td>
@@ -79,32 +79,32 @@
 </thead>
 <tr>
 <td class="success">addProductSuccessfulTest()</td>
-<td class="success">0.003s</td>
+<td class="success">0.007s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">addProductUnsuccessfulTest()</td>
-<td class="success">0.001s</td>
+<td class="success">0s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">deleteProductTest()</td>
-<td class="success">0.003s</td>
+<td class="success">0.009s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">getAllProductNamesTest()</td>
-<td class="success">0s</td>
+<td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">getCategoriesTest()</td>
-<td class="success">0s</td>
+<td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">getCodeRangeTest()</td>
-<td class="success">0s</td>
+<td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -114,7 +114,7 @@
 </tr>
 <tr>
 <td class="success">getInventoryByCategoryTest()</td>
-<td class="success">0s</td>
+<td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -124,32 +124,32 @@
 </tr>
 <tr>
 <td class="success">putBackTest()</td>
-<td class="success">0.002s</td>
+<td class="success">0.005s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">setProductDetailsDuplicateCodeTest()</td>
-<td class="success">0s</td>
+<td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">setProductDetailsDuplicateProductTest()</td>
-<td class="success">0s</td>
+<td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">setProductDetailsPriceBelowZeroTest()</td>
-<td class="success">0.001s</td>
+<td class="success">0.002s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">setProductDetailsQuantityAboveFifteenTest()</td>
-<td class="success">0.001s</td>
+<td class="success">0s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">setProductDetailsQuantityBelowZeroTest()</td>
-<td class="success">0.002s</td>
+<td class="success">0.008s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -159,12 +159,12 @@
 </tr>
 <tr>
 <td class="success">setProductDetailsWrongCategoryTest()</td>
-<td class="success">0s</td>
+<td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">setProductDetailsWrongCodeAboveTest()</td>
-<td class="success">0.001s</td>
+<td class="success">0.002s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -174,12 +174,12 @@
 </tr>
 <tr>
 <td class="success">updateProductSuccessfulTest()</td>
-<td class="success">0.003s</td>
+<td class="success">0.007s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">updateProductUnsuccessfulTest()</td>
-<td class="success">0.001s</td>
+<td class="success">0s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -200,7 +200,7 @@
 	at java.base/java.io.FileWriter.&lt;init&gt;(FileWriter.java:66)
 	at assignment2.model.JsonParser.updateInventory(JsonParser.java:122)
 	at assignment2.model.InventoryModel.updateInventory(InventoryModel.java:67)
-	at assignment2.model.InventoryModel.deleteProduct(InventoryModel.java:192)
+	at assignment2.model.InventoryModel.deleteProduct(InventoryModel.java:196)
 	at assignment2.InventoryModelTest.deleteProductTest(InventoryModelTest.java:519)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
@@ -295,7 +295,7 @@ java.io.FileNotFoundException:  (No such file or directory)
 	at java.base/java.io.FileWriter.&lt;init&gt;(FileWriter.java:66)
 	at assignment2.model.JsonParser.updateInventory(JsonParser.java:122)
 	at assignment2.model.InventoryModel.updateInventory(InventoryModel.java:67)
-	at assignment2.model.InventoryModel.updateProduct(InventoryModel.java:125)
+	at assignment2.model.InventoryModel.updateProduct(InventoryModel.java:129)
 	at assignment2.InventoryModelTest.updateProductSuccessfulTest(InventoryModelTest.java:463)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
@@ -390,7 +390,7 @@ java.io.FileNotFoundException:  (No such file or directory)
 	at java.base/java.io.FileWriter.&lt;init&gt;(FileWriter.java:66)
 	at assignment2.model.JsonParser.updateInventory(JsonParser.java:122)
 	at assignment2.model.InventoryModel.updateInventory(InventoryModel.java:67)
-	at assignment2.model.InventoryModel.addProduct(InventoryModel.java:108)
+	at assignment2.model.InventoryModel.addProduct(InventoryModel.java:112)
 	at assignment2.InventoryModelTest.addProductSuccessfulTest(InventoryModelTest.java:418)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
@@ -485,7 +485,7 @@ java.io.FileNotFoundException:  (No such file or directory)
 	at java.base/java.io.FileWriter.&lt;init&gt;(FileWriter.java:66)
 	at assignment2.model.JsonParser.updateInventory(JsonParser.java:122)
 	at assignment2.model.InventoryModel.updateInventory(InventoryModel.java:67)
-	at assignment2.model.InventoryModel.putBack(InventoryModel.java:92)
+	at assignment2.model.InventoryModel.putBack(InventoryModel.java:96)
 	at assignment2.InventoryModelTest.putBackTest(InventoryModelTest.java:502)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
@@ -583,7 +583,7 @@ java.io.FileNotFoundException:  (No such file or directory)
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 7.5.1</a> at 27 Oct 2022, 8:18:43 pm</p>
+<a href="http://www.gradle.org">Gradle 7.5.1</a> at 28 Oct 2022, 9:53:58 am</p>
 </div>
 </div>
 </body>

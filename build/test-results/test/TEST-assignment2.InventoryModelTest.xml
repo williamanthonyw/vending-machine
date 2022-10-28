@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="assignment2.InventoryModelTest" tests="22" skipped="0" failures="0" errors="0" timestamp="2022-10-27T09:18:42" hostname="Williams-MBP" time="0.029">
+<testsuite name="assignment2.InventoryModelTest" tests="22" skipped="0" failures="0" errors="0" timestamp="2022-10-27T22:53:57" hostname="kylies-mbp.staff.wireless.sydney.edu.au" time="0.063">
   <properties/>
-  <testcase name="setProductDetailsQuantityBelowZeroTest()" classname="assignment2.InventoryModelTest" time="0.002"/>
-  <testcase name="setProductDetailsWrongCodeAboveTest()" classname="assignment2.InventoryModelTest" time="0.001"/>
+  <testcase name="setProductDetailsQuantityBelowZeroTest()" classname="assignment2.InventoryModelTest" time="0.008"/>
+  <testcase name="setProductDetailsWrongCodeAboveTest()" classname="assignment2.InventoryModelTest" time="0.002"/>
   <testcase name="getInventoryByCategoryNoneInCategoryTest()" classname="assignment2.InventoryModelTest" time="0.001"/>
-  <testcase name="deleteProductTest()" classname="assignment2.InventoryModelTest" time="0.003"/>
-  <testcase name="getInventoryByCategoryTest()" classname="assignment2.InventoryModelTest" time="0.0"/>
+  <testcase name="deleteProductTest()" classname="assignment2.InventoryModelTest" time="0.009"/>
+  <testcase name="getInventoryByCategoryTest()" classname="assignment2.InventoryModelTest" time="0.001"/>
   <testcase name="setProductDetailsWrongCodeBelowTest()" classname="assignment2.InventoryModelTest" time="0.001"/>
   <testcase name="setProductDetailsValidTest()" classname="assignment2.InventoryModelTest" time="0.001"/>
-  <testcase name="setProductDetailsDuplicateProductTest()" classname="assignment2.InventoryModelTest" time="0.0"/>
-  <testcase name="setProductDetailsDuplicateCodeTest()" classname="assignment2.InventoryModelTest" time="0.0"/>
-  <testcase name="setProductDetailsQuantityAboveFifteenTest()" classname="assignment2.InventoryModelTest" time="0.001"/>
-  <testcase name="updateProductSuccessfulTest()" classname="assignment2.InventoryModelTest" time="0.003"/>
+  <testcase name="setProductDetailsDuplicateProductTest()" classname="assignment2.InventoryModelTest" time="0.001"/>
+  <testcase name="setProductDetailsDuplicateCodeTest()" classname="assignment2.InventoryModelTest" time="0.001"/>
+  <testcase name="setProductDetailsQuantityAboveFifteenTest()" classname="assignment2.InventoryModelTest" time="0.0"/>
+  <testcase name="updateProductSuccessfulTest()" classname="assignment2.InventoryModelTest" time="0.007"/>
   <testcase name="updateQuantityTest()" classname="assignment2.InventoryModelTest" time="0.001"/>
-  <testcase name="getCategoriesTest()" classname="assignment2.InventoryModelTest" time="0.0"/>
-  <testcase name="getCodeRangeTest()" classname="assignment2.InventoryModelTest" time="0.0"/>
-  <testcase name="setProductDetailsPriceBelowZeroTest()" classname="assignment2.InventoryModelTest" time="0.001"/>
-  <testcase name="addProductSuccessfulTest()" classname="assignment2.InventoryModelTest" time="0.003"/>
-  <testcase name="updateProductUnsuccessfulTest()" classname="assignment2.InventoryModelTest" time="0.001"/>
+  <testcase name="getCategoriesTest()" classname="assignment2.InventoryModelTest" time="0.001"/>
+  <testcase name="getCodeRangeTest()" classname="assignment2.InventoryModelTest" time="0.001"/>
+  <testcase name="setProductDetailsPriceBelowZeroTest()" classname="assignment2.InventoryModelTest" time="0.002"/>
+  <testcase name="addProductSuccessfulTest()" classname="assignment2.InventoryModelTest" time="0.007"/>
+  <testcase name="updateProductUnsuccessfulTest()" classname="assignment2.InventoryModelTest" time="0.0"/>
   <testcase name="getInventoryTest()" classname="assignment2.InventoryModelTest" time="0.001"/>
-  <testcase name="getAllProductNamesTest()" classname="assignment2.InventoryModelTest" time="0.0"/>
-  <testcase name="setProductDetailsWrongCategoryTest()" classname="assignment2.InventoryModelTest" time="0.0"/>
-  <testcase name="addProductUnsuccessfulTest()" classname="assignment2.InventoryModelTest" time="0.001"/>
-  <testcase name="putBackTest()" classname="assignment2.InventoryModelTest" time="0.002"/>
+  <testcase name="getAllProductNamesTest()" classname="assignment2.InventoryModelTest" time="0.001"/>
+  <testcase name="setProductDetailsWrongCategoryTest()" classname="assignment2.InventoryModelTest" time="0.001"/>
+  <testcase name="addProductUnsuccessfulTest()" classname="assignment2.InventoryModelTest" time="0.0"/>
+  <testcase name="putBackTest()" classname="assignment2.InventoryModelTest" time="0.005"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[java.io.FileNotFoundException:  (No such file or directory)
 	at java.base/java.io.FileOutputStream.open0(Native Method)
@@ -32,7 +32,7 @@
 	at java.base/java.io.FileWriter.<init>(FileWriter.java:66)
 	at assignment2.model.JsonParser.updateInventory(JsonParser.java:122)
 	at assignment2.model.InventoryModel.updateInventory(InventoryModel.java:67)
-	at assignment2.model.InventoryModel.deleteProduct(InventoryModel.java:192)
+	at assignment2.model.InventoryModel.deleteProduct(InventoryModel.java:196)
 	at assignment2.InventoryModelTest.deleteProductTest(InventoryModelTest.java:519)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
@@ -127,7 +127,7 @@ java.io.FileNotFoundException:  (No such file or directory)
 	at java.base/java.io.FileWriter.<init>(FileWriter.java:66)
 	at assignment2.model.JsonParser.updateInventory(JsonParser.java:122)
 	at assignment2.model.InventoryModel.updateInventory(InventoryModel.java:67)
-	at assignment2.model.InventoryModel.updateProduct(InventoryModel.java:125)
+	at assignment2.model.InventoryModel.updateProduct(InventoryModel.java:129)
 	at assignment2.InventoryModelTest.updateProductSuccessfulTest(InventoryModelTest.java:463)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
@@ -222,7 +222,7 @@ java.io.FileNotFoundException:  (No such file or directory)
 	at java.base/java.io.FileWriter.<init>(FileWriter.java:66)
 	at assignment2.model.JsonParser.updateInventory(JsonParser.java:122)
 	at assignment2.model.InventoryModel.updateInventory(InventoryModel.java:67)
-	at assignment2.model.InventoryModel.addProduct(InventoryModel.java:108)
+	at assignment2.model.InventoryModel.addProduct(InventoryModel.java:112)
 	at assignment2.InventoryModelTest.addProductSuccessfulTest(InventoryModelTest.java:418)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
@@ -317,7 +317,7 @@ java.io.FileNotFoundException:  (No such file or directory)
 	at java.base/java.io.FileWriter.<init>(FileWriter.java:66)
 	at assignment2.model.JsonParser.updateInventory(JsonParser.java:122)
 	at assignment2.model.InventoryModel.updateInventory(InventoryModel.java:67)
-	at assignment2.model.InventoryModel.putBack(InventoryModel.java:92)
+	at assignment2.model.InventoryModel.putBack(InventoryModel.java:96)
 	at assignment2.InventoryModelTest.putBackTest(InventoryModelTest.java:502)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)

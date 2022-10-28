@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="assignment2.LastFiveProductsModelTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2022-10-27T09:18:42" hostname="Williams-MBP" time="0.006">
+<testsuite name="assignment2.LastFiveProductsModelTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2022-10-27T22:53:58" hostname="kylies-mbp.staff.wireless.sydney.edu.au" time="0.01">
   <properties/>
-  <testcase name="getLastFiveProductsBoughtByUserTestExactlyFivePurchasesWithoutRepeats()" classname="assignment2.LastFiveProductsModelTest" time="0.004"/>
+  <testcase name="getLastFiveProductsBoughtByUserTestExactlyFivePurchasesWithoutRepeats()" classname="assignment2.LastFiveProductsModelTest" time="0.006"/>
   <testcase name="getLastFiveProductsBoughtByUserTestMoreThanFivePurchases()" classname="assignment2.LastFiveProductsModelTest" time="0.0"/>
   <testcase name="getLastFiveProductsBoughtByUserTestEmpty()" classname="assignment2.LastFiveProductsModelTest" time="0.0"/>
-  <testcase name="getLastFiveProductsBoughtByUserTestExactlyFivePurchasesWithRepeats()" classname="assignment2.LastFiveProductsModelTest" time="0.001"/>
+  <testcase name="getLastFiveProductsBoughtByUserTestExactlyFivePurchasesWithRepeats()" classname="assignment2.LastFiveProductsModelTest" time="0.0"/>
   <testcase name="getLastFiveProductsBoughtByUserTestLessThanFivePurchases()" classname="assignment2.LastFiveProductsModelTest" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>

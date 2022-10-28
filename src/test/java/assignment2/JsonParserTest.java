@@ -103,7 +103,7 @@ public class JsonParserTest {
         users.add(new User("test2", "pw"));
         users.add(new User("test3", "pw"));
 
-        String filename = "src/test/resources/test_users3.json";
+        String filename = "src/test/resources/test_users4.json";
 
         jsonParser = new JsonParser("",
                 filename,
@@ -154,7 +154,7 @@ public class JsonParserTest {
 
         try {
             String file = Files.readString(Path.of(filename));
-            assertEquals(file, "[{\"username\":\"test1\",\"password\":\"pw\",\"purchases\":[{\"price\":2.0,\"quantity\":3,\"item\":\"milk\",\"datePurchased\":{\"date\":{\"year\":2022,\"month\":2,\"day\":2},\"time\":{\"hour\":2,\"minute\":2,\"second\":0,\"nano\":0}}}],\"cart\":{}},{\"username\":\"test2\",\"password\":\"pw\",\"purchases\":[{\"price\":2.0,\"quantity\":3,\"item\":\"milk\",\"datePurchased\":{\"date\":{\"year\":2023,\"month\":3,\"day\":3},\"time\":{\"hour\":3,\"minute\":3,\"second\":0,\"nano\":0}}}],\"cart\":{}},{\"username\":\"test3\",\"password\":\"pw\",\"purchases\":[{\"price\":2.0,\"quantity\":3,\"item\":\"milk\",\"datePurchased\":{\"date\":{\"year\":2024,\"month\":4,\"day\":4},\"time\":{\"hour\":4,\"minute\":4,\"second\":0,\"nano\":0}}}],\"cart\":{}}]");
+            assertEquals(file, "[{\"username\":\"test1\",\"password\":\"pw\",\"purchases\":[{\"price\":2.0,\"quantity\":3,\"item\":\"milk\",\"datePurchased\":{\"date\":{\"year\":2022,\"month\":2,\"day\":2},\"time\":{\"hour\":2,\"minute\":2,\"second\":0,\"nano\":0}}}],\"cart\":{},\"userAccess\":\"CUSTOMER\"},{\"username\":\"test2\",\"password\":\"pw\",\"purchases\":[{\"price\":2.0,\"quantity\":3,\"item\":\"milk\",\"datePurchased\":{\"date\":{\"year\":2023,\"month\":3,\"day\":3},\"time\":{\"hour\":3,\"minute\":3,\"second\":0,\"nano\":0}}}],\"cart\":{},\"userAccess\":\"CUSTOMER\"},{\"username\":\"test3\",\"password\":\"pw\",\"purchases\":[{\"price\":2.0,\"quantity\":3,\"item\":\"milk\",\"datePurchased\":{\"date\":{\"year\":2024,\"month\":4,\"day\":4},\"time\":{\"hour\":4,\"minute\":4,\"second\":0,\"nano\":0}}}],\"cart\":{},\"userAccess\":\"CUSTOMER\"}]");
         } catch (IOException e){
             fail();
         }

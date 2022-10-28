@@ -24,7 +24,6 @@ import javafx.stage.Stage;
 import javafx.beans.binding.*;
 import javafx.util.*;
 
-import javax.swing.*;
 import java.util.*;
 
 import java.io.*;
@@ -273,7 +272,6 @@ public class ProductOptionsView implements View{
             }
         };
         addBTNColumn.setCellFactory(cellFactory);
-
 
         populateTable(chocolatesTable, "chocolates");
 
