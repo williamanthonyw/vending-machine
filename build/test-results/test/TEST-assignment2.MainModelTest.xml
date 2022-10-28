@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="assignment2.MainModelTest" tests="13" skipped="0" failures="0" errors="0" timestamp="2022-10-28T02:09:21" hostname="Kylies-MacBook-Pro.local" time="0.025">
+<testsuite name="assignment2.MainModelTest" tests="13" skipped="0" failures="0" errors="0" timestamp="2022-10-28T02:28:13" hostname="Kylies-MacBook-Pro.local" time="0.023">
   <properties/>
-  <testcase name="getLoginModelTest()" classname="assignment2.MainModelTest" time="0.001"/>
-  <testcase name="getCardPaymentModelTest()" classname="assignment2.MainModelTest" time="0.001"/>
-  <testcase name="getCashPaymentModelTest()" classname="assignment2.MainModelTest" time="0.001"/>
+  <testcase name="getLoginModelTest()" classname="assignment2.MainModelTest" time="0.002"/>
+  <testcase name="getCardPaymentModelTest()" classname="assignment2.MainModelTest" time="0.0"/>
+  <testcase name="getCashPaymentModelTest()" classname="assignment2.MainModelTest" time="0.0"/>
   <testcase name="getCartPriceTest()" classname="assignment2.MainModelTest" time="0.001"/>
   <testcase name="loginFailTest()" classname="assignment2.MainModelTest" time="0.001"/>
   <testcase name="addToCartTest()" classname="assignment2.MainModelTest" time="0.001"/>
