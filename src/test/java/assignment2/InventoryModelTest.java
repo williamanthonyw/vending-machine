@@ -352,6 +352,7 @@ public class InventoryModelTest {
 
         Product testProduct = new Product("name", 5);
         testProduct.setCategory("drinks");
+        testProduct.setPrice(5);
         testProduct.setCode(102);
         testProduct.setQuantity(2);
 

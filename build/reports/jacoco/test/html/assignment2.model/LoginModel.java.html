@@ -7,65 +7,75 @@ public class LoginModel {
 
     private List&lt;User&gt; users;
     private User anonymousUser;
+    private JsonParser jsonParser;
+    private MainModel mainModel;
 
-<span class="fc" id="L11">    public LoginModel(List&lt;User&gt; users){</span>
-<span class="fc" id="L12">        this.users = users;</span>
+<span class="fc" id="L13">    public LoginModel(List&lt;User&gt; users,JsonParser jsonParser){</span>
+<span class="fc" id="L14">        this.users = users;</span>
 
-<span class="fc bfc" id="L14" title="All 2 branches covered.">        for (User user : users){</span>
 
-<span class="fc bfc" id="L16" title="All 2 branches covered.">            if (user.getUsername().equals(&quot;anonymous&quot;)){</span>
-<span class="fc" id="L17">                this.anonymousUser = user;</span>
+<span class="fc bfc" id="L17" title="All 2 branches covered.">        for (User user : users){</span>
+
+<span class="fc bfc" id="L19" title="All 2 branches covered.">            if (user.getUsername().equals(&quot;anonymous&quot;)){</span>
+<span class="fc" id="L20">                this.anonymousUser = user;</span>
             }
 
-<span class="fc" id="L20">        }</span>
-<span class="fc" id="L21">    }</span>
-
-    public void setAnonymousUser(User user){
-<span class="fc" id="L24">        this.anonymousUser = user;</span>
+<span class="fc" id="L23">        }</span>
+<span class="fc" id="L24">        this.jsonParser = jsonParser;</span>
 <span class="fc" id="L25">    }</span>
 
+    public void setAnonymousUser(User user){
+<span class="fc" id="L28">        this.anonymousUser = user;</span>
+<span class="fc" id="L29">    }</span>
+
     public List&lt;User&gt; getUsers(){
-<span class="fc" id="L28">        return users;</span>
+<span class="fc" id="L32">        return users;</span>
     }
 
     public User getAnonymousUser(){
-<span class="fc" id="L32">        return anonymousUser;</span>
+<span class="fc" id="L36">        return anonymousUser;</span>
     }
 
     public User login(String username, String password){
 
-<span class="fc" id="L37">        System.out.println(username);</span>
+<span class="fc" id="L41">        System.out.println(username);</span>
 
-<span class="fc bfc" id="L39" title="All 2 branches covered.">        for (User user : users){</span>
-<span class="fc" id="L40">            System.out.println(user.getUsername());</span>
+<span class="fc bfc" id="L43" title="All 2 branches covered.">        for (User user : users){</span>
+<span class="fc" id="L44">            System.out.println(user.getUsername());</span>
 
-<span class="fc bfc" id="L42" title="All 2 branches covered.">            if (user.getUsername().equalsIgnoreCase(username)){</span>
+<span class="fc bfc" id="L46" title="All 2 branches covered.">            if (user.getUsername().equalsIgnoreCase(username)){</span>
 
-<span class="pc bpc" id="L44" title="1 of 2 branches missed.">                if (user.getPassword().equals(password)){</span>
+<span class="pc bpc" id="L48" title="1 of 2 branches missed.">                if (user.getPassword().equals(password)){</span>
 
                     // reset cart for user logged in
-<span class="fc" id="L47">                    user.clearCart();</span>
+<span class="fc" id="L51">                    user.clearCart();</span>
 
                     
-<span class="fc" id="L50">                    return user;</span>
+<span class="fc" id="L54">                    return user;</span>
                 }
             }
 
-<span class="fc" id="L54">        }</span>
+<span class="fc" id="L58">        }</span>
 
-<span class="fc" id="L56">        return null;</span>
+<span class="fc" id="L60">        return null;</span>
     }
 
     public boolean addUser(User user){
 
-<span class="fc bfc" id="L61" title="All 2 branches covered.">        for(User user1: users){</span>
-<span class="fc bfc" id="L62" title="All 2 branches covered.">            if(user1.getUsername().equalsIgnoreCase(user.getUsername())){</span>
-<span class="fc" id="L63">                return false;</span>
+<span class="fc bfc" id="L65" title="All 2 branches covered.">        for(User user1: users){</span>
+<span class="fc bfc" id="L66" title="All 2 branches covered.">            if(user1.getUsername().equalsIgnoreCase(user.getUsername())){</span>
+<span class="fc" id="L67">                return false;</span>
             }
-<span class="fc" id="L65">        }</span>
-<span class="fc" id="L66">        users.add(user);</span>
-<span class="fc" id="L67">        return true;</span>
+<span class="fc" id="L69">        }</span>
+<span class="fc" id="L70">        users.add(user);</span>
+<span class="fc" id="L71">        jsonParser.updateUsers(users);</span>
+<span class="fc" id="L72">        return true;</span>
     }
+
+    public void removeUser(User user){
+<span class="nc" id="L76">        this.users.remove(user);</span>
+<span class="nc" id="L77">        jsonParser.updateUsers(this.users);</span>
+<span class="nc" id="L78">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

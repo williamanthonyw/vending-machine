@@ -59,7 +59,7 @@ public class JsonParser {
             file.flush();
 
         } catch (IOException e) {
-            e.printStackTrace();
+           return;
 
         }
 
@@ -91,7 +91,6 @@ public class JsonParser {
             Reader reader = new BufferedReader(new FileReader(initialCashFile));
 
             List<Cash> cashList = gson.fromJson(reader, new TypeToken<List<Cash>>() {}.getType());
-            // System.out.println("hello");
 
             if (cashList == null){
                 return new ArrayList<Cash>();
@@ -112,8 +111,8 @@ public class JsonParser {
             file.flush();
         }
         
-        catch(Exception e){
-            e.printStackTrace();
+        catch(IOException e){
+            return;
         }
     }
 
@@ -129,8 +128,8 @@ public class JsonParser {
 
         }
 
-        catch(Exception e){
-            e.printStackTrace();
+        catch(IOException e){
+            return;
         }
     }
 
@@ -143,9 +142,8 @@ public class JsonParser {
             List<CardUser> cardUsers = gson.fromJson(reader, new TypeToken<List<CardUser>>() {}.getType());
             return cardUsers;
         } catch (IOException e) {
-            e.printStackTrace();
+            return new ArrayList<CardUser>();
         }
-        return new ArrayList<CardUser>();
     }
 
 }

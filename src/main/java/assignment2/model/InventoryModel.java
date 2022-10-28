@@ -212,10 +212,10 @@ public class InventoryModel {
             reader.close();
         }
         catch (IOException e){
-            e.printStackTrace();
+
         }
         catch(CsvValidationException c){
-            c.printStackTrace();
+
         }
         return items;
     }
