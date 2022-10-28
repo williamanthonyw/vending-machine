@@ -1,6 +1,8 @@
 package assignment2;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import assignment2.model.JsonParser;
 import assignment2.model.LoginModel;
 import assignment2.model.User;
 import org.junit.jupiter.api.BeforeEach;
@@ -23,7 +25,9 @@ public class LoginTest {
         anonymousUser = new User("anonymous","");
         userList.add(anonymousUser);
 
-        loginModel = new LoginModel(userList);
+        JsonParser jsonParser = new JsonParser("", "", "", "");
+
+        loginModel = new LoginModel(userList,  jsonParser);
     }
 
     @Test
