@@ -88,8 +88,9 @@ public class SellerDashboardView implements View{
         
         HBox transactionBox2 = new HBox();
         TextArea transactionText = new TextArea();
-        transactionText.setPrefHeight(600);
-        transactionText.setPrefWidth(800);
+        transactionText.setMinHeight(200);
+        transactionText.setMinWidth(900);
+        transactionText.setEditable(false);
 
         //read transactions done from file
         String transTemp = "";
@@ -121,8 +122,9 @@ public class SellerDashboardView implements View{
 
         HBox inventoryBox2 = new HBox();
         TextArea inventoryText = new TextArea();
-        inventoryText.setPrefHeight(600);
-        inventoryText.setPrefWidth(800);
+        inventoryText.setMinHeight(200);
+        inventoryText.setMinWidth(900);
+        inventoryText.setEditable(false);
 
         //write inventory to file
         this.inventoryModel.writeInventoryToFile(productsPath);
