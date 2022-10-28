@@ -12,10 +12,12 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.text.TextAlignment;
 
 import java.util.*;
 
@@ -80,8 +82,15 @@ public class SellerDashboardView implements View{
         mainBox.getChildren().add(titleLBL);
 
         //List of Purchased Items
+        HBox transactionBox1 = new HBox();
         Label transactionLBL = new Label("List of Items Sold");
+        
+        
+        HBox transactionBox2 = new HBox();
         TextArea transactionText = new TextArea();
+        transactionText.setMinHeight(200);
+        transactionText.setMinWidth(900);
+        transactionText.setEditable(false);
 
         //read transactions done from file
         String transTemp = "";
@@ -100,11 +109,22 @@ public class SellerDashboardView implements View{
         }
         
         transactionText.setText(transTemp);
-        mainBox.getChildren().addAll(transactionLBL, transactionText);
+
+        transactionBox1.getChildren().add(transactionLBL);
+        transactionBox2.getChildren().add(transactionText);
+
+        mainBox.getChildren().addAll(transactionBox1, transactionBox2);
 
         //List of Available Items
+        HBox inventoryBox1 = new HBox();
         Label inventoryLBL = new Label("List of Items Available");
+        
+
+        HBox inventoryBox2 = new HBox();
         TextArea inventoryText = new TextArea();
+        inventoryText.setMinHeight(200);
+        inventoryText.setMinWidth(900);
+        inventoryText.setEditable(false);
 
         //write inventory to file
         this.inventoryModel.writeInventoryToFile(productsPath);
@@ -127,7 +147,10 @@ public class SellerDashboardView implements View{
 
         inventoryText.setText(invTemp);
 
-        mainBox.getChildren().addAll(inventoryLBL, inventoryText);
+        inventoryBox1.getChildren().add(inventoryLBL);
+        inventoryBox2.getChildren().add(inventoryText);
+
+        mainBox.getChildren().addAll(inventoryBox1, inventoryBox2);
 
         
     }

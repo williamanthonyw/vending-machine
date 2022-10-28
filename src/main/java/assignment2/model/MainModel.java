@@ -34,8 +34,9 @@ public class MainModel {
 
     private HashMap<Product, Integer> aggregatePurchases;
     private JsonParser jsonParser;
+    private String transactionsFile;
 
-    public MainModel(String inventoryFile, String usersFile, String initialCashFile, String cardFile){
+    public MainModel(String inventoryFile, String usersFile, String initialCashFile, String cardFile, String transactionsFile){
 
         this.jsonParser = new JsonParser(inventoryFile, usersFile, initialCashFile, cardFile);
 
@@ -47,18 +48,20 @@ public class MainModel {
         }
 
         this.isLoggedIn = false;
-
-
-        this.aggregatePurchases = new HashMap<Product, Integer>();
         this.inventoryFile = inventoryFile;
         this.usersFile = usersFile;
         this.initialCashFile = initialCashFile;
         this.cardFile = cardFile;
+        this.transactionsFile = transactionsFile;
 
         this.lastFiveProductsModel = new LastFiveProductsModel();
         this.cardPaymentModel = new CardPaymentModel(this, jsonParser );
         this.cashPaymentModel = new CashPaymentModel(jsonParser.getCash(), jsonParser);
         this.inventoryModel = new InventoryModel(jsonParser.getInventory(), jsonParser);
+
+        this.aggregatePurchases = new HashMap<Product, Integer>();
+//        List<List<String>> items = readPurchasesFromFile("src/main/resources/transaction.csv");
+
 //        this.userManagementModel = new UserManagementModel(jsonParser.getUsers(), jsonParser);
 
     }
@@ -142,13 +145,15 @@ public class MainModel {
 
     }
 
-    public void writePurchasesToFile(HashMap<Product, Integer> itemsPurchased, String filename){
-        File file = new File(filename);
+    public void writePurchasesToFile(HashMap<Product, Integer> itemsPurchased){
+        File file = new File(transactionsFile);
 
         try{
             List<String[]> items = new ArrayList<String[]>();
-            CSVWriter writer = new CSVWriter(new FileWriter(file));
-            
+
+            FileWriter fileWriter = new FileWriter(file);
+            CSVWriter writer = new CSVWriter(fileWriter);
+
             for (Product p: itemsPurchased.keySet()){
                 items.add(new String[] {String.valueOf(p.getCode()), p.getName(), String.valueOf(itemsPurchased.get(p))});
             }
@@ -159,6 +164,35 @@ public class MainModel {
         catch(IOException e){
             e.printStackTrace();
         }
+    }
+
+    public void checkout(){
+
+        // adds it to user's list of purchases
+        for (Product product : user.getCart().keySet()){
+            user.purchaseProduct(product, user.getCart().get(product));
+
+            if (aggregatePurchases.get(product) == null){
+                this.aggregatePurchases.put(product, 0);
+            }
+
+            this.aggregatePurchases.put(product, user.getCart().get(product) + this.aggregatePurchases.get(product));
+
+        }
+
+        user.clearCart();
+
+        // update users file
+        jsonParser.updateUsers(loginModel.getUsers());
+
+        // update inventory file
+        inventoryModel.updateInventory();
+
+        //write purchases to file
+        writePurchasesToFile(this.aggregatePurchases);
+
+        logout();
+
     }
 
     public List<List<String>> readPurchasesFromFile(String filename){
@@ -184,36 +218,6 @@ public class MainModel {
         }
 
         return items;
-    }
-
-
-    public void checkout(){
-
-        // adds it to user's list of purchases
-        for (Product product : user.getCart().keySet()){
-            user.purchaseProduct(product, user.getCart().get(product));
-
-            if (aggregatePurchases.get(product) == null){
-                this.aggregatePurchases.put(product, 0);
-            }
-            this.aggregatePurchases.put(product, user.getCart().get(product) + this.aggregatePurchases.get(product));
-
-            
-        }
-
-        user.clearCart();
-
-        // update users file
-        jsonParser.updateUsers(loginModel.getUsers());
-
-        // update inventory file
-        inventoryModel.updateInventory();
-
-        //write purchases to file
-        writePurchasesToFile(this.aggregatePurchases, "src/test/resources/transaction.csv");
-
-        logout();
-
     }
 
     public InventoryModel getInventoryModel(){

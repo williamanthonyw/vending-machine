@@ -74,7 +74,7 @@ public class SellerDashboardTest {
         List<Product> inventory = jp.getInventory();
         InventoryModel inventoryModel = new InventoryModel(inventory, jp);
 
-        MainModel mainModel = new MainModel(inventoryPath, "src/test/resources/test_users3.json", "src/test/resources/InitialCash.json", "src/test/resources/credit_cards.json");
+        MainModel mainModel = new MainModel(inventoryPath, "src/test/resources/test_users3.json", "src/test/resources/InitialCash.json", "src/test/resources/credit_cards.json", "src/test/resources/transaction.csv");
 
         // login user 1
         mainModel.setUser(mainModel.getLoginModel().login("test1", "pw"));
@@ -86,12 +86,11 @@ public class SellerDashboardTest {
 
         int cartSize = mainModel.getUser().getCart().size();
 
-
         //complete transaction and write to file 
         mainModel.checkout();
 
         List<List<String>> itemsPurchased = mainModel.readPurchasesFromFile(testTransactionCSVPath);
-        
+
         assertEquals(cartSize, itemsPurchased.size());
 
         //put into maps for both
@@ -118,7 +117,7 @@ public class SellerDashboardTest {
         List<Product> inventory = jp.getInventory();
         InventoryModel inventoryModel = new InventoryModel(inventory, jp);
 
-        MainModel mainModel = new MainModel(inventoryPath, "src/test/resources/test_users3.json", "src/test/resources/InitialCash.json", "src/test/resources/credit_cards.json");
+        MainModel mainModel = new MainModel(inventoryPath, "src/test/resources/test_users3.json", "src/test/resources/InitialCash.json", "src/test/resources/credit_cards.json", "src/test/resources/transaction.csv");
 
         //login user 1
         mainModel.setUser(mainModel.getLoginModel().login("test1", "pw"));

@@ -10,7 +10,6 @@ public class Product {
     private double price;
     private int quantity;
 
-
     public Product(){
 
     }
