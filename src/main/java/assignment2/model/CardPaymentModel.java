@@ -15,18 +15,20 @@ public class CardPaymentModel {
 
     }
 
-    public boolean paymentProcess(String name, String number,boolean saveDetail){
+    public void saveCard(CardUser cardUser){
+        mainModel.getUser().setCardUser(cardUser);
+        jsonParser.updateUsers(mainModel.getLoginModel().getUsers());
+    }
+
+    public CardUser paymentProcess(String name, String number){
 
         for(CardUser user: cardUserList){
             if(user.getName().equals(name) && user.getCardNumber().equals(number)){
-                if(saveDetail){
-                    mainModel.getUser().setCardUser(user);
-                }
                 System.out.println(mainModel.getUser().getCardUser());
-                return true;
+                return user;
             }
         }
 
-        return false;
+        return null;
     }
 }
