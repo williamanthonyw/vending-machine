@@ -232,8 +232,7 @@ public class UserManagementView implements View {
 	@Override
 	public void setUpCancelBTN(Button cancelBTN) {
 
-        cancelBTN.setMaxHeight(10);
-        mainBox.getChildren().add(cancelBTN);		
+
 	}
 
 

@@ -27,7 +27,8 @@ public class App extends Application{
         mainModel = new MainModel("src/main/resources/Inventory.json",
                                     "src/main/resources/users.json",
                                 "src/main/resources/InitialCash.json",
-                                    "src/main/resources/credit_cards.json");
+                                    "src/main/resources/credit_cards.json",
+                            "src/main/resources/transaction.csv");
         mainView = new MainView(mainModel);
         
         launch();
