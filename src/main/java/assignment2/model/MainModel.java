@@ -36,6 +36,8 @@ public class MainModel {
     private JsonParser jsonParser;
     private String transactionsFile;
 
+    private List<List<String>> pastPurchases;
+
     public MainModel(String inventoryFile, String usersFile, String initialCashFile, String cardFile, String transactionsFile){
 
         this.jsonParser = new JsonParser(inventoryFile, usersFile, initialCashFile, cardFile);
@@ -60,7 +62,7 @@ public class MainModel {
         this.inventoryModel = new InventoryModel(jsonParser.getInventory(), jsonParser);
 
         this.aggregatePurchases = new HashMap<Product, Integer>();
-//        List<List<String>> items = readPurchasesFromFile("src/main/resources/transaction.csv");
+        this.pastPurchases = readPurchasesFromFile("src/main/resources/transaction.csv");
 
 //        this.userManagementModel = new UserManagementModel(jsonParser.getUsers(), jsonParser);
 
@@ -153,6 +155,10 @@ public class MainModel {
 
             FileWriter fileWriter = new FileWriter(file);
             CSVWriter writer = new CSVWriter(fileWriter);
+
+            for (List<String> pastPurchase: pastPurchases){
+                items.add(pastPurchase.toArray(new String[3]));
+            }
 
             for (Product p: itemsPurchased.keySet()){
                 items.add(new String[] {String.valueOf(p.getCode()), p.getName(), String.valueOf(itemsPurchased.get(p))});
