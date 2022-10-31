@@ -19,6 +19,8 @@ public class MainModelTest {
                 "",
                 "",
                 "",
+                "",
+                "",
                 ""
         );
     }
@@ -94,6 +96,8 @@ public class MainModelTest {
     public void checkoutTest(){
 
         this.mainModel = new MainModel(
+                "",
+                "",
                 "",
                 "",
                 "",

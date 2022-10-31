@@ -18,7 +18,6 @@ public class SellerDashboardTest {
     private static String testTransactionCSVPath = "src/test/resources/transaction.csv";
 
     JsonParser jp = new JsonParser(inventoryPath, "src/test/resources/test_users3.json", "src/test/resources/InitialCash.json", "src/test/resources/credit_cards.json");
-
     //default
     private List<Product> defaultInventory = jp.getInventory();
 
@@ -31,14 +30,15 @@ public class SellerDashboardTest {
     @Test
     public void readAndWriteInventoryTest(){
         List<Product> inventory = jp.getInventory();
-        InventoryModel inventoryModel = new InventoryModel(inventory, jp);
+        CSVFileParser csvFileParser = new CSVFileParser(testInventoryCSVPath);
+        InventoryModel inventoryModel = new InventoryModel(inventory, jp, csvFileParser);
         
 
         //write to csv file
-        inventoryModel.writeInventoryToFile(testInventoryCSVPath);
+        csvFileParser.writeInventoryToFile(inventoryModel.getInventoryAsString());
 
         //read from file
-        List<List<String>> inventoryRead = inventoryModel.readInventoryFromFile(testInventoryCSVPath);
+        List<List<String>> inventoryRead = csvFileParser.readInventoryFromFile();
 
         //check for equivalent length
         assertEquals(inventory.size(), inventoryRead.size());
@@ -72,9 +72,10 @@ public class SellerDashboardTest {
     @Test
     public void readAndWriteTransactionTest(){
         List<Product> inventory = jp.getInventory();
-        InventoryModel inventoryModel = new InventoryModel(inventory, jp);
+       
 
-        MainModel mainModel = new MainModel(inventoryPath, "src/test/resources/test_users3.json", "src/test/resources/InitialCash.json", "src/test/resources/credit_cards.json", "src/test/resources/transaction.csv");
+        MainModel mainModel = new MainModel(inventoryPath, "src/test/resources/test_users3.json", "src/test/resources/InitialCash.json", "src/test/resources/credit_cards.json", testTransactionCSVPath, testInventoryCSVPath, testTransactionCSVPath);
+        InventoryModel inventoryModel = mainModel.getInventoryModel();
 
         // login user 1
         mainModel.setUser(mainModel.getLoginModel().login("test1", "pw"));
@@ -115,9 +116,10 @@ public class SellerDashboardTest {
     @Test
     public void multipleTransactionsTest(){
         List<Product> inventory = jp.getInventory();
-        InventoryModel inventoryModel = new InventoryModel(inventory, jp);
+        
 
-        MainModel mainModel = new MainModel(inventoryPath, "src/test/resources/test_users3.json", "src/test/resources/InitialCash.json", "src/test/resources/credit_cards.json", "src/test/resources/transaction.csv");
+        MainModel mainModel = new MainModel(inventoryPath, "src/test/resources/test_users3.json", "src/test/resources/InitialCash.json", "src/test/resources/credit_cards.json", testTransactionCSVPath, testInventoryCSVPath, testTransactionCSVPath);
+        InventoryModel inventoryModel = mainModel.getInventoryModel();
 
         //login user 1
         mainModel.setUser(mainModel.getLoginModel().login("test1", "pw"));

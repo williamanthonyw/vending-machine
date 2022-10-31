@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.opencsv.CSVParser;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,11 +18,14 @@ import java.util.*;
 public class InventoryModelTest {
     private InventoryModel inventoryModel;
     private JsonParser jsonParser;
+    private CSVFileParser csvFileParser;
 
     @BeforeEach
     public void beforeTests(){
 
-        this.jsonParser = new JsonParser(                "src/test/resources/InventoryTest1.json",
+        this.csvFileParser = new CSVFileParser("src/test/resources/inventory.csv","src/test/resources/transaction.csv");
+
+        this.jsonParser = new JsonParser("src/test/resources/InventoryTest1.json",
                 "",
                 "",
                 ""
@@ -36,7 +41,7 @@ public class InventoryModelTest {
                 ""
         );
 
-        this.inventoryModel = new InventoryModel(inventory, jsonParser);
+        this.inventoryModel = new InventoryModel(inventory, jsonParser, csvFileParser);
 
     }
 
@@ -144,7 +149,7 @@ public class InventoryModelTest {
                 ""
         );
 
-        InventoryModel inventoryModelTest = new InventoryModel(temp.getInventory(), jsonParser);
+        InventoryModel inventoryModelTest = new InventoryModel(temp.getInventory(), jsonParser, csvFileParser);
 
         Product testProduct = new Product("name", 5);
 
@@ -168,7 +173,7 @@ public class InventoryModelTest {
                 ""
         );
 
-        InventoryModel inventoryModelTest = new InventoryModel(temp.getInventory(), jsonParser);
+        InventoryModel inventoryModelTest = new InventoryModel(temp.getInventory(), jsonParser, csvFileParser);
 
         Product testProduct = new Product("name", 5);
         testProduct.setCategory("drinks");
@@ -198,7 +203,7 @@ public class InventoryModelTest {
                 ""
         );
 
-        InventoryModel inventoryModelTest = new InventoryModel(temp.getInventory(), jsonParser);
+        InventoryModel inventoryModelTest = new InventoryModel(temp.getInventory(), jsonParser, csvFileParser);
 
         Product testProduct = new Product("name", 5);
         testProduct.setCategory("drinks");
@@ -228,7 +233,7 @@ public class InventoryModelTest {
                 ""
         );
 
-        InventoryModel inventoryModelTest = new InventoryModel(temp.getInventory(), jsonParser);
+        InventoryModel inventoryModelTest = new InventoryModel(temp.getInventory(), jsonParser, csvFileParser);
 
         Product testProduct = new Product("name", 5);
         testProduct.setCategory("drinks");
@@ -258,7 +263,7 @@ public class InventoryModelTest {
                 ""
         );
 
-        InventoryModel inventoryModelTest = new InventoryModel(temp.getInventory(), jsonParser);
+        InventoryModel inventoryModelTest = new InventoryModel(temp.getInventory(), jsonParser, csvFileParser);
 
         Product testProduct = new Product("name", 5);
         testProduct.setCategory("drinks");
@@ -288,7 +293,7 @@ public class InventoryModelTest {
                 ""
         );
 
-        InventoryModel inventoryModelTest = new InventoryModel(temp.getInventory(), jsonParser);
+        InventoryModel inventoryModelTest = new InventoryModel(temp.getInventory(), jsonParser, csvFileParser);
 
         Product testProduct = new Product("name", 5);
         testProduct.setCategory("drinks");
@@ -318,7 +323,7 @@ public class InventoryModelTest {
                 ""
         );
 
-        InventoryModel inventoryModelTest = new InventoryModel(temp.getInventory(), jsonParser);
+        InventoryModel inventoryModelTest = new InventoryModel(temp.getInventory(), jsonParser, csvFileParser);
 
         Product testProduct = new Product("name", 5);
         testProduct.setCategory("drinks");
@@ -348,7 +353,7 @@ public class InventoryModelTest {
                 ""
         );
 
-        InventoryModel inventoryModelTest = new InventoryModel(temp.getInventory(), jsonParser);
+        InventoryModel inventoryModelTest = new InventoryModel(temp.getInventory(), jsonParser, csvFileParser);
 
         Product testProduct = new Product("name", 5);
         testProduct.setCategory("drinks");
@@ -379,7 +384,7 @@ public class InventoryModelTest {
                 ""
         );
 
-        InventoryModel inventoryModelTest = new InventoryModel(temp.getInventory(), jsonParser);
+        InventoryModel inventoryModelTest = new InventoryModel(temp.getInventory(), jsonParser, csvFileParser);
 
         Product testProduct = new Product("name", 5);
         testProduct.setCategory("drinks");
@@ -409,7 +414,7 @@ public class InventoryModelTest {
                 ""
         );
 
-        InventoryModel inventoryModelTest = new InventoryModel(temp.getInventory(), jsonParser);
+        InventoryModel inventoryModelTest = new InventoryModel(temp.getInventory(), jsonParser, csvFileParser);
 
         Product testProduct = new Product("name", 5);
         testProduct.setCategory("drinks");
@@ -432,7 +437,7 @@ public class InventoryModelTest {
                 ""
         );
 
-        InventoryModel inventoryModelTest = new InventoryModel(temp.getInventory(), jsonParser);
+        InventoryModel inventoryModelTest = new InventoryModel(temp.getInventory(), jsonParser, csvFileParser);
 
         Product testProduct = new Product("name", 5);
         testProduct.setCategory("drinks");
@@ -457,7 +462,7 @@ public class InventoryModelTest {
                 ""
         );
 
-        InventoryModel inventoryModelTest = new InventoryModel(temp.getInventory(), jsonParser);
+        InventoryModel inventoryModelTest = new InventoryModel(temp.getInventory(), jsonParser, csvFileParser);
 
         Product product = inventoryModelTest.getInventory().get(0);
 
@@ -477,7 +482,7 @@ public class InventoryModelTest {
                 ""
         );
 
-        InventoryModel inventoryModelTest = new InventoryModel(temp.getInventory(), jsonParser);
+        InventoryModel inventoryModelTest = new InventoryModel(temp.getInventory(), jsonParser, csvFileParser);
 
         Product product = inventoryModelTest.getInventory().get(0);
 
