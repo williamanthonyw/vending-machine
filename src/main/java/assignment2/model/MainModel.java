@@ -34,11 +34,13 @@ public class MainModel {
 
     private HashMap<Product, Integer> aggregatePurchases;
     private JsonParser jsonParser;
+    private CSVFileParser csvFileParser;
     private String transactionsFile;
 
-    public MainModel(String inventoryFile, String usersFile, String initialCashFile, String cardFile, String transactionsFile){
+    public MainModel(String inventoryFile, String usersFile, String initialCashFile, String cardFile, String transactionsFile, String inventoryCSV, String transactionCSV){
 
         this.jsonParser = new JsonParser(inventoryFile, usersFile, initialCashFile, cardFile);
+        this.csvFileParser = new CSVFileParser(inventoryCSV, transactionCSV);
 
         this.loginModel = new LoginModel(jsonParser.getUsers(),this.getJsonParser());
         this.user = loginModel.getAnonymousUser();
@@ -57,9 +59,9 @@ public class MainModel {
         this.lastFiveProductsModel = new LastFiveProductsModel();
         this.cardPaymentModel = new CardPaymentModel(this, jsonParser );
         this.cashPaymentModel = new CashPaymentModel(jsonParser.getCash(), jsonParser);
-        this.inventoryModel = new InventoryModel(jsonParser.getInventory(), jsonParser);
+        this.inventoryModel = new InventoryModel(jsonParser.getInventory(), jsonParser, csvFileParser);
 
-        this.aggregatePurchases = new HashMap<Product, Integer>();
+
 //        List<List<String>> items = readPurchasesFromFile("src/main/resources/transaction.csv");
 
 //        this.userManagementModel = new UserManagementModel(jsonParser.getUsers(), jsonParser);
