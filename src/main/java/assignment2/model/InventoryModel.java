@@ -150,11 +150,6 @@ public class InventoryModel {
                               double price,
                               int quantity){
 
-
-        if (!productNamesByCategory.get(category).contains(name)){
-            return UpdateProductState.CATEGORY_ERROR;
-        }
-
         int[] codeRange = getCodeRange(category);
 
         // code should be in the range of that category
@@ -167,7 +162,7 @@ public class InventoryModel {
             if (p != product){
 
                 // no duplicate products allowed
-                if (p.getName().equals(name) &&
+                if (p.getName().equalsIgnoreCase(name) &&
                     p.getCategory().equals(category)) {
                     return UpdateProductState.DUPLICATE_PRODUCT_ERROR;
                 }
@@ -220,6 +215,4 @@ public class InventoryModel {
         }
     }
 
-    public static void main(String[] args){
-    }
 }
