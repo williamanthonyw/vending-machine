@@ -234,6 +234,8 @@ public class MainView {
 
             if (mainModel.getUser().getUserAccess().equals(UserAccess.OWNER)){
                 menuBTN.getItems().addAll(userManagementBTN);
+                menuBTN.getItems().addAll(sellerInventoryBTN);
+                menuBTN.getItems().add(modifyCashBTN);
                 menuBTN.getItems().addAll(ownerDashboardBTN);
             }
             if (mainModel.getUser().getUserAccess().equals(UserAccess.SELLER)){
