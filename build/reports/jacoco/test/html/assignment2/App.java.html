@@ -4,6 +4,7 @@
 
 package assignment2;
 
+import assignment2.model.CSVFileParser;
 import assignment2.model.CsvParser;
 import assignment2.model.JsonParser;
 import assignment2.model.MainModel;
@@ -12,35 +13,37 @@ import com.sun.tools.javac.Main;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
-<span class="nc" id="L15">public class App extends Application{</span>
+<span class="nc" id="L16">public class App extends Application{</span>
 
     private static MainModel mainModel;
     private static MainView mainView;
-    private static CsvParser csvParser;
+    private static CSVFileParser csvFileParser;
     private static JsonParser jsonParser;
 
     @Override
     public void start(Stage stage){
-<span class="nc" id="L24">        stage.setTitle(&quot;Lite Snacks Vending Machine&quot;);</span>
-<span class="nc" id="L25">        mainView.setUp(stage);</span>
+<span class="nc" id="L25">        stage.setTitle(&quot;Lite Snacks Vending Machine&quot;);</span>
+<span class="nc" id="L26">        mainView.setUp(stage);</span>
 
-<span class="nc" id="L27">    }</span>
+<span class="nc" id="L28">    }</span>
 
     public static void main(String[] args){
 
-<span class="nc" id="L31">        jsonParser = new JsonParser(&quot;src/main/resources/Inventory.json&quot;,</span>
+<span class="nc" id="L32">        jsonParser = new JsonParser(&quot;src/main/resources/Inventory.json&quot;,</span>
                 &quot;src/main/resources/users.json&quot;,
                 &quot;src/main/resources/InitialCash.json&quot;,
                 &quot;src/main/resources/credit_cards.json&quot;);
 
-<span class="nc" id="L36">        csvParser = new CsvParser(&quot;src/main/resources/transaction.csv&quot;,</span>
-                                                &quot;src/main/resources/cancelledTransactions.csv&quot;);
+<span class="nc" id="L37">        csvFileParser = new CSVFileParser(&quot;src/main/resources/inventory.csv&quot;,</span>
+                &quot;src/main/resources/transaction.csv&quot;,
+                &quot;src/main/resources/cancelledTransactions.csv&quot;);
 
-<span class="nc" id="L39">        mainModel = new MainModel(jsonParser, csvParser);</span>
-<span class="nc" id="L40">        mainView = new MainView(mainModel);</span>
+<span class="nc" id="L41">        mainModel = new MainModel(jsonParser, csvFileParser);</span>
+
+<span class="nc" id="L43">        mainView = new MainView(mainModel);</span>
         
-<span class="nc" id="L42">        launch();</span>
+<span class="nc" id="L45">        launch();</span>
 
-<span class="nc" id="L44">    }</span>
+<span class="nc" id="L47">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

@@ -13,16 +13,16 @@ import java.util.*;
 public class MainModelTest {
     private MainModel mainModel;
     private JsonParser jsonParser;
-    private CsvParser csvParser;
+    private CSVFileParser csvFileParser;
 
     @BeforeEach
     public void beforeTests(){
 
         this.jsonParser = new JsonParser("", "", "", "");
-        this.csvParser = new CsvParser("", "");
+        this.csvFileParser = new CSVFileParser("", "", "");
 
 
-        this.mainModel = new MainModel(jsonParser, csvParser);
+        this.mainModel = new MainModel(jsonParser, csvFileParser);
     }
 
     @Test

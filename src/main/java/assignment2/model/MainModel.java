@@ -30,25 +30,16 @@ public class MainModel {
 
     private HashMap<Product, Integer> aggregatePurchases;
     private JsonParser jsonParser;
-<<<<<<< HEAD
-    private CsvParser csvParser;
+
+    private CSVFileParser csvFileParser;
 
     private List<CancelledTransaction> cancelledTransactions;
 
 
-    public MainModel(JsonParser jsonParser, CsvParser csvParser){
+    public MainModel(JsonParser jsonParser, CSVFileParser csvParser){
 
         this.jsonParser = jsonParser;
-        this.csvParser = csvParser;
-=======
-    private CSVFileParser csvFileParser;
-    private String transactionsFile;
-
-    public MainModel(String inventoryFile, String usersFile, String initialCashFile, String cardFile, String transactionsFile, String inventoryCSV, String transactionCSV){
-
-        this.jsonParser = new JsonParser(inventoryFile, usersFile, initialCashFile, cardFile);
-        this.csvFileParser = new CSVFileParser(inventoryCSV, transactionCSV);
->>>>>>> 847f8630eebba1654ddd8db83435726c26ba7719
+        this.csvFileParser = csvParser;
 
         this.loginModel = new LoginModel(jsonParser.getUsers(),this.getJsonParser());
         this.user = loginModel.getAnonymousUser();
@@ -65,13 +56,8 @@ public class MainModel {
         this.inventoryModel = new InventoryModel(jsonParser.getInventory(), jsonParser, csvFileParser);
 
 
-<<<<<<< HEAD
-        this.aggregatePurchases = new HashMap<Product, Integer>();
-=======
-//        List<List<String>> items = readPurchasesFromFile("src/main/resources/transaction.csv");
->>>>>>> 847f8630eebba1654ddd8db83435726c26ba7719
-
         this.cancelledTransactions = csvParser.getCancelledTransactions();
+        this.aggregatePurchases = new HashMap<Product, Integer>();
 
     }
 
@@ -127,7 +113,7 @@ public class MainModel {
 
         cancelledTransactions.add(new CancelledTransaction(user.getUsername(), cancellationReason, timeCancelled));
         System.out.println(cancellationReason);
-        csvParser.updateCancelledTransactions(cancelledTransactions);
+        csvFileParser.updateCancelledTransactions(cancelledTransactions);
 
         // log user out
         logout();
@@ -207,7 +193,7 @@ public class MainModel {
         inventoryModel.updateInventory();
 
         //write purchases to file
-        csvParser.writePurchasesToFile(this.aggregatePurchases);
+        csvFileParser.writePurchasesToFile(this.aggregatePurchases);
 
         logout();
 

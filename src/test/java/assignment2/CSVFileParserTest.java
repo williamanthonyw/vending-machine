@@ -1,5 +1,6 @@
 package assignment2;
 
+import assignment2.model.CSVFileParser;
 import assignment2.model.CancellationReason;
 import assignment2.model.CancelledTransaction;
 import assignment2.model.CsvParser;
@@ -12,14 +13,14 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-public class CsvParserTest {
+public class CSVFileParserTest {
 
-    private CsvParser csvParser;
+    private CSVFileParser csvFileParser;
 
     @Test
     public void updateAndGetCancelledTransaction(){
 
-        csvParser = new CsvParser("", "src/test/resources/cancelledTransactions.csv");
+        csvFileParser = new CSVFileParser("", "", "src/test/resources/cancelledTransactions.csv");
 
         CancelledTransaction cancelledTransaction1 = new CancelledTransaction("test", CancellationReason.TIMEOUT, LocalDateTime.of(2022, 1, 12, 23, 11));
         CancelledTransaction cancelledTransaction2 = new CancelledTransaction("test2", CancellationReason.USER_CANCELLATION, LocalDateTime.of(2022, 12, 12, 23, 11));
@@ -27,9 +28,9 @@ public class CsvParserTest {
 
         List<CancelledTransaction> cancelledTransactionList = Arrays.asList(new CancelledTransaction[] {cancelledTransaction1, cancelledTransaction2, cancelledTransaction3});
 
-        csvParser.updateCancelledTransactions(cancelledTransactionList);
+        csvFileParser.updateCancelledTransactions(cancelledTransactionList);
 
-        List<CancelledTransaction> out = csvParser.getCancelledTransactions();
+        List<CancelledTransaction> out = csvFileParser.getCancelledTransactions();
 
         assertEquals(out.size(), 3);
 
@@ -53,10 +54,10 @@ public class CsvParserTest {
     @Test
     public void getCancelledTransactionsEmpty(){
 
-        csvParser = new CsvParser("", "");
+        csvFileParser = new CSVFileParser("", "", "");
 
-        assertNotNull(csvParser.getCancelledTransactions());
-        assertEquals(csvParser.getCancelledTransactions().size(), 0);
+        assertNotNull(csvFileParser.getCancelledTransactions());
+        assertEquals(csvFileParser.getCancelledTransactions().size(), 0);
 
     }
 

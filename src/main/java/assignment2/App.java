@@ -4,6 +4,7 @@
 
 package assignment2;
 
+import assignment2.model.CSVFileParser;
 import assignment2.model.CsvParser;
 import assignment2.model.JsonParser;
 import assignment2.model.MainModel;
@@ -16,7 +17,7 @@ public class App extends Application{
 
     private static MainModel mainModel;
     private static MainView mainView;
-    private static CsvParser csvParser;
+    private static CSVFileParser csvFileParser;
     private static JsonParser jsonParser;
 
     @Override
@@ -33,10 +34,11 @@ public class App extends Application{
                 "src/main/resources/InitialCash.json",
                 "src/main/resources/credit_cards.json");
 
-        csvParser = new CsvParser("src/main/resources/transaction.csv",
-                                                "src/main/resources/cancelledTransactions.csv");
+        csvFileParser = new CSVFileParser("src/main/resources/inventory.csv",
+                "src/main/resources/transaction.csv",
+                "src/main/resources/cancelledTransactions.csv");
 
-        mainModel = new MainModel(jsonParser, csvParser);
+        mainModel = new MainModel(jsonParser, csvFileParser);
 
         mainView = new MainView(mainModel);
         
