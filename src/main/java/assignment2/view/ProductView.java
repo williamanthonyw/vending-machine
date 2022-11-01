@@ -11,6 +11,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import org.w3c.dom.Text;
 
 import java.util.Arrays;
 import java.util.List;
@@ -69,10 +70,9 @@ public class ProductView implements View {
         VBox nameBox = new VBox(5);
         Label nameLBL = new Label("Name");
         nameLBL.setId("categoryLBL");
-        ComboBox<String> nameCB = new ComboBox<String>();
-        nameCB.getItems().addAll(inventoryModel.getAllProductNames());
-        nameCB.setValue(product.getName());
-        nameBox.getChildren().addAll(nameLBL, nameCB);
+        TextField nameTF = new TextField();
+        nameTF.setText(product.getName());
+        nameBox.getChildren().addAll(nameLBL, nameTF);
 
         VBox categoryBox = new VBox(5);
         Label categoryLBL = new Label("Category");
@@ -142,7 +142,7 @@ public class ProductView implements View {
                     quantity != null &&
                     price != null){
 
-                UpdateProductState result = getResult(product, nameCB.getValue(), categoryCB.getValue(), itemCode, price, quantity);
+                UpdateProductState result = getResult(product, nameTF.getText(), categoryCB.getValue(), itemCode, price, quantity);
 
                 switch (result){
                     case SUCCESS:
@@ -151,9 +151,9 @@ public class ProductView implements View {
                     case DUPLICATE_PRODUCT_ERROR:
                         showErrorMsg("Product with name in category already exists.");
                         break;
-                    case CATEGORY_ERROR:
-                        showErrorMsg(nameCB.getValue() + " does not belong in " + categoryCB.getValue());
-                        break;
+//                    case CATEGORY_ERROR:
+//                        showErrorMsg(nameTF.getValue() + " does not belong in " + categoryCB.getValue());
+//                        break;
                     case CODE_RANGE_ERROR:
                         int[] codeRange = inventoryModel.getCodeRange(categoryCB.getValue());
                         showErrorMsg("Products of category " + categoryCB.getValue() + " belong in the range " + codeRange[0] + "-" + codeRange[1]);

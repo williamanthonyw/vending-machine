@@ -108,7 +108,7 @@ public class MainView {
 
     public void setUpCancelOnTimeOut(){
 
-        Duration delay = Duration.seconds(10);
+        Duration delay = Duration.seconds(120);
 
         this.timer = new PauseTransition(delay);
 

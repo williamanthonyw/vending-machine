@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="assignment2.JsonParserTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2022-11-01T11:14:59" hostname="Kylies-MBP" time="0.016">
+<testsuite name="assignment2.JsonParserTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2022-11-01T11:49:42" hostname="Kylies-MBP" time="0.02">
   <properties/>
-  <testcase name="getUsersEmptyFile()" classname="assignment2.JsonParserTest" time="0.001"/>
-  <testcase name="getUsersValidFile()" classname="assignment2.JsonParserTest" time="0.005"/>
+  <testcase name="getUsersEmptyFile()" classname="assignment2.JsonParserTest" time="0.002"/>
+  <testcase name="getUsersValidFile()" classname="assignment2.JsonParserTest" time="0.008"/>
   <testcase name="updateInventoryTest()" classname="assignment2.JsonParserTest" time="0.003"/>
   <testcase name="getUsersFileDoesNotExist()" classname="assignment2.JsonParserTest" time="0.001"/>
   <testcase name="updateUsersValidListWithPurchases()" classname="assignment2.JsonParserTest" time="0.001"/>
   <testcase name="updateUsersValidListNoPurchases()" classname="assignment2.JsonParserTest" time="0.0"/>
-  <testcase name="updateUsersEmptyList()" classname="assignment2.JsonParserTest" time="0.0"/>
+  <testcase name="updateUsersEmptyList()" classname="assignment2.JsonParserTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
