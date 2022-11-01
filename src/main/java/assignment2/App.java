@@ -28,6 +28,7 @@ public class App extends Application{
 
     public static void main(String[] args){
 
+<<<<<<< HEAD
         jsonParser = new JsonParser("src/main/resources/Inventory.json",
                 "src/main/resources/users.json",
                 "src/main/resources/InitialCash.json",
@@ -37,6 +38,15 @@ public class App extends Application{
                                                 "src/main/resources/cancelledTransactions.csv");
 
         mainModel = new MainModel(jsonParser, csvParser);
+=======
+        mainModel = new MainModel("src/main/resources/Inventory.json",
+                                    "src/main/resources/users.json",
+                                "src/main/resources/InitialCash.json",
+                                    "src/main/resources/credit_cards.json",
+                            "src/main/resources/transaction.csv",
+                            "src/main/resources/inventory.csv",
+                            "src/main/resources/transaction.csv");
+>>>>>>> 847f8630eebba1654ddd8db83435726c26ba7719
         mainView = new MainView(mainModel);
         
         launch();
