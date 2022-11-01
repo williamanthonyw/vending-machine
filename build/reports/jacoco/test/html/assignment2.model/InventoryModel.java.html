@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>InventoryModel.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">assignment2</a> &gt; <a href="index.source.html" class="el_package">assignment2.model</a> &gt; <span class="el_source">InventoryModel.java</span></div><h1>InventoryModel.java</h1><pre class="source lang-java linenums">package assignment2.model;
+
+
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.*;
+
+import com.opencsv.CSVReader;
+import com.opencsv.CSVWriter;
+import com.opencsv.exceptions.CsvValidationException;
+
+public class InventoryModel {
+
+    private List&lt;Product&gt; inventory;
+    private List&lt;String&gt; categories;
+    private Map&lt;String, List&lt;String&gt;&gt; productNamesByCategory;
+    private List&lt;String&gt; allProductNames;
+    private String filename;
+    private JsonParser jsonParser;
+    
+<span class="fc" id="L23">    public InventoryModel(List&lt;Product&gt; inventory, JsonParser jsonParser){</span>
+<span class="fc" id="L24">        this.inventory = inventory;</span>
+<span class="fc" id="L25">        this.jsonParser = jsonParser;</span>
+<span class="fc" id="L26">        this.categories = Arrays.asList(new String[] {&quot;drinks&quot;, &quot;chocolates&quot;, &quot;chips&quot;, &quot;candies&quot;});</span>
+
+<span class="fc" id="L28">        productNamesByCategory = new LinkedHashMap&lt;String, List&lt;String&gt;&gt;();</span>
+<span class="fc" id="L29">        productNamesByCategory.put(&quot;drinks&quot;,  new ArrayList&lt;String&gt;(Arrays.asList(new String[] {&quot;Mineral Water&quot;, &quot;Sprite&quot;, &quot;Coca Cola&quot;, &quot;Pepsi&quot;, &quot;Juice&quot;})));</span>
+<span class="fc" id="L30">        productNamesByCategory.put(&quot;chocolates&quot;,  new ArrayList&lt;String&gt;(Arrays.asList(new String[] {&quot;Mars&quot;, &quot;M&amp;M&quot;, &quot;Bounty&quot;, &quot;Snickers&quot;})));</span>
+<span class="fc" id="L31">        productNamesByCategory.put(&quot;chips&quot;, new ArrayList&lt;String&gt;(Arrays.asList(new String[] {&quot;Smiths&quot;, &quot;Pringles&quot;, &quot;Kettle&quot;, &quot;Thins&quot;})));</span>
+<span class="fc" id="L32">        productNamesByCategory.put(&quot;candies&quot;, new ArrayList&lt;String&gt;(Arrays.asList(new String[] {&quot;Mentos&quot;, &quot;Sour Patch&quot;, &quot;Skittles&quot;})));</span>
+
+<span class="fc" id="L34">        this.allProductNames = new ArrayList&lt;String&gt;();</span>
+
+<span class="fc" id="L36">       productNamesByCategory.keySet().forEach((String category) -&gt; {</span>
+<span class="fc" id="L37">           allProductNames.addAll(productNamesByCategory.get(category));</span>
+<span class="fc" id="L38">       });</span>
+
+
+<span class="fc" id="L41">     }</span>
+
+    public List&lt;Product&gt; getInventory(){
+<span class="fc" id="L44">        return inventory;</span>
+    }
+
+    public List&lt;String&gt; getAllProductNames(){
+<span class="fc" id="L48">        return allProductNames;</span>
+    }
+
+    public List&lt;Product&gt; getInventory(String category){
+
+<span class="fc" id="L53">        List&lt;Product&gt; products = new ArrayList&lt;Product&gt;();</span>
+
+<span class="fc bfc" id="L55" title="All 2 branches covered.">        for (Product p : inventory){</span>
+<span class="fc bfc" id="L56" title="All 2 branches covered.">            if (p.getCategory().equals(category)){</span>
+<span class="fc" id="L57">                products.add(p);</span>
+            }
+<span class="fc" id="L59">        }</span>
+
+<span class="fc" id="L61">        return products;</span>
+    }
+
+    public void updateInventory(){   /////////// after purchase/changes
+
+        // write back to inventory
+<span class="fc" id="L67">        jsonParser.updateInventory(inventory);</span>
+
+<span class="fc" id="L69">    }</span>
+
+    public List&lt;String&gt; getCategories(){
+<span class="fc" id="L72">        return categories;</span>
+    }
+
+    public void updateQuantity(Product product, int numBought){
+<span class="fc" id="L76">       product.setQuantity(product.getQuantity() - numBought);</span>
+
+<span class="pc bpc" id="L78" title="1 of 2 branches missed.">       if (product.getQuantity() &lt;= 0){</span>
+<span class="nc" id="L79">           inventory.remove(product);</span>
+       }
+
+<span class="fc" id="L82">    }</span>
+
+    public int[] getCodeRange(String category){
+<span class="fc" id="L85">       int correctCode = (categories.indexOf(category) + 1) * 100;</span>
+
+<span class="fc" id="L87">       return new int[]{correctCode, correctCode + 99};</span>
+    }
+
+    public void putBack(Map&lt;Product, Integer&gt; cart){
+
+<span class="fc bfc" id="L92" title="All 2 branches covered.">        for (Product p : cart.keySet()){</span>
+<span class="fc" id="L93">            p.setQuantity(p.getQuantity() + cart.get(p));</span>
+<span class="fc" id="L94">        }</span>
+
+<span class="fc" id="L96">        updateInventory();</span>
+
+<span class="fc" id="L98">    }</span>
+
+    public UpdateProductState addProduct(Product product,
+                                            String name,
+                                            String category,
+                                            int code,
+                                            double price,
+                                            int quantity){
+
+<span class="fc" id="L107">        UpdateProductState result = setProductDetails(product, name, category, code, price, quantity);</span>
+
+<span class="fc bfc" id="L109" title="All 2 branches covered.">        if (result == UpdateProductState.SUCCESS){</span>
+<span class="fc" id="L110">            inventory.add(product);</span>
+
+<span class="fc" id="L112">            updateInventory();</span>
+        }
+
+<span class="fc" id="L115">        return result;</span>
+
+    }
+
+    public UpdateProductState updateProduct(Product product,
+                                                String name,
+                                                String category,
+                                                int code,
+                                                double price,
+                                                int quantity){
+
+<span class="fc" id="L126">        UpdateProductState result = setProductDetails(product, name, category, code, price, quantity);</span>
+
+<span class="fc bfc" id="L128" title="All 2 branches covered.">        if (result == UpdateProductState.SUCCESS){</span>
+<span class="fc" id="L129">            updateInventory();</span>
+        }
+
+<span class="fc" id="L132">        return result;</span>
+
+    }
+
+    public UpdateProductState setProductDetails(Product product,
+                              String name,
+                              String category,
+                              int code,
+                              double price,
+                              int quantity){
+
+
+<span class="fc bfc" id="L144" title="All 2 branches covered.">        if (!productNamesByCategory.get(category).contains(name)){</span>
+<span class="fc" id="L145">            return UpdateProductState.CATEGORY_ERROR;</span>
+        }
+
+<span class="fc" id="L148">        int[] codeRange = getCodeRange(category);</span>
+
+        // code should be in the range of that category
+<span class="fc bfc" id="L151" title="All 4 branches covered.">        if (code &lt; codeRange[0] || code &gt; codeRange[1]){</span>
+<span class="fc" id="L152">            return UpdateProductState.CODE_RANGE_ERROR;</span>
+        }
+
+<span class="fc bfc" id="L155" title="All 2 branches covered.">        for (Product p : inventory){</span>
+
+<span class="fc bfc" id="L157" title="All 2 branches covered.">            if (p != product){</span>
+
+                // no duplicate products allowed
+<span class="fc bfc" id="L160" title="All 2 branches covered.">                if (p.getName().equals(name) &amp;&amp;</span>
+<span class="pc bpc" id="L161" title="1 of 2 branches missed.">                    p.getCategory().equals(category)) {</span>
+<span class="fc" id="L162">                    return UpdateProductState.DUPLICATE_PRODUCT_ERROR;</span>
+                }
+
+                // no duplicate codes allowed
+<span class="fc bfc" id="L166" title="All 2 branches covered.">                if (p.getCode() == code){</span>
+<span class="fc" id="L167">                    return UpdateProductState.CODE_DUPLICATE_ERROR;</span>
+                }
+            }
+
+<span class="fc" id="L171">        }</span>
+
+<span class="fc bfc" id="L173" title="All 2 branches covered.">        if (price &lt; 0){</span>
+<span class="fc" id="L174">            return UpdateProductState.PRICE_ERROR;</span>
+        }
+
+<span class="fc bfc" id="L177" title="All 4 branches covered.">        if (quantity &gt; 15 || quantity &lt; 0){</span>
+<span class="fc" id="L178">            return UpdateProductState.QUANTITY_ERROR;</span>
+        }
+
+
+<span class="fc" id="L182">        product.setName(name);</span>
+<span class="fc" id="L183">        product.setCategory(category);</span>
+<span class="fc" id="L184">        product.setCode(code);</span>
+<span class="fc" id="L185">        product.setPrice(price);</span>
+<span class="fc" id="L186">        product.setQuantity(quantity);</span>
+
+
+<span class="fc" id="L189">        return UpdateProductState.SUCCESS;</span>
+
+    }
+
+    public void deleteProduct(Product product) {
+<span class="fc" id="L194">        inventory.remove(product);</span>
+
+<span class="fc" id="L196">        updateInventory();</span>
+<span class="fc" id="L197">    }</span>
+
+    public List&lt;List&lt;String&gt;&gt; readInventoryFromFile(String filename){
+<span class="nc" id="L200">        List&lt;List&lt;String&gt;&gt; items = new ArrayList&lt;List&lt;String&gt;&gt;();</span>
+<span class="nc" id="L201">        File file = new File(filename);</span>
+
+        String[] item;
+
+        try{
+<span class="nc" id="L206">            CSVReader reader = new CSVReader(new FileReader(file));</span>
+
+<span class="nc bnc" id="L208" title="All 2 branches missed.">            while((item = reader.readNext()) != null){</span>
+<span class="nc" id="L209">                items.add(Arrays.asList(item));</span>
+            }
+
+<span class="nc" id="L212">            reader.close();</span>
+        }
+<span class="nc" id="L214">        catch (IOException e){</span>
+
+        }
+<span class="nc" id="L217">        catch(CsvValidationException c){</span>
+
+<span class="nc" id="L219">        }</span>
+<span class="nc" id="L220">        return items;</span>
+    }
+
+    public void writeInventoryToFile(String filename){
+<span class="nc" id="L224">        File file = new File(filename);</span>
+        
+        try{
+<span class="nc" id="L227">            CSVWriter writer = new CSVWriter(new FileWriter(file));</span>
+
+<span class="nc" id="L229">            List&lt;String[]&gt; items = new ArrayList&lt;String[]&gt;();</span>
+
+<span class="nc bnc" id="L231" title="All 2 branches missed.">            for (Product p : this.inventory){</span>
+<span class="nc" id="L232">                items.add(new String[] {p.getName(),String.valueOf(p.getCode()), p.getCategory(),  String.valueOf(p.getPrice()), String.valueOf(p.getQuantity())});</span>
+<span class="nc" id="L233">            }</span>
+
+
+
+<span class="nc" id="L237">            writer.writeAll(items);</span>
+
+<span class="nc" id="L239">            writer.close();</span>
+        }
+
+<span class="nc" id="L242">        catch(IOException e){</span>
+<span class="nc" id="L243">            e.printStackTrace();</span>
+<span class="nc" id="L244">        }</span>
+<span class="nc" id="L245">    }</span>
+
+    public static void main(String[] args){
+<span class="nc" id="L248">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

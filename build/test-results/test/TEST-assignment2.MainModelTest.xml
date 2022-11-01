@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="assignment2.MainModelTest" tests="14" skipped="0" failures="0" errors="0" timestamp="2022-11-01T10:57:10" hostname="Kylies-MBP" time="0.106">
+  <properties/>
+  <testcase name="getCancelledTransactionsAsStringTest()" classname="assignment2.MainModelTest" time="0.06"/>
+  <testcase name="getLoginModelTest()" classname="assignment2.MainModelTest" time="0.001"/>
+  <testcase name="getCardPaymentModelTest()" classname="assignment2.MainModelTest" time="0.001"/>
+  <testcase name="getCashPaymentModelTest()" classname="assignment2.MainModelTest" time="0.001"/>
+  <testcase name="getCartPriceTest()" classname="assignment2.MainModelTest" time="0.014"/>
+  <testcase name="loginFailTest()" classname="assignment2.MainModelTest" time="0.002"/>
+  <testcase name="addToCartTest()" classname="assignment2.MainModelTest" time="0.001"/>
+  <testcase name="getInventoryModelTest()" classname="assignment2.MainModelTest" time="0.001"/>
+  <testcase name="cancelTransactionTest()" classname="assignment2.MainModelTest" time="0.003"/>
+  <testcase name="loginStatusCorrectTest()" classname="assignment2.MainModelTest" time="0.001"/>
+  <testcase name="getLastFiveProductsModelTest()" classname="assignment2.MainModelTest" time="0.001"/>
+  <testcase name="loginSuccessTest()" classname="assignment2.MainModelTest" time="0.001"/>
+  <testcase name="checkoutTest()" classname="assignment2.MainModelTest" time="0.002"/>
+  <testcase name="setIsLoggedInTest()" classname="assignment2.MainModelTest" time="0.001"/>
+  <system-out><![CDATA[USER_CANCELLATION
+CHANGE_NOT_AVAILABLE
+TIMEOUT
+doesn't exist
+USER_CANCELLATION
+test
+test
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

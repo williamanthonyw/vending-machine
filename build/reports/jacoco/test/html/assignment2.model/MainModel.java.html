@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MainModel.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">assignment2</a> &gt; <a href="index.source.html" class="el_package">assignment2.model</a> &gt; <span class="el_source">MainModel.java</span></div><h1>MainModel.java</h1><pre class="source lang-java linenums">package assignment2.model;
+
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import com.opencsv.CSVReader;
+import com.opencsv.CSVWriter;
+import com.opencsv.exceptions.CsvValidationException;
+import com.google.gson.Gson;
+
+public class MainModel {
+
+    private LastFiveProductsModel lastFiveProductsModel;
+    private CardPaymentModel cardPaymentModel;
+    private LoginModel loginModel;
+    private CashPaymentModel cashPaymentModel;
+    private InventoryModel inventoryModel;
+
+
+    private User user;
+    private boolean isLoggedIn;
+
+    private HashMap&lt;Product, Integer&gt; aggregatePurchases;
+    private JsonParser jsonParser;
+    private CsvParser csvParser;
+
+    private List&lt;CancelledTransaction&gt; cancelledTransactions;
+
+
+<span class="fc" id="L38">    public MainModel(JsonParser jsonParser, CsvParser csvParser){</span>
+
+<span class="fc" id="L40">        this.jsonParser = jsonParser;</span>
+<span class="fc" id="L41">        this.csvParser = csvParser;</span>
+
+<span class="fc" id="L43">        this.loginModel = new LoginModel(jsonParser.getUsers(),this.getJsonParser());</span>
+<span class="fc" id="L44">        this.user = loginModel.getAnonymousUser();</span>
+
+<span class="pc bpc" id="L46" title="1 of 2 branches missed.">        if (this.user != null){</span>
+<span class="nc" id="L47">            this.user.clearCart();</span>
+        }
+
+<span class="fc" id="L50">        this.isLoggedIn = false;</span>
+
+<span class="fc" id="L52">        this.lastFiveProductsModel = new LastFiveProductsModel();</span>
+<span class="fc" id="L53">        this.cardPaymentModel = new CardPaymentModel(this, jsonParser );</span>
+<span class="fc" id="L54">        this.cashPaymentModel = new CashPaymentModel(jsonParser.getCash(), jsonParser);</span>
+<span class="fc" id="L55">        this.inventoryModel = new InventoryModel(jsonParser.getInventory(), jsonParser);</span>
+
+<span class="fc" id="L57">        this.aggregatePurchases = new HashMap&lt;Product, Integer&gt;();</span>
+
+<span class="fc" id="L59">        this.cancelledTransactions = csvParser.getCancelledTransactions();</span>
+
+<span class="fc" id="L61">    }</span>
+
+    public LastFiveProductsModel getLastFiveProductsModel(){
+<span class="fc" id="L64">        return this.lastFiveProductsModel;</span>
+    }
+
+    public LoginModel getLoginModel() {
+<span class="fc" id="L68">        return loginModel;</span>
+    }
+
+<span class="fc" id="L71">    public CardPaymentModel getCardPaymentModel(){return cardPaymentModel;}</span>
+
+    public CashPaymentModel getCashPaymentModel(){
+<span class="fc" id="L74">        return this.cashPaymentModel;</span>
+    }
+    public boolean isLoggedIn(){
+<span class="fc" id="L77">        return isLoggedIn;</span>
+    }
+
+    public void setIsLoggedIn(boolean logged){
+<span class="fc" id="L81">        this.isLoggedIn = logged;</span>
+<span class="fc" id="L82">    }</span>
+<span class="nc" id="L83">    public List&lt;Cash&gt; getCash(){return cashPaymentModel.getCashList();}</span>
+
+    public User getUser(){
+<span class="fc" id="L86">        return this.user;</span>
+    }
+
+    public void logout(){
+<span class="fc" id="L90">        this.user.clearCart();</span>
+<span class="fc" id="L91">        this.user = loginModel.getAnonymousUser();</span>
+<span class="fc" id="L92">        this.isLoggedIn = false;</span>
+<span class="fc" id="L93">    }</span>
+
+    public void setUser(User user){
+<span class="fc" id="L96">        this.user = user;</span>
+<span class="fc" id="L97">    }</span>
+
+    public Map&lt;Product, Integer&gt; getCart(){
+<span class="fc" id="L100">        return user.getCart();</span>
+    }
+
+    public Map&lt;Product, Integer&gt; getAggregatePurchases(){
+<span class="nc" id="L104">        return this.aggregatePurchases;</span>
+    }
+
+    public void cancelTransaction(CancellationReason cancellationReason, LocalDateTime timeCancelled){
+
+        // clear cart (look at Katie's stuff)
+<span class="fc" id="L110">        inventoryModel.putBack(user.getCart());</span>
+<span class="fc" id="L111">        user.clearCart();</span>
+
+<span class="fc" id="L113">        cancelledTransactions.add(new CancelledTransaction(user.getUsername(), cancellationReason, timeCancelled));</span>
+<span class="fc" id="L114">        System.out.println(cancellationReason);</span>
+<span class="fc" id="L115">        csvParser.updateCancelledTransactions(cancelledTransactions);</span>
+
+        // log user out
+<span class="fc" id="L118">        logout();</span>
+
+<span class="fc" id="L120">    }</span>
+
+    public List&lt;CancelledTransaction&gt; getCancelledTransactions(){
+<span class="fc" id="L123">        return cancelledTransactions;</span>
+    }
+
+    public String getCancelledTransactionsAsString(){
+<span class="fc" id="L127">        String out = &quot;&quot;;</span>
+
+<span class="fc bfc" id="L129" title="All 2 branches covered.">        for (CancelledTransaction c : cancelledTransactions){</span>
+<span class="fc" id="L130">            out += c.getUsername() + &quot;, &quot; + c.getCancellationReason().getReason() + &quot;, &quot; + c.getTimeCancelled().toString();</span>
+<span class="fc" id="L131">            out += &quot;\n&quot;;</span>
+<span class="fc" id="L132">        }</span>
+<span class="fc" id="L133">        return out;</span>
+    }
+
+    public String getTransactionsAsString(){
+//        String out = &quot;&quot;;
+//
+//        for (List&lt;String&gt; c : ){
+//            out += c.getUsername() + &quot;, &quot; + c.getCancellationReason().getReason() + &quot;, &quot; + c.getTimeCancelled().toString();
+//            out += &quot;\n&quot;;
+//        }
+//        return out;
+<span class="nc" id="L144">        return &quot;please move your to string method to model @william&quot;;</span>
+    }
+
+
+
+    public boolean login(String username, String password){
+
+<span class="fc" id="L151">        User attempt = loginModel.login(username, password);</span>
+
+<span class="fc bfc" id="L153" title="All 2 branches covered.">        if (attempt == null){</span>
+<span class="fc" id="L154">            return false;</span>
+        } else {
+<span class="fc" id="L156">            this.user = attempt;</span>
+<span class="fc" id="L157">            this.isLoggedIn = true;</span>
+<span class="fc" id="L158">            return true;</span>
+        }
+
+        // need to update inventory file as well
+    }
+
+    public void addToCart(Product product, int quantity){
+<span class="fc" id="L165">        user.addToCart(product, quantity);</span>
+
+        // update quantity in inventory
+<span class="fc" id="L168">        inventoryModel.updateQuantity(product, quantity);</span>
+
+<span class="fc" id="L170">    }</span>
+
+    public void checkout(){
+
+        // adds it to user's list of purchases
+<span class="fc bfc" id="L175" title="All 2 branches covered.">        for (Product product : user.getCart().keySet()){</span>
+<span class="fc" id="L176">            user.purchaseProduct(product, user.getCart().get(product));</span>
+
+<span class="pc bpc" id="L178" title="1 of 2 branches missed.">            if (aggregatePurchases.get(product) == null){</span>
+<span class="fc" id="L179">                this.aggregatePurchases.put(product, 0);</span>
+            }
+
+<span class="fc" id="L182">            this.aggregatePurchases.put(product, user.getCart().get(product) + this.aggregatePurchases.get(product));</span>
+
+<span class="fc" id="L184">        }</span>
+
+<span class="fc" id="L186">        user.clearCart();</span>
+
+        // update users file
+<span class="fc" id="L189">        jsonParser.updateUsers(loginModel.getUsers());</span>
+
+        // update inventory file
+<span class="fc" id="L192">        inventoryModel.updateInventory();</span>
+
+        //write purchases to file
+<span class="fc" id="L195">        csvParser.writePurchasesToFile(this.aggregatePurchases);</span>
+
+<span class="fc" id="L197">        logout();</span>
+
+<span class="fc" id="L199">    }</span>
+
+    public InventoryModel getInventoryModel(){
+<span class="fc" id="L202">        return this.inventoryModel;</span>
+    }
+
+    public double getCartPrice() {
+
+<span class="fc" id="L207">        double sum = 0;</span>
+
+<span class="fc bfc" id="L209" title="All 2 branches covered.">        for (Product p : user.getCart().keySet()){</span>
+<span class="fc" id="L210">            sum += p.getPrice() * user.getCart().get(p); // price * quantity</span>
+<span class="fc" id="L211">        }</span>
+
+<span class="fc" id="L213">        return sum;</span>
+    }
+
+    public JsonParser getJsonParser(){
+<span class="fc" id="L217">        return this.jsonParser;</span>
+    }
+
+////    public UserManagementModel getUserManagementModel(){
+//        return this.userManagementModel;
+//    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

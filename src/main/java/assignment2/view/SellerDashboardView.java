@@ -94,20 +94,20 @@ public class SellerDashboardView implements View{
 
         //read transactions done from file
         String transTemp = "";
-        List<List<String>> transactions = this.mainModel.readPurchasesFromFile(transactionsPath);
-
-        if (transactions.size() == 0){
-            transTemp = "No transactions available.";
-        }
-        else{
-            for (List<String> s : transactions){
-                String temp2 = String.join(", ", s).stripTrailing();
-                temp2 = temp2.concat("\n");
-            
-                transTemp = transTemp.concat(temp2);
-            }
-        }
-        
+//        List<List<String>> transactions = this.mainModel.getTransactionsAsString();
+//
+//        if (transactions.size() == 0){
+//            transTemp = "No transactions available.";
+//        }
+//        else{
+//            for (List<String> s : transactions){
+//                String temp2 = String.join(", ", s).stripTrailing();
+//                temp2 = temp2.concat("\n");
+//
+//                transTemp = transTemp.concat(temp2);
+//            }
+//        }
+//
         transactionText.setText(transTemp);
 
         transactionBox1.getChildren().add(transactionLBL);
