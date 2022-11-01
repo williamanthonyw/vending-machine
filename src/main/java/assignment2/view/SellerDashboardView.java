@@ -30,7 +30,7 @@ public class SellerDashboardView implements View{
     private User user;
 
     private List<Purchase> purchasedItems;
-    private List<Product> availableProducts;
+    private List<List<String>> availableProducts;
     private static String productsPath = "src/main/resources/inventory.csv";
     private static String transactionsPath = "src/main/resources/transaction.csv";
 
@@ -70,7 +70,7 @@ public class SellerDashboardView implements View{
         
 
         //list of available products
-        availableProducts = this.inventoryModel.getInventory();
+        availableProducts = this.inventoryModel.getInventoryAsString();
 
         //list of purchased items
         purchasedItems = this.user.getPurchases();
@@ -94,20 +94,20 @@ public class SellerDashboardView implements View{
 
         //read transactions done from file
         String transTemp = "";
-        List<List<String>> transactions = this.mainModel.readPurchasesFromFile(transactionsPath);
-
-        if (transactions.size() == 0){
-            transTemp = "No transactions available.";
-        }
-        else{
-            for (List<String> s : transactions){
-                String temp2 = String.join(", ", s).stripTrailing();
-                temp2 = temp2.concat("\n");
-            
-                transTemp = transTemp.concat(temp2);
-            }
-        }
-        
+//        List<List<String>> transactions = this.mainModel.getTransactionsAsString();
+//
+//        if (transactions.size() == 0){
+//            transTemp = "No transactions available.";
+//        }
+//        else{
+//            for (List<String> s : transactions){
+//                String temp2 = String.join(", ", s).stripTrailing();
+//                temp2 = temp2.concat("\n");
+//
+//                transTemp = transTemp.concat(temp2);
+//            }
+//        }
+//
         transactionText.setText(transTemp);
 
         transactionBox1.getChildren().add(transactionLBL);
@@ -126,19 +126,16 @@ public class SellerDashboardView implements View{
         inventoryText.setMinWidth(900);
         inventoryText.setEditable(false);
 
-        //write inventory to file
-        this.inventoryModel.writeInventoryToFile(productsPath);
 
         //read inventory from file 
         String invTemp = "";
-        List<List<String>> inventoryItems = this.inventoryModel.readInventoryFromFile(productsPath);
 
-        if (inventoryItems.size() == 0){
+        if (availableProducts.size() == 0){
             invTemp = "No items available.";
         }
 
         else{
-            for (List<String> s : inventoryItems){
+            for (List<String> s : availableProducts){
                 String temp2 = String.join(", ", s).stripTrailing();
                 temp2 = temp2.concat("\n");
                 invTemp = invTemp.concat(temp2);

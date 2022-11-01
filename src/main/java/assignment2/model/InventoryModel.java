@@ -19,10 +19,13 @@ public class InventoryModel {
     private List<String> allProductNames;
     private String filename;
     private JsonParser jsonParser;
+    private CSVFileParser csvFileParser;
+    private List<List<String>> inventoryStrings;
     
-    public InventoryModel(List<Product> inventory, JsonParser jsonParser){
+    public InventoryModel(List<Product> inventory, JsonParser jsonParser, CSVFileParser csvFileParser){
         this.inventory = inventory;
         this.jsonParser = jsonParser;
+        this.csvFileParser = csvFileParser;
         this.categories = Arrays.asList(new String[] {"drinks", "chocolates", "chips", "candies"});
 
         productNamesByCategory = new LinkedHashMap<String, List<String>>();
@@ -37,6 +40,7 @@ public class InventoryModel {
            allProductNames.addAll(productNamesByCategory.get(category));
        });
 
+       this.inventoryStrings = this.csvFileParser.readInventoryFromFile();
 
      }
 
@@ -65,6 +69,12 @@ public class InventoryModel {
 
         // write back to inventory
         jsonParser.updateInventory(inventory);
+        
+        //update list of product strings
+        updateInventoryString();
+
+        //write to inventory csv
+        csvFileParser.writeInventoryToFile(inventoryStrings);
 
     }
 
@@ -140,11 +150,6 @@ public class InventoryModel {
                               double price,
                               int quantity){
 
-
-        if (!productNamesByCategory.get(category).contains(name)){
-            return UpdateProductState.CATEGORY_ERROR;
-        }
-
         int[] codeRange = getCodeRange(category);
 
         // code should be in the range of that category
@@ -157,7 +162,7 @@ public class InventoryModel {
             if (p != product){
 
                 // no duplicate products allowed
-                if (p.getName().equals(name) &&
+                if (p.getName().equalsIgnoreCase(name) &&
                     p.getCategory().equals(category)) {
                     return UpdateProductState.DUPLICATE_PRODUCT_ERROR;
                 }
@@ -196,54 +201,18 @@ public class InventoryModel {
         updateInventory();
     }
 
-    public List<List<String>> readInventoryFromFile(String filename){
-        List<List<String>> items = new ArrayList<List<String>>();
-        File file = new File(filename);
-
-        String[] item;
-
-        try{
-            CSVReader reader = new CSVReader(new FileReader(file));
-
-            while((item = reader.readNext()) != null){
-                items.add(Arrays.asList(item));
-            }
-
-            reader.close();
-        }
-        catch (IOException e){
-
-        }
-        catch(CsvValidationException c){
-
-        }
-        return items;
+    public List<List<String>> getInventoryAsString(){
+        return this.inventoryStrings;
     }
 
-    public void writeInventoryToFile(String filename){
-        File file = new File(filename);
+    public void updateInventoryString(){
+        this.inventoryStrings.clear();
         
-        try{
-            CSVWriter writer = new CSVWriter(new FileWriter(file));
 
-            List<String[]> items = new ArrayList<String[]>();
-
-            for (Product p : this.inventory){
-                items.add(new String[] {p.getName(),String.valueOf(p.getCode()), p.getCategory(),  String.valueOf(p.getPrice()), String.valueOf(p.getQuantity())});
-            }
-
-
-
-            writer.writeAll(items);
-
-            writer.close();
-        }
-
-        catch(IOException e){
-            e.printStackTrace();
+        for (Product p: inventory){
+            List<String> itemString = List.of(p.getName(), String.valueOf(p.getCode()), p.getCategory(), String.valueOf(p.getPrice()), String.valueOf(p.getQuantity()));
+            this.inventoryStrings.add(itemString);
         }
     }
 
-    public static void main(String[] args){
-    }
 }

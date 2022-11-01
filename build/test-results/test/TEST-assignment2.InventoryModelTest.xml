@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="assignment2.InventoryModelTest" tests="22" skipped="0" failures="0" errors="0" timestamp="2022-11-01T11:49:42" hostname="Kylies-MBP" time="0.056">
+  <properties/>
+  <testcase name="setProductDetailsQuantityBelowZeroTest()" classname="assignment2.InventoryModelTest" time="0.007"/>
+  <testcase name="setProductDetailsWrongCodeAboveTest()" classname="assignment2.InventoryModelTest" time="0.002"/>
+  <testcase name="getInventoryByCategoryNoneInCategoryTest()" classname="assignment2.InventoryModelTest" time="0.001"/>
+  <testcase name="deleteProductTest()" classname="assignment2.InventoryModelTest" time="0.002"/>
+  <testcase name="getInventoryByCategoryTest()" classname="assignment2.InventoryModelTest" time="0.001"/>
+  <testcase name="setProductDetailsWrongCodeBelowTest()" classname="assignment2.InventoryModelTest" time="0.002"/>
+  <testcase name="setProductDetailsValidTest()" classname="assignment2.InventoryModelTest" time="0.002"/>
+  <testcase name="setProductDetailsDuplicateProductTest()" classname="assignment2.InventoryModelTest" time="0.001"/>
+  <testcase name="setProductDetailsDuplicateCodeTest()" classname="assignment2.InventoryModelTest" time="0.001"/>
+  <testcase name="setProductDetailsQuantityAboveFifteenTest()" classname="assignment2.InventoryModelTest" time="0.002"/>
+  <testcase name="updateProductSuccessfulTest()" classname="assignment2.InventoryModelTest" time="0.003"/>
+  <testcase name="updateQuantityTest()" classname="assignment2.InventoryModelTest" time="0.001"/>
+  <testcase name="getCategoriesTest()" classname="assignment2.InventoryModelTest" time="0.001"/>
+  <testcase name="getCodeRangeTest()" classname="assignment2.InventoryModelTest" time="0.001"/>
+  <testcase name="setProductDetailsPriceBelowZeroTest()" classname="assignment2.InventoryModelTest" time="0.002"/>
+  <testcase name="addProductSuccessfulTest()" classname="assignment2.InventoryModelTest" time="0.002"/>
+  <testcase name="updateProductUnsuccessfulTest()" classname="assignment2.InventoryModelTest" time="0.002"/>
+  <testcase name="getInventoryTest()" classname="assignment2.InventoryModelTest" time="0.001"/>
+  <testcase name="getAllProductNamesTest()" classname="assignment2.InventoryModelTest" time="0.001"/>
+  <testcase name="setProductDetailsWrongCategoryTest()" classname="assignment2.InventoryModelTest" time="0.003"/>
+  <testcase name="addProductUnsuccessfulTest()" classname="assignment2.InventoryModelTest" time="0.002"/>
+  <testcase name="putBackTest()" classname="assignment2.InventoryModelTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
