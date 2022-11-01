@@ -42,6 +42,7 @@ public class InventoryModelTest {
         );
 
         this.inventoryModel = new InventoryModel(inventory, jsonParser, csvFileParser);
+        this.inventoryModel.initializeProductsToString();
 
     }
 
@@ -415,6 +416,7 @@ public class InventoryModelTest {
         );
 
         InventoryModel inventoryModelTest = new InventoryModel(temp.getInventory(), jsonParser, csvFileParser);
+        inventoryModelTest.initializeProductsToString();
 
         Product testProduct = new Product("name", 5);
         testProduct.setCategory("drinks");
@@ -438,6 +440,7 @@ public class InventoryModelTest {
         );
 
         InventoryModel inventoryModelTest = new InventoryModel(temp.getInventory(), jsonParser, csvFileParser);
+        inventoryModelTest.initializeProductsToString();
 
         Product testProduct = new Product("name", 5);
         testProduct.setCategory("drinks");
@@ -463,6 +466,7 @@ public class InventoryModelTest {
         );
 
         InventoryModel inventoryModelTest = new InventoryModel(temp.getInventory(), jsonParser, csvFileParser);
+        inventoryModelTest.initializeProductsToString();
 
         Product product = inventoryModelTest.getInventory().get(0);
 
@@ -483,7 +487,8 @@ public class InventoryModelTest {
         );
 
         InventoryModel inventoryModelTest = new InventoryModel(temp.getInventory(), jsonParser, csvFileParser);
-
+        inventoryModelTest.initializeProductsToString();
+        
         Product product = inventoryModelTest.getInventory().get(0);
 
         UpdateProductState actual =  inventoryModelTest.updateProduct(product, "Coca Cola", "drinks", 122, 12, -12);

@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CSVFileParser.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">assignment2</a> &gt; <a href="index.source.html" class="el_package">assignment2.model</a> &gt; <span class="el_source">CSVFileParser.java</span></div><h1>CSVFileParser.java</h1><pre class="source lang-java linenums">package assignment2.model;
+
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import com.opencsv.CSVReader;
+import com.opencsv.CSVWriter;
+import com.opencsv.exceptions.CsvValidationException;
+
+public class CSVFileParser {
+
+    private JsonParser jp;
+    private String inventoryCSV;
+    private String sellerTransactionCSV;
+
+    private String cashierTransactionCSV;
+
+<span class="fc" id="L23">    public CSVFileParser(String inventoryCSV, String sellerTransactionCSV, String cashierTransactionCSV){</span>
+<span class="fc" id="L24">        this.inventoryCSV = inventoryCSV;</span>
+<span class="fc" id="L25">        this.sellerTransactionCSV = sellerTransactionCSV;</span>
+<span class="fc" id="L26">        this.cashierTransactionCSV = cashierTransactionCSV;</span>
+    
+<span class="fc" id="L28">    }</span>
+
+<span class="fc" id="L30">    public CSVFileParser(String inventoryCSV, String sellerTransactionCSV){</span>
+<span class="fc" id="L31">        this.inventoryCSV = inventoryCSV;</span>
+<span class="fc" id="L32">        this.sellerTransactionCSV = sellerTransactionCSV;</span>
+<span class="fc" id="L33">        this.cashierTransactionCSV = &quot;&quot;;</span>
+
+<span class="fc" id="L35">    }</span>
+
+
+    
+    public List&lt;List&lt;String&gt;&gt; readInventoryFromFile(){
+<span class="fc" id="L40">        List&lt;List&lt;String&gt;&gt; items = new ArrayList&lt;List&lt;String&gt;&gt;();</span>
+<span class="fc" id="L41">        File file = new File(this.inventoryCSV);</span>
+
+        String[] item;
+
+        try{
+<span class="fc" id="L46">            CSVReader reader = new CSVReader(new FileReader(file));</span>
+
+<span class="fc bfc" id="L48" title="All 2 branches covered.">            while((item = reader.readNext()) != null){</span>
+<span class="fc" id="L49">                items.add(Arrays.asList(item));</span>
+            }
+
+<span class="fc" id="L52">            reader.close();</span>
+        }
+<span class="fc" id="L54">        catch (IOException e){</span>
+
+        }
+<span class="nc" id="L57">        catch(CsvValidationException c){</span>
+
+<span class="fc" id="L59">        }</span>
+<span class="fc" id="L60">        return items;</span>
+    }
+
+
+    public void writeInventoryToFile(List&lt;List&lt;String&gt;&gt; items){
+<span class="fc" id="L65">        File file = new File(this.inventoryCSV);</span>
+        
+        try{
+<span class="fc" id="L68">            CSVWriter writer = new CSVWriter(new FileWriter(file));</span>
+<span class="fc" id="L69">            List&lt;String[]&gt; writeProducts = new ArrayList&lt;String[]&gt;();</span>
+
+            //convert List&lt;List&lt;String&gt;&gt; to List&lt;String[]&gt;
+<span class="fc bfc" id="L72" title="All 2 branches covered.">            for (List&lt;String&gt; s: items){</span>
+<span class="fc" id="L73">                writeProducts.add(new String[] {s.get(0), s.get(1), s.get(2), s.get(3), s.get(4)});</span>
+<span class="fc" id="L74">            }</span>
+           
+<span class="fc" id="L76">            writer.writeAll(writeProducts);</span>
+<span class="fc" id="L77">            writer.close();</span>
+        }
+
+<span class="fc" id="L80">        catch(IOException e){</span>
+<span class="fc" id="L81">            e.printStackTrace();</span>
+<span class="fc" id="L82">        }</span>
+<span class="fc" id="L83">    }</span>
+
+    public List&lt;List&lt;String&gt;&gt; readSellerTransactions(){
+<span class="fc" id="L86">        List&lt;List&lt;String&gt;&gt; transactions = new ArrayList&lt;List&lt;String&gt;&gt;();</span>
+<span class="fc" id="L87">        File file = new File(this.sellerTransactionCSV);</span>
+
+        String[] transaction;
+
+        try{
+<span class="fc" id="L92">            CSVReader reader = new CSVReader(new FileReader(file));</span>
+
+<span class="fc bfc" id="L94" title="All 2 branches covered.">            while ((transaction = reader.readNext()) != null){</span>
+<span class="fc" id="L95">                transactions.add(Arrays.asList(transaction));</span>
+            }
+
+<span class="fc" id="L98">            reader.close();</span>
+        }
+
+<span class="fc" id="L101">        catch (IOException e){</span>
+
+        }
+<span class="nc" id="L104">        catch (CsvValidationException f){</span>
+
+<span class="fc" id="L106">        }</span>
+
+<span class="fc" id="L108">        return transactions;</span>
+    }
+
+    public List&lt;List&lt;String&gt;&gt; readCashierTransactions(){
+<span class="fc" id="L112">        List&lt;List&lt;String&gt;&gt; transactions = new ArrayList&lt;List&lt;String&gt;&gt;();</span>
+<span class="fc" id="L113">        File file = new File(this.cashierTransactionCSV);</span>
+
+        String[] transaction;
+
+        try{
+<span class="fc" id="L118">            CSVReader reader = new CSVReader(new FileReader(file));</span>
+
+<span class="fc bfc" id="L120" title="All 2 branches covered.">            while ((transaction = reader.readNext()) != null){</span>
+<span class="fc" id="L121">                transactions.add(Arrays.asList(transaction));</span>
+            }
+
+<span class="fc" id="L124">            reader.close();</span>
+        }
+
+<span class="fc" id="L127">        catch (IOException e){</span>
+
+        }
+<span class="nc" id="L130">        catch (CsvValidationException f){</span>
+
+<span class="fc" id="L132">        }</span>
+
+<span class="fc" id="L134">        return transactions;</span>
+    }
+
+    public void writeSellerTransactions(List&lt;List&lt;String&gt;&gt; transactions){
+<span class="fc" id="L138">        File file = new File(this.sellerTransactionCSV);</span>
+
+        try{
+<span class="fc" id="L141">            CSVWriter writer = new CSVWriter(new FileWriter(file));</span>
+<span class="fc" id="L142">            List&lt;String[]&gt; writeTransactions = new ArrayList&lt;String[]&gt;();</span>
+
+<span class="fc bfc" id="L144" title="All 2 branches covered.">            for (List&lt;String&gt; s: transactions){</span>
+<span class="fc" id="L145">                writeTransactions.add(new String[] {s.get(0), s.get(1), s.get(2)});</span>
+<span class="fc" id="L146">            }</span>
+
+<span class="fc" id="L148">            writer.writeAll(writeTransactions);</span>
+<span class="fc" id="L149">            writer.close();</span>
+        }
+
+<span class="fc" id="L152">        catch(IOException e){</span>
+
+<span class="fc" id="L154">        }</span>
+<span class="fc" id="L155">    }</span>
+
+    public void writeCashierTransactions(List&lt;List&lt;String&gt;&gt; transactions){
+<span class="fc" id="L158">        File file = new File(this.cashierTransactionCSV);</span>
+
+        try{
+<span class="fc" id="L161">            CSVWriter writer = new CSVWriter(new FileWriter(file));</span>
+<span class="fc" id="L162">            List&lt;String[]&gt; writeTransactions = new ArrayList&lt;String[]&gt;();</span>
+
+<span class="fc bfc" id="L164" title="All 2 branches covered.">            for (List&lt;String&gt; s: transactions){</span>
+<span class="fc" id="L165">                writeTransactions.add(new String[] {s.get(0), s.get(1), s.get(2), s.get(3), s.get(4)});</span>
+<span class="fc" id="L166">            }</span>
+
+<span class="fc" id="L168">            writer.writeAll(writeTransactions);</span>
+<span class="fc" id="L169">            writer.close();</span>
+        }
+
+<span class="fc" id="L172">        catch(IOException e){</span>
+
+<span class="fc" id="L174">        }</span>
+<span class="fc" id="L175">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

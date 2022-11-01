@@ -11,6 +11,8 @@ import java.util.*;
 
 public class MainModelTest {
     private MainModel mainModel;
+    
+
 
     @BeforeEach
     public void beforeTests(){
@@ -23,6 +25,7 @@ public class MainModelTest {
                 "",
                 ""
         );
+        mainModel.getInventoryModel().initializeProductsToString();
     }
 
     @Test
@@ -105,6 +108,8 @@ public class MainModelTest {
                 ""
         );
 
+        mainModel.getInventoryModel().initializeProductsToString();
+
         User user = new User("test", "pw");
         mainModel.setUser(user);
 
@@ -122,7 +127,7 @@ public class MainModelTest {
 
         user.setCart(cart);
 
-        mainModel.checkout();
+        mainModel.checkout("card");
 
         assertEquals(user.getPurchases().size(), 2 );
         assertEquals(mainModel.getCart().size(), 0);

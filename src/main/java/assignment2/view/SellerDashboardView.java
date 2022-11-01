@@ -29,10 +29,8 @@ public class SellerDashboardView implements View{
     private InventoryModel inventoryModel;
     private User user;
 
-    private List<Purchase> purchasedItems;
+    private List<List<String>> purchasedItems;
     private List<List<String>> availableProducts;
-    private static String productsPath = "src/main/resources/inventory.csv";
-    private static String transactionsPath = "src/main/resources/transaction.csv";
 
     private Scene scene;
     private Stage stage;
@@ -73,7 +71,7 @@ public class SellerDashboardView implements View{
         availableProducts = this.inventoryModel.getInventoryAsString();
 
         //list of purchased items
-        purchasedItems = this.user.getPurchases();
+        purchasedItems = this.mainModel.getSellerTransactionAsString();
 
         //title 
         Label titleLBL = new Label("Seller Dashboard");
@@ -94,13 +92,12 @@ public class SellerDashboardView implements View{
 
         //read transactions done from file
         String transTemp = "";
-        List<List<String>> transactions = this.mainModel.readPurchasesFromFile(transactionsPath);
 
-        if (transactions.size() == 0){
+        if (purchasedItems.size() == 0){
             transTemp = "No transactions available.";
         }
         else{
-            for (List<String> s : transactions){
+            for (List<String> s : purchasedItems){
                 String temp2 = String.join(", ", s).stripTrailing();
                 temp2 = temp2.concat("\n");
             

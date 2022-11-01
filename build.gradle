@@ -28,8 +28,8 @@ javafx {
 
 application {
     // Define the main class for the application.
-    mainClass = 'assignment2.App'
-    // mainClass = 'assignment2.model.MainModel'
+    // mainClass = 'assignment2.App'
+    mainClass = 'assignment2.model.MainModel'
     applicationDefaultJvmArgs = ["--add-opens", "java.base/java.time=ALL-UNNAMED", '-Xss80m']
 }
 

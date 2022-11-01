@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -35,12 +36,18 @@ public class MainModel {
     private HashMap<Product, Integer> aggregatePurchases;
     private JsonParser jsonParser;
     private CSVFileParser csvFileParser;
-    private String transactionsFile;
 
-    public MainModel(String inventoryFile, String usersFile, String initialCashFile, String cardFile, String transactionsFile, String inventoryCSV, String transactionCSV){
+
+    private List<List<String>> sellerTransactionString;
+    private List<Transaction> sellerTransactions;
+
+    private List<List<String>> cashierTransactionString;
+    private List<Transaction> cashierTransactions;
+
+    public MainModel(String inventoryFile, String usersFile, String initialCashFile, String cardFile, String inventoryCSV, String sellerTransactionCSV, String cashierTransactionCSV){
 
         this.jsonParser = new JsonParser(inventoryFile, usersFile, initialCashFile, cardFile);
-        this.csvFileParser = new CSVFileParser(inventoryCSV, transactionCSV);
+        this.csvFileParser = new CSVFileParser(inventoryCSV, sellerTransactionCSV, cashierTransactionCSV);
 
         this.loginModel = new LoginModel(jsonParser.getUsers(),this.getJsonParser());
         this.user = loginModel.getAnonymousUser();
@@ -54,13 +61,19 @@ public class MainModel {
         this.usersFile = usersFile;
         this.initialCashFile = initialCashFile;
         this.cardFile = cardFile;
-        this.transactionsFile = transactionsFile;
 
         this.lastFiveProductsModel = new LastFiveProductsModel();
         this.cardPaymentModel = new CardPaymentModel(this, jsonParser );
         this.cashPaymentModel = new CashPaymentModel(jsonParser.getCash(), jsonParser);
         this.inventoryModel = new InventoryModel(jsonParser.getInventory(), jsonParser, csvFileParser);
 
+        this.sellerTransactions = new ArrayList<Transaction>();
+        this.cashierTransactions = new ArrayList<Transaction>();
+
+        this.sellerTransactionString = this.csvFileParser.readSellerTransactions();
+        this.cashierTransactionString = this.csvFileParser.readCashierTransactions();
+
+        
 
 //        List<List<String>> items = readPurchasesFromFile("src/main/resources/transaction.csv");
 
@@ -147,38 +160,24 @@ public class MainModel {
 
     }
 
-    public void writePurchasesToFile(HashMap<Product, Integer> itemsPurchased){
-        File file = new File(transactionsFile);
 
-        try{
-            List<String[]> items = new ArrayList<String[]>();
-
-            FileWriter fileWriter = new FileWriter(file);
-            CSVWriter writer = new CSVWriter(fileWriter);
-
-            for (Product p: itemsPurchased.keySet()){
-                items.add(new String[] {String.valueOf(p.getCode()), p.getName(), String.valueOf(itemsPurchased.get(p))});
-            }
-            writer.writeAll(items);
-            writer.close();
-
-        }
-        catch(IOException e){
-            e.printStackTrace();
-        }
-    }
-
-    public void checkout(){
+    public void checkout(String paymentMethod){
 
         // adds it to user's list of purchases
         for (Product product : user.getCart().keySet()){
             user.purchaseProduct(product, user.getCart().get(product));
 
-            if (aggregatePurchases.get(product) == null){
-                this.aggregatePurchases.put(product, 0);
-            }
+            //add to seller's transaction view 
+            this.sellerTransactions.add(new Transaction(product.getCode(), product.getName(), user.getCart().get(product)));
 
-            this.aggregatePurchases.put(product, user.getCart().get(product) + this.aggregatePurchases.get(product));
+            //add to cashier's transaction view
+            if (paymentMethod.equals("cash")){
+                 this.cashierTransactions.add(new Transaction(LocalDateTime.now(), product.getName(), this.cashPaymentModel.getMoneyPaid(), this.cashPaymentModel.getReturnedChange(), paymentMethod));
+            }
+            else{
+                this.cashierTransactions.add(new Transaction(LocalDateTime.now(), product.getName(), 0, 0, paymentMethod));
+            }
+           
 
         }
 
@@ -190,37 +189,22 @@ public class MainModel {
         // update inventory file
         inventoryModel.updateInventory();
 
-        //write purchases to file
-        writePurchasesToFile(this.aggregatePurchases);
+        //update seller transaction list string
+        updateSellerTransactionString();
+
+        //update seller transaction list string
+        updateCashierTransactionString();
+
+        //write seller transactions to file
+        csvFileParser.writeSellerTransactions(sellerTransactionString);
+
+        //write cashier transactions to file
+        csvFileParser.writeCashierTransactions(cashierTransactionString);
 
         logout();
 
     }
 
-    public List<List<String>> readPurchasesFromFile(String filename){
-        List<List<String>> items = new ArrayList<List<String>>();
-        File file = new File(filename);
-        String[] item;
-
-        try{
-            CSVReader reader = new CSVReader(new FileReader(file));
-
-            while((item = reader.readNext()) != null){
-                items.add(Arrays.asList(item));
-            }
-
-            reader.close();
-        }
-
-        catch(IOException e){
-//            e.printStackTrace();
-        }
-        catch(CsvValidationException c){
-//            c.printStackTrace();
-        }
-
-        return items;
-    }
 
     public InventoryModel getInventoryModel(){
         return this.inventoryModel;
@@ -241,7 +225,89 @@ public class MainModel {
         return this.jsonParser;
     }
 
+    public void updateSellerTransactionString(){
+        this.sellerTransactionString.clear();
+        
+        for (Transaction t: this.sellerTransactions){
+            this.sellerTransactionString.add(List.of(String.valueOf(t.getItemCode()), t.getItemName(), String.valueOf(t.getQuantitySold())));
+        }
+    }
+
+    public void updateCashierTransactionString(){
+
+        for(Transaction t: this.cashierTransactions){
+            this.cashierTransactionString.add(List.of(String.valueOf(t.getTransactionDate()), t.getItemName(), String.valueOf(t.getMoneyPaid()), String.valueOf(t.getReturnedChange()), t.getPaymentMethod()));
+        }
+    }
+
+    public List<List<String>> getSellerTransactionAsString(){
+        return this.sellerTransactionString;
+    }
+
+    public List<List<String>> getCashierTransactionAsString(){
+        return this.cashierTransactionString;
+    }
+
 ////    public UserManagementModel getUserManagementModel(){
 //        return this.userManagementModel;
 //    }
+
+
+
+    public static void main(String[] args){
+
+         String originalInventoryPath = "src/test/resources/original_test_inventory.json";
+   String inventoryPath1 = "src/test/resources/test_inventory.json";
+   String inventoryPath2 = "src/test/resources/test_inventory3.json";
+   String inventoryPath3 = "src/test/resources/test_inventory4.json";
+
+
+ String testInventoryCSVPath = "src/test/resources/test_inventory.csv";
+   String testInventoryCSVPath2 = "src/test/resources/test_inventory2.csv";
+    String testSellerTransactionCSVPath = "src/test/resources/seller_transaction.csv";
+    String testCashierTransactionCSVPath = "src/test/resources/cashier_transaction.csv";
+        MainModel mainModel = new MainModel(inventoryPath2, "src/test/resources/test_users3.json", "src/test/resources/InitialCash.json", "src/test/resources/credit_cards.json", testInventoryCSVPath2, testSellerTransactionCSVPath, testCashierTransactionCSVPath);
+        InventoryModel inventoryModel = mainModel.getInventoryModel();
+        List<Product> defaultInventory = mainModel.getJsonParser().getInventory();
+        inventoryModel.initializeProductsToString();
+
+        // login user 1
+        mainModel.setUser(mainModel.getLoginModel().login("test1", "pw"));
+
+        //add 2 of each items to cart
+        for (Product p : inventoryModel.getInventory()){
+            mainModel.addToCart(p, 2);
+        }
+
+        int cartSize = mainModel.getUser().getCart().size();
+
+        //complete transaction and write to file 
+        mainModel.checkout("card");
+
+        List<List<String>> sellerTransactions = mainModel.getSellerTransactionAsString();
+        List<List<String>> cashierTransactions = mainModel.getCashierTransactionAsString();
+        
+        System.out.println(sellerTransactions);
+        System.out.println(cashierTransactions);
+
+
+
+        // assertEquals(cartSize, itemsPurchased.size());
+
+        // //put into maps for both
+        // HashMap<String, Integer> ip = new HashMap<String, Integer>();
+
+        // for (int i=0; i<itemsPurchased.size(); i++){
+        //     List<String> item = itemsPurchased.get(i);
+        //     ip.put(item.get(1), Integer.parseInt(item.get(2)));
+        // }
+
+        // HashMap<String, Integer> ap = new HashMap<String, Integer>();
+
+        // for (List<String> t: mainModel.getSellerTransactionAsString()){
+        //     ap.put(t.get(1), Integer.parseInt(t.get(2)));
+        // }
+
+        // assertEquals(ip, ap);
+    }
 }

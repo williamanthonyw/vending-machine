@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CardPaymentModel.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">assignment2</a> &gt; <a href="index.source.html" class="el_package">assignment2.model</a> &gt; <span class="el_source">CardPaymentModel.java</span></div><h1>CardPaymentModel.java</h1><pre class="source lang-java linenums">package assignment2.model;
+import java.util.List;
+public class CardPaymentModel {
+
+    private JsonParser jsonParser;
+    private List&lt;CardUser&gt; cardUserList;
+    private MainModel mainModel;
+    private String cardFile;
+
+<span class="fc" id="L10">    public CardPaymentModel(MainModel mainModel, JsonParser jsonParser){</span>
+<span class="fc" id="L11">        this.mainModel = mainModel;</span>
+<span class="fc" id="L12">        this.jsonParser = jsonParser;</span>
+
+<span class="fc" id="L14">        this.cardUserList = jsonParser.getCardDetail();</span>
+
+<span class="fc" id="L16">    }</span>
+
+    public void saveCard(CardUser cardUser){
+<span class="nc" id="L19">        mainModel.getUser().setCardUser(cardUser);</span>
+<span class="nc" id="L20">        jsonParser.updateUsers(mainModel.getLoginModel().getUsers());</span>
+<span class="nc" id="L21">    }</span>
+
+    public CardUser paymentProcess(String name, String number){
+
+<span class="nc bnc" id="L25" title="All 2 branches missed.">        for(CardUser user: cardUserList){</span>
+<span class="nc bnc" id="L26" title="All 4 branches missed.">            if(user.getName().equals(name) &amp;&amp; user.getCardNumber().equals(number)){</span>
+<span class="nc" id="L27">                System.out.println(mainModel.getUser().getCardUser());</span>
+<span class="nc" id="L28">                return user;</span>
+            }
+<span class="nc" id="L30">        }</span>
+
+<span class="nc" id="L32">        return null;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
