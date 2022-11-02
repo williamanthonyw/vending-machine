@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="assignment2.CSVTest" tests="3" skipped="0" failures="2" errors="0" timestamp="2022-11-02T08:42:35" hostname="DESKTOP-Q9TS4JK" time="0.262">
+<testsuite name="assignment2.CSVTest" tests="3" skipped="0" failures="2" errors="0" timestamp="2022-11-02T08:48:51" hostname="DESKTOP-Q9TS4JK" time="0.228">
   <properties/>
-  <testcase name="readAndWriteInventoryTest()" classname="assignment2.CSVTest" time="0.036"/>
-  <testcase name="readAndWriteSellerTransactionTest()" classname="assignment2.CSVTest" time="0.114">
+  <testcase name="readAndWriteInventoryTest()" classname="assignment2.CSVTest" time="0.038"/>
+  <testcase name="readAndWriteSellerTransactionTest()" classname="assignment2.CSVTest" time="0.125">
     <failure message="java.util.ConcurrentModificationException" type="java.util.ConcurrentModificationException">java.util.ConcurrentModificationException
 	at java.base/java.util.ArrayList$Itr.checkForComodification(ArrayList.java:1043)
 	at java.base/java.util.ArrayList$Itr.next(ArrayList.java:997)
@@ -94,13 +94,11 @@
 	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="multipleSellerTransactionsTest()" classname="assignment2.CSVTest" time="0.108">
-    <failure message="java.lang.UnsupportedOperationException" type="java.lang.UnsupportedOperationException">java.lang.UnsupportedOperationException
-	at java.base/java.util.ImmutableCollections.uoe(ImmutableCollections.java:71)
-	at java.base/java.util.ImmutableCollections$AbstractImmutableList.set(ImmutableCollections.java:109)
-	at assignment2.model.MainModel.updateSellerTransactionString(MainModel.java:258)
-	at assignment2.model.MainModel.checkout(MainModel.java:214)
-	at assignment2.CSVTest.multipleSellerTransactionsTest(CSVTest.java:179)
+  <testcase name="multipleSellerTransactionsTest()" classname="assignment2.CSVTest" time="0.059">
+    <failure message="java.util.ConcurrentModificationException" type="java.util.ConcurrentModificationException">java.util.ConcurrentModificationException
+	at java.base/java.util.ArrayList$Itr.checkForComodification(ArrayList.java:1043)
+	at java.base/java.util.ArrayList$Itr.next(ArrayList.java:997)
+	at assignment2.CSVTest.multipleSellerTransactionsTest(CSVTest.java:139)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -188,39 +186,6 @@
 	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <system-out><![CDATA[1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-[]
-[[312, Pringles, 1], [212, M&M, 1], [313, Kettle, 1], [214, Snickers, 1], [311, Smiths, 1], [411, Mentos, 1], [211, Mars, 1], [413, Skittles, 1], [111, Mineral Water, 1], [114, Pepsi, 1], [314, Thins, 1], [412, Sour Patch, 1], [213, Bounty, 1], [115, Juice, 1], [112, Sprite, 1]]
-2
-2
-2
-2
-2
-2
-2
-2
-2
-2
-2
-2
-2
-2
-2
-[[312, Pringles, 1], [212, M&M, 1], [313, Kettle, 1], [214, Snickers, 1], [311, Smiths, 1], [411, Mentos, 1], [211, Mars, 1], [413, Skittles, 1], [111, Mineral Water, 1], [114, Pepsi, 1], [314, Thins, 1], [412, Sour Patch, 1], [213, Bounty, 1], [115, Juice, 1], [112, Sprite, 1]]
-]]></system-out>
+  <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
