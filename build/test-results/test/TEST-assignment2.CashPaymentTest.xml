@@ -1,44 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="assignment2.CashPaymentTest" tests="12" skipped="0" failures="0" errors="0" timestamp="2022-11-01T11:49:42" hostname="Kylies-MBP" time="0.044">
+<testsuite name="assignment2.CashPaymentTest" tests="12" skipped="0" failures="0" errors="0" timestamp="2022-11-02T08:42:35" hostname="DESKTOP-Q9TS4JK" time="0.031">
   <properties/>
-  <testcase name="cashValueCheck()" classname="assignment2.CashPaymentTest" time="0.001"/>
-  <testcase name="multiplePayments()" classname="assignment2.CashPaymentTest" time="0.012"/>
-  <testcase name="changeisNotSufficient()" classname="assignment2.CashPaymentTest" time="0.003"/>
-  <testcase name="changeCoinsOnly()" classname="assignment2.CashPaymentTest" time="0.003"/>
+  <testcase name="cashValueCheck()" classname="assignment2.CashPaymentTest" time="0.0"/>
+  <testcase name="multiplePayments()" classname="assignment2.CashPaymentTest" time="0.002"/>
+  <testcase name="changeisNotSufficient()" classname="assignment2.CashPaymentTest" time="0.004"/>
+  <testcase name="changeCoinsOnly()" classname="assignment2.CashPaymentTest" time="0.002"/>
   <testcase name="initialAmountCheck()" classname="assignment2.CashPaymentTest" time="0.001"/>
   <testcase name="NotEnoughPayment()" classname="assignment2.CashPaymentTest" time="0.001"/>
   <testcase name="calculateTotalPayment()" classname="assignment2.CashPaymentTest" time="0.001"/>
   <testcase name="smallChangeInsufficient()" classname="assignment2.CashPaymentTest" time="0.001"/>
-  <testcase name="smallChangeRound()" classname="assignment2.CashPaymentTest" time="0.004"/>
-  <testcase name="updateChangeList()" classname="assignment2.CashPaymentTest" time="0.002"/>
+  <testcase name="smallChangeRound()" classname="assignment2.CashPaymentTest" time="0.003"/>
+  <testcase name="updateChangeList()" classname="assignment2.CashPaymentTest" time="0.001"/>
   <testcase name="changeNotesOnly()" classname="assignment2.CashPaymentTest" time="0.002"/>
   <testcase name="numberOfDifferentNotesandCoins()" classname="assignment2.CashPaymentTest" time="0.001"/>
   <system-out><![CDATA[{5c=0, 10c=0, 20c=0, 50c=0, $1=0, $2=0, $5=0, $10=0, $20=0, $50=0, $100=0}
-[assignment2.model.Cash@3a91d146, assignment2.model.Cash@4784013e, assignment2.model.Cash@6f952d6c, assignment2.model.Cash@5965844d, assignment2.model.Cash@6d4a65c6, assignment2.model.Cash@aa004a0, assignment2.model.Cash@4c98a6d5, assignment2.model.Cash@392a04e7, assignment2.model.Cash@7f02251, assignment2.model.Cash@dffa30b, assignment2.model.Cash@4d8126f]
-{5c=1, 10c=0, 20c=2, 50c=1, $1=0, $2=0, $5=1, $10=0, $20=2, $50=1, $100=1}
-{5c=0, 10c=0, 20c=0, 50c=0, $1=0, $2=0, $5=0, $10=0, $20=0, $50=0, $100=0}
-[assignment2.model.Cash@3a91d146, assignment2.model.Cash@4784013e, assignment2.model.Cash@6f952d6c, assignment2.model.Cash@5965844d, assignment2.model.Cash@6d4a65c6, assignment2.model.Cash@aa004a0, assignment2.model.Cash@4c98a6d5, assignment2.model.Cash@392a04e7, assignment2.model.Cash@7f02251, assignment2.model.Cash@dffa30b, assignment2.model.Cash@4d8126f]
-{5c=0, 10c=1, 20c=0, 50c=1, $1=1, $2=0, $5=0, $10=0, $20=0, $50=0, $100=3}
-{5c=0, 10c=0, 20c=0, 50c=0, $1=0, $2=0, $5=0, $10=0, $20=0, $50=0, $100=0}
-[assignment2.model.Cash@ecfbe91, assignment2.model.Cash@20ed3303, assignment2.model.Cash@3adbe50f, assignment2.model.Cash@3a627c80, assignment2.model.Cash@49aa766b, assignment2.model.Cash@963176, assignment2.model.Cash@65004ff6, assignment2.model.Cash@4cafa9aa, assignment2.model.Cash@562c877a, assignment2.model.Cash@67001148, assignment2.model.Cash@989da1]
-{5c=0, 10c=0, 20c=0, 50c=0, $1=0, $2=0, $5=0, $10=0, $20=0, $50=0, $100=0}
-[assignment2.model.Cash@3eed0f5, assignment2.model.Cash@64030b91, assignment2.model.Cash@2032e725, assignment2.model.Cash@4d23015c, assignment2.model.Cash@383f1975, assignment2.model.Cash@441cc260, assignment2.model.Cash@73a00e09, assignment2.model.Cash@26dcd8c0, assignment2.model.Cash@66e889df, assignment2.model.Cash@444548a0, assignment2.model.Cash@3766c667]
-{5c=1, 10c=1, 20c=1, 50c=0, $1=0, $2=0, $5=0, $10=0, $20=0, $50=0, $100=0}
 {5c=0, 10c=0, 20c=0, 50c=0, $1=0, $2=0, $5=0, $10=0, $20=0, $50=0, $100=0}
 {5c=0, 10c=0, 20c=0, 50c=0, $1=0, $2=0, $5=0, $10=0, $20=0, $50=0, $100=0}
-[]
-{5c=0, 10c=0, 20c=0, 50c=0, $1=0, $2=0, $5=0, $10=0, $20=0, $50=0, $100=0}
-[assignment2.model.Cash@3a022576, assignment2.model.Cash@2dbd803f, assignment2.model.Cash@3e48e859, assignment2.model.Cash@31ddd4a4, assignment2.model.Cash@1a5f7e7c, assignment2.model.Cash@5b22b970, assignment2.model.Cash@22d1886d, assignment2.model.Cash@7df60067, assignment2.model.Cash@1cbb3d3b, assignment2.model.Cash@529cfee5, assignment2.model.Cash@7ca0863b]
-{5c=1, 10c=0, 20c=0, 50c=0, $1=0, $2=0, $5=0, $10=0, $20=0, $50=0, $100=0}
-{5c=0, 10c=0, 20c=0, 50c=0, $1=0, $2=0, $5=0, $10=0, $20=0, $50=0, $100=0}
-[assignment2.model.Cash@319854f0, assignment2.model.Cash@748fe51d, assignment2.model.Cash@415156bf, assignment2.model.Cash@393881f0, assignment2.model.Cash@4af46df3, assignment2.model.Cash@4158debd, assignment2.model.Cash@af78c87, assignment2.model.Cash@773dab28, assignment2.model.Cash@1ecfcbc9, assignment2.model.Cash@1965539b, assignment2.model.Cash@2fc07784]
 {5c=0, 10c=0, 20c=0, 50c=0, $1=0, $2=0, $5=0, $10=0, $20=0, $50=0, $100=0}
 {5c=0, 10c=0, 20c=0, 50c=0, $1=0, $2=0, $5=0, $10=0, $20=0, $50=0, $100=0}
-[assignment2.model.Cash@353efdbf, assignment2.model.Cash@55cff952, assignment2.model.Cash@660591fb, assignment2.model.Cash@4a55a6e8, assignment2.model.Cash@8c46918, assignment2.model.Cash@226b143b, assignment2.model.Cash@682bd3c4, assignment2.model.Cash@f2e4acf, assignment2.model.Cash@24097e9b, assignment2.model.Cash@5eb97ced, assignment2.model.Cash@68ba310d]
-{5c=1, 10c=0, 20c=0, 50c=1, $1=1, $2=0, $5=1, $10=1, $20=0, $50=0, $100=0}
 {5c=0, 10c=0, 20c=0, 50c=0, $1=0, $2=0, $5=0, $10=0, $20=0, $50=0, $100=0}
-[assignment2.model.Cash@153f66e7, assignment2.model.Cash@7aad3f7d, assignment2.model.Cash@6f667ad1, assignment2.model.Cash@566d0c69, assignment2.model.Cash@388b401d, assignment2.model.Cash@2bcec6a6, assignment2.model.Cash@77a281fc, assignment2.model.Cash@4912d525, assignment2.model.Cash@2bfbffb2, assignment2.model.Cash@765df79d, assignment2.model.Cash@151335cb]
-{5c=0, 10c=0, 20c=0, 50c=0, $1=1, $2=0, $5=1, $10=0, $20=1, $50=1, $100=2}
+{5c=0, 10c=0, 20c=0, 50c=0, $1=0, $2=0, $5=0, $10=0, $20=0, $50=0, $100=0}
+{5c=0, 10c=0, 20c=0, 50c=0, $1=0, $2=0, $5=0, $10=0, $20=0, $50=0, $100=0}
+{5c=0, 10c=0, 20c=0, 50c=0, $1=0, $2=0, $5=0, $10=0, $20=0, $50=0, $100=0}
+{5c=0, 10c=0, 20c=0, 50c=0, $1=0, $2=0, $5=0, $10=0, $20=0, $50=0, $100=0}
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

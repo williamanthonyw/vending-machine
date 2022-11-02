@@ -18,18 +18,22 @@ public class CSVFileParser {
 
     private JsonParser jp;
     private String inventoryCSV;
-    private String transactionCSV;
-    private String cancelledTransactionsCSV;
+    private String sellerTransactionCSV;
+    private String cashierTransactionCSV;
+        private String cancelledTransactionsCSV;
 
-    public CSVFileParser(String inventoryCSV, String transactionCSV, String cancelledTransactionsCSV){
+    public CSVFileParser(String inventoryCSV, String sellerTransactionCSV, String cashierTransactionCSV, String cancelledTransactionsCSV){
         this.inventoryCSV = inventoryCSV;
-        this.transactionCSV = transactionCSV;
+        this.sellerTransactionCSV = sellerTransactionCSV;
+        this.cashierTransactionCSV = cashierTransactionCSV;
         this.cancelledTransactionsCSV = cancelledTransactionsCSV;
     }
 
-    public CSVFileParser(String inventoryCSV){
+    public CSVFileParser(String inventoryCSV, String sellerTransactionCSV){
         this.inventoryCSV = inventoryCSV;
-        this.transactionCSV = "";
+        this.sellerTransactionCSV = sellerTransactionCSV;
+        this.cashierTransactionCSV = "";
+
     }
 
     public List<CancelledTransaction> getCancelledTransactions(){
@@ -83,26 +87,26 @@ public class CSVFileParser {
 
 
 
-    public void writePurchasesToFile(HashMap<Product, Integer> itemsPurchased){
-        File file = new File(transactionCSV);
+    // public void writePurchasesToFile(HashMap<Product, Integer> itemsPurchased){
+    //     File file = new File(transactionCSV);
 
-        try{
-            List<String[]> items = new ArrayList<String[]>();
+    //     try{
+    //         List<String[]> items = new ArrayList<String[]>();
 
-            FileWriter fileWriter = new FileWriter(file);
-            CSVWriter writer = new CSVWriter(fileWriter);
+    //         FileWriter fileWriter = new FileWriter(file);
+    //         CSVWriter writer = new CSVWriter(fileWriter);
 
-            for (Product p: itemsPurchased.keySet()){
-                items.add(new String[] {String.valueOf(p.getCode()), p.getName(), String.valueOf(itemsPurchased.get(p))});
-            }
-            writer.writeAll(items);
-            writer.close();
+    //         for (Product p: itemsPurchased.keySet()){
+    //             items.add(new String[] {String.valueOf(p.getCode()), p.getName(), String.valueOf(itemsPurchased.get(p))});
+    //         }
+    //         writer.writeAll(items);
+    //         writer.close();
 
-        }
-        catch(IOException e){
+    //     }
+    //     catch(IOException e){
 
-        }
-    }
+    //     }
+    // }
 
     
     public List<List<String>> readInventoryFromFile(){
@@ -147,7 +151,100 @@ public class CSVFileParser {
         }
 
         catch(IOException e){
-            e.printStackTrace();
+           
         }
     }
+
+    public List<List<String>> readSellerTransactions(){
+        List<List<String>> transactions = new ArrayList<List<String>>();
+        File file = new File(this.sellerTransactionCSV);
+
+        String[] transaction;
+
+        try{
+            CSVReader reader = new CSVReader(new FileReader(file));
+
+            while ((transaction = reader.readNext()) != null){
+                transactions.add(Arrays.asList(transaction));
+            }
+
+            reader.close();
+        }
+
+        catch (IOException e){
+
+        }
+        catch (CsvValidationException f){
+
+        }
+
+        return transactions;
+    }
+
+    public List<List<String>> readCashierTransactions(){
+        List<List<String>> transactions = new ArrayList<List<String>>();
+        File file = new File(this.cashierTransactionCSV);
+
+        String[] transaction;
+
+        try{
+            CSVReader reader = new CSVReader(new FileReader(file));
+
+            while ((transaction = reader.readNext()) != null){
+                transactions.add(Arrays.asList(transaction));
+            }
+
+            reader.close();
+        }
+
+        catch (IOException e){
+
+        }
+        catch (CsvValidationException f){
+
+        }
+
+        return transactions;
+    }
+
+    public void writeSellerTransactions(List<List<String>> transactions){
+        File file = new File(this.sellerTransactionCSV);
+
+        try{
+            CSVWriter writer = new CSVWriter(new FileWriter(file));
+            List<String[]> writeTransactions = new ArrayList<String[]>();
+
+            for (List<String> s: transactions){
+                writeTransactions.add(new String[] {s.get(0), s.get(1), s.get(2)});
+            }
+
+            writer.writeAll(writeTransactions);
+            writer.close();
+        }
+
+        catch(IOException e){
+
+        }
+    }
+
+    public void writeCashierTransactions(List<List<String>> transactions){
+        File file = new File(this.cashierTransactionCSV);
+
+        try{
+            CSVWriter writer = new CSVWriter(new FileWriter(file));
+            List<String[]> writeTransactions = new ArrayList<String[]>();
+
+            for (List<String> s: transactions){
+                writeTransactions.add(new String[] {s.get(0), s.get(1), s.get(2), s.get(3), s.get(4)});
+            }
+
+            writer.writeAll(writeTransactions);
+            writer.close();
+        }
+
+        catch(IOException e){
+
+        }
+    }
+
 }

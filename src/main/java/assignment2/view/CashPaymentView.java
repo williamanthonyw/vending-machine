@@ -298,7 +298,7 @@ public class CashPaymentView implements View{
             changePopup.setContentText(changeFormat);
             changePopup.showAndWait();
 
-            mainModel.checkout();
+            mainModel.checkout("cash");
             mainView.goToProductOptionsView();
         }
 

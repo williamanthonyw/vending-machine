@@ -20,16 +20,27 @@ public class CashPaymentModel{
 
     private JsonParser jsonParser;
     private List<Cash> cashList;
-    private double currentChange;
+    private double moneyPaid;
+    private double returnedChange;
     
     public CashPaymentModel(List<Cash> cashList, JsonParser jsonParser){
 
         this.jsonParser = jsonParser;
         this.cashList = cashList;
+        this.moneyPaid = 0;
+        this.returnedChange = 0;
     }
 
     public List<Cash> getCashList(){
         return this.cashList;
+    }
+
+    public double getMoneyPaid(){
+        return this.moneyPaid;
+    }
+
+    public double getReturnedChange(){
+        return this.returnedChange;
     }
 
     public HashMap<String, Integer> getCashMap(List<Cash> cashList){
@@ -48,6 +59,7 @@ public class CashPaymentModel{
         for (HashMap.Entry<Double, Integer> map: cashPayment.entrySet()){
             totalPayment += map.getKey() * map.getValue();
         }
+        this.moneyPaid = totalPayment;
 
         return totalPayment;
     }
@@ -90,8 +102,6 @@ public class CashPaymentModel{
             throw new PaymentNotEnoughException("Please add more cash or cancel");
         }
         double change = payment - price;
-
-        System.out.println(cashList);
 
         //add payment cash to machine
         addPaymentToMachine(cashPayment);
@@ -162,11 +172,17 @@ public class CashPaymentModel{
 
         jsonParser.updateCash(this.cashList);
 
-
-
-        System.out.println(totalChange);
+        totalChange();
 
         return totalChange;
+    }
+
+    public void totalChange(){
+        double total = 0;
+        for (Cash c: this.cashList){
+            total += (c.getValue() * c.getAmount());
+        }
+        this.returnedChange = total;
     }
 
     public static void main(String[] args){

@@ -5,7 +5,6 @@
 package assignment2;
 
 import assignment2.model.CSVFileParser;
-import assignment2.model.CsvParser;
 import assignment2.model.JsonParser;
 import assignment2.model.MainModel;
 import assignment2.view.MainView;
@@ -35,7 +34,8 @@ public class App extends Application{
                 "src/main/resources/credit_cards.json");
 
         csvFileParser = new CSVFileParser("src/main/resources/inventory.csv",
-                "src/main/resources/transaction.csv",
+                "src/main/resources/seller_transaction.csv",
+                "src/main/resources/cashier_transaction.csv",
                 "src/main/resources/cancelledTransactions.csv");
 
         mainModel = new MainModel(jsonParser, csvFileParser);
