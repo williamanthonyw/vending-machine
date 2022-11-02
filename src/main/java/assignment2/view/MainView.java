@@ -45,8 +45,8 @@ public class MainView {
     public void setUp(Stage stage){
         this.stage = stage;
         // goToSellerInventoryView();
-        goToOwnerDashboardView();
-//        goToProductOptionsView();
+        // goToOwnerDashboardView();
+       goToProductOptionsView();
 
         stage.show();
     }
@@ -223,7 +223,7 @@ public class MainView {
 
         MenuItem ownerDashboardBTN = new MenuItem("Owner Dashboard");
         ownerDashboardBTN.setOnAction((ActionEvent e) -> {
-            goToModifyCashView();
+            goToOwnerDashboardView();
         });
 
         menuBTN.getItems().addAll(productOptionsBTN);

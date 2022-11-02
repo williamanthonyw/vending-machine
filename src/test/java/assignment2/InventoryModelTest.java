@@ -23,7 +23,7 @@ public class InventoryModelTest {
     @BeforeEach
     public void beforeTests(){
 
-        this.csvFileParser = new CSVFileParser("src/test/resources/inventory.csv","src/test/resources/transaction.csv", "");
+        this.csvFileParser = new CSVFileParser("src/test/resources/inventory.csv","", "", "");
 
         this.jsonParser = new JsonParser("src/test/resources/InventoryTest1.json",
                 "",
@@ -42,6 +42,7 @@ public class InventoryModelTest {
         );
 
         this.inventoryModel = new InventoryModel(inventory, jsonParser, csvFileParser);
+        this.inventoryModel.initializeProductsToString();
 
     }
 
@@ -415,6 +416,7 @@ public class InventoryModelTest {
         );
 
         InventoryModel inventoryModelTest = new InventoryModel(temp.getInventory(), jsonParser, csvFileParser);
+        inventoryModelTest.initializeProductsToString();
 
         Product testProduct = new Product("name", 5);
         testProduct.setCategory("drinks");
@@ -438,6 +440,7 @@ public class InventoryModelTest {
         );
 
         InventoryModel inventoryModelTest = new InventoryModel(temp.getInventory(), jsonParser, csvFileParser);
+        inventoryModelTest.initializeProductsToString();
 
         Product testProduct = new Product("name", 5);
         testProduct.setCategory("drinks");
@@ -463,6 +466,7 @@ public class InventoryModelTest {
         );
 
         InventoryModel inventoryModelTest = new InventoryModel(temp.getInventory(), jsonParser, csvFileParser);
+        inventoryModelTest.initializeProductsToString();
 
         Product product = inventoryModelTest.getInventory().get(0);
 
@@ -483,6 +487,7 @@ public class InventoryModelTest {
         );
 
         InventoryModel inventoryModelTest = new InventoryModel(temp.getInventory(), jsonParser, csvFileParser);
+        inventoryModelTest.initializeProductsToString();
 
         Product product = inventoryModelTest.getInventory().get(0);
 

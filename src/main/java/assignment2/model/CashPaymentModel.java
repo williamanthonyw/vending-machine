@@ -20,16 +20,27 @@ public class CashPaymentModel{
 
     private JsonParser jsonParser;
     private List<Cash> cashList;
-    private double currentChange;
+    private double moneyPaid;
+    private double returnedChange;
     
     public CashPaymentModel(List<Cash> cashList, JsonParser jsonParser){
 
         this.jsonParser = jsonParser;
         this.cashList = cashList;
+        this.moneyPaid = 0;
+        this.returnedChange = 0;
     }
 
     public List<Cash> getCashList(){
         return this.cashList;
+    }
+
+    public double getMoneyPaid(){
+        return this.moneyPaid;
+    }
+
+    public double getReturnedChange(){
+        return this.returnedChange;
     }
 
     public HashMap<String, Integer> getCashMap(List<Cash> cashList){
@@ -48,6 +59,7 @@ public class CashPaymentModel{
         for (HashMap.Entry<Double, Integer> map: cashPayment.entrySet()){
             totalPayment += map.getKey() * map.getValue();
         }
+        this.moneyPaid = totalPayment;
 
         return totalPayment;
     }
@@ -90,8 +102,6 @@ public class CashPaymentModel{
             throw new PaymentNotEnoughException("Please add more cash or cancel");
         }
         double change = payment - price;
-
-        System.out.println(cashList);
 
         //add payment cash to machine
         addPaymentToMachine(cashPayment);
@@ -162,11 +172,55 @@ public class CashPaymentModel{
 
         jsonParser.updateCash(this.cashList);
 
-
-
-        System.out.println(totalChange);
+        totalChange(totalChange);
 
         return totalChange;
+    }
+
+    public void totalChange(Map<String, Integer> change){
+
+        double total = 0;
+
+        for (String s: change.keySet()){
+            switch(s){
+                case "5c":
+                    total += 0.05 * change.get(s);
+                    break;
+                case "10c":
+                    total += 0.10  * change.get(s);
+                    break;
+                case "20c":
+                    total += 0.20  * change.get(s);
+                    break;
+                case "50c":
+                    total += 0.50  * change.get(s);
+                    break;
+                case "$1":
+                    total += 1.00  * change.get(s);
+                    break;
+                case "$2":
+                    total += 2.00  * change.get(s);
+                    break;
+                case "$5":
+                    total += 5.00  * change.get(s);
+                    break;
+                case "$10":
+                    total += 10.00  * change.get(s);
+                    break;
+                case "$20":
+                    total += 20.00  * change.get(s);
+                    break;
+                case "$50":
+                    total += 50.00  * change.get(s);
+                    break;
+                case "$100":
+                    total += 100.00 * change.get(s);
+                    break;
+            }   
+        }
+        System.out.println(total);
+
+        this.returnedChange = Math.round(total*100.0)/100.0;
     }
 
     public static void main(String[] args){

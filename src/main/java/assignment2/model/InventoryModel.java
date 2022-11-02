@@ -40,7 +40,7 @@ public class InventoryModel {
            allProductNames.addAll(productNamesByCategory.get(category));
        });
 
-       this.inventoryStrings = this.csvFileParser.readInventoryFromFile();
+       
 
      }
 
@@ -208,11 +208,43 @@ public class InventoryModel {
     public void updateInventoryString(){
         this.inventoryStrings.clear();
         
-
-        for (Product p: inventory){
+  
+        for (Product p: this.inventory){
             List<String> itemString = List.of(p.getName(), String.valueOf(p.getCode()), p.getCategory(), String.valueOf(p.getPrice()), String.valueOf(p.getQuantity()));
             this.inventoryStrings.add(itemString);
         }
     }
 
+    public void initializeProductsToString(){
+        List<List<String>> products = new ArrayList<List<String>>();
+
+        for (Product p: this.inventory){
+            List<String> itemString = List.of(p.getName(), String.valueOf(p.getCode()), p.getCategory(), String.valueOf(p.getPrice()), String.valueOf(p.getQuantity()));
+            products.add(itemString);
+        }
+
+        this.csvFileParser.writeInventoryToFile(products);
+
+        this.inventoryStrings = products;
+    }
+
+    public CSVFileParser getCsvFileParser(){
+        return this.csvFileParser;
+    }
+
+    public static void main(String[] args){
+    //     JsonParser jp = new JsonParser("src/test/resources/test_inventory.json", "src/test/resources/test_users3.json", "src/test/resources/InitialCash.json", "src/test/resources/credit_cards.json");
+    //     String testInventoryCSVPath = "src/test/resources/test_inventory.csv";
+    // String testSellerTransactionCSVPath = "src/test/resources/seller_transaction.csv";
+    // String testCashierTransactionCSVPath = "src/test/resources/cashier_transaction.csv";
+
+    //     List<Product> inventory = jp.getInventory();
+    //     CSVFileParser csvFileParser = new CSVFileParser(testInventoryCSVPath, testSellerTransactionCSVPath);
+    //     InventoryModel inventoryModel = new InventoryModel(inventory, jp, csvFileParser);
+    //     inventoryModel.initializeProductsToString();
+        
+    //     //read from file
+    //     List<List<String>> inventoryRead = inventoryModel.getInventoryAsString();
+    //     System.out.println(inventoryRead);
+    }
 }

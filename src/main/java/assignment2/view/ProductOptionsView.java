@@ -85,6 +85,7 @@ public class ProductOptionsView implements View{
 
     @Override
     public void setUp() {
+        this.inventoryModel.initializeProductsToString();
         this.borderPane = new BorderPane();
 
         scene = new Scene(borderPane, 1000, 600);
