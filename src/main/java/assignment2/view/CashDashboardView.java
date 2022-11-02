@@ -26,6 +26,7 @@ public class CashDashboardView implements View{
     private BorderPane borderPane;
     private List<Cash> cashList;
     private List<List<String>> cashString;
+    private List<List<String>> cashierTransactionString;
 
     public CashDashboardView(MainModel mainModel, MainView mainView){
         this.mainModel = mainModel;
@@ -53,15 +54,21 @@ public class CashDashboardView implements View{
         titleLBL.setId("title");
         mainBox.getChildren().add(titleLBL);
 
-//        HBox cashBox = new HBox();
+        HBox cashBox1 = new HBox();
+        Label cashLBL = new Label("List of available change");
+        cashBox1.getChildren().add(cashLBL);
+
+        HBox cashBox2 = new HBox();
         TextArea cashText = new TextArea();
-        cashText.setMinHeight(250);
-        cashText.setMinWidth(200);
+        cashText.setMinHeight(100);
+        cashText.setMinWidth(900);
+        cashText.setEditable(false);
+
         String result = "";
         cashString = cashPaymentModel.getCashString();
 
 //        cashBox.setAlignment(Pos.CENTER);
-        mainBox.getChildren().addAll(cashText);
+        cashBox2.getChildren().add(cashText);
 
         if(cashList.size() == 0){
             result = "No cash available";
@@ -73,6 +80,45 @@ public class CashDashboardView implements View{
             }
         }
         cashText.setText(result);
+
+        mainBox.getChildren().addAll(cashBox1, cashBox2);
+
+         //List of Purchased Items
+         cashierTransactionString = this.mainModel.getCsvFileParser().readCashierTransactions();
+
+         HBox transactionBox1 = new HBox();
+         Label transactionLBL = new Label("List of transactions");
+         
+         
+         HBox transactionBox2 = new HBox();
+         TextArea transactionText = new TextArea();
+         transactionText.setMinHeight(100);
+         transactionText.setMinWidth(900);
+         transactionText.setEditable(false);
+ 
+         //read transactions done from file
+         String transTemp = "";
+ 
+         if (cashierTransactionString.size() == 0){
+             transTemp = "No transactions available.";
+         }
+         else{
+             for (List<String> s : cashierTransactionString){
+                 String temp2 = String.join(", ", s).stripTrailing();
+                 temp2 = temp2.concat("\n");
+             
+                 transTemp = transTemp.concat(temp2);
+             }
+         }
+         
+         transactionText.setText(transTemp);
+ 
+         transactionBox1.getChildren().add(transactionLBL);
+         transactionBox2.getChildren().add(transactionText);
+ 
+         mainBox.getChildren().addAll(transactionBox1, transactionBox2);
+
+
     }
 
     @Override
