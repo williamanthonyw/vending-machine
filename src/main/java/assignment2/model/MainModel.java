@@ -237,6 +237,8 @@ public class MainModel {
 
 
     public void checkout(String paymentMethod){
+        List<String> listOfProductsBought = new ArrayList<String>();
+        
 
         // adds it to user's list of purchases
         for (Product product : user.getCart().keySet()){
@@ -245,15 +247,18 @@ public class MainModel {
             //add to seller's transaction view         
             this.sellerTransactions.add(new Transaction(product.getCode(), product.getName(), user.getCart().get(product)));
             System.out.println(this.sellerTransactions.get(0).getQuantitySold());
-
-            //add to cashier's transaction view
-            if (paymentMethod.equals("cash")){
-                 this.cashierTransactions.add(new Transaction(LocalDateTime.now(), product.getName(), this.cashPaymentModel.getMoneyPaid(), this.cashPaymentModel.getReturnedChange(), paymentMethod));
-            }
-            else{
-                this.cashierTransactions.add(new Transaction(LocalDateTime.now(), product.getName(), 0, 0, paymentMethod));
-            }
+            
+            listOfProductsBought.add(product.getName());
+            
            
+        }
+        String productsString = String.join(", ", listOfProductsBought);
+        //add to cashier's transaction view
+        if (paymentMethod.equals("cash")){
+            this.cashierTransactions.add(new Transaction(LocalDateTime.now(), productsString, this.cashPaymentModel.getMoneyPaid(), this.cashPaymentModel.getReturnedChange(), paymentMethod));
+        }
+        else{
+           this.cashierTransactions.add(new Transaction(LocalDateTime.now(), productsString, 0, 0, paymentMethod));
         }
 
         user.clearCart();
@@ -326,6 +331,7 @@ public class MainModel {
         for(Transaction t: this.cashierTransactions){
             this.cashierTransactionString.add(List.of(String.valueOf(t.getTransactionDate()), t.getItemName(), String.valueOf(t.getMoneyPaid()), String.valueOf(t.getReturnedChange()), t.getPaymentMethod()));
         }
+        this.cashierTransactions.clear();
     }
 
     public List<List<String>> getSellerTransactionAsString(){
