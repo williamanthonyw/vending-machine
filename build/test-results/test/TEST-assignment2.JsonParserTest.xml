@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
 <testsuite name="assignment2.JsonParserTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2022-10-28T05:12:50" hostname="vlan-2657-10-19-211-228.student.wireless.sydney.edu.au" time="0.04">
   <properties/>
   <testcase name="getUsersEmptyFile()" classname="assignment2.JsonParserTest" time="0.006"/>
@@ -6,6 +7,15 @@
   <testcase name="updateInventoryTest()" classname="assignment2.JsonParserTest" time="0.004"/>
   <testcase name="getUsersFileDoesNotExist()" classname="assignment2.JsonParserTest" time="0.001"/>
   <testcase name="updateUsersValidListWithPurchases()" classname="assignment2.JsonParserTest" time="0.003"/>
+=======
+<testsuite name="assignment2.JsonParserTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2022-11-01T11:49:42" hostname="Kylies-MBP" time="0.02">
+  <properties/>
+  <testcase name="getUsersEmptyFile()" classname="assignment2.JsonParserTest" time="0.002"/>
+  <testcase name="getUsersValidFile()" classname="assignment2.JsonParserTest" time="0.008"/>
+  <testcase name="updateInventoryTest()" classname="assignment2.JsonParserTest" time="0.003"/>
+  <testcase name="getUsersFileDoesNotExist()" classname="assignment2.JsonParserTest" time="0.001"/>
+  <testcase name="updateUsersValidListWithPurchases()" classname="assignment2.JsonParserTest" time="0.001"/>
+>>>>>>> 6025943a1f910ddcfd37170c6ab43d0c87acdc84
   <testcase name="updateUsersValidListNoPurchases()" classname="assignment2.JsonParserTest" time="0.0"/>
   <testcase name="updateUsersEmptyList()" classname="assignment2.JsonParserTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
