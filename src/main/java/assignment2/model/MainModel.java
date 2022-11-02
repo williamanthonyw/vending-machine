@@ -34,14 +34,15 @@ public class MainModel {
     private CSVFileParser csvFileParser;
 
     private List<CancelledTransaction> cancelledTransactions;
-
+    private List<User> users;
+    private List<List<String>> availableProducts;
 
     public MainModel(JsonParser jsonParser, CSVFileParser csvParser){
 
         this.jsonParser = jsonParser;
         this.csvFileParser = csvParser;
 
-        this.loginModel = new LoginModel(jsonParser.getUsers(),this.getJsonParser());
+        this.loginModel = new LoginModel(jsonParser.getUsers(),this.getJsonParser(), csvFileParser);
         this.user = loginModel.getAnonymousUser();
 
         if (this.user != null){
@@ -58,6 +59,9 @@ public class MainModel {
 
         this.cancelledTransactions = csvParser.getCancelledTransactions();
         this.aggregatePurchases = new HashMap<Product, Integer>();
+
+        this.users = loginModel.getUsers(); ////////
+        availableProducts = this.inventoryModel.getInventoryAsString();
 
     }
 
@@ -146,6 +150,38 @@ public class MainModel {
     }
 
 
+    public List<List<String>> getAvailableProducts(){
+        return this.availableProducts;
+    }
+
+    public String getAvailableProductsAsString(){
+        //read inventory from file 
+        //copypasted from sellerdashboardview - clean later
+        String invTemp = "";
+
+        if (availableProducts.size() == 0){
+            invTemp = "No items available.";
+        }
+
+        else{
+            for (List<String> s : availableProducts){
+                String temp2 = String.join(", ", s).stripTrailing();
+                temp2 = temp2.concat("\n");
+                invTemp = invTemp.concat(temp2);
+            }
+        }
+        return invTemp;
+    }
+
+
+    public String getUsersAsString(){
+        String out = "";
+        for (User user : users){
+            out += user.getUsername() + ", " + user.getUserAccess() + "\n";
+        }
+        return out;
+    }
+
 
     public boolean login(String username, String password){
 
@@ -216,6 +252,10 @@ public class MainModel {
 
     public JsonParser getJsonParser(){
         return this.jsonParser;
+    }
+
+    public CSVFileParser getCsvFileParser(){
+        return this.csvFileParser;
     }
 
 ////    public UserManagementModel getUserManagementModel(){
