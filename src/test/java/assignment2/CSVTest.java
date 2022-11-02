@@ -13,12 +13,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class CSVTest {
     private static String originalInventoryPath = "src/test/resources/original_test_inventory.json";
-    private static String inventoryPath1 = "src/test/resources/test_inventory.json";
+    private static String inventoryPath1 = "src/test/resources/test_inventory2.json";
     private static String inventoryPath2 = "src/test/resources/test_inventory3.json";
     private static String inventoryPath3 = "src/test/resources/test_inventory4.json";
 
 
-    private static String testInventoryCSVPath = "src/test/resources/test_inventory.csv";
+    private static String testInventoryCSVPath = "src/test/resources/test_inventory1.csv";
     private static String testInventoryCSVPath2 = "src/test/resources/test_inventory2.csv";
     private static String testSellerTransactionCSVPath = "src/test/resources/seller_transaction.csv";
     private static String testCashierTransactionCSVPath = "src/test/resources/cashier_transaction.csv";

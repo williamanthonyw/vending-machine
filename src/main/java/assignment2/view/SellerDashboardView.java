@@ -41,6 +41,7 @@ public class SellerDashboardView implements View{
         this.mainModel = mainModel;
         this.mainView = mainView;
         this.inventoryModel = this.mainModel.getInventoryModel();
+        
         this.user = this.mainModel.getUser();
     }
 
@@ -52,7 +53,7 @@ public class SellerDashboardView implements View{
 
     @Override
     public void setUp(){
-
+        this.inventoryModel.initializeProductsToString();
         this.stage = new Stage();
         this.borderPane = new BorderPane();
 
@@ -68,10 +69,10 @@ public class SellerDashboardView implements View{
         
 
         //list of available products
-        availableProducts = this.inventoryModel.getInventoryAsString();
+        availableProducts = this.inventoryModel.getCsvFileParser().readInventoryFromFile();
 
         //list of purchased items
-        purchasedItems = this.mainModel.getSellerTransactionAsString();
+        purchasedItems = this.mainModel.getCsvFileParser().readSellerTransactions();
 
         //title 
         Label titleLBL = new Label("Seller Dashboard");

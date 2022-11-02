@@ -59,4 +59,7 @@ public class Transaction {
         return this.paymentMethod;
     }
     
+    public void setQuantitySold(int quantitySold){
+        this.quantitySold = quantitySold;
+    }
 }

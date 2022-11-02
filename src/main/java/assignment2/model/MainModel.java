@@ -166,9 +166,10 @@ public class MainModel {
         // adds it to user's list of purchases
         for (Product product : user.getCart().keySet()){
             user.purchaseProduct(product, user.getCart().get(product));
-
-            //add to seller's transaction view 
+            
+            //add to seller's transaction view         
             this.sellerTransactions.add(new Transaction(product.getCode(), product.getName(), user.getCart().get(product)));
+            System.out.println(this.sellerTransactions.get(0).getQuantitySold());
 
             //add to cashier's transaction view
             if (paymentMethod.equals("cash")){
@@ -178,7 +179,6 @@ public class MainModel {
                 this.cashierTransactions.add(new Transaction(LocalDateTime.now(), product.getName(), 0, 0, paymentMethod));
             }
            
-
         }
 
         user.clearCart();
@@ -191,6 +191,7 @@ public class MainModel {
 
         //update seller transaction list string
         updateSellerTransactionString();
+        System.out.println(this.sellerTransactionString);
 
         //update seller transaction list string
         updateCashierTransactionString();
@@ -226,11 +227,24 @@ public class MainModel {
     }
 
     public void updateSellerTransactionString(){
-        this.sellerTransactionString.clear();
-        
+        //this.sellerTransactionString.clear();
+        System.out.println(this.sellerTransactionString);
+
         for (Transaction t: this.sellerTransactions){
-            this.sellerTransactionString.add(List.of(String.valueOf(t.getItemCode()), t.getItemName(), String.valueOf(t.getQuantitySold())));
+            boolean found = false;
+            for (List<String> s: this.sellerTransactionString){
+                if (t.getItemName().equals(s.get(1))){
+                    found = true;
+                    s.set(2, String.valueOf((Integer.parseInt(s.get(2)) + t.getQuantitySold())));
+                    break;
+                }
+            }
+            if (found == false){
+                this.sellerTransactionString.add(List.of(String.valueOf(t.getItemCode()), t.getItemName(), String.valueOf(t.getQuantitySold())));
+            }
+            
         }
+        this.sellerTransactions.clear();
     }
 
     public void updateCashierTransactionString(){
@@ -246,6 +260,10 @@ public class MainModel {
 
     public List<List<String>> getCashierTransactionAsString(){
         return this.cashierTransactionString;
+    }
+
+    public CSVFileParser getCsvFileParser(){
+        return this.csvFileParser;
     }
 
 ////    public UserManagementModel getUserManagementModel(){

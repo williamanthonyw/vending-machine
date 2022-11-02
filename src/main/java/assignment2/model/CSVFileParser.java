@@ -78,7 +78,7 @@ public class CSVFileParser {
         }
 
         catch(IOException e){
-            e.printStackTrace();
+           
         }
     }
 

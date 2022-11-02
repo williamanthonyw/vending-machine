@@ -37,27 +37,27 @@ public class CSVFileParser {
 
     
     public List&lt;List&lt;String&gt;&gt; readInventoryFromFile(){
-<span class="fc" id="L40">        List&lt;List&lt;String&gt;&gt; items = new ArrayList&lt;List&lt;String&gt;&gt;();</span>
-<span class="fc" id="L41">        File file = new File(this.inventoryCSV);</span>
+<span class="nc" id="L40">        List&lt;List&lt;String&gt;&gt; items = new ArrayList&lt;List&lt;String&gt;&gt;();</span>
+<span class="nc" id="L41">        File file = new File(this.inventoryCSV);</span>
 
         String[] item;
 
         try{
-<span class="fc" id="L46">            CSVReader reader = new CSVReader(new FileReader(file));</span>
+<span class="nc" id="L46">            CSVReader reader = new CSVReader(new FileReader(file));</span>
 
-<span class="fc bfc" id="L48" title="All 2 branches covered.">            while((item = reader.readNext()) != null){</span>
-<span class="fc" id="L49">                items.add(Arrays.asList(item));</span>
+<span class="nc bnc" id="L48" title="All 2 branches missed.">            while((item = reader.readNext()) != null){</span>
+<span class="nc" id="L49">                items.add(Arrays.asList(item));</span>
             }
 
-<span class="fc" id="L52">            reader.close();</span>
+<span class="nc" id="L52">            reader.close();</span>
         }
-<span class="fc" id="L54">        catch (IOException e){</span>
+<span class="nc" id="L54">        catch (IOException e){</span>
 
         }
 <span class="nc" id="L57">        catch(CsvValidationException c){</span>
 
-<span class="fc" id="L59">        }</span>
-<span class="fc" id="L60">        return items;</span>
+<span class="nc" id="L59">        }</span>
+<span class="nc" id="L60">        return items;</span>
     }
 
 
@@ -78,7 +78,7 @@ public class CSVFileParser {
         }
 
 <span class="fc" id="L80">        catch(IOException e){</span>
-<span class="fc" id="L81">            e.printStackTrace();</span>
+           
 <span class="fc" id="L82">        }</span>
 <span class="fc" id="L83">    }</span>
 

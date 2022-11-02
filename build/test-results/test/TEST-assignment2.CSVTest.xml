@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="assignment2.CSVTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2022-11-01T11:25:25" hostname="DESKTOP-Q9TS4JK" time="0.417">
+  <properties/>
+  <testcase name="readAndWriteInventoryTest()" classname="assignment2.CSVTest" time="0.054"/>
+  <testcase name="readAndWriteSellerTransactionTest()" classname="assignment2.CSVTest" time="0.229"/>
+  <testcase name="multipleSellerTransactionsTest()" classname="assignment2.CSVTest" time="0.129"/>
+  <system-out><![CDATA[test1
+test1
+test1
+test1
+test2
+test1
+test2
+test3
+test1
+test2
+test3
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
