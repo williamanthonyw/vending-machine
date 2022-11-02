@@ -20,13 +20,18 @@ public class CashPaymentModel{
 
     private JsonParser jsonParser;
     private List<Cash> cashList;
+    private double currentChange;
+    private CSVFileParser csvFileParser;
+    private List<List<String>> cashString;
     private double moneyPaid;
     private double returnedChange;
-    
-    public CashPaymentModel(List<Cash> cashList, JsonParser jsonParser){
+
+    public CashPaymentModel(List<Cash> cashList, JsonParser jsonParser,CSVFileParser csvFileParser){
 
         this.jsonParser = jsonParser;
         this.cashList = cashList;
+        this.csvFileParser = csvFileParser;
+        this.cashString = this.csvFileParser.readCashFromFile();
         this.moneyPaid = 0;
         this.returnedChange = 0;
     }
@@ -79,6 +84,8 @@ public class CashPaymentModel{
             System.out.println(c.getAmount());
         }
         jsonParser.updateCash(cashList);
+        csvFileParser.updateCash(cashList);
+        updateCashString();
     }
     public Map<String, Integer> calculateChange(double payment, double price, HashMap<Double, Integer> cashPayment) throws InsufficientChangeException, PaymentNotEnoughException{
         
@@ -216,11 +223,24 @@ public class CashPaymentModel{
                 case "$100":
                     total += 100.00 * change.get(s);
                     break;
-            }   
+            }
         }
         System.out.println(total);
 
         this.returnedChange = Math.round(total*100.0)/100.0;
+    }
+
+    public void updateCashString(){
+        this.cashString.clear();
+
+        for(Cash c: cashList){
+            List<String> stringList = List.of(c.getName(),Integer.toString(c.getAmount()));
+            this.cashString.add(stringList);
+        }
+    }
+
+    public List<List<String>> getCashString(){
+        return cashString;
     }
 
     public static void main(String[] args){

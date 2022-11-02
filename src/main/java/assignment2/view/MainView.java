@@ -55,6 +55,10 @@ public class MainView {
         goToView(new OwnerDashboardView(mainModel, this));
     }
 
+    public void goToCashDashboardView(){
+        goToView(new CashDashboardView(mainModel,this));
+    }
+
     private void goToSellerInventoryView() {
         goToView(new SellerInventoryView(this.mainModel, this));
     }
@@ -226,6 +230,11 @@ public class MainView {
             goToOwnerDashboardView();
         });
 
+        MenuItem cashDashboardBTN = new MenuItem("Cash Dashboard");
+        cashDashboardBTN.setOnAction((ActionEvent e)->{
+            goToCashDashboardView();
+        });
+
         menuBTN.getItems().addAll(productOptionsBTN);
 
         if (mainModel.isLoggedIn()){
@@ -244,6 +253,7 @@ public class MainView {
             }
             if (mainModel.getUser().getUserAccess().equals(UserAccess.CASHIER)){
                 menuBTN.getItems().add(modifyCashBTN);
+                menuBTN.getItems().add(cashDashboardBTN);
             }
 
         } else {
