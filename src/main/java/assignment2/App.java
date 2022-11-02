@@ -4,6 +4,8 @@
 
 package assignment2;
 
+import assignment2.model.CSVFileParser;
+import assignment2.model.JsonParser;
 import assignment2.model.MainModel;
 import assignment2.view.MainView;
 import com.sun.tools.javac.Main;
@@ -14,6 +16,8 @@ public class App extends Application{
 
     private static MainModel mainModel;
     private static MainView mainView;
+    private static CSVFileParser csvFileParser;
+    private static JsonParser jsonParser;
 
     @Override
     public void start(Stage stage){
@@ -24,13 +28,18 @@ public class App extends Application{
 
     public static void main(String[] args){
 
-        mainModel = new MainModel("src/main/resources/Inventory.json",
-                                    "src/main/resources/users.json",
-                                "src/main/resources/InitialCash.json",
-                                    "src/main/resources/credit_cards.json",
-                            "src/main/resources/inventory.csv",
-                            "src/main/resources/seller_transaction.csv",
-                            "src/main/resources/cashier_transaction.csv");
+        jsonParser = new JsonParser("src/main/resources/Inventory.json",
+                "src/main/resources/users.json",
+                "src/main/resources/InitialCash.json",
+                "src/main/resources/credit_cards.json");
+
+        csvFileParser = new CSVFileParser("src/main/resources/inventory.csv",
+                "src/main/resources/seller_transaction.csv",
+                "src/main/resources/cashier_transaction.csv",
+                "src/main/resources/cancelledTransactions.csv");
+
+        mainModel = new MainModel(jsonParser, csvFileParser);
+
         mainView = new MainView(mainModel);
         
         launch();

@@ -23,31 +23,27 @@ public class MainModel {
     private LoginModel loginModel;
     private CashPaymentModel cashPaymentModel;
     private InventoryModel inventoryModel;
-//    private UserManagementModel userManagementModel;
 
-    private String inventoryFile;
-    private String usersFile;
-    private String initialCashFile;
-    private String cardFile;
 
     private User user;
     private boolean isLoggedIn;
 
     private HashMap<Product, Integer> aggregatePurchases;
     private JsonParser jsonParser;
+
     private CSVFileParser csvFileParser;
 
-
+    private List<CancelledTransaction> cancelledTransactions;
     private List<List<String>> sellerTransactionString;
     private List<Transaction> sellerTransactions;
 
     private List<List<String>> cashierTransactionString;
     private List<Transaction> cashierTransactions;
 
-    public MainModel(String inventoryFile, String usersFile, String initialCashFile, String cardFile, String inventoryCSV, String sellerTransactionCSV, String cashierTransactionCSV){
+    public MainModel(JsonParser jsonParser, CSVFileParser csvParser){
 
-        this.jsonParser = new JsonParser(inventoryFile, usersFile, initialCashFile, cardFile);
-        this.csvFileParser = new CSVFileParser(inventoryCSV, sellerTransactionCSV, cashierTransactionCSV);
+        this.jsonParser = jsonParser;
+        this.csvFileParser = csvParser;
 
         this.loginModel = new LoginModel(jsonParser.getUsers(),this.getJsonParser());
         this.user = loginModel.getAnonymousUser();
@@ -57,10 +53,6 @@ public class MainModel {
         }
 
         this.isLoggedIn = false;
-        this.inventoryFile = inventoryFile;
-        this.usersFile = usersFile;
-        this.initialCashFile = initialCashFile;
-        this.cardFile = cardFile;
 
         this.lastFiveProductsModel = new LastFiveProductsModel();
         this.cardPaymentModel = new CardPaymentModel(this, jsonParser );
@@ -75,9 +67,8 @@ public class MainModel {
 
         
 
-//        List<List<String>> items = readPurchasesFromFile("src/main/resources/transaction.csv");
-
-//        this.userManagementModel = new UserManagementModel(jsonParser.getUsers(), jsonParser);
+        this.cancelledTransactions = csvParser.getCancelledTransactions();
+        this.aggregatePurchases = new HashMap<Product, Integer>();
 
     }
 
@@ -125,17 +116,47 @@ public class MainModel {
         return this.aggregatePurchases;
     }
 
-    public void cancelTransaction(){
+    public void cancelTransaction(CancellationReason cancellationReason, LocalDateTime timeCancelled){
 
         // clear cart (look at Katie's stuff)
         inventoryModel.putBack(user.getCart());
         user.clearCart();
 
+        cancelledTransactions.add(new CancelledTransaction(user.getUsername(), cancellationReason, timeCancelled));
+        System.out.println(cancellationReason);
+        csvFileParser.updateCancelledTransactions(cancelledTransactions);
 
         // log user out
         logout();
 
     }
+
+    public List<CancelledTransaction> getCancelledTransactions(){
+        return cancelledTransactions;
+    }
+
+    public String getCancelledTransactionsAsString(){
+        String out = "";
+
+        for (CancelledTransaction c : cancelledTransactions){
+            out += c.getUsername() + ", " + c.getCancellationReason().getReason() + ", " + c.getTimeCancelled().toString();
+            out += "\n";
+        }
+        return out;
+    }
+
+    public String getTransactionsAsString(){
+//        String out = "";
+//
+//        for (List<String> c : ){
+//            out += c.getUsername() + ", " + c.getCancellationReason().getReason() + ", " + c.getTimeCancelled().toString();
+//            out += "\n";
+//        }
+//        return out;
+        return "please move your to string method to model @william";
+    }
+
+
 
     public boolean login(String username, String password){
 
@@ -206,7 +227,6 @@ public class MainModel {
 
     }
 
-
     public InventoryModel getInventoryModel(){
         return this.inventoryModel;
     }
@@ -274,39 +294,39 @@ public class MainModel {
 
     public static void main(String[] args){
 
-         String originalInventoryPath = "src/test/resources/original_test_inventory.json";
-   String inventoryPath1 = "src/test/resources/test_inventory.json";
-   String inventoryPath2 = "src/test/resources/test_inventory3.json";
-   String inventoryPath3 = "src/test/resources/test_inventory4.json";
+//          String originalInventoryPath = "src/test/resources/original_test_inventory.json";
+//    String inventoryPath1 = "src/test/resources/test_inventory.json";
+//    String inventoryPath2 = "src/test/resources/test_inventory3.json";
+//    String inventoryPath3 = "src/test/resources/test_inventory4.json";
 
 
- String testInventoryCSVPath = "src/test/resources/test_inventory.csv";
-   String testInventoryCSVPath2 = "src/test/resources/test_inventory2.csv";
-    String testSellerTransactionCSVPath = "src/test/resources/seller_transaction.csv";
-    String testCashierTransactionCSVPath = "src/test/resources/cashier_transaction.csv";
-        MainModel mainModel = new MainModel(inventoryPath2, "src/test/resources/test_users3.json", "src/test/resources/InitialCash.json", "src/test/resources/credit_cards.json", testInventoryCSVPath2, testSellerTransactionCSVPath, testCashierTransactionCSVPath);
-        InventoryModel inventoryModel = mainModel.getInventoryModel();
-        List<Product> defaultInventory = mainModel.getJsonParser().getInventory();
-        inventoryModel.initializeProductsToString();
+//  String testInventoryCSVPath = "src/test/resources/test_inventory.csv";
+//    String testInventoryCSVPath2 = "src/test/resources/test_inventory2.csv";
+//     String testSellerTransactionCSVPath = "src/test/resources/seller_transaction.csv";
+//     String testCashierTransactionCSVPath = "src/test/resources/cashier_transaction.csv";
+//         MainModel mainModel = new MainModel(inventoryPath2, "src/test/resources/test_users3.json", "src/test/resources/InitialCash.json", "src/test/resources/credit_cards.json", testInventoryCSVPath2, testSellerTransactionCSVPath, testCashierTransactionCSVPath);
+//         InventoryModel inventoryModel = mainModel.getInventoryModel();
+//         List<Product> defaultInventory = mainModel.getJsonParser().getInventory();
+//         inventoryModel.initializeProductsToString();
 
-        // login user 1
-        mainModel.setUser(mainModel.getLoginModel().login("test1", "pw"));
+//         // login user 1
+//         mainModel.setUser(mainModel.getLoginModel().login("test1", "pw"));
 
-        //add 2 of each items to cart
-        for (Product p : inventoryModel.getInventory()){
-            mainModel.addToCart(p, 2);
-        }
+//         //add 2 of each items to cart
+//         for (Product p : inventoryModel.getInventory()){
+//             mainModel.addToCart(p, 2);
+//         }
 
-        int cartSize = mainModel.getUser().getCart().size();
+//         int cartSize = mainModel.getUser().getCart().size();
 
-        //complete transaction and write to file 
-        mainModel.checkout("card");
+//         //complete transaction and write to file 
+//         mainModel.checkout("card");
 
-        List<List<String>> sellerTransactions = mainModel.getSellerTransactionAsString();
-        List<List<String>> cashierTransactions = mainModel.getCashierTransactionAsString();
+//         List<List<String>> sellerTransactions = mainModel.getSellerTransactionAsString();
+//         List<List<String>> cashierTransactions = mainModel.getCashierTransactionAsString();
         
-        System.out.println(sellerTransactions);
-        System.out.println(cashierTransactions);
+//         System.out.println(sellerTransactions);
+//         System.out.println(cashierTransactions);
 
 
 

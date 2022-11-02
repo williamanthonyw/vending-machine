@@ -15,6 +15,8 @@ import javafx.scene.layout.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.*;
+
+import java.security.spec.ECPublicKeySpec;
 import java.util.*;
 
 
@@ -31,11 +33,14 @@ public class UserManagementView implements View {
     private Stage stage;
 
     private Scene popupScene;
+    private Scene cannotRemoveUserScene;
     private BorderPane popupBorderPane;
+    private BorderPane cannotRemoveUserBorderPane;
 
     private ComboBox selectNewAccess;
     private Button saveNewAccessBTN;
     private Button removeUserBTN;
+    private Button closeBTN;
 
     public UserManagementView(MainModel mainModel, Stage stage, MainView mainView){
         this.mainModel = mainModel;
@@ -48,7 +53,7 @@ public class UserManagementView implements View {
 
 	@Override
 	public List<Scene> getScenes() {
-        return Arrays.asList(new Scene[] { scene, popupScene });
+        return Arrays.asList(new Scene[] { scene, popupScene, cannotRemoveUserScene });
     }
 
 	@Override
@@ -73,7 +78,8 @@ public class UserManagementView implements View {
         this.popupBorderPane = new BorderPane();
         popupScene = new Scene(popupBorderPane, 500, 300);
 
-        
+        this.cannotRemoveUserBorderPane = new BorderPane();
+        cannotRemoveUserScene = new Scene(cannotRemoveUserBorderPane, 500, 300);
 	}
 
 
@@ -140,8 +146,17 @@ public class UserManagementView implements View {
                         } else {
                             removeBTN.setOnAction(event -> {
 
-                                // setUpPopup(getTableView().getItems().get(getIndex()), usersTable);
-                                userManagementModel.removeUser(getTableView().getItems().get(getIndex()));
+                                User userToRemove = getTableView().getItems().get(getIndex());
+
+                                if (userToRemove.equals(mainModel.getUser())){
+
+                                    // i.e. owner cannot remove themselves (currently logged in user) 
+                                    setUpCannotRemoveUserPopup();
+                                }
+                                else{
+                                    userManagementModel.removeUser(userToRemove);
+                                }
+                                
                                 refresh();
                             });
                             setGraphic(removeBTN);
@@ -206,19 +221,76 @@ public class UserManagementView implements View {
             UserAccess selectedNewAccess = (UserAccess) selectNewAccess.getValue();
             popupStage.hide();
 
-            //logsout if the current user's access is changed - checkk (mainmodel user doesnt seem to be updated after login?)
+            //logsout if the current user's access is changed 
             if (mainModel.getUser().equals(user) && !selectedNewAccess.equals(user.getUserAccess())){
-                mainModel.logout();
+        
+                setUpCannotChangeAccessPopup();
+                
             }
+            else{
 
-            user.setUserAccess(selectedNewAccess);
-
-            mainModel.getJsonParser().updateUsers(userManagementModel.getUsers());
-
+                user.setUserAccess(selectedNewAccess);
+                mainModel.getJsonParser().updateUsers(userManagementModel.getUsers());
+            }
+            
             table.refresh();
-
             
         });
+    }
+
+    public void setUpCannotRemoveUserPopup(){
+        cannotRemoveUserScene.getStylesheets().add("Style.css");
+
+        Stage cannotRemoveUserStage = new Stage();
+
+        cannotRemoveUserStage.setScene(cannotRemoveUserScene);
+        cannotRemoveUserStage.initModality(Modality.APPLICATION_MODAL);
+        cannotRemoveUserStage.initOwner(this.stage);
+        cannotRemoveUserStage.show();
+
+        VBox cannotRemoveUserMainBox = new VBox(60);
+        cannotRemoveUserBorderPane.setMargin(cannotRemoveUserMainBox, new Insets(70, 70, 70, 70));
+        cannotRemoveUserBorderPane.setCenter(cannotRemoveUserMainBox);
+        cannotRemoveUserMainBox.getChildren().add(new Label("Unable to remove currently logged in Owner User"));
+
+
+        closeBTN = new Button("Close Message");
+        cannotRemoveUserMainBox.getChildren().addAll(closeBTN);
+
+        closeBTN.setOnAction((e) -> {
+            cannotRemoveUserStage.hide();
+        
+        });
+
+    }
+
+    public void setUpCannotChangeAccessPopup(){
+
+        cannotRemoveUserScene.getStylesheets().add("Style.css");
+
+        Stage cannotRemoveUserStage = new Stage();
+
+        cannotRemoveUserStage.setScene(cannotRemoveUserScene);
+        cannotRemoveUserStage.initModality(Modality.APPLICATION_MODAL);
+        cannotRemoveUserStage.initOwner(this.stage);
+        cannotRemoveUserStage.show();
+
+        VBox cannotRemoveUserMainBox = new VBox(60);
+        cannotRemoveUserBorderPane.setMargin(cannotRemoveUserMainBox, new Insets(70, 70, 70, 70));
+        cannotRemoveUserBorderPane.setCenter(cannotRemoveUserMainBox);
+        Label msg = new Label("Unable to change user access for currently logged in Owner User.");
+        msg.setWrapText(true);
+        cannotRemoveUserMainBox.getChildren().add(msg);
+
+
+        closeBTN = new Button("Close Message");
+        cannotRemoveUserMainBox.getChildren().addAll(closeBTN);
+
+        closeBTN.setOnAction((e) -> {
+            cannotRemoveUserStage.hide();
+        
+        });
+
     }
 
 

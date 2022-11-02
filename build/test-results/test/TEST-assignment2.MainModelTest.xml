@@ -1,22 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="assignment2.MainModelTest" tests="13" skipped="0" failures="0" errors="0" timestamp="2022-11-01T11:25:26" hostname="DESKTOP-Q9TS4JK" time="0.01">
+<testsuite name="assignment2.MainModelTest" tests="14" skipped="0" failures="0" errors="0" timestamp="2022-11-02T08:42:35" hostname="DESKTOP-Q9TS4JK" time="0.02">
   <properties/>
+  <testcase name="getCancelledTransactionsAsStringTest()" classname="assignment2.MainModelTest" time="0.012"/>
   <testcase name="getLoginModelTest()" classname="assignment2.MainModelTest" time="0.001"/>
-  <testcase name="getCardPaymentModelTest()" classname="assignment2.MainModelTest" time="0.001"/>
-  <testcase name="getCashPaymentModelTest()" classname="assignment2.MainModelTest" time="0.0"/>
-  <testcase name="getCartPriceTest()" classname="assignment2.MainModelTest" time="0.001"/>
-  <testcase name="loginFailTest()" classname="assignment2.MainModelTest" time="0.001"/>
-  <testcase name="addToCartTest()" classname="assignment2.MainModelTest" time="0.0"/>
+  <testcase name="getCardPaymentModelTest()" classname="assignment2.MainModelTest" time="0.0"/>
+  <testcase name="getCashPaymentModelTest()" classname="assignment2.MainModelTest" time="0.001"/>
+  <testcase name="getCartPriceTest()" classname="assignment2.MainModelTest" time="0.0"/>
+  <testcase name="loginFailTest()" classname="assignment2.MainModelTest" time="0.0"/>
+  <testcase name="addToCartTest()" classname="assignment2.MainModelTest" time="0.001"/>
   <testcase name="getInventoryModelTest()" classname="assignment2.MainModelTest" time="0.0"/>
-  <testcase name="cancelTransactionTest()" classname="assignment2.MainModelTest" time="0.001"/>
+  <testcase name="cancelTransactionTest()" classname="assignment2.MainModelTest" time="0.0"/>
   <testcase name="loginStatusCorrectTest()" classname="assignment2.MainModelTest" time="0.001"/>
   <testcase name="getLastFiveProductsModelTest()" classname="assignment2.MainModelTest" time="0.0"/>
-  <testcase name="loginSuccessTest()" classname="assignment2.MainModelTest" time="0.0"/>
+  <testcase name="loginSuccessTest()" classname="assignment2.MainModelTest" time="0.001"/>
   <testcase name="checkoutTest()" classname="assignment2.MainModelTest" time="0.0"/>
-  <testcase name="setIsLoggedInTest()" classname="assignment2.MainModelTest" time="0.0"/>
-  <system-out><![CDATA[doesn't exist
-test
-test
+  <testcase name="setIsLoggedInTest()" classname="assignment2.MainModelTest" time="0.001"/>
+  <system-out><![CDATA[USER_CANCELLATION
+CHANGE_NOT_AVAILABLE
+TIMEOUT
+USER_CANCELLATION
+2
+2
+[]
+[[0, Coca Cola, 2], [0, Skittles, 2]]
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

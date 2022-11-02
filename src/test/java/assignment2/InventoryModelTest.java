@@ -23,7 +23,7 @@ public class InventoryModelTest {
     @BeforeEach
     public void beforeTests(){
 
-        this.csvFileParser = new CSVFileParser("src/test/resources/inventory.csv","src/test/resources/transaction.csv");
+        this.csvFileParser = new CSVFileParser("src/test/resources/inventory.csv","", "", "");
 
         this.jsonParser = new JsonParser("src/test/resources/InventoryTest1.json",
                 "",
@@ -181,17 +181,17 @@ public class InventoryModelTest {
         testProduct.setCode(102);
         testProduct.setQuantity(2);
 
-        // Coca cole doesn't belong in candies
-        UpdateProductState actual =  inventoryModelTest.setProductDetails(testProduct, "Coca Cola", "candies", 128, 20, 12);
+        UpdateProductState actual =  inventoryModelTest.setProductDetails(testProduct, "Coca Cola", "candies", 428, 20, 12);
 
-        assertEquals(actual, UpdateProductState.CATEGORY_ERROR);
+        // is okay
+        assertEquals(actual, UpdateProductState.SUCCESS);
 
-        // shouldn't be updated
-        assertEquals(testProduct.getName(), "name");
-        assertEquals(testProduct.getCategory(), "drinks");
-        assertEquals(testProduct.getCode(), 102);
-        assertEquals(testProduct.getPrice(), 5);
-        assertEquals(testProduct.getQuantity(), 2);
+        // should be updated
+        assertEquals(testProduct.getName(), "Coca Cola");
+        assertEquals(testProduct.getCategory(), "candies");
+        assertEquals(testProduct.getCode(), 428);
+        assertEquals(testProduct.getPrice(), 20);
+        assertEquals(testProduct.getQuantity(), 12);
 
     }
 
@@ -488,7 +488,7 @@ public class InventoryModelTest {
 
         InventoryModel inventoryModelTest = new InventoryModel(temp.getInventory(), jsonParser, csvFileParser);
         inventoryModelTest.initializeProductsToString();
-        
+
         Product product = inventoryModelTest.getInventory().get(0);
 
         UpdateProductState actual =  inventoryModelTest.updateProduct(product, "Coca Cola", "drinks", 122, 12, -12);

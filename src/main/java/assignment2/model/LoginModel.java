@@ -38,10 +38,8 @@ public class LoginModel {
 
     public User login(String username, String password){
 
-        System.out.println(username);
 
         for (User user : users){
-            System.out.println(user.getUsername());
 
             if (user.getUsername().equalsIgnoreCase(username)){
 

@@ -20,7 +20,8 @@ public class CSVTest {
 
     private static String testInventoryCSVPath = "src/test/resources/test_inventory1.csv";
     private static String testInventoryCSVPath2 = "src/test/resources/test_inventory2.csv";
-    private static String testSellerTransactionCSVPath = "src/test/resources/seller_transaction.csv";
+    private static String testSellerTransactionCSVPath = "src/test/resources/seller_transaction1.csv";
+    private static String testSellerTransactionCSVPath2 = "src/test/resources/seller_transaction2.csv";
     private static String testCashierTransactionCSVPath = "src/test/resources/cashier_transaction.csv";
 
     JsonParser origJP = new JsonParser(originalInventoryPath, inventoryPath3, inventoryPath2, inventoryPath1);
@@ -75,8 +76,9 @@ public class CSVTest {
     //test for reading and writing seller transactions to CSV file
     @Test
     public void readAndWriteSellerTransactionTest(){
-     
-        MainModel mainModel = new MainModel(inventoryPath2, "src/test/resources/test_users3.json", "src/test/resources/InitialCash.json", "src/test/resources/credit_cards.json", testInventoryCSVPath2, testSellerTransactionCSVPath, testCashierTransactionCSVPath);
+        JsonParser jp2 = new JsonParser(inventoryPath2, "src/test/resources/test_users3.json", "src/test/resources/InitialCash.json", "src/test/resources/credit_cards.json");
+        CSVFileParser cv2 = new CSVFileParser(testInventoryCSVPath2, testSellerTransactionCSVPath, testCashierTransactionCSVPath, "");
+        MainModel mainModel = new MainModel(jp2, cv2);
         InventoryModel inventoryModel = mainModel.getInventoryModel();
         inventoryModel.initializeProductsToString();
         List<Product> defaultInventory = mainModel.getJsonParser().getInventory();
@@ -90,13 +92,14 @@ public class CSVTest {
         }
 
         int cartSize = mainModel.getUser().getCart().size();
+        int itemsBefore = mainModel.getSellerTransactionAsString().size();
 
         //complete transaction and write to file 
         mainModel.checkout("card");
 
         List<List<String>> itemsPurchased = mainModel.getSellerTransactionAsString();
 
-        assertEquals(cartSize, itemsPurchased.size());
+        assertEquals(itemsBefore + cartSize, itemsPurchased.size());
 
         //put into maps for both
         HashMap<String, Integer> ip = new HashMap<String, Integer>();
@@ -122,7 +125,10 @@ public class CSVTest {
     @Test
     public void multipleSellerTransactionsTest(){
 
-        MainModel mainModel = new MainModel(inventoryPath3, "src/test/resources/test_users3.json", "src/test/resources/InitialCash.json", "src/test/resources/credit_cards.json", testInventoryCSVPath, testSellerTransactionCSVPath, testCashierTransactionCSVPath);
+        JsonParser jp3 = new JsonParser(inventoryPath3, "src/test/resources/test_users3.json", "src/test/resources/InitialCash.json", "src/test/resources/credit_cards.json");
+        CSVFileParser cv3 = new CSVFileParser(testInventoryCSVPath, testSellerTransactionCSVPath2, testCashierTransactionCSVPath, "");
+
+        MainModel mainModel = new MainModel(jp3, cv3);
         InventoryModel inventoryModel = mainModel.getInventoryModel();
         inventoryModel.initializeProductsToString();
 
