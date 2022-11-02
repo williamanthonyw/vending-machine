@@ -18,15 +18,18 @@ public class CSVFileParser {
 
     private JsonParser jp;
     private String inventoryCSV;
+
+    private String usersCSV;
     private String sellerTransactionCSV;
     private String cashierTransactionCSV;
-        private String cancelledTransactionsCSV;
+    private String cancelledTransactionsCSV;
 
-    public CSVFileParser(String inventoryCSV, String sellerTransactionCSV, String cashierTransactionCSV, String cancelledTransactionsCSV){
+    public CSVFileParser(String inventoryCSV, String sellerTransactionCSV, String cashierTransactionCSV, String cancelledTransactionsCSV, String usersCSV){
         this.inventoryCSV = inventoryCSV;
         this.sellerTransactionCSV = sellerTransactionCSV;
         this.cashierTransactionCSV = cashierTransactionCSV;
         this.cancelledTransactionsCSV = cancelledTransactionsCSV;
+        this.usersCSV = usersCSV;
     }
 
     public CSVFileParser(String inventoryCSV, String sellerTransactionCSV){
@@ -150,6 +153,26 @@ public class CSVFileParser {
             writer.close();
         }
 
+        catch(IOException e){
+           
+        }
+    }
+
+    public void updateUsers(List<User> users){
+        File f = new File(this.usersCSV);
+        try{
+            CSVWriter writer = new CSVWriter(new FileWriter(f));
+            List<String[]> writeUsers = new ArrayList<String[]>();
+
+            for (User s: users){
+
+                writeUsers.add(new String[] {s.getUsername(), s.getUserAccess().toString()});
+            }
+           
+            writer.writeAll(writeUsers);
+            writer.close();
+
+        }
         catch(IOException e){
            
         }
