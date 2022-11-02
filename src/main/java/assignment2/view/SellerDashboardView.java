@@ -63,7 +63,7 @@ public class SellerDashboardView implements View{
 
 
         
-        this.scene = new Scene(this.borderPane, 1000, 1000);
+        this.scene = new Scene(this.borderPane, 1000, 600);
         this.scene.getStylesheets().add("Style.css");
 
         
@@ -87,7 +87,7 @@ public class SellerDashboardView implements View{
         
         HBox transactionBox2 = new HBox();
         TextArea transactionText = new TextArea();
-        transactionText.setMinHeight(200);
+        transactionText.setMinHeight(100);
         transactionText.setMinWidth(900);
         transactionText.setEditable(false);
 
@@ -120,7 +120,7 @@ public class SellerDashboardView implements View{
 
         HBox inventoryBox2 = new HBox();
         TextArea inventoryText = new TextArea();
-        inventoryText.setMinHeight(200);
+        inventoryText.setMinHeight(100);
         inventoryText.setMinWidth(900);
         inventoryText.setEditable(false);
 
