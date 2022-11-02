@@ -19,7 +19,7 @@ public class MainModelTest {
     public void beforeTests(){
 
         this.jsonParser = new JsonParser("", "", "", "");
-        this.csvFileParser = new CSVFileParser("", "", "", "");
+        this.csvFileParser = new CSVFileParser("", "", "","","","");
 
 
         this.mainModel = new MainModel(jsonParser, csvFileParser);

@@ -37,7 +37,8 @@ public class App extends Application{
                 "src/main/resources/seller_transaction.csv",
                 "src/main/resources/cashier_transaction.csv",
                 "src/main/resources/cancelledTransactions.csv",
-                "src/main/resources/users.csv");
+                "src/main/resources/users.csv",
+                "src/main/resources/cashAvailable.csv");
 
         mainModel = new MainModel(jsonParser, csvFileParser);
 
