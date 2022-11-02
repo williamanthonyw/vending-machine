@@ -19,10 +19,11 @@ public class MainModelTest {
     public void beforeTests(){
 
         this.jsonParser = new JsonParser("", "", "", "");
-        this.csvFileParser = new CSVFileParser("", "", "","");
+        this.csvFileParser = new CSVFileParser("", "", "", "","","");
 
 
         this.mainModel = new MainModel(jsonParser, csvFileParser);
+        this.mainModel.getInventoryModel().initializeProductsToString();
     }
 
     @Test
@@ -125,6 +126,8 @@ public class MainModelTest {
     @Test
     public void checkoutTest(){
 
+        mainModel.getInventoryModel().initializeProductsToString();
+
         User user = new User("test", "pw");
         mainModel.setUser(user);
 
@@ -142,7 +145,7 @@ public class MainModelTest {
 
         user.setCart(cart);
 
-        mainModel.checkout();
+        mainModel.checkout("card");
 
         assertEquals(user.getPurchases().size(), 2 );
         assertEquals(mainModel.getCart().size(), 0);

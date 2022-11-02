@@ -231,6 +231,7 @@ public class UserManagementView implements View {
 
                 user.setUserAccess(selectedNewAccess);
                 mainModel.getJsonParser().updateUsers(userManagementModel.getUsers());
+                mainModel.getCsvFileParser().updateUsers(userManagementModel.getUsers());
             }
             
             table.refresh();

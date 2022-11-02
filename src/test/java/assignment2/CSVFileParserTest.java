@@ -3,7 +3,6 @@ package assignment2;
 import assignment2.model.CSVFileParser;
 import assignment2.model.CancellationReason;
 import assignment2.model.CancelledTransaction;
-import assignment2.model.CsvParser;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
@@ -20,7 +19,7 @@ public class CSVFileParserTest {
     @Test
     public void updateAndGetCancelledTransaction(){
 
-        csvFileParser = new CSVFileParser("", "", "src/test/resources/cancelledTransactions.csv","");
+        csvFileParser = new CSVFileParser("", "", "", "src/test/resources/cancelledTransactions.csv","","");
 
         CancelledTransaction cancelledTransaction1 = new CancelledTransaction("test", CancellationReason.TIMEOUT, LocalDateTime.of(2022, 1, 12, 23, 11));
         CancelledTransaction cancelledTransaction2 = new CancelledTransaction("test2", CancellationReason.USER_CANCELLATION, LocalDateTime.of(2022, 12, 12, 23, 11));
@@ -54,7 +53,7 @@ public class CSVFileParserTest {
     @Test
     public void getCancelledTransactionsEmpty(){
 
-        csvFileParser = new CSVFileParser("", "", "","");
+        csvFileParser = new CSVFileParser("", "", "", "","","");
 
         assertNotNull(csvFileParser.getCancelledTransactions());
         assertEquals(csvFileParser.getCancelledTransactions().size(), 0);
