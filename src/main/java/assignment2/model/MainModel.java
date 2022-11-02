@@ -161,6 +161,23 @@ public class MainModel {
         return "please move your to string method to model @william";
     }
 
+    public List<List<String>> getItemsSold(){
+        return getCsvFileParser().readSellerTransactions();
+    }
+
+    public String getItemsSoldAsString(){
+        String transTemp = "";
+        List<List<String>> purchasedItems = getCsvFileParser().readSellerTransactions();
+
+        for (List<String> s : purchasedItems){
+            String temp2 = String.join(", ", s).stripTrailing();
+            temp2 = temp2.concat("\n");
+        
+            transTemp = transTemp.concat(temp2);
+        }
+        return transTemp;
+    }
+
 
     public List<List<String>> getAvailableProducts(){
         return this.availableProducts;

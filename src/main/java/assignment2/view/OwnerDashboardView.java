@@ -260,8 +260,38 @@ public class OwnerDashboardView implements View{
         setUpCloseBTN(availableItemsStage, mainBox);
     }
 
-    public void setUpItemsSoldPopup(){  ////////////////////////////////////////////// to do
-        
+    public void setUpItemsSoldPopup(){  
+        itemsSoldScene.getStylesheets().add("Style.css");
+        Stage itemsSoldStage = new Stage();
+        itemsSoldStage.setScene(itemsSoldScene);
+        itemsSoldStage.initModality(Modality.APPLICATION_MODAL);
+        itemsSoldStage.initOwner(this.stage);
+        itemsSoldStage.show();
+
+        VBox mainBox = new VBox(60);
+        itemsSoldBorderPane.setMargin(mainBox, new Insets(70, 70, 70, 70));
+        itemsSoldBorderPane.setCenter(mainBox);
+
+        Label itemsSoldLBL = new Label("Summary of Items Sold");
+        itemsSoldLBL.setAlignment(Pos.CENTER);
+        TextArea itemsSoldTA = new TextArea();
+        itemsSoldTA.setWrapText(true);
+        itemsSoldTA.setMinHeight(300);
+        itemsSoldTA.setMinWidth(500);
+        itemsSoldTA.setEditable(false);
+        mainBox.getChildren().addAll(itemsSoldLBL, itemsSoldTA);
+
+        String result = "";
+        if (mainModel.getItemsSold().size() == 0){
+            result = "No transactions available.";
+        }
+        else{
+            result = mainModel.getItemsSoldAsString();
+        }
+        itemsSoldTA.setText(result);
+
+
+        setUpCloseBTN(itemsSoldStage, mainBox);
     }
 
     public void setUpAvailableChangePopup(){

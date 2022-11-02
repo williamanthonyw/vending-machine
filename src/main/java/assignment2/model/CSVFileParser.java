@@ -178,6 +178,7 @@ public class CSVFileParser {
         catch(IOException e){
            
         }
+    }
 
     public List<List<String>> readSellerTransactions(){
         List<List<String>> transactions = new ArrayList<List<String>>();
