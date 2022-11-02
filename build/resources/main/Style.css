@@ -27,14 +27,11 @@
     -fx-border-width: 1px;
 }
 
-<<<<<<< HEAD
-=======
 .textarea {
     -fx-min-height: 200;
     -fx-min-width: 900;
 }
 
->>>>>>> 6025943a1f910ddcfd37170c6ab43d0c87acdc84
 
 .label {
     -fx-alignment: CENTER;

@@ -52,7 +52,7 @@ public class MainModel {
 
         this.lastFiveProductsModel = new LastFiveProductsModel();
         this.cardPaymentModel = new CardPaymentModel(this, jsonParser );
-        this.cashPaymentModel = new CashPaymentModel(jsonParser.getCash(), jsonParser);
+        this.cashPaymentModel = new CashPaymentModel(jsonParser.getCash(), jsonParser,csvFileParser);
         this.inventoryModel = new InventoryModel(jsonParser.getInventory(), jsonParser, csvFileParser);
 
 

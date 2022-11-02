@@ -20,11 +20,13 @@ public class CSVFileParser {
     private String inventoryCSV;
     private String transactionCSV;
     private String cancelledTransactionsCSV;
+    private String cashAvailableCSV;
 
-    public CSVFileParser(String inventoryCSV, String transactionCSV, String cancelledTransactionsCSV){
+    public CSVFileParser(String inventoryCSV, String transactionCSV, String cancelledTransactionsCSV,String cashAvailableCSV){
         this.inventoryCSV = inventoryCSV;
         this.transactionCSV = transactionCSV;
         this.cancelledTransactionsCSV = cancelledTransactionsCSV;
+        this.cashAvailableCSV = cashAvailableCSV;
     }
 
     public CSVFileParser(String inventoryCSV){
@@ -79,6 +81,68 @@ public class CSVFileParser {
         catch(IOException e){
 
         }
+    }
+
+    public void updateCash(List<Cash> cashList){
+        File file = new File(cashAvailableCSV);
+        try{
+            List<String[]> rows = new ArrayList<String[]>();
+
+            FileWriter fileWriter = new FileWriter(file);
+            CSVWriter csvWriter = new CSVWriter(fileWriter);
+
+            for(Cash c: cashList){
+                rows.add(new String[]{c.getName(),Integer.toString(c.getAmount())});
+            }
+            csvWriter.writeAll(rows);
+            csvWriter.close();
+        }catch (IOException e){
+
+        }
+    }
+
+//    public void writeCashToFile(List<List<String>> cashString){
+//        File file = new File(this.cashAvailableCSV);
+//
+//        try{
+//            CSVWriter writer = new CSVWriter(new FileWriter(file));
+//            List<String[]> writeCash = new ArrayList<String[]>();
+//
+//            //convert List<List<String>> to List<String[]>
+//            for (List<String> s: cashString){
+//                writeCash.add(new String[] {s.get(0), s.get(1)});
+//            }
+//
+//            writer.writeAll(writeCash);
+//            writer.close();
+//        }
+//
+//        catch(IOException e){
+//        }
+//    }
+
+    public List<List<String>> readCashFromFile(){
+        List<List<String>> items = new ArrayList<List<String>>();
+        File file = new File(this.cashAvailableCSV);
+
+        String[] item;
+
+        try{
+            CSVReader reader = new CSVReader(new FileReader(file));
+
+            while((item = reader.readNext()) != null){
+                items.add(Arrays.asList(item));
+            }
+
+            reader.close();
+        }
+        catch (IOException e){
+
+        }
+        catch(CsvValidationException c){
+
+        }
+        return items;
     }
 
 
