@@ -19,8 +19,6 @@ public class CSVFileParser {
     private JsonParser jp;
     private String inventoryCSV;
 
-    // private String transactionCSV;
-    // private String cancelledTransactionsCSV;
     private String usersCSV;
     private String sellerTransactionCSV;
     private String cashierTransactionCSV;

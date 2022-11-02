@@ -117,15 +117,6 @@ public class OwnerDashboardView implements View{
             itemsSoldBTN, availableChangeBTN, summaryTransactionsBTN);
         
         setUpButtons();
-        
-            // usersBox = new VBox(20);
-        // setUpUsersBox();
-
-        // cancelledTransactionsBox = new VBox(20);
-        // setUpCancelledTransactionsBox();
-
-        // mainBox.getChildren().addAll(usersBox, cancelledTransactionsBox);
-
 
     }
 
@@ -294,7 +285,7 @@ public class OwnerDashboardView implements View{
         setUpCloseBTN(itemsSoldStage, mainBox);
     }
 
-    public void setUpAvailableChangePopup(){
+    public void setUpAvailableChangePopup(){  //////////////to do/////////////////
         
     }
 

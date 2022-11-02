@@ -73,6 +73,7 @@ public class MainModel {
         this.aggregatePurchases = new HashMap<Product, Integer>();
 
         this.users = loginModel.getUsers(); ////////
+        inventoryModel.initializeProductsToString(); ////
         availableProducts = this.inventoryModel.getInventoryAsString();
 
     }
@@ -161,11 +162,12 @@ public class MainModel {
         return "please move your to string method to model @william";
     }
 
-    public List<List<String>> getItemsSold(){
+    public List<List<String>> getItemsSold(){  //below for displaying seller reports on owner dashboard
         return getCsvFileParser().readSellerTransactions();
     }
 
     public String getItemsSoldAsString(){
+    
         String transTemp = "";
         List<List<String>> purchasedItems = getCsvFileParser().readSellerTransactions();
 
@@ -203,7 +205,7 @@ public class MainModel {
     }
 
 
-    public String getUsersAsString(){
+    public String getUsersAsString(){  //for displaying users report
         String out = "";
         for (User user : users){
             out += user.getUsername() + ", " + user.getUserAccess() + "\n";
