@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="assignment2.CSVFileParserTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2022-11-02T08:42:35" hostname="DESKTOP-Q9TS4JK" time="0.018">
+<testsuite name="assignment2.CSVFileParserTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2022-11-02T08:48:51" hostname="DESKTOP-Q9TS4JK" time="0.018">
   <properties/>
-  <testcase name="getCancelledTransactionsEmpty()" classname="assignment2.CSVFileParserTest" time="0.001"/>
-  <testcase name="updateAndGetCancelledTransaction()" classname="assignment2.CSVFileParserTest" time="0.016"/>
+  <testcase name="getCancelledTransactionsEmpty()" classname="assignment2.CSVFileParserTest" time="0.003"/>
+  <testcase name="updateAndGetCancelledTransaction()" classname="assignment2.CSVFileParserTest" time="0.013"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

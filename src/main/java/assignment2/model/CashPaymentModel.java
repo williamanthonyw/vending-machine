@@ -172,17 +172,55 @@ public class CashPaymentModel{
 
         jsonParser.updateCash(this.cashList);
 
-        totalChange();
+        totalChange(totalChange);
 
         return totalChange;
     }
 
-    public void totalChange(){
+    public void totalChange(Map<String, Integer> change){
+
         double total = 0;
-        for (Cash c: this.cashList){
-            total += (c.getValue() * c.getAmount());
+
+        for (String s: change.keySet()){
+            switch(s){
+                case "5c":
+                    total += 0.05 * change.get(s);
+                    break;
+                case "10c":
+                    total += 0.10  * change.get(s);
+                    break;
+                case "20c":
+                    total += 0.20  * change.get(s);
+                    break;
+                case "50c":
+                    total += 0.50  * change.get(s);
+                    break;
+                case "$1":
+                    total += 1.00  * change.get(s);
+                    break;
+                case "$2":
+                    total += 2.00  * change.get(s);
+                    break;
+                case "$5":
+                    total += 5.00  * change.get(s);
+                    break;
+                case "$10":
+                    total += 10.00  * change.get(s);
+                    break;
+                case "$20":
+                    total += 20.00  * change.get(s);
+                    break;
+                case "$50":
+                    total += 50.00  * change.get(s);
+                    break;
+                case "$100":
+                    total += 100.00 * change.get(s);
+                    break;
+            }   
         }
-        this.returnedChange = total;
+        System.out.println(total);
+
+        this.returnedChange = Math.round(total*100.0)/100.0;
     }
 
     public static void main(String[] args){
