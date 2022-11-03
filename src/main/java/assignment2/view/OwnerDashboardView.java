@@ -286,11 +286,71 @@ public class OwnerDashboardView implements View{
     }
 
     public void setUpAvailableChangePopup(){  //////////////to do/////////////////
-        
+        availableChangeScene.getStylesheets().add("Style.css");
+        Stage availableChangeStage = new Stage();
+        availableChangeStage.setScene(availableChangeScene);
+        availableChangeStage.initModality(Modality.APPLICATION_MODAL);
+        availableChangeStage.initOwner(this.stage);
+        availableChangeStage.show();
+
+        VBox mainBox = new VBox(60);
+        availableChangeBorderPane.setMargin(mainBox, new Insets(70, 70, 70, 70));
+        availableChangeBorderPane.setCenter(mainBox);
+
+        Label availableChangeLBL = new Label("List of Available Change");
+        availableChangeLBL.setAlignment(Pos.CENTER);
+        TextArea availableChangeTA = new TextArea();
+        availableChangeTA.setWrapText(true);
+        availableChangeTA.setMinHeight(300);
+        availableChangeTA.setMinWidth(500);
+        availableChangeTA.setEditable(false);
+        mainBox.getChildren().addAll(availableChangeLBL, availableChangeTA);
+
+        String result = "";
+        if (mainModel.getCash().size() == 0){
+            result = "No change available.";
+        }
+        else{
+            result = mainModel.getAvailableChangeAsString();
+        }
+        availableChangeTA.setText(result);
+
+        setUpCloseBTN(availableChangeStage, mainBox);
     }
 
     public void setUpSummaryTransactionsPopup(){
-        
+        summaryTransactionsScene.getStylesheets().add("Style.css");
+        Stage summaryTransactionsStage = new Stage();
+        summaryTransactionsStage.setScene(summaryTransactionsScene);
+        summaryTransactionsStage.initModality(Modality.APPLICATION_MODAL);
+        summaryTransactionsStage.initOwner(this.stage);
+        summaryTransactionsStage.show();
+
+        VBox mainBox = new VBox(60);
+        summaryTransactionsBorderPane.setMargin(mainBox, new Insets(70, 70, 70, 70));
+        summaryTransactionsBorderPane.setCenter(mainBox);
+
+        Label summaryTransactionsLBL = new Label("Summary of Transactions");
+        summaryTransactionsLBL.setAlignment(Pos.CENTER);
+        TextArea summaryTransactionsTA = new TextArea();
+        summaryTransactionsTA.setWrapText(true);
+        summaryTransactionsTA.setMinHeight(300);
+        summaryTransactionsTA.setMinWidth(500);
+        summaryTransactionsTA.setEditable(false);
+        mainBox.getChildren().addAll(summaryTransactionsLBL, summaryTransactionsTA);
+
+        List<List<String>> cashierTransactionString = this.mainModel.getCsvFileParser().readCashierTransactions();
+
+        String result = "";
+        if (cashierTransactionString.size() == 0){
+            result = "No transactions available.";
+        }
+        else{
+            result = mainModel.getTransactionsAsString();
+        }
+        summaryTransactionsTA.setText(result);
+
+        setUpCloseBTN(summaryTransactionsStage, mainBox);
     }
 
 

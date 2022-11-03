@@ -3,6 +3,7 @@ package assignment2;
 import static org.junit.jupiter.api.Assertions.*;
 
 import assignment2.model.JsonParser;
+import assignment2.model.CSVFileParser;
 import assignment2.model.LoginModel;
 import assignment2.model.User;
 import org.junit.jupiter.api.BeforeEach;
@@ -26,8 +27,8 @@ public class LoginTest {
         userList.add(anonymousUser);
 
         JsonParser jsonParser = new JsonParser("", "", "", "");
-
-        loginModel = new LoginModel(userList,  jsonParser);
+        CSVFileParser csvFileParser = new CSVFileParser(null, null);
+        loginModel = new LoginModel(userList,  jsonParser, csvFileParser);
     }
 
     @Test
