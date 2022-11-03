@@ -25,6 +25,7 @@ public class InventoryModelTest {
 
         this.csvFileParser = new CSVFileParser("src/test/resources/inventory.csv","src/test/resources/transaction.csv","","","","");
 
+
         this.jsonParser = new JsonParser("src/test/resources/InventoryTest1.json",
                 "",
                 "",

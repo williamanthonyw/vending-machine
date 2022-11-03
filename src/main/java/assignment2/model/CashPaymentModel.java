@@ -30,10 +30,12 @@ public class CashPaymentModel{
 
         this.jsonParser = jsonParser;
         this.cashList = cashList;
+
         this.moneyPaid = 0;
         this.returnedChange = 0;
         this.csvFileParser = csvFileParser;
         this.cashString = this.csvFileParser.readCashFromFile();
+
     }
 
     public List<Cash> getCashList(){

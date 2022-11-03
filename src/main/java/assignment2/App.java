@@ -33,7 +33,8 @@ public class App extends Application{
                 "src/main/resources/InitialCash.json",
                 "src/main/resources/credit_cards.json");
 
-        csvFileParser = new CSVFileParser("src/main/resources/inventory.csv", 
+
+        csvFileParser = new CSVFileParser("src/main/resources/inventory.csv",
                 "src/main/resources/seller_transaction.csv",
                 "src/main/resources/cashier_transaction.csv",
                 "src/main/resources/cancelledTransactions.csv",
