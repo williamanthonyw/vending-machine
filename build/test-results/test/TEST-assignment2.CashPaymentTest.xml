@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="assignment2.CashPaymentTest" tests="14" skipped="0" failures="0" errors="0" timestamp="2022-11-03T08:58:23" hostname="Chius-MacBook-Pro.local" time="0.2">
+  <properties/>
+  <testcase name="cashValueCheck()" classname="assignment2.CashPaymentTest" time="0.094"/>
+  <testcase name="multiplePayments()" classname="assignment2.CashPaymentTest" time="0.017"/>
+  <testcase name="getCashStringTest()" classname="assignment2.CashPaymentTest" time="0.005"/>
+  <testcase name="changeisNotSufficient()" classname="assignment2.CashPaymentTest" time="0.013"/>
+  <testcase name="changeCoinsOnly()" classname="assignment2.CashPaymentTest" time="0.004"/>
+  <testcase name="initialAmountCheck()" classname="assignment2.CashPaymentTest" time="0.001"/>
+  <testcase name="NotEnoughPayment()" classname="assignment2.CashPaymentTest" time="0.004"/>
+  <testcase name="calculateTotalPayment()" classname="assignment2.CashPaymentTest" time="0.001"/>
+  <testcase name="smallChangeInsufficient()" classname="assignment2.CashPaymentTest" time="0.003"/>
+  <testcase name="smallChangeRound()" classname="assignment2.CashPaymentTest" time="0.012"/>
+  <testcase name="updateChangeList()" classname="assignment2.CashPaymentTest" time="0.01"/>
+  <testcase name="changeNotesOnly()" classname="assignment2.CashPaymentTest" time="0.003"/>
+  <testcase name="numberOfDifferentNotesandCoins()" classname="assignment2.CashPaymentTest" time="0.002"/>
+  <testcase name="updateCashStringTest()" classname="assignment2.CashPaymentTest" time="0.002"/>
+  <system-out><![CDATA[{5c=0, 10c=0, 20c=0, 50c=0, $1=0, $2=0, $5=0, $10=0, $20=0, $50=0, $100=0}
+195.95
+{5c=0, 10c=0, 20c=0, 50c=0, $1=0, $2=0, $5=0, $10=0, $20=0, $50=0, $100=0}
+301.6
+{5c=0, 10c=0, 20c=0, 50c=0, $1=0, $2=0, $5=0, $10=0, $20=0, $50=0, $100=0}
+{5c=0, 10c=0, 20c=0, 50c=0, $1=0, $2=0, $5=0, $10=0, $20=0, $50=0, $100=0}
+0.35000000000000003
+{5c=0, 10c=0, 20c=0, 50c=0, $1=0, $2=0, $5=0, $10=0, $20=0, $50=0, $100=0}
+{5c=0, 10c=0, 20c=0, 50c=0, $1=0, $2=0, $5=0, $10=0, $20=0, $50=0, $100=0}
+{5c=0, 10c=0, 20c=0, 50c=0, $1=0, $2=0, $5=0, $10=0, $20=0, $50=0, $100=0}
+0.05
+{5c=0, 10c=0, 20c=0, 50c=0, $1=0, $2=0, $5=0, $10=0, $20=0, $50=0, $100=0}
+0.0
+{5c=0, 10c=0, 20c=0, 50c=0, $1=0, $2=0, $5=0, $10=0, $20=0, $50=0, $100=0}
+16.55
+{5c=0, 10c=0, 20c=0, 50c=0, $1=0, $2=0, $5=0, $10=0, $20=0, $50=0, $100=0}
+276.0
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
