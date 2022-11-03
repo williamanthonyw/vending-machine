@@ -84,7 +84,6 @@ public class CashDashboardView implements View{
         mainBox.getChildren().addAll(cashBox1, cashBox2);
 
          //List of Purchased Items
-         cashierTransactionString = this.mainModel.getCsvFileParser().readCashierTransactions();
 
          HBox transactionBox1 = new HBox();
          Label transactionLBL = new Label("List of transactions");
@@ -95,22 +94,8 @@ public class CashDashboardView implements View{
          transactionText.setMinHeight(100);
          transactionText.setMinWidth(900);
          transactionText.setEditable(false);
- 
-         //read transactions done from file
-         String transTemp = "";
- 
-         if (cashierTransactionString.size() == 0){
-             transTemp = "No transactions available.";
-         }
-         else{
-             for (List<String> s : cashierTransactionString){
-                 String temp2 = String.join(", ", s).stripTrailing();
-                 temp2 = temp2.concat("\n");
-             
-                 transTemp = transTemp.concat(temp2);
-             }
-         }
          
+         String transTemp = this.mainModel.getCashierTransactionsAsString();
          transactionText.setText(transTemp);
  
          transactionBox1.getChildren().add(transactionLBL);
