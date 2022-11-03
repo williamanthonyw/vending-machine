@@ -92,20 +92,8 @@ public class SellerDashboardView implements View{
         transactionText.setEditable(false);
 
         //read transactions done from file
-        String transTemp = "";
-
-        if (purchasedItems.size() == 0){
-            transTemp = "No transactions available.";
-        }
-        else{
-            for (List<String> s : purchasedItems){
-                String temp2 = String.join(", ", s).stripTrailing();
-                temp2 = temp2.concat("\n");
-            
-                transTemp = transTemp.concat(temp2);
-            }
-        }
-        
+        String transTemp = mainModel.getItemsSoldAsString();
+   
         transactionText.setText(transTemp);
 
         transactionBox1.getChildren().add(transactionLBL);
@@ -126,19 +114,7 @@ public class SellerDashboardView implements View{
 
 
         //read inventory from file 
-        String invTemp = "";
-
-        if (availableProducts.size() == 0){
-            invTemp = "No items available.";
-        }
-
-        else{
-            for (List<String> s : availableProducts){
-                String temp2 = String.join(", ", s).stripTrailing();
-                temp2 = temp2.concat("\n");
-                invTemp = invTemp.concat(temp2);
-            }
-        }
+        String invTemp = mainModel.getAvailableProductsAsString();
 
         inventoryText.setText(invTemp);
 

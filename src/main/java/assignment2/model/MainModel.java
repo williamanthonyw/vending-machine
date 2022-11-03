@@ -118,10 +118,6 @@ public class MainModel {
         return user.getCart();
     }
 
-    public Map<Product, Integer> getAggregatePurchases(){
-        return this.aggregatePurchases;
-    }
-
     public void cancelTransaction(CancellationReason cancellationReason, LocalDateTime timeCancelled){
 
         // clear cart (look at Katie's stuff)
@@ -192,6 +188,24 @@ public class MainModel {
         
             transTemp = transTemp.concat(temp2);
         }
+        return transTemp;
+    }
+
+    public String getCashierTransactionsAsString(){
+        String transTemp = "";
+        List<List<String>> cashierTransactions = getCsvFileParser().readCashierTransactions();
+ 
+         if (cashierTransactions.size() == 0){
+             transTemp = "No transactions available.";
+         }
+         else{
+             for (List<String> s : cashierTransactions){
+                 String temp2 = String.join(", ", s).stripTrailing();
+                 temp2 = temp2.concat("\n");
+             
+                 transTemp = transTemp.concat(temp2);
+             }
+         }
         return transTemp;
     }
 
