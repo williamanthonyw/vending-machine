@@ -1,21 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<<<<<<< HEAD
-<testsuite name="assignment2.LoginTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2022-10-28T05:12:50" hostname="vlan-2657-10-19-211-228.student.wireless.sydney.edu.au" time="0.005">
+<testsuite name="assignment2.LoginTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2022-11-03T08:58:24" hostname="Chius-MacBook-Pro.local" time="0.01">
   <properties/>
-  <testcase name="loginTest()" classname="assignment2.LoginTest" time="0.0"/>
-  <testcase name="addUserTest()" classname="assignment2.LoginTest" time="0.001"/>
-  <testcase name="getAnonymousUser()" classname="assignment2.LoginTest" time="0.001"/>
-  <testcase name="getUsersTest()" classname="assignment2.LoginTest" time="0.001"/>
-=======
-<testsuite name="assignment2.LoginTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2022-11-01T11:49:42" hostname="Kylies-MBP" time="0.003">
-  <properties/>
-  <testcase name="loginTest()" classname="assignment2.LoginTest" time="0.001"/>
+  <testcase name="loginTest()" classname="assignment2.LoginTest" time="0.002"/>
   <testcase name="addUserTest()" classname="assignment2.LoginTest" time="0.001"/>
   <testcase name="getAnonymousUser()" classname="assignment2.LoginTest" time="0.0"/>
-  <testcase name="getUsersTest()" classname="assignment2.LoginTest" time="0.0"/>
->>>>>>> 6025943a1f910ddcfd37170c6ab43d0c87acdc84
-  <system-out><![CDATA[Allen
-Allen
-]]></system-out>
+  <testcase name="getUsersTest()" classname="assignment2.LoginTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

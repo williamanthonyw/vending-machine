@@ -431,4 +431,32 @@ public class CashPaymentTest {
 
 
     }
+
+    @Test
+    public void updateCashStringTest(){
+        String initialPath = "src/test/resources/InitialCash.json";
+        jp = new JsonParser("",
+                "",
+                initialPath,
+                ""
+        );
+        cvs = new CSVFileParser("src/test/resources/test_inventory1.csv", "src/test/resources/seller_transaction1.csv", "", "", "", "src/test/resources/cash_available1.csv");
+
+        CashPaymentModel test = new CashPaymentModel(jp.getCash(), jp, cvs);
+        test.updateCashString();
+    }
+
+    @Test
+    public void getCashStringTest(){
+        String initialPath = "src/test/resources/InitialCash.json";
+        jp = new JsonParser("",
+                "",
+                initialPath,
+                ""
+        );
+        cvs = new CSVFileParser("src/test/resources/test_inventory1.csv", "src/test/resources/seller_transaction1.csv", "", "", "", "src/test/resources/cash_available1.csv");
+
+        CashPaymentModel test = new CashPaymentModel(jp.getCash(), jp, cvs);
+        test.getCashString();
+    }
 }
