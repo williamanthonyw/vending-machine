@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import assignment2.model.CSVFileParser;
 import assignment2.model.JsonParser;
+import assignment2.model.CSVFileParser;
 import assignment2.model.LoginModel;
 import assignment2.model.User;
 import org.junit.jupiter.api.BeforeEach;

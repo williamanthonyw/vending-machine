@@ -147,15 +147,30 @@ public class MainModel {
         return out;
     }
 
+    public String getAvailableChangeAsString(){
+        String result = "";
+        List<List<String>> cashString = cashPaymentModel.getCashString();
+
+        for(List<String> s: cashString){
+            String temp = String.join(", ",s).stripTrailing();
+            temp = temp.concat("\n");
+            result = result.concat(temp);
+        }
+        return result;
+        
+    }
+
     public String getTransactionsAsString(){
-//        String out = "";
-//
-//        for (List<String> c : ){
-//            out += c.getUsername() + ", " + c.getCancellationReason().getReason() + ", " + c.getTimeCancelled().toString();
-//            out += "\n";
-//        }
-//        return out;
-        return "please move your to string method to model @william";
+         //read transactions done from file
+         String transTemp = "";
+ 
+        for (List<String> s : cashierTransactionString){
+            String temp2 = String.join(", ", s).stripTrailing();
+            temp2 = temp2.concat("\n");
+        
+            transTemp = transTemp.concat(temp2);
+        }
+        return transTemp;
     }
 
     public List<List<String>> getItemsSold(){  //below for displaying seller reports on owner dashboard
@@ -361,10 +376,6 @@ public class MainModel {
     public CSVFileParser getCsvFileParser(){
         return this.csvFileParser;
     }
-
-////    public UserManagementModel getUserManagementModel(){
-//        return this.userManagementModel;
-//    }
 
 
 
