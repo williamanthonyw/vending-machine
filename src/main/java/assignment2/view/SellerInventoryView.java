@@ -75,7 +75,6 @@ public class SellerInventoryView implements View{
 
     @Override
     public void refresh(){
-        System.out.println(currentCategory);
         showProducts();
     }
 
@@ -184,7 +183,6 @@ public class SellerInventoryView implements View{
                                                     if (!empty) {
                                                         btn.setOnAction(event -> {
                                                             Product product = getTableView().getItems().get(getIndex());
-                                                            System.out.println(product.getName());
                                                             inventoryModel.deleteProduct(product);
 
                                                             showProducts();

@@ -406,10 +406,6 @@ public class ProductOptionsView implements View{
 
         List<Product> products = inventoryModel.getInventory();
 
-        for (Product p : products){
-            System.out.println(p.getName() + " " + p.getQuantity());
-        }
-
         table.getItems().clear();
 
         if (products.size() == 0){

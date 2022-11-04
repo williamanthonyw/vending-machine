@@ -24,7 +24,6 @@ public class CardPaymentModel {
 
         for(CardUser user: cardUserList){
             if(user.getName().equals(name) && user.getCardNumber().equals(number)){
-                System.out.println(mainModel.getUser().getCardUser());
                 return user;
             }
         }

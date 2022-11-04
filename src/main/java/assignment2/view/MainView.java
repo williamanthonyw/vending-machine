@@ -190,11 +190,6 @@ public class MainView {
             menuBTN.fire();
         });
 
-        // MenuItem homeBTN = new MenuItem("Home");
-        // homeBTN.setOnAction((ActionEvent e) -> {
-        //     goToLastFiveProductsView();
-        // });
-
         MenuItem loginBTN = new MenuItem("Login");
         loginBTN.setOnAction((ActionEvent e) -> {
             goToLoginView();
