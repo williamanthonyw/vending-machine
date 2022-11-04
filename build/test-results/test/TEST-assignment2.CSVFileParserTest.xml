@@ -1,45 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="assignment2.CSVFileParserTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2022-11-03T08:58:24" hostname="Chius-MacBook-Pro.local" time="0.28">
+<testsuite name="assignment2.CSVFileParserTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2022-11-04T10:55:46" hostname="Kylies-MBP" time="0.448">
   <properties/>
-  <testcase name="getCancelledTransactionsEmpty()" classname="assignment2.CSVFileParserTest" time="0.002"/>
-  <testcase name="readAndWriteInventoryTest()" classname="assignment2.CSVFileParserTest" time="0.013"/>
-  <testcase name="readAndWriteCashierTransactionTest()" classname="assignment2.CSVFileParserTest" time="0.161"/>
-  <testcase name="readAndWriteSellerTransactionTest()" classname="assignment2.CSVFileParserTest" time="0.082"/>
-  <testcase name="updateAndGetCancelledTransaction()" classname="assignment2.CSVFileParserTest" time="0.015"/>
-  <system-out><![CDATA[2
-2
-2
-2
-2
-2
-2
-2
-2
-2
-2
-2
-2
-2
-2
-[]
-[[111, Mineral Water, 2], [112, Sprite, 2], [412, Sour Patch, 2], [212, M&M, 2], [314, Thins, 2], [413, Skittles, 2], [213, Bounty, 2], [411, Mentos, 2], [312, Pringles, 2], [211, Mars, 2], [115, Juice, 2], [311, Smiths, 2], [214, Snickers, 2], [114, Pepsi, 2], [313, Kettle, 2]]
-2
-2
-2
-2
-2
-2
-2
-2
-2
-2
-2
-2
-2
-2
-2
-[]
-[[313, Kettle, 2], [312, Pringles, 2], [212, M&M, 2], [213, Bounty, 2], [411, Mentos, 2], [111, Mineral Water, 2], [114, Pepsi, 2], [211, Mars, 2], [413, Skittles, 2], [214, Snickers, 2], [112, Sprite, 2], [314, Thins, 2], [115, Juice, 2], [311, Smiths, 2], [412, Sour Patch, 2]]
-]]></system-out>
+  <testcase name="getCancelledTransactionsEmpty()" classname="assignment2.CSVFileParserTest" time="0.028"/>
+  <testcase name="readAndWriteInventoryTest()" classname="assignment2.CSVFileParserTest" time="0.086"/>
+  <testcase name="readAndWriteCashierTransactionTest()" classname="assignment2.CSVFileParserTest" time="0.213"/>
+  <testcase name="readAndWriteSellerTransactionTest()" classname="assignment2.CSVFileParserTest" time="0.11"/>
+  <testcase name="updateAndGetCancelledTransaction()" classname="assignment2.CSVFileParserTest" time="0.006"/>
+  <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

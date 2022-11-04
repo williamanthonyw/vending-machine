@@ -152,8 +152,7 @@ public class CardPaymentView implements View {
                 errorAlert.setHeaderText("Invalid credit card details. Please enter valid details.");
 
                 ((Button) errorAlert.getDialogPane().lookupButton(ButtonType.CANCEL)).setOnAction((ActionEvent e) -> {
-                    mainView.cancelPopup();
-                    mainModel.cancelTransaction(CancellationReason.USER_CANCELLATION, LocalDateTime.now());
+                    mainView.cancelTransaction(CancellationReason.USER_CANCELLATION);
                 });
 
                 errorAlert.showAndWait();
