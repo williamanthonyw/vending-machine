@@ -28,7 +28,6 @@ public class MainModel {
     private User user;
     private boolean isLoggedIn;
 
-    private HashMap<Product, Integer> aggregatePurchases;
     private JsonParser jsonParser;
 
     private CSVFileParser csvFileParser;
@@ -70,11 +69,11 @@ public class MainModel {
         
 
         this.cancelledTransactions = csvParser.getCancelledTransactions();
-        this.aggregatePurchases = new HashMap<Product, Integer>();
 
         this.users = loginModel.getUsers(); ////////
         inventoryModel.initializeProductsToString(); ////
-        availableProducts = this.inventoryModel.getInventoryAsString();
+        this.availableProducts = this.csvFileParser.readInventoryFromFile();
+        
 
     }
 
@@ -217,6 +216,7 @@ public class MainModel {
     public String getAvailableProductsAsString(){
         //read inventory from file 
         //copypasted from sellerdashboardview - clean later
+        availableProducts = this.csvFileParser.readInventoryFromFile();
         String invTemp = "";
 
         if (availableProducts.size() == 0){

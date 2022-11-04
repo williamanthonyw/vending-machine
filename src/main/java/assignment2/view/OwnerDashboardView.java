@@ -231,11 +231,13 @@ public class OwnerDashboardView implements View{
 
         Label availableItemsLBL = new Label("List of Current Available Items");
         availableItemsLBL.setAlignment(Pos.CENTER);
+
         TextArea availableItemsTA = new TextArea();
         availableItemsTA.setWrapText(true);
         availableItemsTA.setMinHeight(300);
         availableItemsTA.setMinWidth(500);
         availableItemsTA.setEditable(false);
+        
         mainBox.getChildren().addAll(availableItemsLBL, availableItemsTA);
 
         String result = "";
@@ -246,9 +248,8 @@ public class OwnerDashboardView implements View{
             result = mainModel.getAvailableProductsAsString();
         }
         availableItemsTA.setText(result);
-
-
         setUpCloseBTN(availableItemsStage, mainBox);
+        System.out.println(mainBox.getChildren());
     }
 
     public void setUpItemsSoldPopup(){  
