@@ -53,11 +53,11 @@ public class MainView {
     }
 
     public void goToOwnerDashboardView(){
-        goToView(new OwnerDashboardView(mainModel, this));
+        goToView(new OwnerDashboardView(this.mainModel, this));
     }
 
     public void goToCashDashboardView(){
-        goToView(new CashDashboardView(mainModel,this));
+        goToView(new CashDashboardView(this.mainModel,this));
     }
 
     private void goToSellerInventoryView() {
