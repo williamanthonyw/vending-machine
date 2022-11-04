@@ -307,8 +307,7 @@ public class CashPaymentView implements View{
             notEnoughChange = new Alert(Alert.AlertType.CONFIRMATION);
 
            ((Button) notEnoughChange.getDialogPane().lookupButton(ButtonType.CANCEL)).setOnAction((ActionEvent f) -> {
-               mainView.cancelPopup();
-               mainModel.cancelTransaction(CancellationReason.CHANGE_NOT_AVAILABLE, LocalDateTime.now());
+               mainView.cancelTransaction(CancellationReason.CHANGE_NOT_AVAILABLE);
            });
 
 
@@ -323,8 +322,7 @@ public class CashPaymentView implements View{
             insertMoreCash.setHeaderText("Please insert more cash or cancel your transaction");
 //            //cancel button
             ((Button) insertMoreCash.getDialogPane().lookupButton(ButtonType.CANCEL)).setOnAction((ActionEvent e) -> {
-                mainView.cancelPopup();
-                mainModel.cancelTransaction(CancellationReason.USER_CANCELLATION, LocalDateTime.now());
+                mainView.cancelTransaction(CancellationReason.USER_CANCELLATION);
             });
 
             ((Button) insertMoreCash.getDialogPane().lookupButton(ButtonType.OK)).setText("Back");

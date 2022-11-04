@@ -1,5 +1,6 @@
-"Kylie","SELLER"
+"Kylie","OWNER"
 "anonymous","CUSTOMER"
 "owner","OWNER"
 "apple","CASHIER"
-"banana","CUSTOMER"
+"banana","SELLER"
+"cashier","CUSTOMER"

@@ -100,7 +100,11 @@ public class InventoryModel {
     public void putBack(Map<Product, Integer> cart){
 
         for (Product p : cart.keySet()){
+            if (!inventory.contains(p)){
+                inventory.add(p);
+            }
             p.setQuantity(p.getQuantity() + cart.get(p));
+
         }
 
         updateInventory();
