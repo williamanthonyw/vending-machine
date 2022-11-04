@@ -99,7 +99,6 @@ public class CardPaymentView implements View {
         PasswordField cardNumberTF = new PasswordField();
 
         if(mainModel.getUser().getCardUser() != null && mainModel.isLoggedIn()){
-            System.out.println("hello" + mainModel.getUser().getCardUser().getName());
             userNameTF.setText(mainModel.getUser().getCardUser().getName());
             cardNumberTF.setText(mainModel.getUser().getCardUser().getCardNumber());
         }
