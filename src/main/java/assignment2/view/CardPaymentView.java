@@ -99,7 +99,6 @@ public class CardPaymentView implements View {
         PasswordField cardNumberTF = new PasswordField();
 
         if(mainModel.getUser().getCardUser() != null && mainModel.isLoggedIn()){
-            System.out.println("hello" + mainModel.getUser().getCardUser().getName());
             userNameTF.setText(mainModel.getUser().getCardUser().getName());
             cardNumberTF.setText(mainModel.getUser().getCardUser().getCardNumber());
         }
@@ -152,8 +151,7 @@ public class CardPaymentView implements View {
                 errorAlert.setHeaderText("Invalid credit card details. Please enter valid details.");
 
                 ((Button) errorAlert.getDialogPane().lookupButton(ButtonType.CANCEL)).setOnAction((ActionEvent e) -> {
-                    mainView.cancelPopup();
-                    mainModel.cancelTransaction(CancellationReason.USER_CANCELLATION, LocalDateTime.now());
+                    mainView.cancelTransaction(CancellationReason.USER_CANCELLATION);
                 });
 
                 errorAlert.showAndWait();

@@ -98,7 +98,6 @@ public class ModifyCashView implements View {
                                 } else {
                                     btn.setOnAction(event -> {
                                         // add to cart
-                                        System.out.println("hello");
                                         setUpPopupScreen(getTableView().getItems().get(getIndex()), cashTable);
                                     });
                                     setGraphic(btn);

@@ -67,7 +67,6 @@ public class CashDashboardView implements View{
         String result = "";
         cashString = cashPaymentModel.getCashString();
 
-//        cashBox.setAlignment(Pos.CENTER);
         cashBox2.getChildren().add(cashText);
 
         if(cashList.size() == 0){

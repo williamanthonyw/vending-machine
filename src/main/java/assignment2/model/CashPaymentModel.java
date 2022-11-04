@@ -76,15 +76,11 @@ public class CashPaymentModel{
             if (cashPayment.get(c.getValue()) == null){
                 cashPayment.put(c.getValue(),0);
             }
-            //System.out.println(cashPayment.get(c.getValue()));
             c.setAmount(c.getAmount() + cashPayment.get(c.getValue()));
         }
     }
     public void updateCash(int newAmount, Cash cash) {
         cash.setAmount(newAmount);
-        for(Cash c : cashList){
-            System.out.println(c.getAmount());
-        }
         jsonParser.updateCash(cashList);
         csvFileParser.updateCash(cashList);
         updateCashString();
@@ -105,7 +101,6 @@ public class CashPaymentModel{
         totalChange.put("$20", 0);
         totalChange.put("$50", 0);
         totalChange.put("$100", 0);
-        System.out.println(totalChange);
 
         if (payment < price){
             throw new PaymentNotEnoughException("Please add more cash or cancel");
@@ -159,7 +154,6 @@ public class CashPaymentModel{
                             c.setAmount(c.getAmount()-1);
                             totalChange.replace("5c", fiveCentsChange, fiveCentsChange+1);
                             change -= 0.05;
-                            // System.out.println(change);
                             break;
                         }
                     }
@@ -169,7 +163,6 @@ public class CashPaymentModel{
                 }
             }
         }
-        // System.out.println(change);
         if (change > 0){
             throw new InsufficientChangeException("Not enough change");
         }
@@ -227,7 +220,6 @@ public class CashPaymentModel{
                     break;
             }
         }
-        System.out.println(total);
 
         this.returnedChange = Math.round(total*100.0)/100.0;
     }

@@ -33,6 +33,7 @@ public class MainView {
     private MenuButton menuBTN;
     private Button cancelBTN;
     private Transition timer;
+    private View currentView;
 
 
     public MainView(MainModel mainModel){
@@ -95,20 +96,30 @@ public class MainView {
     }
 
     public void goToProductOptionsView(){
-        goToView(new ProductOptionsView(mainModel, stage, this));
+        this.currentView = new ProductOptionsView(mainModel, stage, this);
+        goToView(currentView);
     }
 
-    public void goToModifyCashView(){goToView(new ModifyCashView(mainModel,stage,this));}
+    public void goToModifyCashView(){
+        this.currentView = new ModifyCashView(mainModel,stage,this);
+        goToView(currentView);
+    }
 
     public void goToLoginView(){
-        goToView(new LoginView(mainModel, this));
+        this.currentView = new LoginView(mainModel, this);
+        goToView(currentView);
     }
 
     public void goToCardPaymentView(ProductOptionsView productOptionsView){
-        goToView(new CardPaymentView(mainModel, this, productOptionsView));
+        this.currentView = new CardPaymentView(mainModel, this, productOptionsView);
+        goToView(currentView);
     }
 
-    public void goToCashPaymentView(ProductOptionsView productOptionsView){ goToView(new CashPaymentView(mainModel, this, productOptionsView)); }
+    public void goToCashPaymentView(ProductOptionsView productOptionsView){
+        this.currentView = new CashPaymentView(mainModel, this, productOptionsView);
+        goToView(currentView);
+    }
+
 
     public void setUpCancelOnTimeOut(){
 
@@ -123,6 +134,7 @@ public class MainView {
             });
 
             mainModel.cancelTransaction(CancellationReason.TIMEOUT, LocalDateTime.now());
+            goToProductOptionsView();
 
             timer.playFromStart();
         });
@@ -150,13 +162,18 @@ public class MainView {
         goToProductOptionsView();
     }
 
+    public void cancelTransaction(CancellationReason cancellationReason){
+        mainModel.cancelTransaction(cancellationReason, LocalDateTime.now());
+        cancelPopup();
+        goToProductOptionsView();
+    }
+
     public void setUpCancelBTN(){
 
         this.cancelBTN = new Button("Cancel");
 
         cancelBTN.setOnAction((ActionEvent e) -> {
-            cancelPopup();
-            mainModel.cancelTransaction(CancellationReason.USER_CANCELLATION, LocalDateTime.now());
+           cancelTransaction(CancellationReason.USER_CANCELLATION);
         });
 
     }
@@ -172,11 +189,6 @@ public class MainView {
         menuBTN.setOnMouseEntered((e) -> {
             menuBTN.fire();
         });
-
-        // MenuItem homeBTN = new MenuItem("Home");
-        // homeBTN.setOnAction((ActionEvent e) -> {
-        //     goToLastFiveProductsView();
-        // });
 
         MenuItem loginBTN = new MenuItem("Login");
         loginBTN.setOnAction((ActionEvent e) -> {
@@ -264,15 +276,18 @@ public class MainView {
     }
 
     public void goToUpdateProductView(SellerInventoryView sellerInventoryView, Product product) {
-        goToView(new UpdateProductView(mainModel, this, sellerInventoryView, product));
+        this.currentView =new UpdateProductView(mainModel, this, sellerInventoryView, product);
+        goToView(currentView);
     }
 
     public void gotoAddProductView(SellerInventoryView sellerInventoryView) {
-        goToView(new AddProductView(mainModel, this, sellerInventoryView));
+        this.currentView = new AddProductView(mainModel, this, sellerInventoryView);
+        goToView(currentView);
     }
 
     public void goToUserManagementView(){
-        goToView(new UserManagementView(mainModel, stage, this));
+        this.currentView = new UserManagementView(mainModel, stage, this);
+        goToView(currentView);
     }
 }
 

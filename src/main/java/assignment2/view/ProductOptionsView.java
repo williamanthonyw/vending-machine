@@ -53,6 +53,7 @@ public class ProductOptionsView implements View{
     private Button cartBTN;
     ComboBox<String> selectCategory;
     ComboBox<Integer> selectQuantity;
+    private TableView<Product> currentTable;
 
     private MainView mainView;
 
@@ -60,6 +61,8 @@ public class ProductOptionsView implements View{
     private HBox buttonBox;
     private VBox lastFiveProductsBox;
     private VBox topBox;
+
+    private String currentCategory;
 
     public ProductOptionsView(MainModel mainModel, Stage stage, MainView mainView){
         this.mainModel = mainModel;
@@ -143,14 +146,14 @@ public class ProductOptionsView implements View{
         productOptionsBox.setAlignment(Pos.CENTER_LEFT);
         mainBox.getChildren().add(productOptionsBox);
 
-        setUpDrinksTable();  //show drinks table as default
-
         setUpSelectCategory();
 
         this.popupBorderPane = new BorderPane();
         popupScene = new Scene(popupBorderPane, 500, 300);
 
         setupCart();
+
+        setUpDrinksTable();  //show drinks table as default
     }
 
 
@@ -415,6 +418,8 @@ public class ProductOptionsView implements View{
 
             }
         }
+
+        table.refresh();
     }
 
     public void setUpSelectCategory(){
@@ -425,15 +430,23 @@ public class ProductOptionsView implements View{
             
             if (selectedCategory.equals("drinks")){
                 setUpDrinksTable();
+                this.currentTable = drinksTable;
+                this.currentCategory = "drinks";
             }
             if (selectedCategory.equals("chocolates")){
                 setUpChocolatesTable();
+                this.currentTable = chocolatesTable;
+                this.currentCategory = "chocolates";
             }
             if (selectedCategory.equals("chips")){
                 setUpChipsTable();
+                this.currentTable = chipsTable;
+                this.currentCategory = "chips";
             }
             if (selectedCategory.equals("candies")){
                 setUpCandiesTable();
+                this.currentTable = candiesTable;
+                this.currentCategory = "candies";
             }
         });
     }
@@ -574,7 +587,6 @@ public class ProductOptionsView implements View{
 
     @Override
     public void refresh(){
-
 
     }
 

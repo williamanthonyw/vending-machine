@@ -100,7 +100,11 @@ public class InventoryModel {
     public void putBack(Map<Product, Integer> cart){
 
         for (Product p : cart.keySet()){
+            if (!inventory.contains(p)){
+                inventory.add(p);
+            }
             p.setQuantity(p.getQuantity() + cart.get(p));
+
         }
 
         updateInventory();
@@ -232,19 +236,5 @@ public class InventoryModel {
         return this.csvFileParser;
     }
 
-    public static void main(String[] args){
-    //     JsonParser jp = new JsonParser("src/test/resources/test_inventory.json", "src/test/resources/test_users3.json", "src/test/resources/InitialCash.json", "src/test/resources/credit_cards.json");
-    //     String testInventoryCSVPath = "src/test/resources/test_inventory.csv";
-    // String testSellerTransactionCSVPath = "src/test/resources/seller_transaction.csv";
-    // String testCashierTransactionCSVPath = "src/test/resources/cashier_transaction.csv";
 
-    //     List<Product> inventory = jp.getInventory();
-    //     CSVFileParser csvFileParser = new CSVFileParser(testInventoryCSVPath, testSellerTransactionCSVPath);
-    //     InventoryModel inventoryModel = new InventoryModel(inventory, jp, csvFileParser);
-    //     inventoryModel.initializeProductsToString();
-        
-    //     //read from file
-    //     List<List<String>> inventoryRead = inventoryModel.getInventoryAsString();
-    //     System.out.println(inventoryRead);
-    }
 }

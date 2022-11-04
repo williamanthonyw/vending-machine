@@ -252,7 +252,7 @@ public class UserManagementView implements View {
         VBox cannotRemoveUserMainBox = new VBox(60);
         cannotRemoveUserBorderPane.setMargin(cannotRemoveUserMainBox, new Insets(70, 70, 70, 70));
         cannotRemoveUserBorderPane.setCenter(cannotRemoveUserMainBox);
-        cannotRemoveUserMainBox.getChildren().add(new Label("Unable to remove currently logged in Owner User"));
+        cannotRemoveUserMainBox.getChildren().add(new Label("Unable to remove currently\nlogged in Owner User"));
 
 
         closeBTN = new Button("Close Message");
@@ -279,7 +279,7 @@ public class UserManagementView implements View {
         VBox cannotRemoveUserMainBox = new VBox(60);
         cannotRemoveUserBorderPane.setMargin(cannotRemoveUserMainBox, new Insets(70, 70, 70, 70));
         cannotRemoveUserBorderPane.setCenter(cannotRemoveUserMainBox);
-        Label msg = new Label("Unable to change user access for currently logged in Owner User.");
+        Label msg = new Label("Unable to change user access\n for currently logged in Owner User.");
         msg.setWrapText(true);
         cannotRemoveUserMainBox.getChildren().add(msg);
 

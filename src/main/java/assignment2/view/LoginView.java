@@ -118,6 +118,10 @@ public class LoginView implements View{
         });
 
         registerBTN.setOnAction((ActionEvent e)->{
+            if (userNameTF.getText().length() == 0 || passwordTF.getText().length() == 0 ){
+                signInErrorLBL.setText("Cannot have a username or password of length 0");
+                return;
+            }
             User user = new User(userNameTF.getText(),passwordTF.getText());
             if(loginModel.addUser(user)){
 
