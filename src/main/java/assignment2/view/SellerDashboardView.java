@@ -29,10 +29,8 @@ public class SellerDashboardView implements View{
     private InventoryModel inventoryModel;
     private User user;
 
-    private List<Purchase> purchasedItems;
-    private List<Product> availableProducts;
-    private static String productsPath = "src/main/resources/inventory.csv";
-    private static String transactionsPath = "src/main/resources/transaction.csv";
+    private List<List<String>> purchasedItems;
+    private List<List<String>> availableProducts;
 
     private Scene scene;
     private Stage stage;
@@ -43,6 +41,7 @@ public class SellerDashboardView implements View{
         this.mainModel = mainModel;
         this.mainView = mainView;
         this.inventoryModel = this.mainModel.getInventoryModel();
+        
         this.user = this.mainModel.getUser();
     }
 
@@ -54,7 +53,7 @@ public class SellerDashboardView implements View{
 
     @Override
     public void setUp(){
-
+        this.inventoryModel.initializeProductsToString();
         this.stage = new Stage();
         this.borderPane = new BorderPane();
 
@@ -64,16 +63,16 @@ public class SellerDashboardView implements View{
 
 
         
-        this.scene = new Scene(this.borderPane, 1000, 1000);
+        this.scene = new Scene(this.borderPane, 1000, 600);
         this.scene.getStylesheets().add("Style.css");
 
         
 
         //list of available products
-        availableProducts = this.inventoryModel.getInventory();
+        availableProducts = this.inventoryModel.getCsvFileParser().readInventoryFromFile();
 
         //list of purchased items
-        purchasedItems = this.user.getPurchases();
+        purchasedItems = this.mainModel.getCsvFileParser().readSellerTransactions();
 
         //title 
         Label titleLBL = new Label("Seller Dashboard");
@@ -88,26 +87,13 @@ public class SellerDashboardView implements View{
         
         HBox transactionBox2 = new HBox();
         TextArea transactionText = new TextArea();
-        transactionText.setMinHeight(200);
+        transactionText.setMinHeight(100);
         transactionText.setMinWidth(900);
         transactionText.setEditable(false);
 
         //read transactions done from file
-        String transTemp = "";
-        List<List<String>> transactions = this.mainModel.readPurchasesFromFile(transactionsPath);
-
-        if (transactions.size() == 0){
-            transTemp = "No transactions available.";
-        }
-        else{
-            for (List<String> s : transactions){
-                String temp2 = String.join(", ", s).stripTrailing();
-                temp2 = temp2.concat("\n");
-            
-                transTemp = transTemp.concat(temp2);
-            }
-        }
-        
+        String transTemp = mainModel.getItemsSoldAsString();
+   
         transactionText.setText(transTemp);
 
         transactionBox1.getChildren().add(transactionLBL);
@@ -122,28 +108,13 @@ public class SellerDashboardView implements View{
 
         HBox inventoryBox2 = new HBox();
         TextArea inventoryText = new TextArea();
-        inventoryText.setMinHeight(200);
+        inventoryText.setMinHeight(100);
         inventoryText.setMinWidth(900);
         inventoryText.setEditable(false);
 
-        //write inventory to file
-        this.inventoryModel.writeInventoryToFile(productsPath);
 
         //read inventory from file 
-        String invTemp = "";
-        List<List<String>> inventoryItems = this.inventoryModel.readInventoryFromFile(productsPath);
-
-        if (inventoryItems.size() == 0){
-            invTemp = "No items available.";
-        }
-
-        else{
-            for (List<String> s : inventoryItems){
-                String temp2 = String.join(", ", s).stripTrailing();
-                temp2 = temp2.concat("\n");
-                invTemp = invTemp.concat(temp2);
-            }
-        }
+        String invTemp = mainModel.getAvailableProductsAsString();
 
         inventoryText.setText(invTemp);
 

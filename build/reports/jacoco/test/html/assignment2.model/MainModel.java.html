@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -22,225 +23,417 @@ public class MainModel {
     private LoginModel loginModel;
     private CashPaymentModel cashPaymentModel;
     private InventoryModel inventoryModel;
-//    private UserManagementModel userManagementModel;
 
-    private String inventoryFile;
-    private String usersFile;
-    private String initialCashFile;
-    private String cardFile;
 
     private User user;
     private boolean isLoggedIn;
 
     private HashMap&lt;Product, Integer&gt; aggregatePurchases;
     private JsonParser jsonParser;
-    private String transactionsFile;
 
-<span class="fc" id="L39">    public MainModel(String inventoryFile, String usersFile, String initialCashFile, String cardFile, String transactionsFile){</span>
+    private CSVFileParser csvFileParser;
 
-<span class="fc" id="L41">        this.jsonParser = new JsonParser(inventoryFile, usersFile, initialCashFile, cardFile);</span>
+    private List&lt;CancelledTransaction&gt; cancelledTransactions;
+    private List&lt;User&gt; users;
+    private List&lt;List&lt;String&gt;&gt; availableProducts;
+    private List&lt;List&lt;String&gt;&gt; sellerTransactionString;
+    private List&lt;Transaction&gt; sellerTransactions;
 
-<span class="fc" id="L43">        this.loginModel = new LoginModel(jsonParser.getUsers(),this.getJsonParser());</span>
-<span class="fc" id="L44">        this.user = loginModel.getAnonymousUser();</span>
+    private List&lt;List&lt;String&gt;&gt; cashierTransactionString;
+    private List&lt;Transaction&gt; cashierTransactions;
 
-<span class="pc bpc" id="L46" title="1 of 2 branches missed.">        if (this.user != null){</span>
-<span class="nc" id="L47">            this.user.clearCart();</span>
+<span class="fc" id="L45">    public MainModel(JsonParser jsonParser, CSVFileParser csvParser){</span>
+
+<span class="fc" id="L47">        this.jsonParser = jsonParser;</span>
+<span class="fc" id="L48">        this.csvFileParser = csvParser;</span>
+
+<span class="fc" id="L50">        this.loginModel = new LoginModel(jsonParser.getUsers(),this.getJsonParser(), csvFileParser);</span>
+<span class="fc" id="L51">        this.user = loginModel.getAnonymousUser();</span>
+
+<span class="fc bfc" id="L53" title="All 2 branches covered.">        if (this.user != null){</span>
+<span class="fc" id="L54">            this.user.clearCart();</span>
         }
 
-<span class="fc" id="L50">        this.isLoggedIn = false;</span>
-<span class="fc" id="L51">        this.inventoryFile = inventoryFile;</span>
-<span class="fc" id="L52">        this.usersFile = usersFile;</span>
-<span class="fc" id="L53">        this.initialCashFile = initialCashFile;</span>
-<span class="fc" id="L54">        this.cardFile = cardFile;</span>
-<span class="fc" id="L55">        this.transactionsFile = transactionsFile;</span>
+<span class="fc" id="L57">        this.isLoggedIn = false;</span>
 
-<span class="fc" id="L57">        this.lastFiveProductsModel = new LastFiveProductsModel();</span>
-<span class="fc" id="L58">        this.cardPaymentModel = new CardPaymentModel(this, jsonParser );</span>
-<span class="fc" id="L59">        this.cashPaymentModel = new CashPaymentModel(jsonParser.getCash(), jsonParser);</span>
-<span class="fc" id="L60">        this.inventoryModel = new InventoryModel(jsonParser.getInventory(), jsonParser);</span>
+<span class="fc" id="L59">        this.lastFiveProductsModel = new LastFiveProductsModel();</span>
+<span class="fc" id="L60">        this.cardPaymentModel = new CardPaymentModel(this, jsonParser );</span>
+<span class="fc" id="L61">        this.cashPaymentModel = new CashPaymentModel(jsonParser.getCash(), jsonParser,csvFileParser);</span>
+<span class="fc" id="L62">        this.inventoryModel = new InventoryModel(jsonParser.getInventory(), jsonParser, csvFileParser);</span>
 
-<span class="fc" id="L62">        this.aggregatePurchases = new HashMap&lt;Product, Integer&gt;();</span>
-//        List&lt;List&lt;String&gt;&gt; items = readPurchasesFromFile(&quot;src/main/resources/transaction.csv&quot;);
+<span class="fc" id="L64">        this.sellerTransactions = new ArrayList&lt;Transaction&gt;();</span>
+<span class="fc" id="L65">        this.cashierTransactions = new ArrayList&lt;Transaction&gt;();</span>
 
-//        this.userManagementModel = new UserManagementModel(jsonParser.getUsers(), jsonParser);
+<span class="fc" id="L67">        this.sellerTransactionString = this.csvFileParser.readSellerTransactions();</span>
+<span class="fc" id="L68">        this.cashierTransactionString = this.csvFileParser.readCashierTransactions();</span>
 
-<span class="fc" id="L67">    }</span>
+        
+
+<span class="fc" id="L72">        this.cancelledTransactions = csvParser.getCancelledTransactions();</span>
+<span class="fc" id="L73">        this.aggregatePurchases = new HashMap&lt;Product, Integer&gt;();</span>
+
+<span class="fc" id="L75">        this.users = loginModel.getUsers(); ////////</span>
+<span class="fc" id="L76">        inventoryModel.initializeProductsToString(); ////</span>
+<span class="fc" id="L77">        availableProducts = this.inventoryModel.getInventoryAsString();</span>
+
+<span class="fc" id="L79">    }</span>
 
     public LastFiveProductsModel getLastFiveProductsModel(){
-<span class="fc" id="L70">        return this.lastFiveProductsModel;</span>
+<span class="fc" id="L82">        return this.lastFiveProductsModel;</span>
     }
 
     public LoginModel getLoginModel() {
-<span class="fc" id="L74">        return loginModel;</span>
+<span class="fc" id="L86">        return loginModel;</span>
     }
 
-<span class="fc" id="L77">    public CardPaymentModel getCardPaymentModel(){return cardPaymentModel;}</span>
+<span class="fc" id="L89">    public CardPaymentModel getCardPaymentModel(){return cardPaymentModel;}</span>
 
     public CashPaymentModel getCashPaymentModel(){
-<span class="fc" id="L80">        return this.cashPaymentModel;</span>
+<span class="fc" id="L92">        return this.cashPaymentModel;</span>
     }
     public boolean isLoggedIn(){
-<span class="fc" id="L83">        return isLoggedIn;</span>
+<span class="fc" id="L95">        return isLoggedIn;</span>
     }
 
     public void setIsLoggedIn(boolean logged){
-<span class="fc" id="L87">        this.isLoggedIn = logged;</span>
-<span class="fc" id="L88">    }</span>
-<span class="nc" id="L89">    public List&lt;Cash&gt; getCash(){return cashPaymentModel.getCashList();}</span>
+<span class="fc" id="L99">        this.isLoggedIn = logged;</span>
+<span class="fc" id="L100">    }</span>
+<span class="nc" id="L101">    public List&lt;Cash&gt; getCash(){return cashPaymentModel.getCashList();}</span>
 
     public User getUser(){
-<span class="fc" id="L92">        return this.user;</span>
+<span class="fc" id="L104">        return this.user;</span>
     }
 
     public void logout(){
-<span class="fc" id="L96">        this.user.clearCart();</span>
-<span class="fc" id="L97">        this.user = loginModel.getAnonymousUser();</span>
-<span class="fc" id="L98">        this.isLoggedIn = false;</span>
-<span class="fc" id="L99">    }</span>
+<span class="fc" id="L108">        this.user.clearCart();</span>
+<span class="fc" id="L109">        this.user = loginModel.getAnonymousUser();</span>
+<span class="fc" id="L110">        this.isLoggedIn = false;</span>
+<span class="fc" id="L111">    }</span>
 
     public void setUser(User user){
-<span class="fc" id="L102">        this.user = user;</span>
-<span class="fc" id="L103">    }</span>
+<span class="fc" id="L114">        this.user = user;</span>
+<span class="fc" id="L115">    }</span>
 
     public Map&lt;Product, Integer&gt; getCart(){
-<span class="fc" id="L106">        return user.getCart();</span>
+<span class="fc" id="L118">        return user.getCart();</span>
     }
 
-    public Map&lt;Product, Integer&gt; getAggregatePurchases(){
-<span class="fc" id="L110">        return this.aggregatePurchases;</span>
-    }
-
-    public void cancelTransaction(){
+    public void cancelTransaction(CancellationReason cancellationReason, LocalDateTime timeCancelled){
 
         // clear cart (look at Katie's stuff)
-<span class="fc" id="L116">        inventoryModel.putBack(user.getCart());</span>
-<span class="fc" id="L117">        user.clearCart();</span>
+<span class="fc" id="L124">        inventoryModel.putBack(user.getCart());</span>
+<span class="fc" id="L125">        user.clearCart();</span>
 
+<span class="fc" id="L127">        cancelledTransactions.add(new CancelledTransaction(user.getUsername(), cancellationReason, timeCancelled));</span>
+<span class="fc" id="L128">        System.out.println(cancellationReason);</span>
+<span class="fc" id="L129">        csvFileParser.updateCancelledTransactions(cancelledTransactions);</span>
 
         // log user out
-<span class="fc" id="L121">        logout();</span>
+<span class="fc" id="L132">        logout();</span>
 
-<span class="fc" id="L123">    }</span>
+<span class="fc" id="L134">    }</span>
+
+    public List&lt;CancelledTransaction&gt; getCancelledTransactions(){
+<span class="fc" id="L137">        return cancelledTransactions;</span>
+    }
+
+    public String getCancelledTransactionsAsString(){
+<span class="fc" id="L141">        String out = &quot;&quot;;</span>
+
+<span class="fc bfc" id="L143" title="All 2 branches covered.">        for (CancelledTransaction c : cancelledTransactions){</span>
+<span class="fc" id="L144">            out += c.getUsername() + &quot;, &quot; + c.getCancellationReason().getReason() + &quot;, &quot; + c.getTimeCancelled().toString();</span>
+<span class="fc" id="L145">            out += &quot;\n&quot;;</span>
+<span class="fc" id="L146">        }</span>
+<span class="fc" id="L147">        return out;</span>
+    }
+
+    public String getAvailableChangeAsString(){
+<span class="nc" id="L151">        String result = &quot;&quot;;</span>
+<span class="nc" id="L152">        List&lt;List&lt;String&gt;&gt; cashString = cashPaymentModel.getCashString();</span>
+
+<span class="nc bnc" id="L154" title="All 2 branches missed.">        for(List&lt;String&gt; s: cashString){</span>
+<span class="nc" id="L155">            String temp = String.join(&quot;, &quot;,s).stripTrailing();</span>
+<span class="nc" id="L156">            temp = temp.concat(&quot;\n&quot;);</span>
+<span class="nc" id="L157">            result = result.concat(temp);</span>
+<span class="nc" id="L158">        }</span>
+<span class="nc" id="L159">        return result;</span>
+        
+    }
+
+    public String getTransactionsAsString(){
+         //read transactions done from file
+<span class="nc" id="L165">         String transTemp = &quot;&quot;;</span>
+ 
+<span class="nc bnc" id="L167" title="All 2 branches missed.">        for (List&lt;String&gt; s : cashierTransactionString){</span>
+<span class="nc" id="L168">            String temp2 = String.join(&quot;, &quot;, s).stripTrailing();</span>
+<span class="nc" id="L169">            temp2 = temp2.concat(&quot;\n&quot;);</span>
+        
+<span class="nc" id="L171">            transTemp = transTemp.concat(temp2);</span>
+<span class="nc" id="L172">        }</span>
+<span class="nc" id="L173">        return transTemp;</span>
+    }
+
+    public List&lt;List&lt;String&gt;&gt; getItemsSold(){  //below for displaying seller reports on owner dashboard
+<span class="nc" id="L177">        return getCsvFileParser().readSellerTransactions();</span>
+    }
+
+    public String getItemsSoldAsString(){
+    
+<span class="nc" id="L182">        String transTemp = &quot;&quot;;</span>
+<span class="nc" id="L183">        List&lt;List&lt;String&gt;&gt; purchasedItems = getCsvFileParser().readSellerTransactions();</span>
+
+<span class="nc bnc" id="L185" title="All 2 branches missed.">        for (List&lt;String&gt; s : purchasedItems){</span>
+<span class="nc" id="L186">            String temp2 = String.join(&quot;, &quot;, s).stripTrailing();</span>
+<span class="nc" id="L187">            temp2 = temp2.concat(&quot;\n&quot;);</span>
+        
+<span class="nc" id="L189">            transTemp = transTemp.concat(temp2);</span>
+<span class="nc" id="L190">        }</span>
+<span class="nc" id="L191">        return transTemp;</span>
+    }
+
+    public String getCashierTransactionsAsString(){
+<span class="nc" id="L195">        String transTemp = &quot;&quot;;</span>
+<span class="nc" id="L196">        List&lt;List&lt;String&gt;&gt; cashierTransactions = getCsvFileParser().readCashierTransactions();</span>
+ 
+<span class="nc bnc" id="L198" title="All 2 branches missed.">         if (cashierTransactions.size() == 0){</span>
+<span class="nc" id="L199">             transTemp = &quot;No transactions available.&quot;;</span>
+         }
+         else{
+<span class="nc bnc" id="L202" title="All 2 branches missed.">             for (List&lt;String&gt; s : cashierTransactions){</span>
+<span class="nc" id="L203">                 String temp2 = String.join(&quot;, &quot;, s).stripTrailing();</span>
+<span class="nc" id="L204">                 temp2 = temp2.concat(&quot;\n&quot;);</span>
+             
+<span class="nc" id="L206">                 transTemp = transTemp.concat(temp2);</span>
+<span class="nc" id="L207">             }</span>
+         }
+<span class="nc" id="L209">        return transTemp;</span>
+    }
+
+
+    public List&lt;List&lt;String&gt;&gt; getAvailableProducts(){
+<span class="nc" id="L214">        return this.availableProducts;</span>
+    }
+
+    public String getAvailableProductsAsString(){
+        //read inventory from file 
+        //copypasted from sellerdashboardview - clean later
+<span class="nc" id="L220">        String invTemp = &quot;&quot;;</span>
+
+<span class="nc bnc" id="L222" title="All 2 branches missed.">        if (availableProducts.size() == 0){</span>
+<span class="nc" id="L223">            invTemp = &quot;No items available.&quot;;</span>
+        }
+
+        else{
+<span class="nc bnc" id="L227" title="All 2 branches missed.">            for (List&lt;String&gt; s : availableProducts){</span>
+<span class="nc" id="L228">                String temp2 = String.join(&quot;, &quot;, s).stripTrailing();</span>
+<span class="nc" id="L229">                temp2 = temp2.concat(&quot;\n&quot;);</span>
+<span class="nc" id="L230">                invTemp = invTemp.concat(temp2);</span>
+<span class="nc" id="L231">            }</span>
+        }
+<span class="nc" id="L233">        return invTemp;</span>
+    }
+
+
+    public String getUsersAsString(){  //for displaying users report
+<span class="nc" id="L238">        String out = &quot;&quot;;</span>
+<span class="nc bnc" id="L239" title="All 2 branches missed.">        for (User user : users){</span>
+<span class="nc" id="L240">            out += user.getUsername() + &quot;, &quot; + user.getUserAccess() + &quot;\n&quot;;</span>
+<span class="nc" id="L241">        }</span>
+<span class="nc" id="L242">        return out;</span>
+    }
+
 
     public boolean login(String username, String password){
 
-<span class="fc" id="L127">        User attempt = loginModel.login(username, password);</span>
+<span class="fc" id="L248">        User attempt = loginModel.login(username, password);</span>
 
-<span class="fc bfc" id="L129" title="All 2 branches covered.">        if (attempt == null){</span>
-<span class="fc" id="L130">            return false;</span>
+<span class="fc bfc" id="L250" title="All 2 branches covered.">        if (attempt == null){</span>
+<span class="fc" id="L251">            return false;</span>
         } else {
-<span class="fc" id="L132">            this.user = attempt;</span>
-<span class="fc" id="L133">            this.isLoggedIn = true;</span>
-<span class="fc" id="L134">            return true;</span>
+<span class="fc" id="L253">            this.user = attempt;</span>
+<span class="fc" id="L254">            this.isLoggedIn = true;</span>
+<span class="fc" id="L255">            return true;</span>
         }
 
         // need to update inventory file as well
     }
 
     public void addToCart(Product product, int quantity){
-<span class="fc" id="L141">        user.addToCart(product, quantity);</span>
+<span class="fc" id="L262">        user.addToCart(product, quantity);</span>
 
         // update quantity in inventory
-<span class="fc" id="L144">        inventoryModel.updateQuantity(product, quantity);</span>
+<span class="fc" id="L265">        inventoryModel.updateQuantity(product, quantity);</span>
 
-<span class="fc" id="L146">    }</span>
+<span class="fc" id="L267">    }</span>
 
-    public void writePurchasesToFile(HashMap&lt;Product, Integer&gt; itemsPurchased){
-<span class="fc" id="L149">        File file = new File(transactionsFile);</span>
 
-        try{
-<span class="fc" id="L152">            List&lt;String[]&gt; items = new ArrayList&lt;String[]&gt;();</span>
-
-<span class="fc" id="L154">            FileWriter fileWriter = new FileWriter(file);</span>
-<span class="fc" id="L155">            CSVWriter writer = new CSVWriter(fileWriter);</span>
-
-<span class="fc bfc" id="L157" title="All 2 branches covered.">            for (Product p: itemsPurchased.keySet()){</span>
-<span class="fc" id="L158">                items.add(new String[] {String.valueOf(p.getCode()), p.getName(), String.valueOf(itemsPurchased.get(p))});</span>
-<span class="fc" id="L159">            }</span>
-<span class="fc" id="L160">            writer.writeAll(items);</span>
-<span class="fc" id="L161">            writer.close();</span>
-
-        }
-<span class="fc" id="L164">        catch(IOException e){</span>
-<span class="fc" id="L165">            e.printStackTrace();</span>
-<span class="fc" id="L166">        }</span>
-<span class="fc" id="L167">    }</span>
-
-    public void checkout(){
+    public void checkout(String paymentMethod){
+<span class="fc" id="L271">        List&lt;String&gt; listOfProductsBought = new ArrayList&lt;String&gt;();</span>
+        
 
         // adds it to user's list of purchases
-<span class="fc bfc" id="L172" title="All 2 branches covered.">        for (Product product : user.getCart().keySet()){</span>
-<span class="fc" id="L173">            user.purchaseProduct(product, user.getCart().get(product));</span>
+<span class="fc bfc" id="L275" title="All 2 branches covered.">        for (Product product : user.getCart().keySet()){</span>
+<span class="fc" id="L276">            user.purchaseProduct(product, user.getCart().get(product));</span>
+            
+            //add to seller's transaction view         
+<span class="fc" id="L279">            this.sellerTransactions.add(new Transaction(product.getCode(), product.getName(), user.getCart().get(product)));</span>
+<span class="fc" id="L280">            System.out.println(this.sellerTransactions.get(0).getQuantitySold());</span>
+            
+<span class="fc" id="L282">            listOfProductsBought.add(product.getName());</span>
+            
+           
+<span class="fc" id="L285">        }</span>
+<span class="fc" id="L286">        String productsString = String.join(&quot;, &quot;, listOfProductsBought);</span>
+        //add to cashier's transaction view
+<span class="pc bpc" id="L288" title="1 of 2 branches missed.">        if (paymentMethod.equals(&quot;cash&quot;)){</span>
+<span class="nc" id="L289">            this.cashierTransactions.add(new Transaction(LocalDateTime.now(), productsString, this.cashPaymentModel.getMoneyPaid(), this.cashPaymentModel.getReturnedChange(), paymentMethod));</span>
+        }
+        else{
+<span class="fc" id="L292">           this.cashierTransactions.add(new Transaction(LocalDateTime.now(), productsString, 0, 0, paymentMethod));</span>
+        }
 
-<span class="fc bfc" id="L175" title="All 2 branches covered.">            if (aggregatePurchases.get(product) == null){</span>
-<span class="fc" id="L176">                this.aggregatePurchases.put(product, 0);</span>
-            }
-
-<span class="fc" id="L179">            this.aggregatePurchases.put(product, user.getCart().get(product) + this.aggregatePurchases.get(product));</span>
-
-<span class="fc" id="L181">        }</span>
-
-<span class="fc" id="L183">        user.clearCart();</span>
+<span class="fc" id="L295">        user.clearCart();</span>
 
         // update users file
-<span class="fc" id="L186">        jsonParser.updateUsers(loginModel.getUsers());</span>
+<span class="fc" id="L298">        jsonParser.updateUsers(loginModel.getUsers());</span>
 
         // update inventory file
-<span class="fc" id="L189">        inventoryModel.updateInventory();</span>
+<span class="fc" id="L301">        inventoryModel.updateInventory();</span>
 
-        //write purchases to file
-<span class="fc" id="L192">        writePurchasesToFile(this.aggregatePurchases);</span>
+        //update seller transaction list string
+<span class="fc" id="L304">        updateSellerTransactionString();</span>
+<span class="fc" id="L305">        System.out.println(this.sellerTransactionString);</span>
 
-<span class="fc" id="L194">        logout();</span>
+        //update seller transaction list string
+<span class="fc" id="L308">        updateCashierTransactionString();</span>
 
-<span class="fc" id="L196">    }</span>
+        //write seller transactions to file
+<span class="fc" id="L311">        csvFileParser.writeSellerTransactions(sellerTransactionString);</span>
 
-    public List&lt;List&lt;String&gt;&gt; readPurchasesFromFile(String filename){
-<span class="fc" id="L199">        List&lt;List&lt;String&gt;&gt; items = new ArrayList&lt;List&lt;String&gt;&gt;();</span>
-<span class="fc" id="L200">        File file = new File(filename);</span>
-        String[] item;
+        //write cashier transactions to file
+<span class="fc" id="L314">        csvFileParser.writeCashierTransactions(cashierTransactionString);</span>
 
-        try{
-<span class="fc" id="L204">            CSVReader reader = new CSVReader(new FileReader(file));</span>
+<span class="fc" id="L316">        logout();</span>
 
-<span class="fc bfc" id="L206" title="All 2 branches covered.">            while((item = reader.readNext()) != null){</span>
-<span class="fc" id="L207">                items.add(Arrays.asList(item));</span>
-            }
-
-<span class="fc" id="L210">            reader.close();</span>
-        }
-
-<span class="nc" id="L213">        catch(IOException e){</span>
-//            e.printStackTrace();
-        }
-<span class="nc" id="L216">        catch(CsvValidationException c){</span>
-//            c.printStackTrace();
-<span class="pc" id="L218">        }</span>
-
-<span class="fc" id="L220">        return items;</span>
-    }
+<span class="fc" id="L318">    }</span>
 
     public InventoryModel getInventoryModel(){
-<span class="fc" id="L224">        return this.inventoryModel;</span>
+<span class="fc" id="L321">        return this.inventoryModel;</span>
     }
 
     public double getCartPrice() {
 
-<span class="fc" id="L229">        double sum = 0;</span>
+<span class="fc" id="L326">        double sum = 0;</span>
 
-<span class="fc bfc" id="L231" title="All 2 branches covered.">        for (Product p : user.getCart().keySet()){</span>
-<span class="fc" id="L232">            sum += p.getPrice() * user.getCart().get(p); // price * quantity</span>
-<span class="fc" id="L233">        }</span>
+<span class="fc bfc" id="L328" title="All 2 branches covered.">        for (Product p : user.getCart().keySet()){</span>
+<span class="fc" id="L329">            sum += p.getPrice() * user.getCart().get(p); // price * quantity</span>
+<span class="fc" id="L330">        }</span>
 
-<span class="fc" id="L235">        return sum;</span>
+<span class="fc" id="L332">        return sum;</span>
     }
 
     public JsonParser getJsonParser(){
-<span class="fc" id="L239">        return this.jsonParser;</span>
+<span class="fc" id="L336">        return this.jsonParser;</span>
     }
 
-////    public UserManagementModel getUserManagementModel(){
-//        return this.userManagementModel;
-//    }
+    public void updateSellerTransactionString(){
+        //this.sellerTransactionString.clear();
+<span class="fc" id="L341">        System.out.println(this.sellerTransactionString);</span>
+
+<span class="fc bfc" id="L343" title="All 2 branches covered.">        for (Transaction t: this.sellerTransactions){</span>
+<span class="fc" id="L344">            boolean found = false;</span>
+<span class="fc bfc" id="L345" title="All 2 branches covered.">            for (List&lt;String&gt; s: this.sellerTransactionString){</span>
+<span class="pc bpc" id="L346" title="1 of 2 branches missed.">                if (t.getItemName().equals(s.get(1))){</span>
+<span class="nc" id="L347">                    found = true;</span>
+<span class="nc" id="L348">                    s.set(2, String.valueOf((Integer.parseInt(s.get(2)) + t.getQuantitySold())));</span>
+<span class="nc" id="L349">                    break;</span>
+                }
+<span class="fc" id="L351">            }</span>
+<span class="pc bpc" id="L352" title="1 of 2 branches missed.">            if (found == false){</span>
+<span class="fc" id="L353">                this.sellerTransactionString.add(List.of(String.valueOf(t.getItemCode()), t.getItemName(), String.valueOf(t.getQuantitySold())));</span>
+            }
+            
+<span class="fc" id="L356">        }</span>
+<span class="fc" id="L357">        this.sellerTransactions.clear();</span>
+<span class="fc" id="L358">    }</span>
+
+    public void updateCashierTransactionString(){
+
+<span class="fc bfc" id="L362" title="All 2 branches covered.">        for(Transaction t: this.cashierTransactions){</span>
+<span class="fc" id="L363">            this.cashierTransactionString.add(List.of(String.valueOf(t.getTransactionDate()), t.getItemName(), String.valueOf(t.getMoneyPaid()), String.valueOf(t.getReturnedChange()), t.getPaymentMethod()));</span>
+<span class="fc" id="L364">        }</span>
+<span class="fc" id="L365">        this.cashierTransactions.clear();</span>
+<span class="fc" id="L366">    }</span>
+
+    public List&lt;List&lt;String&gt;&gt; getSellerTransactionAsString(){
+<span class="fc" id="L369">        return this.sellerTransactionString;</span>
+    }
+
+    public List&lt;List&lt;String&gt;&gt; getCashierTransactionAsString(){
+<span class="fc" id="L373">        return this.cashierTransactionString;</span>
+    }
+
+    public CSVFileParser getCsvFileParser(){
+<span class="fc" id="L377">        return this.csvFileParser;</span>
+    }
+
+
+
+    public static void main(String[] args){
+
+//          String originalInventoryPath = &quot;src/test/resources/original_test_inventory.json&quot;;
+//    String inventoryPath1 = &quot;src/test/resources/test_inventory.json&quot;;
+//    String inventoryPath2 = &quot;src/test/resources/test_inventory3.json&quot;;
+//    String inventoryPath3 = &quot;src/test/resources/test_inventory4.json&quot;;
+
+
+//  String testInventoryCSVPath = &quot;src/test/resources/test_inventory.csv&quot;;
+//    String testInventoryCSVPath2 = &quot;src/test/resources/test_inventory2.csv&quot;;
+//     String testSellerTransactionCSVPath = &quot;src/test/resources/seller_transaction.csv&quot;;
+//     String testCashierTransactionCSVPath = &quot;src/test/resources/cashier_transaction.csv&quot;;
+//         MainModel mainModel = new MainModel(inventoryPath2, &quot;src/test/resources/test_users3.json&quot;, &quot;src/test/resources/InitialCash.json&quot;, &quot;src/test/resources/credit_cards.json&quot;, testInventoryCSVPath2, testSellerTransactionCSVPath, testCashierTransactionCSVPath);
+//         InventoryModel inventoryModel = mainModel.getInventoryModel();
+//         List&lt;Product&gt; defaultInventory = mainModel.getJsonParser().getInventory();
+//         inventoryModel.initializeProductsToString();
+
+//         // login user 1
+//         mainModel.setUser(mainModel.getLoginModel().login(&quot;test1&quot;, &quot;pw&quot;));
+
+//         //add 2 of each items to cart
+//         for (Product p : inventoryModel.getInventory()){
+//             mainModel.addToCart(p, 2);
+//         }
+
+//         int cartSize = mainModel.getUser().getCart().size();
+
+//         //complete transaction and write to file 
+//         mainModel.checkout(&quot;card&quot;);
+
+//         List&lt;List&lt;String&gt;&gt; sellerTransactions = mainModel.getSellerTransactionAsString();
+//         List&lt;List&lt;String&gt;&gt; cashierTransactions = mainModel.getCashierTransactionAsString();
+        
+//         System.out.println(sellerTransactions);
+//         System.out.println(cashierTransactions);
+
+
+
+        // assertEquals(cartSize, itemsPurchased.size());
+
+        // //put into maps for both
+        // HashMap&lt;String, Integer&gt; ip = new HashMap&lt;String, Integer&gt;();
+
+        // for (int i=0; i&lt;itemsPurchased.size(); i++){
+        //     List&lt;String&gt; item = itemsPurchased.get(i);
+        //     ip.put(item.get(1), Integer.parseInt(item.get(2)));
+        // }
+
+        // HashMap&lt;String, Integer&gt; ap = new HashMap&lt;String, Integer&gt;();
+
+        // for (List&lt;String&gt; t: mainModel.getSellerTransactionAsString()){
+        //     ap.put(t.get(1), Integer.parseInt(t.get(2)));
+        // }
+
+        // assertEquals(ip, ap);
+<span class="nc" id="L437">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

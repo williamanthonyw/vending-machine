@@ -16,20 +16,20 @@ public class CardPaymentModel {
 <span class="fc" id="L16">    }</span>
 
     public void saveCard(CardUser cardUser){
-<span class="nc" id="L19">        mainModel.getUser().setCardUser(cardUser);</span>
-<span class="nc" id="L20">        jsonParser.updateUsers(mainModel.getLoginModel().getUsers());</span>
-<span class="nc" id="L21">    }</span>
+<span class="fc" id="L19">        mainModel.getUser().setCardUser(cardUser);</span>
+<span class="fc" id="L20">        jsonParser.updateUsers(mainModel.getLoginModel().getUsers());</span>
+<span class="fc" id="L21">    }</span>
 
     public CardUser paymentProcess(String name, String number){
 
-<span class="nc bnc" id="L25" title="All 2 branches missed.">        for(CardUser user: cardUserList){</span>
-<span class="nc bnc" id="L26" title="All 4 branches missed.">            if(user.getName().equals(name) &amp;&amp; user.getCardNumber().equals(number)){</span>
-<span class="nc" id="L27">                System.out.println(mainModel.getUser().getCardUser());</span>
-<span class="nc" id="L28">                return user;</span>
+<span class="fc bfc" id="L25" title="All 2 branches covered.">        for(CardUser user: cardUserList){</span>
+<span class="pc bpc" id="L26" title="1 of 4 branches missed.">            if(user.getName().equals(name) &amp;&amp; user.getCardNumber().equals(number)){</span>
+<span class="fc" id="L27">                System.out.println(mainModel.getUser().getCardUser());</span>
+<span class="fc" id="L28">                return user;</span>
             }
-<span class="nc" id="L30">        }</span>
+<span class="fc" id="L30">        }</span>
 
-<span class="nc" id="L32">        return null;</span>
+<span class="fc" id="L32">        return null;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

@@ -8,40 +8,40 @@ public class LoginModel {
     private List&lt;User&gt; users;
     private User anonymousUser;
     private JsonParser jsonParser;
+    private CSVFileParser csvFileParser;
     private MainModel mainModel;
 
-<span class="fc" id="L13">    public LoginModel(List&lt;User&gt; users,JsonParser jsonParser){</span>
-<span class="fc" id="L14">        this.users = users;</span>
+<span class="fc" id="L14">    public LoginModel(List&lt;User&gt; users,JsonParser jsonParser, CSVFileParser csvFileParser){</span>
+<span class="fc" id="L15">        this.users = users;</span>
 
 
-<span class="fc bfc" id="L17" title="All 2 branches covered.">        for (User user : users){</span>
+<span class="fc bfc" id="L18" title="All 2 branches covered.">        for (User user : users){</span>
 
-<span class="fc bfc" id="L19" title="All 2 branches covered.">            if (user.getUsername().equals(&quot;anonymous&quot;)){</span>
-<span class="fc" id="L20">                this.anonymousUser = user;</span>
+<span class="fc bfc" id="L20" title="All 2 branches covered.">            if (user.getUsername().equals(&quot;anonymous&quot;)){</span>
+<span class="fc" id="L21">                this.anonymousUser = user;</span>
             }
 
-<span class="fc" id="L23">        }</span>
-<span class="fc" id="L24">        this.jsonParser = jsonParser;</span>
-<span class="fc" id="L25">    }</span>
+<span class="fc" id="L24">        }</span>
+<span class="fc" id="L25">        this.jsonParser = jsonParser;</span>
+<span class="fc" id="L26">        this.csvFileParser = csvFileParser;</span>
+<span class="fc" id="L27">    }</span>
 
     public void setAnonymousUser(User user){
-<span class="fc" id="L28">        this.anonymousUser = user;</span>
-<span class="fc" id="L29">    }</span>
+<span class="fc" id="L30">        this.anonymousUser = user;</span>
+<span class="fc" id="L31">    }</span>
 
     public List&lt;User&gt; getUsers(){
-<span class="fc" id="L32">        return users;</span>
+<span class="fc" id="L34">        return users;</span>
     }
 
     public User getAnonymousUser(){
-<span class="fc" id="L36">        return anonymousUser;</span>
+<span class="fc" id="L38">        return anonymousUser;</span>
     }
 
     public User login(String username, String password){
 
-<span class="fc" id="L41">        System.out.println(username);</span>
 
-<span class="fc bfc" id="L43" title="All 2 branches covered.">        for (User user : users){</span>
-<span class="fc" id="L44">            System.out.println(user.getUsername());</span>
+<span class="fc bfc" id="L44" title="All 2 branches covered.">        for (User user : users){</span>
 
 <span class="fc bfc" id="L46" title="All 2 branches covered.">            if (user.getUsername().equalsIgnoreCase(username)){</span>
 
@@ -69,13 +69,15 @@ public class LoginModel {
 <span class="fc" id="L69">        }</span>
 <span class="fc" id="L70">        users.add(user);</span>
 <span class="fc" id="L71">        jsonParser.updateUsers(users);</span>
-<span class="fc" id="L72">        return true;</span>
+<span class="fc" id="L72">        csvFileParser.updateUsers(users);</span>
+<span class="fc" id="L73">        return true;</span>
     }
 
     public void removeUser(User user){
-<span class="nc" id="L76">        this.users.remove(user);</span>
-<span class="nc" id="L77">        jsonParser.updateUsers(this.users);</span>
-<span class="nc" id="L78">    }</span>
+<span class="nc" id="L77">        this.users.remove(user);</span>
+<span class="nc" id="L78">        jsonParser.updateUsers(this.users);</span>
+<span class="nc" id="L79">        csvFileParser.updateUsers(this.users);</span>
+<span class="nc" id="L80">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

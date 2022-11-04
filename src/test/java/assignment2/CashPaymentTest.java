@@ -18,6 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class CashPaymentTest {
     JsonParser jp = new JsonParser("src/test/resources/InventoryTest1.json", "src/test/resources/empty_users.json", "src/test/resources/InitialCash.json", "src/test/resources/credit_cards.json");
     private List<Cash> defaultCash = jp.getCash();
+    private CSVFileParser cvs;
 
     public List<Cash> addCash(int c5, int c10, int c20, int c50, int S1, int S2, int S5, int S10, int S20, int S50, int S100){
         List<Cash> newCash = new ArrayList<Cash>();
@@ -45,7 +46,8 @@ public class CashPaymentTest {
         initialPath,
         ""
 );
-        CashPaymentModel Test1 = new CashPaymentModel(jp.getCash(), jp);
+        cvs = new CSVFileParser("src/test/resources/test_inventory1.csv", "src/test/resources/seller_transaction1.csv", "", "", "", "src/test/resources/cash_available1.csv");
+        CashPaymentModel Test1 = new CashPaymentModel(jp.getCash(), jp, cvs);
         
 
         for (Cash c: Test1.getCashList()){
@@ -62,7 +64,8 @@ public class CashPaymentTest {
         initialPath,
         ""
         );
-        CashPaymentModel Test2 = new CashPaymentModel(jp.getCash(), jp);
+        cvs = new CSVFileParser("src/test/resources/test_inventory1.csv", "src/test/resources/seller_transaction1.csv", "", "", "", "src/test/resources/cash_available1.csv");
+        CashPaymentModel Test2 = new CashPaymentModel(jp.getCash(), jp, cvs);
 
         for (Cash c: Test2.getCashList()){
             switch(c.getName()){
@@ -114,7 +117,8 @@ public class CashPaymentTest {
         initialPath,
         ""
         );
-        CashPaymentModel Test3 = new CashPaymentModel(jp.getCash(), jp);
+        cvs = new CSVFileParser("src/test/resources/test_inventory1.csv", "src/test/resources/seller_transaction1.csv", "", "", "", "src/test/resources/cash_available1.csv");
+        CashPaymentModel Test3 = new CashPaymentModel(jp.getCash(), jp, cvs);
 
         assertEquals(11, Test3.getCashList().size());
     }
@@ -128,7 +132,9 @@ public class CashPaymentTest {
         initialPath,
         ""
         );
-        CashPaymentModel Test4 = new CashPaymentModel(jp.getCash(), jp);
+
+        cvs = new CSVFileParser("src/test/resources/test_inventory1.csv", "src/test/resources/seller_transaction1.csv", "", "", "", "src/test/resources/cash_available2.csv");
+        CashPaymentModel Test4 = new CashPaymentModel(jp.getCash(), jp, cvs);
 
         HashMap<Double, Integer> cash = new HashMap<Double, Integer>();
         cash.put(100.0, 2);
@@ -163,7 +169,8 @@ public class CashPaymentTest {
         initialPath,
         ""
         );
-        CashPaymentModel Test5 = new CashPaymentModel(jp.getCash(), jp);
+        cvs = new CSVFileParser("src/test/resources/test_inventory1.csv", "src/test/resources/seller_transaction1.csv", "", "", "", "src/test/resources/cash_available2.csv");
+        CashPaymentModel Test5 = new CashPaymentModel(jp.getCash(), jp, cvs);
 
         HashMap<Double, Integer> cash = new HashMap<Double, Integer>();
         cash.put(0.20, 2);
@@ -191,7 +198,8 @@ public class CashPaymentTest {
         initialPath,
         ""
         );
-        CashPaymentModel Test6 = new CashPaymentModel(jp.getCash(), jp);
+        cvs = new CSVFileParser("src/test/resources/test_inventory1.csv", "src/test/resources/seller_transaction1.csv", "", "", "", "src/test/resources/cash_available3.csv");
+        CashPaymentModel Test6 = new CashPaymentModel(jp.getCash(), jp, cvs);
 
         HashMap<Double, Integer> cash = new HashMap<Double, Integer>();
         cash.put(100.0, 1000);
@@ -211,7 +219,8 @@ public class CashPaymentTest {
         initialPath,
         ""
         );
-        CashPaymentModel Test7 = new CashPaymentModel(jp.getCash(), jp);
+        cvs = new CSVFileParser("src/test/resources/test_inventory1.csv", "src/test/resources/seller_transaction1.csv", "", "", "", "src/test/resources/cash_available4.csv");
+        CashPaymentModel Test7 = new CashPaymentModel(jp.getCash(), jp, cvs);
         
 
         HashMap<Double, Integer> cash = new HashMap<Double, Integer>();
@@ -244,8 +253,8 @@ public class CashPaymentTest {
         initialPath,
         ""
         );
-
-        CashPaymentModel Test8 = new CashPaymentModel(jp.getCash(), jp);
+        cvs = new CSVFileParser("src/test/resources/test_inventory1.csv", "src/test/resources/seller_transaction1.csv", "", "", "", "src/test/resources/cash_available5.csv");
+        CashPaymentModel Test8 = new CashPaymentModel(jp.getCash(), jp, cvs);
 
         HashMap<Double, Integer> cash = new HashMap<Double, Integer>();
         cash.put(0.10, 1);
@@ -266,7 +275,8 @@ public class CashPaymentTest {
         initialPath,
         ""
         );
-        CashPaymentModel Test9 = new CashPaymentModel(jp.getCash(), jp);
+        cvs = new CSVFileParser("src/test/resources/test_inventory1.csv", "src/test/resources/seller_transaction1.csv", "", "", "", "src/test/resources/cash_available4.csv");
+        CashPaymentModel Test9 = new CashPaymentModel(jp.getCash(), jp, cvs);
         
         HashMap<Double, Integer> cash = new HashMap<Double, Integer>();
         cash.put(0.05, 2);
@@ -297,7 +307,8 @@ public class CashPaymentTest {
         );
 
         defaultCash = jp.getCash();
-        CashPaymentModel Test10 = new CashPaymentModel(defaultCash, jp);
+        cvs = new CSVFileParser("src/test/resources/test_inventory1.csv", "src/test/resources/seller_transaction1.csv", "", "", "", "src/test/resources/cash_available4.csv");
+        CashPaymentModel Test10 = new CashPaymentModel(defaultCash, jp, cvs);
 
 
         HashMap<Double, Integer> cash1 = new HashMap<Double, Integer>();
@@ -314,7 +325,7 @@ public class CashPaymentTest {
 
 
         //rounding down
-        CashPaymentModel Test11 = new CashPaymentModel(jp.getCash(), jp);
+        CashPaymentModel Test11 = new CashPaymentModel(jp.getCash(), jp, cvs);
 
         HashMap<Double, Integer> cash2 = new HashMap<Double, Integer>();
         cash2.put(0.05, 2);
@@ -338,7 +349,8 @@ public class CashPaymentTest {
         initialPath,
         ""
         );
-        CashPaymentModel Test12 = new CashPaymentModel(jp.getCash(), jp);
+        cvs = new CSVFileParser("src/test/resources/test_inventory1.csv", "src/test/resources/seller_transaction1.csv", "", "", "", "src/test/resources/cash_available6.csv");
+        CashPaymentModel Test12 = new CashPaymentModel(jp.getCash(), jp, cvs);
         List<Cash> cashList = Test12.getCashList();
        
 
@@ -402,7 +414,8 @@ public class CashPaymentTest {
         initialPath,
         ""
         );
-        CashPaymentModel Test13 = new CashPaymentModel(jp.getCash(), jp);
+        cvs = new CSVFileParser("src/test/resources/test_inventory1.csv", "src/test/resources/seller_transaction1.csv", "", "", "", "src/test/resources/cash_available4.csv");
+        CashPaymentModel Test13 = new CashPaymentModel(jp.getCash(), jp, cvs);
         List<Cash> cashList = Test13.getCashList();
        
 
@@ -417,5 +430,33 @@ public class CashPaymentTest {
         
 
 
+    }
+
+    @Test
+    public void updateCashStringTest(){
+        String initialPath = "src/test/resources/InitialCash.json";
+        jp = new JsonParser("",
+                "",
+                initialPath,
+                ""
+        );
+        cvs = new CSVFileParser("src/test/resources/test_inventory1.csv", "src/test/resources/seller_transaction1.csv", "", "", "", "src/test/resources/cash_available1.csv");
+
+        CashPaymentModel test = new CashPaymentModel(jp.getCash(), jp, cvs);
+        test.updateCashString();
+    }
+
+    @Test
+    public void getCashStringTest(){
+        String initialPath = "src/test/resources/InitialCash.json";
+        jp = new JsonParser("",
+                "",
+                initialPath,
+                ""
+        );
+        cvs = new CSVFileParser("src/test/resources/test_inventory1.csv", "src/test/resources/seller_transaction1.csv", "", "", "", "src/test/resources/cash_available1.csv");
+
+        CashPaymentModel test = new CashPaymentModel(jp.getCash(), jp, cvs);
+        test.getCashString();
     }
 }

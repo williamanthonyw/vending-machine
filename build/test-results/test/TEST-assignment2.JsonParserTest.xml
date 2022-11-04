@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="assignment2.JsonParserTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2022-10-28T02:28:13" hostname="Kylies-MacBook-Pro.local" time="0.02">
+<testsuite name="assignment2.JsonParserTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2022-11-03T08:58:24" hostname="Chius-MacBook-Pro.local" time="0.017">
   <properties/>
-  <testcase name="getUsersEmptyFile()" classname="assignment2.JsonParserTest" time="0.003"/>
-  <testcase name="getUsersValidFile()" classname="assignment2.JsonParserTest" time="0.009"/>
-  <testcase name="updateInventoryTest()" classname="assignment2.JsonParserTest" time="0.004"/>
-  <testcase name="getUsersFileDoesNotExist()" classname="assignment2.JsonParserTest" time="0.001"/>
+  <testcase name="getUsersEmptyFile()" classname="assignment2.JsonParserTest" time="0.002"/>
+  <testcase name="getUsersValidFile()" classname="assignment2.JsonParserTest" time="0.002"/>
+  <testcase name="updateInventoryTest()" classname="assignment2.JsonParserTest" time="0.003"/>
+  <testcase name="getUsersFileDoesNotExist()" classname="assignment2.JsonParserTest" time="0.002"/>
   <testcase name="updateUsersValidListWithPurchases()" classname="assignment2.JsonParserTest" time="0.001"/>
   <testcase name="updateUsersValidListNoPurchases()" classname="assignment2.JsonParserTest" time="0.0"/>
   <testcase name="updateUsersEmptyList()" classname="assignment2.JsonParserTest" time="0.001"/>

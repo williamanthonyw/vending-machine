@@ -1,0 +1,3 @@
+"test","User's transaction timed out","2022-01-12T23:11"
+"test2","User cancelled transaction before checkout","2022-12-12T23:11"
+"test3","User cancelled transaction because change was not available","2023-12-12T23:11"

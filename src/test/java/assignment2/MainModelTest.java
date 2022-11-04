@@ -7,20 +7,25 @@ import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 public class MainModelTest {
     private MainModel mainModel;
+    private JsonParser jsonParser;
+    private CSVFileParser csvFileParser;
 
     @BeforeEach
     public void beforeTests(){
-        this.mainModel = new MainModel(
-                "",
-                "",
-                "",
-                "",
-                ""
-        );
+
+        this.jsonParser = new JsonParser("", "", "", "");
+
+        this.csvFileParser = new CSVFileParser("", "", "", "","","");
+
+
+
+        this.mainModel = new MainModel(jsonParser, csvFileParser);
+        this.mainModel.getInventoryModel().initializeProductsToString();
     }
 
     @Test
@@ -78,6 +83,7 @@ public class MainModelTest {
 
         User user = new User("test", "pw");
         mainModel.setUser(user);
+        assertEquals(mainModel.getCancelledTransactions().size(), 0);
 
         User anon = new User("anonymous", "pw");
         mainModel.getLoginModel().setAnonymousUser(anon);
@@ -85,21 +91,44 @@ public class MainModelTest {
         mainModel.setIsLoggedIn(true);
         assertTrue(mainModel.isLoggedIn());
 
-        mainModel.cancelTransaction();
+        mainModel.cancelTransaction(CancellationReason.USER_CANCELLATION, LocalDateTime.of(2022, 1, 12, 23, 11));
         assertFalse(mainModel.isLoggedIn());
+        assertEquals(mainModel.getCancelledTransactions().size(), 1);
 
+        CancelledTransaction cancelledTransaction = mainModel.getCancelledTransactions().get(0);
+        assertEquals(cancelledTransaction.getCancellationReason(), CancellationReason.USER_CANCELLATION);
+        assertEquals(cancelledTransaction.getUsername(), "test");
+
+    }
+
+    @Test
+    public void getCancelledTransactionsAsStringTest(){
+
+        User user = new User("test", "pw");
+        mainModel.setUser(user);
+        mainModel.setIsLoggedIn(true);
+
+        User anon = new User("anonymous", "pw");
+        mainModel.getLoginModel().setAnonymousUser(anon);
+
+        // user should be test
+        mainModel.cancelTransaction(CancellationReason.USER_CANCELLATION, LocalDateTime.of(2022, 1, 12, 23, 11));
+
+        mainModel.logout();
+
+        // user should be test
+        mainModel.cancelTransaction(CancellationReason.CHANGE_NOT_AVAILABLE, LocalDateTime.of(2022, 11, 12, 23, 11));
+        mainModel.cancelTransaction(CancellationReason.TIMEOUT, LocalDateTime.of(2023, 1, 12, 23, 11));
+
+        assertEquals(mainModel.getCancelledTransactionsAsString(), "test, User cancelled transaction before checkout, 2022-01-12T23:11\nanonymous, User cancelled transaction because change was not available, 2022-11-12T23:11\nanonymous, User's transaction timed out, 2023-01-12T23:11\n");
+
+        assertEquals(mainModel.getCancelledTransactions().size(), 3);
     }
 
     @Test
     public void checkoutTest(){
 
-        this.mainModel = new MainModel(
-                "",
-                "",
-                "",
-                "",
-                ""
-        );
+        mainModel.getInventoryModel().initializeProductsToString();
 
         User user = new User("test", "pw");
         mainModel.setUser(user);
@@ -118,7 +147,7 @@ public class MainModelTest {
 
         user.setCart(cart);
 
-        mainModel.checkout();
+        mainModel.checkout("card");
 
         assertEquals(user.getPurchases().size(), 2 );
         assertEquals(mainModel.getCart().size(), 0);

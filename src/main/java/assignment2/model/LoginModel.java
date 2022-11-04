@@ -8,9 +8,10 @@ public class LoginModel {
     private List<User> users;
     private User anonymousUser;
     private JsonParser jsonParser;
+    private CSVFileParser csvFileParser;
     private MainModel mainModel;
 
-    public LoginModel(List<User> users,JsonParser jsonParser){
+    public LoginModel(List<User> users,JsonParser jsonParser, CSVFileParser csvFileParser){
         this.users = users;
 
 
@@ -22,6 +23,7 @@ public class LoginModel {
 
         }
         this.jsonParser = jsonParser;
+        this.csvFileParser = csvFileParser;
     }
 
     public void setAnonymousUser(User user){
@@ -38,10 +40,8 @@ public class LoginModel {
 
     public User login(String username, String password){
 
-        System.out.println(username);
 
         for (User user : users){
-            System.out.println(user.getUsername());
 
             if (user.getUsername().equalsIgnoreCase(username)){
 
@@ -69,12 +69,14 @@ public class LoginModel {
         }
         users.add(user);
         jsonParser.updateUsers(users);
+        csvFileParser.updateUsers(users);
         return true;
     }
 
     public void removeUser(User user){
         this.users.remove(user);
         jsonParser.updateUsers(this.users);
+        csvFileParser.updateUsers(this.users);
     }
 
 }

@@ -27,6 +27,11 @@
     -fx-border-width: 1px;
 }
 
+.textarea {
+    -fx-min-height: 200;
+    -fx-min-width: 900;
+}
+
 
 .label {
     -fx-alignment: CENTER;

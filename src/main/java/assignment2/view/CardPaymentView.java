@@ -1,10 +1,8 @@
 
 package assignment2.view;
-import assignment2.model.CardPaymentModel;
-import assignment2.model.CardUser;
-import assignment2.model.JsonParser;
-import assignment2.model.MainModel;
+import assignment2.model.*;
 import com.sun.tools.javac.Main;
+import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -16,6 +14,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Arrays;
 
@@ -144,13 +143,19 @@ public class CardPaymentView implements View {
 
                 successAlert.showAndWait();
 
-                mainModel.checkout();
+                mainModel.checkout("card");
                 mainView.goToProductOptionsView();
 
             } else {
 
-                Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+                Alert errorAlert = new Alert(Alert.AlertType.CONFIRMATION);
                 errorAlert.setHeaderText("Invalid credit card details. Please enter valid details.");
+
+                ((Button) errorAlert.getDialogPane().lookupButton(ButtonType.CANCEL)).setOnAction((ActionEvent e) -> {
+                    mainView.cancelPopup();
+                    mainModel.cancelTransaction(CancellationReason.USER_CANCELLATION, LocalDateTime.now());
+                });
+
                 errorAlert.showAndWait();
 
             }

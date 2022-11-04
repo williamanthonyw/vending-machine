@@ -1,5 +1,6 @@
 package assignment2.view;
 
+import assignment2.model.CancellationReason;
 import assignment2.model.MainModel;
 import assignment2.model.Product;
 import assignment2.model.UserAccess;
@@ -19,6 +20,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import javafx.util.Pair;
 
+import java.time.LocalDateTime;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.logging.Handler;
@@ -43,9 +45,18 @@ public class MainView {
     public void setUp(Stage stage){
         this.stage = stage;
         // goToSellerInventoryView();
-        goToProductOptionsView();
+        // goToOwnerDashboardView();
+       goToProductOptionsView();
 
         stage.show();
+    }
+
+    public void goToOwnerDashboardView(){
+        goToView(new OwnerDashboardView(mainModel, this));
+    }
+
+    public void goToCashDashboardView(){
+        goToView(new CashDashboardView(mainModel,this));
     }
 
     private void goToSellerInventoryView() {
@@ -106,23 +117,12 @@ public class MainView {
         this.timer = new PauseTransition(delay);
 
         timer.setOnFinished(evt -> {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Cancel Transaction");
-            alert.setHeaderText("Your transaction has been cancelled");
-            if (mainModel.isLoggedIn()){
-                alert.setContentText("Your cart has been cleared and you have been logged out.");
-            } else {
-                alert.setContentText("Your cart has been cleared.");
-            }
-
-            mainModel.cancelTransaction();
 
             Platform.runLater(()-> {
-                alert.showAndWait();
+                cancelPopup();
             });
 
-            // back to default page
-            goToProductOptionsView();
+            mainModel.cancelTransaction(CancellationReason.TIMEOUT, LocalDateTime.now());
 
             timer.playFromStart();
         });
@@ -134,27 +134,29 @@ public class MainView {
 
     }
 
+    public void cancelPopup(){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Cancel Transaction");
+        alert.setHeaderText("Your transaction has been cancelled");
+        if (mainModel.isLoggedIn()){
+            alert.setContentText("Your cart has been cleared and you have been logged out.");
+        } else {
+            alert.setContentText("Your cart has been cleared.");
+        }
+
+        alert.showAndWait();
+
+        // back to default page
+        goToProductOptionsView();
+    }
+
     public void setUpCancelBTN(){
 
         this.cancelBTN = new Button("Cancel");
 
         cancelBTN.setOnAction((ActionEvent e) -> {
-
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Cancel Transaction");
-            alert.setHeaderText("Your transaction has been cancelled");
-            if (mainModel.isLoggedIn()){
-                alert.setContentText("Your cart has been cleared and you have been logged out.");
-            } else {
-                alert.setContentText("Your cart has been cleared.");
-            }
-
-            mainModel.cancelTransaction();
-
-            alert.showAndWait();
-
-            // back to default page
-            goToProductOptionsView();
+            cancelPopup();
+            mainModel.cancelTransaction(CancellationReason.USER_CANCELLATION, LocalDateTime.now());
         });
 
     }
@@ -223,6 +225,15 @@ public class MainView {
             goToModifyCashView();
         });
 
+        MenuItem ownerDashboardBTN = new MenuItem("Owner Dashboard");
+        ownerDashboardBTN.setOnAction((ActionEvent e) -> {
+            goToOwnerDashboardView();
+        });
+
+        MenuItem cashDashboardBTN = new MenuItem("Cash Dashboard");
+        cashDashboardBTN.setOnAction((ActionEvent e)->{
+            goToCashDashboardView();
+        });
 
         menuBTN.getItems().addAll(productOptionsBTN);
 
@@ -232,6 +243,9 @@ public class MainView {
 
             if (mainModel.getUser().getUserAccess().equals(UserAccess.OWNER)){
                 menuBTN.getItems().addAll(userManagementBTN);
+                menuBTN.getItems().addAll(sellerInventoryBTN);
+                menuBTN.getItems().add(modifyCashBTN);
+                menuBTN.getItems().addAll(ownerDashboardBTN);
             }
             if (mainModel.getUser().getUserAccess().equals(UserAccess.SELLER)){
                 menuBTN.getItems().addAll(sellerInventoryBTN);
@@ -239,6 +253,7 @@ public class MainView {
             }
             if (mainModel.getUser().getUserAccess().equals(UserAccess.CASHIER)){
                 menuBTN.getItems().add(modifyCashBTN);
+                menuBTN.getItems().add(cashDashboardBTN);
             }
 
         } else {

@@ -1,9 +1,6 @@
 package assignment2.view;
 
-import assignment2.model.MainModel;
-import assignment2.model.PaymentNotEnoughException;
-import assignment2.model.CashPaymentModel;
-import assignment2.model.InsufficientChangeException;
+import assignment2.model.*;
 import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
@@ -17,6 +14,7 @@ import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.stage.Modality;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -300,13 +298,18 @@ public class CashPaymentView implements View{
             changePopup.setContentText(changeFormat);
             changePopup.showAndWait();
 
-            mainModel.checkout();
+            mainModel.checkout("cash");
             mainView.goToProductOptionsView();
         }
 
         //change in vending machine is not enough
        catch(InsufficientChangeException e){
-            notEnoughChange = new Alert(Alert.AlertType.ERROR);
+            notEnoughChange = new Alert(Alert.AlertType.CONFIRMATION);
+
+           ((Button) notEnoughChange.getDialogPane().lookupButton(ButtonType.CANCEL)).setOnAction((ActionEvent f) -> {
+               mainView.cancelPopup();
+               mainModel.cancelTransaction(CancellationReason.CHANGE_NOT_AVAILABLE, LocalDateTime.now());
+           });
 
 
             notEnoughChange.setHeaderText("No change available. Please insert different notes/coins or cancel your transaction");
@@ -316,13 +319,13 @@ public class CashPaymentView implements View{
             notEnoughChange.showAndWait();
         } catch(PaymentNotEnoughException f){
 
-            insertMoreCash = new Alert(Alert.AlertType.ERROR);
+            insertMoreCash = new Alert(Alert.AlertType.CONFIRMATION);
             insertMoreCash.setHeaderText("Please insert more cash or cancel your transaction");
 //            //cancel button
-//            ((Button) insertMoreCash.getDialogPane().lookupButton(ButtonType.OK)).setOnAction((ActionEvent e) -> {
-//                insertMoreCash.hide();
-//                //cancel
-//            });
+            ((Button) insertMoreCash.getDialogPane().lookupButton(ButtonType.CANCEL)).setOnAction((ActionEvent e) -> {
+                mainView.cancelPopup();
+                mainModel.cancelTransaction(CancellationReason.USER_CANCELLATION, LocalDateTime.now());
+            });
 
             ((Button) insertMoreCash.getDialogPane().lookupButton(ButtonType.OK)).setText("Back");
 
